@@ -1,0 +1,100 @@
+<div class="pagel">
+  <div class="example-container mat-elevation-z8">
+    <div fxLayout fxLayoutAlign="left left" style="margin-left: 1em">
+      <mat-form-field style="margin-top: 1em; width: 100%" appearance="fill">
+        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Chercher">
+
+      </mat-form-field>
+
+
+    </div>
+
+
+    <button style="margin-left: 50%" mat-raised-button color="primary" class="material-icons" (click)="ajouter()">
+
+      <mat-icon >add_circle</mat-icon>
+      Ajouter un patient
+    </button>
+
+    <table mat-table  [dataSource]="dataSource"  matSort>
+
+      <ng-container matColumnDef="numero_dossier">
+        <th mat-header-cell *matHeaderCellDef>Numero de dossier</th>
+        <td mat-cell *matCellDef="let element"> {{element.fileNumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Selectioner </th>
+        <td mat-cell *matCellDef="let element">
+<!--          [matMenuTriggerFor]="opt"-->
+          <button mat-icon-button color="primary"  (click)="show_profile(element.id)">
+            Ouvrir
+          </button>
+          <span *ngIf="selected==element.id"  class="material-icons" style="font-size: small; color: red">
+             place
+          </span>
+          <!--
+          <mat-menu #opt="matMenu">
+            <button mat-menu-item (click)="show_profile(element.id)">
+              <mat-icon>perm_identity</mat-icon>
+
+              <span>Profile</span>
+            </button>
+
+
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="add_socio(element.id)">
+              <mat-icon>domain</mat-icon>
+              <span> Informations Socio-démographiques</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item (click)="add_antedant(element.id)">
+              <mat-icon>local_hospital</mat-icon>
+              <span> Antécédents </span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item (click)="show_exam(element.id)">
+              <mat-icon>accessibility_new</mat-icon>
+              <span>  Examen clinique</span>
+            </button>
+            <button mat-menu-item (click)="show_podo(element.id)">
+              <mat-icon>watch</mat-icon>
+              <span>  PODOMETRE</span>
+            </button>
+          </mat-menu>-->
+
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+    </mat-paginator>
+
+    <!--<app-patient-profile *ngIf="patient"></app-patient-profile>-->
+
+  </div>
+</div>
+<div class="page" style=" ">
+  <app-addpatient (exampleOutput)="refresh_list($event)" [id]="id" *ngIf="addpatient===true"></app-addpatient>
+  <app-patient-profile [id]="id" *ngIf="showProfile===true"></app-patient-profile>
+  <app-antecedants [id]="id" *ngIf="ante===true"></app-antecedants>
+  <app-sociodemo [id]="id" *ngIf="socio===true"></app-sociodemo>
+  <app-examenclinique [id]="id" *ngIf="exam===true"></app-examenclinique>
+  <app-affectpodometre [id]="id" *ngIf="podo===true"></app-affectpodometre>
+
+</div>

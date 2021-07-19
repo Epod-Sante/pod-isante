@@ -1,0 +1,171 @@
+
+<!--  <div class="patient-wrapper" fxLayout="row" fxLayoutAlign="center center"-->
+<!--       style="margin-top: 5em; margin-bottom : 5em; position: relative;">-->
+<!--    <mat-expansion-panel style="width:100%;max-width:70em; margin-top: 2em; margin-bottom: 2em;">-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <mat-panel-title style="color: #323232; font-weight: bold ">-->
+
+<!--          <i class="material-icons" style="margin-left: 40%">-->
+<!--            add_box-->
+<!--          </i>-->
+<!--          Ajouter un patient-->
+<!--        </mat-panel-title>-->
+<!--      </mat-expansion-panel-header>-->
+
+<!--      <mat-card class="box">-->
+
+
+<!--        &lt;!&ndash;<mat-card style=" color : white; background : blue;"> Dossier medical </mat-card>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>VO2_peak : La consommation maximale d'oxygène</mat-label>-->
+<!--          <input  type="number" #VO2_peak   placeholder="VO2_peak : La consommation maximale d'oxygène">-->
+<!--        </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>pression artérielle</mat-label>-->
+<!--        <input  type="number" #pression_artérielle   placeholder="pression artérielle" min="9" max="14">-->
+<!--      </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>FC repos</mat-label>-->
+<!--        <input  type="number" #fc_repos   placeholder="FC repos">-->
+<!--      </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>IMC</mat-label>-->
+<!--        <input  type="number" #imc   placeholder="IMC">-->
+<!--      </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>tour de taille</mat-label>-->
+<!--        <input  type="number" #tour_taille   placeholder="tour de taille">-->
+<!--      </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>bilan lipidique</mat-label>-->
+<!--        <input  type="number" #bilan_lipidique   placeholder="bilan lipidique">-->
+<!--      </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>glycemine</mat-label>-->
+<!--        <input  type="number" #glycemine   placeholder="glycemine">-->
+<!--      </mat-form-field>    <mat-form-field appearance="outline">-->
+<!--        <mat-label>hbA1c</mat-label>-->
+<!--        <input  type="number" #hbA1c   placeholder="hbA1c">-->
+<!--      </mat-form-field>&ndash;&gt;-->
+
+
+<!--      </mat-card>-->
+<!--    </mat-expansion-panel>-->
+<!--  </div>-->
+<!--  <div class="register-wrapper" fxLayout="row" fxLayoutAlign="center center"
+       style=" position: relative; margin-top: -0em">
+
+
+    <mat-expansion-panel style="width:100%;max-width:70em; margin-top: -4em; margin-bottom: 2em;">
+      <mat-expansion-panel-header>
+        <mat-panel-title style="color: #323232; font-weight: bold">
+
+          <i class="material-icons" style="margin-left: 40%">
+
+            filter_list
+          </i>
+          Listes des utilisateurs
+
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>-->
+ <!-- <div class="pagel" >
+      <app-list-patients></app-list-patients>
+  </div>
+      <div class="page" style=" ">-->
+  <!--      <mat-tab-group style="margin-top: 2em; margin-bottom: 2em;">
+          <mat-tab label="Informations personnels (obligatoires)">
+            <app-addpatient></app-addpatient>
+
+          </mat-tab>
+          <mat-tab label="Informations socio-demographiques ">
+            <app-sociodemo></app-sociodemo>
+
+          </mat-tab>
+          <mat-tab label="EXAMEN CLINIQUE">
+            <app-examenclinique></app-examenclinique>
+
+          </mat-tab>
+          <mat-tab label=" Antécédents ">
+            <p style="font-weight: bold">HISTOIRE DE SANTÉ</p>
+            <mat-checkbox #angineinfractus style="margin-left: 1em" value="Angine Infarctus du myocarde">Angine Infarctus du myocarde</mat-checkbox>
+            <br>
+            <mat-checkbox #pontagescoronariens  style="margin-left: 1em" value="Pontages coronariens">Pontages coronariens</mat-checkbox>
+            <br>
+            <mat-checkbox #angioplasticoronarienne style="margin-left: 1em" value="Angioplastie coronarienne">Angioplastie coronarienne</mat-checkbox>
+            <br>
+            <mat-checkbox #maladievalvulaire style="margin-left: 1em" value="Maladie valvulaire">Maladie valvulaire</mat-checkbox>
+            <br>
+            <mat-checkbox #insuf_cardiaque_nyha1_2 style="margin-left: 1em" value="Insuffisance cardiaque NYHA 1 ou 2">Insuffisance cardiaque NYHA 1 ou 2</mat-checkbox>
+            <br>
+            <mat-checkbox #insuf_cardiaque_nyha3_4 style="margin-left: 1em" value="Insuffisance cardiaque NYHA 3 ou 4">Insuffisance cardiaque NYHA 3 ou 4</mat-checkbox>
+            <br>
+            <mat-checkbox #avc style="margin-left: 1em" value="AVC">AVC</mat-checkbox><input #avcyear  type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #ait style="margin-left: 1em" value="AIT">AIT</mat-checkbox><input #aityear type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #thrombectomie style="margin-left: 1em" value="Thrombectomie">Thrombectomie</mat-checkbox><input #thrombectomieyear type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #claudication style="margin-left: 1em" value="Claudication">Claudication</mat-checkbox><input #claudicationyear type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #Chirurgie_vasculairep style="margin-left: 1em; width: 30%" value="Chirurgie vasculaire périphérique">Chirurgie vasculaire périphérique</mat-checkbox>
+
+            <br>
+            <mat-checkbox #mpoc style="margin-left: 1em" value="MPOC">MPOC</mat-checkbox><input #mpocyear type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #insuffisance_renale style="margin-left: 1em" value="Insuffisance rénale">Insuffisance rénale</mat-checkbox>
+            <br>
+            <mat-checkbox #dialyse style="margin-left: 1em" value="Dialyse">Dialyse</mat-checkbox>
+            <br>
+            <mat-checkbox #cancer1 style="margin-left: 1em" value="Cancer : ">Cancer </mat-checkbox><input #cancer1_organe type="text" placeholder="Organe" style="margin-left: 1em;  font-weight : bold" appearance="outline"><input #cancer1_year type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #cancer2 style="margin-left: 1em" value=" Cancer : ">Cancer </mat-checkbox><input #cancer2_organe type="text" placeholder="Organe" style="margin-left: 1em;  font-weight : bold" appearance="outline"><input #cancer2_year type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+            <mat-checkbox #cancer3 style="margin-left: 1em" value=" Cancer : ">Cancer </mat-checkbox><input #cancer3_organe type="text" placeholder="Organe" style="margin-left: 1em;  font-weight : bold" appearance="outline"><input #cancer3_year type="text" placeholder="ANNEE" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+            <br>
+              <mat-checkbox #touble_muscle_squel style="margin-left: 1em" value="Troubles musculo squelettiques (ex : lombalgie)">Troubles musculo squelettiques (ex : lombalgie)</mat-checkbox>
+              <br>
+              <mat-checkbox #neurodgnrative style="margin-left: 1em" value="Maladie neurodégénérative (ex : sclérose en plaques, parkinson)">Maladie neurodégénérative (ex : sclérose en plaques, parkinson)</mat-checkbox>
+              <br>
+              Autres Maladies : <input #others type="text" placeholder="Maladie" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+              <br>
+
+
+            <br>
+            <p>Facteurs de risque connus</p>
+            <mat-checkbox #dyslipidmiestyle style="margin-left: 1em" value="Dyslipidémie">Dyslipidémie</mat-checkbox>
+            <br>
+            <mat-checkbox #hypertension_artrielle style="margin-left: 1em" value="Hypertension artérielle">Hypertension artérielle</mat-checkbox>
+            <br>
+            <mat-checkbox #diabete style="margin-left: 1em" value="Diabète">Diabète</mat-checkbox>
+            <br>
+              <mat-checkbox #surpoids style="margin-left: 1em" value="Surpoids (IMC 25,0 à 29,9)">Surpoids (IMC 25,0 à 29,9)</mat-checkbox>
+              <br>
+              <mat-checkbox #obes_1 style="margin-left: 1em" value="Obésité grade 1 (IMC 30,0 - 34,9)">Obésité grade 1 (IMC 30,0 - 34,9)</mat-checkbox>
+              <br>
+              <mat-checkbox #obes_2 style="margin-left: 1em" value="Obésité grade 2 (IMC 35,0 - 39,9)">Obésité grade 2 (IMC 35,0 - 39,9)</mat-checkbox>
+              <br>
+              <mat-checkbox #obes_3 style="margin-left: 1em" value="Obésité grade 3 ou sévère (IMC > 40,0)">Obésité grade 3 ou sévère (IMC > 40,0)</mat-checkbox>
+              <br><mat-checkbox #actif_tabac style="margin-left: 1em" value="Tabagisme actif">Tabagisme actif</mat-checkbox>
+              <br><mat-checkbox #arret_tabac_moins6 style="margin-left: 1em" value="Tabagisme ancien (arrêt depuis < 6 mois)">Tabagisme ancien (arrêt depuis < 6 mois)</mat-checkbox>
+              <br><mat-checkbox #arret_tabac_plus6 style="margin-left: 1em" value="Tabagisme ancien (arrêt depuis > 6 mois)">Tabagisme ancien (arrêt depuis > 6 mois)</mat-checkbox>
+              <br><mat-checkbox #atcd_famlly_cardiovas style="margin-left: 1em" value="Antécédents familiaux – maladie cardiovasculaire)">Antécédents familiaux – maladie cardiovasculaire)</mat-checkbox>
+              <br><mat-checkbox #atcd_famlly_cancer style="margin-left: 1em" value="Antécédents familiaux – cancer">Antécédents familiaux – cancer</mat-checkbox>
+              <br><mat-checkbox #troubles_anxieux style="margin-left: 1em" value="Troubles anxieux<">Troubles anxieux</mat-checkbox>
+              <br><mat-checkbox #depression style="margin-left: 1em" value="Dépression">Dépression</mat-checkbox>
+              <br>
+              Autres  : <input #others_fact type="text" placeholder="" style="margin-left: 1em;  font-weight : bold" appearance="outline">
+              <br>
+
+
+              <br>
+            <button mat-stroked-button color="primary" class="btn-block">Enregistrer
+
+            </button>
+          </mat-tab>
+
+        </mat-tab-group>-->
+     <!--   <app-addpatient *ngIf="patient===true"></app-addpatient>
+
+
+      </div>-->
+   <!-- </mat-expansion-panel>
+  </div>-->
+
+
+<!-- <app-chart [parentData]="patientsChild"></app-chart>-->
+

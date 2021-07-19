@@ -1,0 +1,94 @@
+<mat-card style=" color : white; background :#323232;">Informations Socio-démographiques</mat-card>
+<!--<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Genre</mat-label>
+  <select #gender matNativeControl matInput placeholder="Genre">
+    <option></option>
+    <option>Homme</option>
+    <option>Femme</option>
+    <option>Autre</option>
+  </select>
+</mat-form-field>-->
+<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Scolarité</mat-label>
+  <select #scolarity  matNativeControl matInput placeholder="Niveau de scolaire">
+    <option></option>
+    <option> < 11 ans de scolarité (< Diplôme d'études secondaires)</option>
+    <option>Diplôme d'études secondaires (DEP)</option>
+    <option>Formation Formation professionnelle</option>
+    <option>Formation collégiale</option>
+    <option>Formation universitaire 1er cycle</option>
+    <option>Formation universitaire 2ème et 3ème cycle</option>
+  </select>
+</mat-form-field>
+
+
+<mat-form-field appearance="fill" style="width: 30%;" >
+  <mat-label>Statut marital actuel</mat-label>
+  <select  #marital matNativeControl matInput placeholder="Statut marital actuel :">
+    <option value="celibataire">Célibataire</option>
+    <option value="marie">Marié(e)</option>
+    <option value="Conjoints de fait">Conjoints de fait</option>
+    <option value="divorce">Divorcé(e)</option>
+    <option value="veuf">veuf(ve)</option>
+  </select>
+</mat-form-field>
+<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Statut professionnel actuel</mat-label>
+  <select #profession matNativeControl matInput placeholder="Statut professionnel actuel"
+          >
+    <option></option>
+    <option >À l'emploi</option>
+    <option >Retraité</option>
+    <option >Arrêt (maladie/invalidité)</option>
+    <option>Au foyer</option>
+    <option >Étudiant</option>
+    <option >Autre</option>
+
+  </select>
+</mat-form-field>
+<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Revenu familial</mat-label>
+  <select #revenu  matNativeControl matInput placeholder="Revenu familial">
+    <option></option>
+    <option> < 20 000 $ / année</option>
+    <option>Entre 20 000 et 39 999 $ / année</option>
+    <option>Entre 40 000 et 59 999$ / année</option>
+    <option>Entre 60 000 et 79 999 $ / année</option>
+    <option>> 80 000 $ / année</option>
+
+  </select>
+</mat-form-field>
+
+<br>
+<mat-label style="font-weight: bold; font-size: 15px; width: 100%">Milieu de vie :</mat-label>
+<mat-radio-group  #zone="matRadioGroup" aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button value="Zone urbaine" [checked]="this.urbaine"> Zone urbaine</mat-radio-button>
+  <mat-radio-button value="Zone rurale" [checked]="this.rural"> Zone rurale</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-checkbox  style="width: 100%" #retraite [(ngModel)]="disabled" value="Résidence pour retraitée">Résidence pour retraitée : </mat-checkbox>
+<mat-radio-group style="width: 100%"  #services="matRadioGroup" aria-label="choisissez une option" matNativeControl
+                 [disabled]="!disabled">
+  <mat-radio-button value="1" [checked]="this.services"> Avec services</mat-radio-button>
+    <mat-radio-button value="0"[checked]="!this.services"> Sans services</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-checkbox #house_uni  value="Maison unifamiliale" style="width: 100%" >Maison unifamiliale</mat-checkbox>
+<br>
+<mat-checkbox #cottage  value="Cottage"  style="width: 100%" >Cottage</mat-checkbox>
+<br>
+<mat-checkbox #bungalow  value="Bungalow" style="width: 100%" >Bungalow</mat-checkbox>
+<br>
+<mat-checkbox #condo  style="width: 100%"  value="Condo /appartement">Condo /appartement</mat-checkbox>
+<br>
+<mat-checkbox #app style="width: 100%" value="Appartement" >Appartement</mat-checkbox>
+
+<br>
+
+
+<button mat-stroked-button color="primary" class="btn-block" (click)="ajouter(profession.value,revenu.value,retraite,
+services,house_uni,
+cottage,bungalow,condo,zone.value,app,marital.value,scolarity.value)">Enregistrer
+
+</button>
+

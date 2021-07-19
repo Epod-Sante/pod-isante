@@ -1,0 +1,1043 @@
+{
+  "id": 1,
+  "name": "BREQ-2 QUESTIONNAIRE : MOTIVATION A PRATIQUER UNE ACTIVITE PHYSIQUE",
+  "description": "Pourquoi prenez-vous part à un programme d’activité physique ?\n\nPourquoi décidons-nous de pratiquer ou non un sport ? Attribuez une cote de 0 à 4 à chacun des points ci-dessous, en fonction de ce qui vous correspond le mieux. \nAttention : il n’y a pas de \"bonne\" ou de \"mauvaise\" réponse ! Notre seul objectif est de connaître votre attitude personnelle face au sport. \n",
+  "questions": [
+    {
+      "id": 1010,
+      "name": "Je fais de l’activité physique parce que les autres estiment que je dois en faire",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1010,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+
+        },
+        {
+          "id": 1056,
+          "questionId": 1010,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1010,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1010,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1010,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 2,
+          "questionId": 1010,
+          "name": "External regulation",
+          "coef" : -2
+        }
+
+    },
+    {
+      "id": 1011,
+      "name": "Je me sens coupable si je ne fais pas de l’activité physique ",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1011,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1011,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1011,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1011,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1011,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+         "regulation": 
+        {
+          "id": 3,
+          "questionId": 1011,
+          "name": "Introjected regulation",
+          "coef" : -1
+    }
+    },
+    {
+      "id": 1012,
+      "name": "J’apprécie les avantages que m’apporte l’activité physique",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1012,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1012,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1012,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1012,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1012,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      } ,
+      "regulation": 
+        {
+          "id": 4,
+          "questionId": 1012,
+          "name": "Identified regulation",
+          "coef" : 2
+        } 
+    },
+    {
+      "id": 1013,
+      "name": "Je fais de l’activité physique parce que j’aime ça ",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1013,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1013,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1013,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1013,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1013,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+      {
+        "id": 5,
+        "questionId": 1013,
+        "name": "Intrinsic regulation",
+        "coef" : 3
+      } 
+    },
+    {
+      "id": 1014,
+      "name": "Je ne vois pas pourquoi je devrais faire de l’activité physique",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1014,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1014,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1014,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1014,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1014,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+      {
+        "id": 1,
+        "questionId": 1014,
+        "name": "Amotivation",
+        "coef" : -3
+      }
+
+    },
+    {
+      "id": 1015,
+      "name": "Je fais de l’activité physique parce que mes amis / ma famille / mon partenaire estime(nt) que je dois en faire",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1015,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1015,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1015,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1015,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1015,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 2,
+          "questionId": 1015,
+          "name": "External regulation",
+          "coef" : -2
+        }
+
+    },
+    {
+      "id": 1016,
+      "name": "J’ai honte quand je manque un de mes entraînements",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1016,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1016,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1016,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1016,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1016,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      }, "regulation": 
+      {
+        "id": 3,
+        "questionId": 1016,
+        "name": "Introjected regulation",
+        "coef" : -1
+      }
+    },
+    {
+    "id": 1017,
+    "name": "J’estime qu’il est important de pratiquer une activité physique régulière ",
+    "questionTypeId": 1,
+    "options": [
+      {
+        "id": 1055,
+        "questionId": 1017,
+        "name": "0 (Non, pas du tout !)",
+        "isAnswer": false
+      },
+      {
+        "id": 1056,
+          "questionId": 1017,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+      },
+      {
+        "id": 1057,
+        "questionId": 1017,
+        "name": "2 ( C’est parfois vrai…)" ,
+        "isAnswer": false,
+        "poids" : 2
+      },
+      {
+        "id": 1058,
+          "questionId": 1017,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+      },
+      {
+          "id": 1059,
+          "questionId": 1017,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+      }
+    ],
+    "questionType": {
+      "id": 1,
+      "name": "Multiple Choice",
+      "isActive": true
+    },
+      "regulation": 
+      {
+        "id": 4,
+        "questionId": 1017,
+        "name": "Identified regulation",
+        "coef" : 2
+      }
+    },
+    {
+      "id": 1018,
+      "name": "Je ne vois pas pourquoi je devrais prendre la peine de faire de l’activité physique ",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1018,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1018,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1018,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1018,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1018,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 1,
+          "questionId": 1018,
+          "name": "Amotivation",
+          "coef" : -3
+        }
+    },
+    {
+    "id": 1019,
+    "name": "J’apprécie mes séances d’entraînement  ",
+    "questionTypeId": 1,
+    "options": [
+      {
+        "id": 1055,
+        "questionId": 1019,
+        "name": "0 (Non, pas du tout !)",
+        "isAnswer": false,
+        "poids" : 0
+      },
+      {
+        "id": 1056,
+          "questionId": 1019,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+      },
+      {
+        "id": 1057,
+        "questionId": 1019,
+        "name": "2 ( C’est parfois vrai…)" ,
+        "isAnswer": false,
+        "poids" : 2
+      },
+      {
+        "id": 1058,
+          "questionId": 1019,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+      },
+      {
+          "id": 1059,
+          "questionId": 1019,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+      }
+    ],
+    "questionType": {
+      "id": 1,
+      "name": "Multiple Choice",
+      "isActive": true
+    },
+      "regulation": 
+      {
+        "id": 5,
+        "questionId": 1019,
+        "name": "Intrinsic regulation",
+        "coef" : 3
+
+
+      }
+    },
+    {
+      "id": 1020,
+      "name": "Je pratique parce que les autres n’apprécieront pas que je ne le fasse pas",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1020,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1020,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1020,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1020,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1020,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 2,
+          "questionId": 1020,
+          "name": "External regulation",
+          "coef" : -2
+        }
+
+    },
+    {
+      "id": 1021,
+      "name": "Je ne vois pas l’utilité de l’activité physique",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1021,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1021,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1021,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1021,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1021,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 1,
+          "questionId": 1021,
+          "name": "Amotivation",
+          "coef" : -3
+        }
+    },
+    {
+      "id": 1022,
+      "name": "Je me sens minable quand je n’ai pas fait de l’activité physique pendant un certain temps",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1022,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1022,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1022,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1022,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1022,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+      {
+        "id": 3,
+        "questionId": 1022,
+        "name": "Introjected regulation",
+        "coef" : -1
+      }
+    },
+
+    {
+      "id": 1024,
+      "name": "J’estime qu’il est important de faire de l’activité physique régulièrement ",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1024,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1024,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1024,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1024,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1024,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation":
+      {
+        "id": 4,
+        "questionId": 1027,
+        "name": "Identified regulation",
+        "coef" : 2
+      }
+    },
+    {
+      "id": 1025,
+      "name": "Je trouve que l’activité physique est une agréable",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1025,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1025,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1025,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1025,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1025,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 5,
+          "questionId": 1025,
+          "name": "Intrinsic regulation",
+          "coef" : 3
+        }
+    },
+    {
+      "id": 1026,
+      "name": "Je trouve que mes amis / ma famille / mon partenaire font pression sur moi pour que je fasse de l’activité physique ",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1026,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1026,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1026,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1026,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1026,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 2,
+          "questionId": 1026,
+          "name": "External regulation",
+          "coef" : -2
+        }
+
+    },
+    {
+      "id": 1027,
+      "name": "Je me sens nerveux(se) si je ne fais pas de l’activité physique régulièrement",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1027,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1027,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1027,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1027,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1027,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+      {
+        "id": 4,
+        "questionId": 1027,
+        "name": "Identified regulation",
+        "coef" : 2
+      }
+    },
+    {
+      "id": 1028,
+      "name": "L’activité physique m’apporte du plaisir et de la satisfaction",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1028,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1028,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1028,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1028,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1028,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 5,
+          "questionId": 1028,
+          "name": "Intrinsic regulation",
+          "coef" : 3
+        }
+    },
+    {
+      "id": 1030,
+      "name": "Je trouve que faire de l’activité physique est une perte de temps",
+      "questionTypeId": 1,
+      "options": [
+        {
+          "id": 1055,
+          "questionId": 1030,
+          "name": "0 (Non, pas du tout !)",
+          "isAnswer": false,
+          "poids" : 0
+        },
+        {
+          "id": 1056,
+          "questionId": 1030,
+          "name": "1",
+          "isAnswer": true,
+          "poids" : 1
+        },
+        {
+          "id": 1057,
+          "questionId": 1030,
+          "name": "2 ( C’est parfois vrai…)" ,
+          "isAnswer": false,
+          "poids" : 2
+        },
+        {
+          "id": 1058,
+          "questionId": 1030,
+          "name": "3",
+          "isAnswer": true,
+          "poids" : 3
+        },
+        {
+          "id": 1059,
+          "questionId": 1030,
+          "name": "4 ( Oui, tout à fait !)" ,
+          "isAnswer": true,
+          "poids" : 4
+        }
+      ],
+      "questionType": {
+        "id": 1,
+        "name": "Multiple Choice",
+        "isActive": true
+      },
+      "regulation": 
+        {
+          "id": 1,
+          "questionId": 1030,
+          "name": "Amotivation",
+          "coef" : -3
+        }
+    }
+  ]
+}

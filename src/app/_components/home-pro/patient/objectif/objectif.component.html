@@ -1,0 +1,78 @@
+<div class="container" >
+
+
+
+
+  <mat-tab-group mat-align-tabs="center"  >
+    <!-- <mat-tab label="recommandation">
+     </mat-tab>-->
+    <mat-tab  label=" Sélectionner le nombre d’objectifs souhaités">
+    </mat-tab>
+
+    <mat-tab label=" Identifier les principales barrières à la pratique d’activité physique" style="display: inline-block; ">
+      <mat-selection-list #bar>
+ <h2>BARRIÈRES</h2>
+          <mat-list-option value="Manque de temps">Manque de temps</mat-list-option>
+          <mat-list-option  value="Faible motivation">Faible motivation</mat-list-option>
+          <mat-list-option value="Peu d’énergie ou se sent fatigué">Peu d’énergie ou se sent fatigué
+            froides</mat-list-option>
+          <mat-list-option value="Pas les moyens financiers de pratiquer de l’activité physique">Pas les moyens financiers de pratiquer de l’activité physique</mat-list-option>
+          <mat-list-option value="Mauvaises températures/météo">Mauvaises températures/météo</mat-list-option>
+          <mat-list-option value="Être seul(e)">Être seul(e)</mat-list-option>
+          <mat-list-option  value="Blessure ou douleur chronique">Blessure ou douleur chronique</mat-list-option>
+          <mat-list-option  value="Ennuyant/ou peu d’intérêt pour l’activité physique">Ennuyant/ou peu d’intérêt pour l’activité physique</mat-list-option>
+        <mat-list-option  value="Ne possède pas d’équipement pour faire de l’activité physique">Ne possède pas d’équipement pour faire de l’activité physique</mat-list-option>
+        <mat-list-option  value="N’a pas accès à des infrastructures adéquates">N’a pas accès à des infrastructures adéquates</mat-list-option>
+        <mat-list-option  value="Ne se sent pas compétent à pratiquer de l’activité physique">Ne se sent pas compétent à pratiquer de l’activité physique</mat-list-option>
+        <mat-list-option  value="Se sent essoufflé rapidement ou déconditionné">Se sent essoufflé rapidement ou déconditionné</mat-list-option>
+        <mat-list-option  value="Crainte de se blesser">Crainte de se blesser</mat-list-option>
+
+      </mat-selection-list>
+      <button (click)="comfirmerBar(bar.selectedOptions.selected)" color="primary" mat-button style="background-color: aliceblue; width: 100%; margin-top: 2em;">
+        Enregistrer
+      </button>
+    </mat-tab>
+
+    <mat-tab label="  Identifier les solutions à ces mêmes barrières ">
+      <mat-selection-list #sol>
+        <h2>SOLUTIONS</h2>
+        <mat-list-option value="Prévoir des journées et moments fixes dans l'horaire pour pratiquer de l’activité physique">Prévoir des journées et moments fixes dans l'horaire pour pratiquer de l’activité physique</mat-list-option>
+        <mat-list-option  value="Avoir un plan B pour remplacer une activité physique déjà planifiée en cas d'imprévus">Avoir un plan B pour remplacer une activité physique déjà planifiée en cas d'imprévus</mat-list-option>
+        <mat-list-option value="Faire un journal d'activité physique pour apprécier les progrès">Faire un journal d'activité physique pour apprécier les progrès</mat-list-option>
+        <mat-list-option value="Se procurer de l’équipement de seconde main.">Se procurer de l’équipement de seconde main.</mat-list-option>
+        <mat-list-option value="Débuter par des activités accessibles de faible intensité (marche)">Débuter par des activités accessibles de faible intensité (marche)</mat-list-option>
+        <mat-list-option value="S'inscrire à un groupe de conditionnement ou de marche">S'inscrire à un groupe de conditionnement ou de marche</mat-list-option>
+        <mat-list-option  value="Viser des activités physiques limitant la mise en charge (vélo, natation)">Viser des activités physiques limitant la mise en charge (vélo, natation)</mat-list-option>
+        <mat-list-option  value="Faire une activité physique avec un membre de la famille ou un(e) ami(e)">Faire une activité physique avec un membre de la famille ou un(e) ami(e)</mat-list-option>
+        <mat-list-option  value="Emprunt ou location d’équipement pour tester différents sports/activités.">Emprunt ou location d’équipement pour tester différents sports/activités.</mat-list-option>
+        <mat-list-option  value="Rechercher les infrastructures à proximité de votre domicile pour pratiquer de l'activité physique (piste cyclable, sentiers pédestres, centre de conditionnement, etc)">Rechercher les infrastructures à proximité de votre domicile pour pratiquer de l'activité physique (piste cyclable, sentiers pédestres, centre de conditionnement, etc)</mat-list-option>
+        <mat-list-option  value="Faire une liste des activités physiques que vous aimez ou croyez pouvoir apprécier et regarder les moyens pour initier l'activité.">Faire une liste des activités physiques que vous aimez ou croyez pouvoir apprécier et regarder les moyens pour initier l'activité.</mat-list-option>
+        <mat-list-option  value="Écouter de la musique ou des livres audio pendant la pratique d'activité physique">Écouter de la musique ou des livres audio pendant la pratique d'activité physique</mat-list-option>
+        <mat-list-option  value="S'équiper d'équipement pour bouger confortablement (chaussure confortable, pantalon et chandail de sport)">S'équiper d'équipement pour bouger confortablement (chaussure confortable, pantalon et chandail de sport)</mat-list-option>
+        <mat-list-option  value="Mettre une alarme sur le cellulaire ou autre appareil afin de se lever aux 30 minutes ou aux heures pour couper les périodes assises.">Mettre une alarme sur le cellulaire ou autre appareil afin de se lever aux 30 minutes ou aux heures pour couper les périodes assises.</mat-list-option>
+        <mat-list-option  value="Avoir un maximum d'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.)">Avoir un maximum d'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.)</mat-list-option>
+        <mat-list-option  value="Consulter un professionnel de la santé spécialisé en activité physique (kinésiologue) pour obtenir des conseils précis">Consulter un professionnel de la santé spécialisé en activité physique (kinésiologue) pour obtenir des conseils précis</mat-list-option>
+        <mat-list-option  value="Ajouter une marche de loisir à un moment opportun de votre journée">Ajouter une marche de loisir à un moment opportun de votre journée</mat-list-option>
+        <mat-list-option  value="Faire une liste des bénéfices à faire de l’activité physique et la laisser accessible en tout temps pour consultation quand la motivation est plus difficile.">Faire une liste des bénéfices à faire de l’activité physique et la laisser accessible en tout temps pour consultation quand la motivation est plus difficile.</mat-list-option>
+
+      </mat-selection-list>
+      <button (click)="comfirmerSol(sol.selectedOptions.selected)" color="primary" mat-button style="background-color: aliceblue; width: 100%; margin-top: 2em;">
+        Enregistrer
+      </button>
+
+
+    </mat-tab>
+
+
+
+
+  </mat-tab-group>
+  <!--  </mat-expansion-panel>-->
+
+
+
+
+
+
+
+</div>

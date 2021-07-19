@@ -1,0 +1,62 @@
+<app-main-nav *ngIf="currentUser"></app-main-nav>
+<div class="container">
+<div class="profile-wrapper" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 0em; position: relative;">
+  <mat-expansion-panel style="width:100%;max-width:40em; margin-top: 2em; margin-bottom: 2em;">
+    <mat-expansion-panel-header >
+      <mat-panel-title style="color: #323232; font-weight: bold ">
+
+        <i class="material-icons" style="margin-left: 40%">
+          add_box
+        </i>
+        Ajouter un profil
+
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+<mat-card class="box">
+  <mat-card-header>
+    <mat-card-title >Ajout Profil</mat-card-title>
+  </mat-card-header>
+  <mat-form-field appearance="outline" style="width: 30%;">
+    <mat-label>Nom du Profil </mat-label>
+    <input #profilName matInput placeholder="Nom du Profi" color="primary"  >
+  </mat-form-field>
+  <mat-form-field appearance="outline" style="width: 30%;">
+    <mat-label>Role du  Profil</mat-label>
+    <input #middlename matInput placeholder="Role du  Profil" color="Role du  Profil"  >
+  </mat-form-field>
+  <mat-card appearance="outline" style="">
+  <span style="color: red;">ACCES</span><br>
+    <mat-radio-button style="margin-left: 1em; margin-bottom: 1em;margin-top: 1em;">Administration</mat-radio-button>
+    <mat-radio-button style="margin-left: 1em; margin-bottom: 1em;margin-top: 1em;"> Professinelle</mat-radio-button>
+    <mat-radio-button style="margin-left: 1em; margin-bottom: 1em;">Recherche</mat-radio-button>
+  </mat-card>
+
+  <button mat-stroked-button color="primary" >Ajouter
+    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAA
+        AAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  </button>
+
+
+    </mat-card>
+  </mat-expansion-panel>
+
+</div>
+
+  <div class="profile-wrapper" fxLayout="row" fxLayoutAlign="center center" style="margin-top: 0em; position: relative;">
+  <mat-expansion-panel style="width:100%;max-width:40em; margin-top: 2em; margin-bottom: 2em;">
+    <mat-expansion-panel-header >
+      <mat-panel-title style="color: #323232; font-weight: bold ">
+
+        <i class="material-icons" style="margin-left: 40%">
+          filter_list
+        </i>
+        Listes des profils
+
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="box">
+
+    </div>
+  </mat-expansion-panel>
+  </div>
+</div>

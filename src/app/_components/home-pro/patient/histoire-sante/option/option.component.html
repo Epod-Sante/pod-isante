@@ -1,0 +1,39 @@
+<div >
+
+  <h3 style="text-align: center">{{data.antecedent.valeur}}</h3>
+
+  <mat-form-field *ngIf="data.antecedent.valeur==='Cancer'" appearance = "outline">
+    <input #organe (change)="onChangeOrgane(organe.value)" [value]="data.typ" matInput placeholder = "Organe">
+    <mat-hint>Cancer de ..</mat-hint>
+  </mat-form-field>
+  <br>
+  <mat-form-field *ngIf="data.type!=null" appearance = "outline">
+    <mat-select [value]="data.typ"  matNativeControl placeholder = "Type"  required >
+      <mat-option #type (click)="onChangeType(type.value)" *ngFor="let t of data.type " [value]="t" >{{t}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="data.traitement!=null" appearance = "outline">
+    <mat-select [value]="data.trait"  matNativeControl placeholder = "Traitement"  required >
+      <mat-option #trait (click)="onChangeTraitement(trait.value)" *ngFor="let t of data.traitement " [value]="t" >{{t}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field *ngIf="data.mois!=null"  appearance = "outline">
+    <mat-select [value]="m"  matNativeControl placeholder = "Mois"  required >
+      <mat-option #mois (click)="onChangeMounth(mois.value)"  *ngFor="let m of mois " [value]="m" >{{m}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field  appearance = "outline">
+    <mat-select  [value]="a" matNativeControl placeholder = "Année"  required >
+      <mat-option #year (click)="onChangeYear(year.value)" *ngFor="let a of annee " [value]="a" >{{a}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <button (click)="enreg()" [mat-dialog-close]="lis_antecedant" color="primary" mat-raised-button> Enregistrer </button>
+
+
+</div>

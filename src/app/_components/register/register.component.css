@@ -1,0 +1,23 @@
+html,body{height:100%;margin:0;padding:0; width: 100%;}
+.register-wrapper{height:100%;  position: absolute;}
+.box{position:relative;width:100%;max-width:40em;}
+
+.register-wrapper .mat-stroked-button{border:1px solid currentColor; width: 100%;}
+.register-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
+register-wrapper .mat-form-field { width: 100%;}
+
+
+
+
+.mat-form-field{
+  width: 40%;
+}
+
+
+
+.mat-form-field{
+  margin: 10px;
+}
+
+
+

@@ -1,0 +1,11 @@
+<div class="container">
+  <div mat-dialog-content>
+    Comfirmer la suppression ?
+  </div>
+
+  <div mat-dialog-actions>
+    <button (click)="confirmDelete()" [mat-dialog-close]="1" mat-button>Supprimer</button>
+    <button (click)="onNoClick()" mat-button tabindex="-1">Anuller</button>
+  </div>
+
+</div>

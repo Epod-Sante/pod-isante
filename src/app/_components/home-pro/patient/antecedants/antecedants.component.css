@@ -1,0 +1,73 @@
+html,body{height:100%;margin:0;padding:0;}
+.patient-wrapper{height:100%;  position: absolute;}
+.box{position:relative;width:100%;max-width:150em;}
+
+.mat-stroked-button{border:1px solid currentColor; width: 100%;}
+.patient-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
+.patient-wrapper .mat-form-field { width: 80%;}
+
+.mat-list-option{
+  margin-top: 2em;
+}
+
+
+.mat-form-field{
+  width: 40%;
+}
+
+
+
+.mat-form-field{
+  margin: 10px;
+}
+
+
+tr.example-detail-row {
+  height: 0;
+}
+
+
+tr.example-element-row:hover {
+  background: #ff53d4;
+  cursor: pointer;
+
+}
+tr.example-element-row:active{
+  background: #b6b5b5;
+  cursor: pointer;
+
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+.mat-stroked-button{border:5px solid black; width: 80%; margin-left: 10%; margin-right: 10%; margin-top: 30em; margin-bottom: 5em; }
+

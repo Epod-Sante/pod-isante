@@ -1,0 +1,91 @@
+<mat-sidenav-container  class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport style=""
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false">
+    <mat-nav-list style="margin-top: -1em;" >
+      <ng-material-multilevel-menu
+        [configuration]='config'
+        [items]='appitems'
+        (selectedItem)="selectedItem($event)"
+        (selectedLabel)="selectedLabel($event)">
+      </ng-material-multilevel-menu>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+<mat-sidenav-content>
+<mat-toolbar  class="crm-navigation-bar"  >
+
+  <mat-toolbar-row>
+
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+
+    </button>
+
+    <span class="toolbar-title">  </span>
+
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" >
+
+      <ul fxLayout fxLayoutGap="2em" class="navigation-items" >
+        <li style="font-weight:unset; font-size: small">
+          {{obj.user_name}}
+
+          <button  mat-icon-button [matMenuTriggerFor]="auth" style="margin-right: 5%; font-weight:bolder"  >
+            <mat-icon  >person_outline</mat-icon>
+          </button>
+          <mat-menu  #auth="matMenu" >
+
+            <button mat-menu-item  >
+              <mat-icon>person_outline</mat-icon>
+
+              <span>Profile</span>
+            </button>
+
+
+
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span> Parametres</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item >
+              <mat-icon>help_outline</mat-icon>
+              <span> Guide Utilisateur </span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button  mat-menu-item >
+              <mat-icon color="warn">exit_to_app</mat-icon>
+              <span style="color: red" (click)="logOut()"> Deconnexion</span>
+            </button>
+
+
+
+
+          </mat-menu>
+        </li>
+
+
+
+
+
+
+      </ul>
+
+    </div>
+
+  </mat-toolbar-row>
+
+
+</mat-toolbar>
+  <router-outlet></router-outlet>
+
+</mat-sidenav-content>
+</mat-sidenav-container>
+

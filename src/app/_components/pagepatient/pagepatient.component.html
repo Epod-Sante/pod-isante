@@ -1,0 +1,126 @@
+<mat-sidenav-container *ngIf="  token!=null ">
+  <mat-sidenav  #sidenav role="navigation" >
+    <mat-nav-list>
+      <a mat-list-item>
+        <mat-icon class="icon">done_outline</mat-icon>
+        <span class="label">Recommandations</span>
+      </a>
+      <a mat-list-item >
+              <mat-icon class="icon">autorenew</mat-icon>
+              <span class="label" routerLink="device" >Synchroniser votre podometre</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon class="icon">question_answer</mat-icon>
+        <span class="label">Repondre aux questionnaires</span>
+
+      </a>
+
+        <a mat-list-item  *ngIf="socio==null">
+              <mat-icon class="icon">sentiment_satisfied_alt</mat-icon>
+              <span class="label" routerLink="socio" >Completer votre profil</span>
+
+            </a>
+
+    <!--  <a  mat-list-item type="button">
+        <mat-icon class="icon">input</mat-icon>
+        <span class="label">Deconnexion</span>
+      </a>-->
+    </mat-nav-list>
+  </mat-sidenav>
+<mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
+        <ul fxLayout fxLayoutGap="2em" class="navigation-items">
+
+
+
+          <li>
+            <a  mat-menu-item >
+              <mat-icon color="warn">exit_to_app</mat-icon>
+              <span style="color: red" (click)="logOut()"> Deconnexion</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+
+
+    <div class="pagel"  style="margin-bottom:1em; position: relative">
+      <mat-card class="example-card" style="margin-bottom: 2em">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+          </div>
+          <mat-card-title>{{obj?.object.firstName}} {{obj?.object.lastName}}</mat-card-title>
+          <mat-card-subtitle>Numero de dossier : {{obj?.object.fileNumber}} </mat-card-subtitle>
+          <mat-card-actions >
+          </mat-card-actions>
+
+
+        </mat-card-header>
+        <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
+          <ul fxLayout fxLayoutGap="2em" class="navigation-items">
+            <li>
+              <a mat-list-item [routerLink]="['/recom' , patient?.id]">
+                <mat-icon class="icon">done_outline</mat-icon>
+                <span class="label">Recommandations</span>
+              </a>
+            </li>
+            <li>
+              <a mat-list-item [routerLink]="['/socio', patient?.id]"  *ngIf="socio==null">
+                <mat-icon class="icon">sentiment_satisfied_alt</mat-icon>
+                <span class="label">Complétez votre profil. </span>
+
+              </a>
+            </li>
+            <li>
+              <a *ngIf="!expanded" (click)="is_expanded()">
+
+                <span class="label"><mat-icon class="icon" >question_answer</mat-icon><br>Répondre aux questonnaires</span>
+              </a>
+              <div *ngIf="expanded">
+                <a *ngIf="obj.object.hasBREQ===false" mat-list-item (click)="breq()" >
+                  <span class="label">Questinnaire de motivation </span>
+                  <mat-icon class="icon" >question_answer</mat-icon>
+
+
+                </a>
+                <a mat-list-item (click)="gpag()">
+                  <span class="label" >Questinnaire d'Activites physiques </span>
+                  <mat-icon class="icon" > question_answer</mat-icon>
+
+
+                </a>
+              </div>
+
+            </li>
+            <li>
+              <a mat-list-item href="https://help.fitbit.com/articles/fr/Help_article/1877" target="_blank" >
+                <mat-icon class="icon">autorenew</mat-icon>
+                <span class="label">Synchronisez votre podomètre</span>
+              </a>
+            </li>
+
+
+
+
+          </ul>
+        </div>
+      </mat-card>
+    </div>
+    <div style="margin-top: 8em; margin-left: 10em; margin-right: 10em; width: 70%">
+      <router-outlet></router-outlet>
+
+    </div>
+
+</mat-sidenav-content>
+</mat-sidenav-container>
+
+
+

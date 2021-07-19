@@ -1,0 +1,24 @@
+<mat-card style=" color : white; background : #323232;"> Bilan lipidique</mat-card>
+<mat-form-field appearance="fill">
+  <mat-label>LDL (mmol/L) </mat-label>
+  <input #ldl matInput placeholder="LDL (mmol/L)" type="number">
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>HDL (mml/L) </mat-label>
+  <input #hdl matInput placeholder="HDL (mml/L) " type="number">
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Non HDL  (CT- HDL) </mat-label>
+  <input #nonhdl matInput placeholder="Non HDL  (CT- HDL) " type="number">
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Triglycérides (mmol/L)</mat-label>
+  <input #triglycerides matInput placeholder="Triglycérides (mmol/L)" type="number">
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>HbA1c   (%)  </mat-label>
+  <input #hba1c matInput max="100" min="0" placeholder="HbA1c   (%) " type="number">
+</mat-form-field>
+<button (click)="ajouter(ldl.value, hdl.value, nonhdl.value, triglycerides.value, hba1c.value)" class="btn-block" color="primary" mat-stroked-button>Enregistrer
+
+</button>

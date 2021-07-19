@@ -1,0 +1,44 @@
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Chercher">
+  </mat-form-field>
+</div>
+<table mat-table [dataSource]="dataSource" matSort>
+
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+    <td mat-cell *matCellDef="let element" > {{element.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="mail">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email.value }} </td>
+   </ng-container>
+
+   <ng-container matColumnDef="role">
+     <th mat-header-cell *matHeaderCellDef> Role </th>
+     <td mat-cell *matCellDef="let element"> {{element.role.name}} </td>
+   </ng-container>
+
+   <ng-container matColumnDef="details">
+     <th mat-header-cell *matHeaderCellDef> Details </th>
+     <td mat-cell *matCellDef="let element">
+       <button mat-icon-button color="primary" (click)="redirectToDetails(element.id)">
+         <mat-icon class="mat-18">reorder</mat-icon>
+       </button>
+     </td>
+   </ng-container>
+
+     <ng-container matColumnDef="block">
+     <th mat-header-cell *matHeaderCellDef> Bloquer </th>
+     <td mat-cell *matCellDef="let element">
+       <mat-checkbox [checked]="!element.account.enabled" (click)="redirectToUpdate(element)"></mat-checkbox>
+     </td>
+   </ng-container>
+
+
+   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+ </table>
+<mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+</mat-paginator>

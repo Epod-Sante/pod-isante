@@ -1,0 +1,119 @@
+body{
+  width: 100%;
+  position: absolute;
+}
+table {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+
+}
+html,body{height:100%;margin:0;padding:0;}
+.box{position:relative;width:100%;max-width:150em;}
+
+.mat-stroked-button{border:1px solid black; width: 30%; margin-top: 2em; margin-left: 2em}
+.patient-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
+.patient-wrapper .mat-form-field { width: 80%;}
+
+
+
+
+.mat-form-field{
+  width: 40%;
+}
+
+
+
+.mat-form-field{
+  margin: 10px;
+}
+
+
+tr.example-detail-row {
+  height: 0;
+}
+
+
+tr.example-element-row:hover {
+  background: #ff53d4;
+  cursor: pointer;
+
+}
+tr.example-element-row:active{
+  background: #b6b5b5;
+  cursor: pointer;
+
+}
+
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+.pagel{
+  width: 25%;
+  position: absolute;
+  margin-top: 2em;
+  margin-left: 1em;
+  margin-bottom: 2em;
+
+
+}
+
+.page{
+  position: relative; margin-left: 28%; width: 65%;
+  margin-top: 2em;
+  margin-right: 1em;
+
+}
+@media(max-width: 1000px) {
+  .pagel{
+    width: 100%;
+    position: relative;
+  }
+  .page{
+    width: 100%;
+    position: relative;
+    margin-left: 0;
+
+
+  }
+
+
+
+}
+@media print {
+  /* invert the display (show/hide) properties of the main */
+  /* aplication component and the printing component       */
+
+  .pagel{
+   display: none;
+
+
+  }
+  mat-tab mat-tab-header { display: none}
+  button {
+    display: none;
+
+  }
+  app-raport-g {
+    display: block;
+  }
+
+
+}
+
+
+

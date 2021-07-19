@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-6">
+    <img src="" alt="">
+    <button mat-button style="margin-left: 95%; margin-right: 5%"  (click)="fermer()">Fermer
+    </button>
+  </div>
+</div>
+<div id="quiz"><!-- Partie affichage du questionnaire -->
+  <h3 >{{quiz.name}}</h3>
+  <h4  style="font-weight: inherit">{{quiz.description}}</h4>
+  <hr/>
+
+  <div *ngIf="mode=='quiz' && quiz"> <!-- Partie affichage des questions un par un  -->
+    <div *ngFor="let question of filteredQuestions;">
+    <!--  <mat-card  >Question {{pager.index + 1}} de {{pager.count}}.</mat-card>-->
+      <!--<div  *ngIf="config.duration" class="badge badge-info float-right">Temps ecoule : {{ellapsedTime}}
+        / {{duration}}</div>-->
+      <h3 class="font-weight-normal">
+        <span [innerHTML]="question.name"></span>
+      </h3>
+      <mat-card class="row text-left options">
+        <div style="width: 100%; " *ngFor="let option of question.options">
+          <div class="option" style="background-color: #eeeeee; font-weight: bold;" [attr.for]="option.id"
+               *ngIf="option.id==1055 || option.id==1056 || option.id==1057 || option.id==1058 || option.id==1059">
+            <label class="font-weight-normal">
+              <input style="margin-left: 1em; margin-right: 2em;" id="{{option.id}}" type="checkbox"
+                     [(ngModel)]="option.selected"
+                     (change)="onSelect(question, option);"/> <b>{{option.name}}</b>
+            </label>
+
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <hr/>
+    <div >
+     <!-- <button mat-button color="primary" style="margin-left: 50%"  *ngIf="config.allowBack"
+              (click)="goTo(pager.index - 1);">
+        Precedent
+      </button>-->
+    <!--  <button mat-button color="primary"  (click)="goTo(pager.index + 1);">Suivant</button>-->
+     <!-- <button mat-button style="background-color: darkseagreen" *ngIf="comfirmer == true   " style="margin-left: 1em;"
+              (click)="mode='result'"> Confirmer
+      </button>-->
+      <button mat-raised-button color="primary"  [disabled]="!comfirmer" class="btn btn-primary" (click)="onSubmit()">Envoyer</button>
+
+    </div>
+  </div>
+
+  <div *ngIf="mode=='result'">
+    <h3 class="alert-success"> Merci, cliquez sur le button envoyer si vous avez fini sinon retour au
+      questionnaire </h3>
+    <button mat-button style="margin-right: 5%; margin-left: 20%; color: darkgreen" class="btn btn-primary" (click)="onSubmit()">Envoyer</button>
+    <button mat-button style="margin-left: 5%; color: coral; margin-right: 5%" class="btn btn-warning" (click)="goBack(pager.count)">retour au
+      questionnaire
+    </button>
+  </div>
+</div>
+<hr/>
+
+

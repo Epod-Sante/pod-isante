@@ -1,0 +1,88 @@
+
+<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Niveau de scolarite</mat-label>
+  <select #scolarity  matInput matNativeControl placeholder="Niveau de scolaire">
+    <option></option>
+    <option> < 11 ans de scolarité (< Diplôme d’étude secondaire)</option>
+    <option>Diplôme d’étude secondaire (DEP)</option>
+    <option>Formation professionnell</option>
+    <option>Formation collégiale</option>
+    <option>Formation universitaire 1er cycle</option>
+    <option>Formation universitaire 2ème et 3ème cycle</option>
+  </select>
+</mat-form-field>
+
+
+<mat-form-field appearance="fill" style="width: 30%;" >
+  <mat-label>Statut marital actuel</mat-label>
+  <select  #marital matInput matNativeControl placeholder="Statut marital actuel :">
+    <option value="celibataire">Célibataire</option>
+    <option value="divorce">Divorcé(e)</option>
+    <option value="marie">Marié(e)</option>
+    <option value="pasce">Pacsé(e)</option>
+    <option value="Vivant maritalement">Vivant maritalement</option>
+    <option value="veuf">veuf(ve)</option>
+
+  </select>
+</mat-form-field>
+<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Statut professionnel actuel</mat-label>
+  <select #profession matInput matNativeControl placeholder="Statut professionnel actuel"
+          >
+    <option></option>
+    <option >Profession libérale</option>
+    <option >Salarié</option>
+    <option >Retraité</option>
+    <option >Sans activité</option>
+    <option >Étudiant</option>
+    <option >Autre</option>
+
+  </select>
+</mat-form-field>
+<mat-form-field appearance="fill" style="width: 30%;">
+  <mat-label>Revenu familial</mat-label>
+  <select #revenu  matInput matNativeControl placeholder="Revenu familial">
+    <option></option>
+    <option> < 20 000 $ / année</option>
+    <option>Entre 20 000 et 39 999 $ / année</option>
+    <option>Entre 40 000 et 59 999$ / année</option>
+    <option>Entre 60 000 et 79 999 $ / année</option>
+    <option>> 80 000 $ / année</option>
+
+  </select>
+</mat-form-field>
+
+<br>
+<div style="margin-left: 5em;">
+<mat-label style="font-weight: bold; font-size: 15px; width: 10%">Milieu de vie :</mat-label>
+<mat-radio-group  #zone="matRadioGroup" aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button [checked]="this.urbaine" value="Zone urbaine"> Zone urbaine</mat-radio-button>
+  <mat-radio-button [checked]="this.rural" value="Zone rurale"> Zone rurale</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-checkbox  #retraite [(ngModel)]="disabled" style="width: 100%" value="Résidence pour retraitée">Résidence pour retraitée : </mat-checkbox>
+<mat-radio-group #services="matRadioGroup"  [disabled]="!disabled" aria-label="choisissez une option" matNativeControl
+                 style="width: 100%">
+  <mat-radio-button [checked]="this.services" value="1"> Avec services</mat-radio-button>
+    <mat-radio-button [checked]="!this.services"value="0"> Sans services</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-checkbox #house_uni  style="width: 100%" value="Maison unifamiliale" >Maison unifamiliale</mat-checkbox>
+<br>
+<mat-checkbox #cottage  style="width: 100%"  value="Cottage" >Cottage</mat-checkbox>
+<br>
+<mat-checkbox #bungalow  style="width: 100%" value="Bungalow" >Bungalow</mat-checkbox>
+<br>
+<mat-checkbox #condo  style="width: 100%"  value="Condo /appartement">Condo /appartement</mat-checkbox>
+<br>
+<mat-checkbox #app style="width: 100%" value="Appartement" >Appartement</mat-checkbox>
+</div>
+<br>
+
+
+<button (click)="ajouter(profession.value,revenu.value,retraite,
+services,house_uni,
+cottage,bungalow,condo,zone.value,app,marital.value,scolarity.value)" class="btn-block" color="primary" mat-stroked-button>Enregistrer
+
+</button>
+

@@ -1,0 +1,187 @@
+<div class="container-fluid">
+{{date}}
+  <br><br>
+  <div class="row no-gutters">
+    <div class="col">
+    </div>
+  </div>
+
+  <div class="row no-gutters">
+    <div class="col">
+      <img
+        alt="logotipo"
+        class="logotipo"
+        src="https://www.jobillico.com/medias/logo-entreprise/0/0/exp_logo_7966_fr_2016_09_02_14_49_44.png">
+    </div>
+
+    <!--<div class="col" style="margin-left: 80%">
+      <qrcode  [level]="'M'" [qrdata]="patient.fileNumber" [size]="256"></qrcode>
+    </div>-->
+  </div>
+
+  <div class="row no-gutters items-group">
+      <h1 style="text-align: center"> Informations personnels </h1>
+      <p>Nom et prenom : {{patient?.firstName}} {{patient?.lastName}}</p>
+      <p>Numero de dossier : {{patient?.fileNumber}}</p>
+      <p>date de naissance : {{patient?.birthday}}</p>
+      <p>genre : {{patient?.gender}}</p>
+    <div class="address">
+
+      <p>{{patient?.contact?.email}}</p>
+      <p class="material-icons">
+        contact_phone
+
+      </p>
+      {{patient?.contact?.phone}}
+
+      <p>Patient Pin : {{patient?.loginCode}}</p>
+    </div>
+
+  </div>
+
+  <div *ngIf="socioDemographicVariables != null" class="row no-gutters items-group">
+    <h1 style="text-align: center">Informations socio-demographiques :</h1>
+    <div class="col-3 label">
+
+    </div>
+
+    <div class="col-9">
+      <p>Niveau de scolarite : {{socioDemographicVariables.education}}</p>
+      <p>Statut marital actuel : {{ socioDemographicVariables.civilStatus}}</p>
+      <p>Statut professionnel actuel : {{socioDemographicVariables.jobStatus}}</p>
+      <p>Revenu familial : {{socioDemographicVariables.familyIncome}}</p>
+      <p>Milieu de vie  : {{socioDemographicVariables.livingEnvironment.type}}</p>
+    </div>
+  </div>
+  <div *ngIf="lipidProfiles!=null" class="row no-gutters items-group" >
+    <h1 style="text-align: center">Bilan lipidique :</h1>
+    <div class="col-3 label" >
+
+    </div>
+
+    <div *ngFor="let p of lipidProfiles" class="col-9">
+      <h3 style="text-align: center">Bilan lipidique du : {{p.date}}</h3>
+      <table style="width:100%">
+        <tr>
+          <th>ldl</th>
+          <th>triglyceride</th>
+          <th>hdl</th>
+          <th>nohdl</th>
+          <th>hba1c</th>
+
+        </tr>
+        <tr>
+          <td>{{p.ldl}}</td>
+          <td>{{p.triglyceride}}</td>
+          <td>{{p.hdl}}</td>
+          <td>{{p.nohdl}}</td>
+          <td>{{p.hba1c}}</td>
+
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="clinicalExamination!=[]" class="row no-gutters items-group" >
+    <h1 style="text-align: center">Examen clinique :</h1>
+    <div class="col-3 label" >
+
+    </div>
+
+    <div *ngFor="let c of clinicalExamination" class="col-9">
+      <h3 style="text-align: center">Examen clinique du : {{c.date}}</h3>
+      <div>
+      <h3 style="text-align: center; color: blue">Cardiovasculaire :</h3>
+
+      <table  style="width:80%">
+        <tr>
+          <th>FC (repos)</th>
+          <th>TA (bras dr) Diastolique</th>
+          <th>TA (bras dr) Systolique</th>
+          <th>TA (bras gche) Diastolique</th>
+          <th>TA (bras gche) Systolique</th>
+
+        </tr>
+        <tr>
+          <td>{{c?.cardiovascular?.heartRate?.value}}</td>
+          <td>{{c.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
+          <td>{{c.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}}</td>
+          <td>{{c.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
+          <td>{{c.cardiovascular.bloodPressure.bloodPressureLeftHandSystolique}}</td>
+
+
+        </tr>
+      </table>
+      </div>
+      <h3 style="text-align: center; color: blue">Pharmacothérapie :</h3>
+     <h4 *ngIf="c?.pharmacotherapy?.cardiovascular != '[]'">Cardiovasculaire</h4>
+      <h5 *ngIf="c?.pharmacotherapy?.cardiovascular != '[]'" style="color: #039be5">{{c?.pharmacotherapy?.cardiovascular}}</h5>
+      <h4 *ngIf="c?.pharmacotherapy?.diabetes != '[]'">Diabète</h4>
+      <h5 *ngIf="c?.pharmacotherapy?.diabetes != '[]'" style="color: #039be5" >{{c?.pharmacotherapy?.diabetes}}</h5>
+      <h4 *ngIf="c?.pharmacotherapy?.dyslipidemia != '[]'">Dyslipidémie</h4>
+      <h5 *ngIf="c?.pharmacotherapy?.dyslipidemia != '[]'" style="color: #039be5">{{c?.pharmacotherapy?.dyslipidemia}}</h5>
+      <h4 *ngIf="c?.pharmacotherapy?.other != '[]'">Autres</h4>
+      <h5 *ngIf="c?.pharmacotherapy?.other != '[]'" style="color: #039be5">{{c?.pharmacotherapy?.other}}</h5>
+      <div *ngIf="c?.smoking != undefined">
+        <h3 >Tabagisme </h3>
+        <h5 *ngIf="c.smoking != null">type : {{c.smoking.type}}</h5>
+        <h5 *ngIf="c.smoking.type=== 'actif'">Nombre de cigarettes par jour</h5>
+        <h5 *ngIf="c.smoking.type=== 'actif'" style="color: #039be5">{{c.smoking.numberCigarettes}}</h5>
+      </div>
+
+    </div>
+  </div>
+  <div *ngIf="antecedents!=null" class="row no-gutters items-group" >
+    <h1 style="text-align: center">Histoire de Sante:</h1>
+    <mat-list   #antecedants *ngFor="let ante of antecedents ">
+      <mat-list-item *ngFor="let x of ante" >
+        <h4>{{ x?.antecedent }}&nbsp;&nbsp;</h4>
+        <p *ngIf=" x.mounth!=null ">
+          &nbsp;&nbsp;{{ x?.mounth }}- <br>
+        </p>
+        <p *ngIf="x?.year!=null">
+          {{ x?.year }} <br>
+        </p>
+
+        <p *ngIf="x.traitement!=null ">
+          &nbsp;&nbsp; traitement : {{ x.traitement }} <br>
+        </p>
+        <p *ngIf=" x.type!= null">
+          &nbsp;&nbsp; type : {{ x.type }} <br>
+        </p>
+      </mat-list-item>
+    </mat-list>
+
+
+
+
+
+</div>
+  <div *ngIf="recommandation!=null">
+    <mat-list>
+
+      <mat-list-item *ngFor="let reco of recommandation">
+
+        <mat-icon mat-list-icon>accessibility</mat-icon>
+        <div mat-line>{{reco.valeur}}</div>
+        <div mat-line> {{reco.updated | date}} </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h5 *ngFor="let deta of detaills">
+        <h5 *ngIf="deta.value!=undefined" style="color: #039be5">{{deta.type.toUpperCase()}}</h5>
+        <h5 *ngFor="let val of deta.value">
+          * {{val.value}}
+        </h5>
+      </h5>
+      <h3>Barrieres</h3>
+      {{barriersRecommendation}}
+      <h5 *ngFor="let b of barriersRecommendation">
+        <h6> {{b}} </h6>
+      </h5>
+      <h3>Solutions</h3>
+      {{barriersRecommendationSolutions}}
+      <h5 *ngFor="let s of barriersRecommendationSolutions">
+        <h6>{{s}}</h6>
+      </h5>
+    </mat-list>
+  </div>
+</div>

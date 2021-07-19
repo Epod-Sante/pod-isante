@@ -1,0 +1,129 @@
+<mat-card-title>{{data.patient.firstName}}, {{data.patient.lastName}}</mat-card-title>
+<mat-card-subtitle>Numero de dossier : {{data.patient.fileNumber}}</mat-card-subtitle>
+<mat-card-subtitle>Code compte patient : {{data.patient.loginCode}}</mat-card-subtitle>
+<mat-tab-group>
+
+<mat-tab label="Ajouter une nouvelle recommandation">
+<mat-form-field class="example-chip-list">
+
+  <mat-chip-list #chipList aria-label="Action">
+
+    <mat-chip
+      *ngFor="let r of Reco"
+      (click)="chipDetails(r)"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(r)">
+      {{r}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+    </mat-chip>
+    <input
+      placeholder="Actions"
+      #RecoInput
+      [formControl]="RecoCtrlA"
+      [matAutocomplete]="auto1"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let r of filteredRecoActions| async" [value]="r">
+      {{r}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+
+<mat-form-field class="example-chip-list">
+  <mat-label>Trucs generaux</mat-label>
+
+  <mat-chip-list #chipListsedentaire aria-label="Trucs generaux">
+
+    <mat-chip
+              *ngFor="let r of Reco1"
+              (click)="chipDetails1(r)"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove1(r)">
+      {{r}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+    </mat-chip>
+    <input
+      placeholder="Trucs generaux"
+      #RecoInput
+      [formControl]="RecoCtrlG"
+      [matAutocomplete]="auto2"
+      [matChipInputFor]="chipListsedentaire"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add1($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="selected1($event)">
+    <mat-option *ngFor="let r of filteredRecoGeneraux | async" [value]="r">
+      {{r}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field class="example-chip-list">
+<mat-label>temps sédentaire</mat-label>
+  <mat-chip-list #chipListsedentaire aria-label="temps sédentaire">
+
+    <mat-chip (click)="chipDetails2(r)"
+              *ngFor="let r of Reco2"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove2(r)">
+      {{r}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+    </mat-chip>
+    <input
+      placeholder="temps sédentaire"
+      #RecoInput
+      [formControl]="RecoCtrlS"
+      [matAutocomplete]="auto3"
+      [matChipInputFor]="chipListsedentaire"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add2($event)">
+  </mat-chip-list>
+  <mat-autocomplete #auto3="matAutocomplete" (optionSelected)="selected2($event)">
+    <mat-option *ngFor="let r of filteredRecoSedentaires | async" [value]="r">
+      {{r}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+  <button mat-button color="primary" (click)="enregister()" style="background-color: aliceblue; width: 100%">
+    Enregistrer
+  </button>
+</mat-tab>
+  <mat-tab label="Recommandations precedentes">
+    <mat-list>
+
+      <mat-list-item *ngFor="let reco of recommandation">
+
+        <mat-icon mat-list-icon>accessibility</mat-icon>
+        <div mat-line>{{reco.valeur}}</div>
+        <div mat-line> {{reco.updated | date}} </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h5 *ngFor="let deta of detaills">
+        <h5 *ngIf="deta.value!=undefined" style="color: #039be5">{{deta.type.toUpperCase()}}</h5>
+        <h5 *ngFor="let val of deta.value">
+          * {{val.value}}
+        </h5>
+      </h5>
+<h3>Barrieres</h3>
+      {{barriersRecommendation}}
+      <h5 *ngFor="let b of barriersRecommendation">
+        <h6> {{b}} </h6>
+      </h5>
+ <h3>Solutions</h3>
+      {{barriersRecommendationSolutions}}
+      <h5 *ngFor="let s of barriersRecommendationSolutions">
+        <h6>{{s}}</h6>
+      </h5>
+    </mat-list>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,64 @@
+.example-card {
+  width: 100%;
+
+}
+body {
+}
+mat-button-toggle-group{
+  width: 100%;
+  display: flow;
+}
+
+button {
+  padding: 0 6px 0 6px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  border: #323232;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: none;
+  outline: none;
+}
+.mat-stroked-button{border:1px solid black;  margin-top: 2em; margin-left: 2em}
+
+.example-header-image {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR2pKfz6MeqrIgC0FDDhcn6pnFoxf3nF1iqjgv1XmWlUEXeoDy3');
+  background-size: cover;
+}
+app-raport-g {
+  display: none;
+}
+@media print {
+  /* invert the display (show/hide) properties of the main */
+  /* aplication component and the printing component       */
+
+  .pagel{
+    display: none;
+
+
+  }
+  .example-card mat-card-header {
+    display: none;
+  }
+  app-rapport{
+    display: block;
+  }
+ mat-tab-group {
+   display: none;
+ }
+  button {
+    display: none;
+
+  }
+  app-raport-g {
+    display: block;
+  }
+
+
+}
+
+
+

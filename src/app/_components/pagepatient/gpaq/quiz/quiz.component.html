@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-6">
+    <img alt="" src="">
+    <button (click)="fermer()" mat-button  style="margin-left: 95%; margin-right: 5%">Fermer
+    </button>
+  </div>
+</div>
+<div id="quiz"><!-- Partie affichage du questionnaire -->
+  <h3 class="text-center font-weight-bold">{{quiz.name}}</h3>
+  <h5 class="text-center font-weight-inherit" style="font-weight: inherit">{{quiz.description}}</h5>
+  <hr/>
+
+  <div *ngIf="mode=='quiz' && quiz"> <!-- Partie affichage des questions un par un  -->
+    <div *ngFor="let question of filteredQuestions;">
+<!--
+      <div class="badge badge-info">Question {{pager.index + 1}} de {{pager.count}}.</div>
+-->
+      <!--<div *ngIf="config.duration" class="badge badge-info float-right">Temps ecoule : {{ellapsedTime}}
+        / {{duration}}</div>-->
+      <h3 class="font-weight-normal"> {{question.id - 1009}} .
+        <span [innerHTML]="question.name"></span>
+      </h3>
+      <div class="row text-left options">
+
+
+
+
+        <div *ngFor="let option of question.options" style="width: 100%; ">
+          <div *ngIf="question.questionPere==0" [attr.for]="option.id" class="option"
+               style="background-color: #eeeeee; font-weight: bold;">
+
+            <label class="font-weight-normal">
+
+              <input (change)="onSelect(question, option);" [(ngModel)]="option.selected" id="{{option.id}}"
+                     style="margin-left: 1em; margin-right: 2em;"
+                     type="checkbox"/> <b>{{option.name}}</b>
+            </label>
+
+          </div>
+          <div *ngFor="let option of question.options" style="width: 100%; ">
+              <label *ngIf="question.questionTypeId==4" for="" > Heures : </label>
+
+              <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==4" [(ngModel)]="question.hr"   class="form-control" id="hr" max="24"  min="0" name="" style="width: 30%" type="number">
+              <label *ngIf="question.questionTypeId==4" for=""  > Minutes : </label>
+              <input (change)="onSelect(question, option);"  *ngIf="question.questionTypeId==4" [(ngModel)]="question.min" class="form-control" id="mn" max="59" min="1" name="" style="width: 30%" type="number">
+
+
+            <label *ngIf="question.questionTypeId==3" for="" > Jours : </label>
+            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==3"  [(ngModel)]="question.nbJour"class="form-control"  id="" max="7" min="1" name="" style="width: 30%" type="number">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <hr/>
+    <div class="text-center">
+      <button (click)="goTo(pager.index - 1);" *ngIf="config.allowBack" class="btn btn-primary"
+              style="margin-right: 1em;">
+        Precedent
+      </button>
+      <button (click)="goTo(pager.index + 1);" class="btn btn-primary">Suivant</button>
+<!--      <button class="btn btn-info" *ngIf="pager.index +1  == pager.count  && comfirmer == true " style="margin-left: 1em;"
+              (click)="mode='result'"> Confirmer
+      </button>-->
+      <button (click)="onSubmit()" [disabled]="!comfirmer" color="primary"  mat-raised-button style="margin-right: 5%; margin-left: 20%">Envoyer</button>
+
+    </div>
+  </div>
+
+  <div *ngIf="mode=='result'">
+    <h3 class="alert-success"> Merci, cliquez sur le button envoyer si vous avez fini sinon retour au
+      questionnaire </h3>
+    <button (click)="onSubmit()" class="btn btn-primary" style="margin-right: 5%; margin-left: 20%">Envoyer</button>
+    <button (click)="goBack(pager.count)" class="btn btn-warning" style="margin-left: 5%; margin-right: 5%">retour au
+      questionnaire
+    </button>
+  </div>
+</div>
+<hr/>
+
+

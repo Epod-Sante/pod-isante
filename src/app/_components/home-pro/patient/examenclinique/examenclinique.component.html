@@ -1,0 +1,157 @@
+<mat-card style=" color : white; background : #323232;"> Cardiovasculaire (* repos de 10 minutes minimum
+  doit précéder l’examen)
+</mat-card>
+<mat-form-field appearance="fill">
+  <mat-label>FC (repos)</mat-label>
+  <input type="number" #fc_repos matInput placeholder="FC repos"> batt. / par minute
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>TA (bras dr) Systolique en mmHg</mat-label>
+  <input type="number" #tadrsys matInput placeholder="Systolique">
+
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>TA (bras dr) Diastolique" en mmHg</mat-label>
+  <input type="number" #tadrdias matInput placeholder="Diastolique">
+
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>TA (bras gauche) Systolique en mmHg</mat-label>
+  <input type="number" #tagcsys matInput placeholder="Systolique">
+
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>TA (bras gche) Diastolique en mmHg</mat-label>
+  <input type="number" #tagcdias matInput placeholder="Diastolique">
+
+</mat-form-field>
+<mat-expansion-panel   style=" margin-top: 2em;  margin-bottom: 2em;">
+  <mat-expansion-panel-header>
+    <mat-panel-title style="color: #323232; font-weight: bold ">
+      <h4>Bilan lipidique :</h4>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+ <app-bilan-lipidique [id]="id"></app-bilan-lipidique>
+
+
+</mat-expansion-panel>
+<mat-card style=" color : white; background : #323232;"> Données anthropométriques
+</mat-card>
+<mat-form-field appearance="fill" style="width: 30%">
+  <mat-label>Poids</mat-label>
+  <input type="number"  #poidskg [(ngModel)]="kg"  matInput placeholder="Kg"/>
+
+</mat-form-field>
+Kg ou Lb
+<mat-form-field appearance="fill" style="width: 30%">
+  <mat-label>Poids</mat-label>
+  <input type="number" #poidslb [(ngModel)]="lbpoids" matInput placeholder="Lb" appTwoDigitDecimaNumber>
+</mat-form-field>
+<mat-form-field appearance="fill" style="width: 30%">
+  <mat-label>Taille</mat-label>
+  <input type="number" #taillecm [(ngModel)]="cm" matInput placeholder="taille en cm"/>
+
+</mat-form-field>
+cm ou pi
+<mat-form-field appearance="fill" style="width: 30%">
+  <mat-label>Taille</mat-label>
+  <input type="number" #taillepi  [(ngModel)]="pitaille" matInput placeholder="taille en pi" appTwoDigitDecimaNumber>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="calcul_imc()" >Convertir</button>
+
+
+<mat-form-field appearance="fill" >
+  <mat-label>IMC</mat-label>
+  <input type="number" step="0.01" #imc [(ngModel)]="imccm" matInput placeholder="IMC" appTwoDigitDecimaNumber> kg/m2
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>tour de taille</mat-label>
+  <input type="number" #tour_taille matInput placeholder="tour de taille"> cm
+</mat-form-field>
+<mat-card style=" color : white; background : #323232;"> Tabagisme
+</mat-card>
+<mat-radio-button [(ngModel)]="!disaledactif" #actiftabac (click)="onChangeActif()"  value="actif">Actif – nombre de cigarettes/jour</mat-radio-button>
+<mat-form-field appearance="fill">
+
+  <input type="number" [disabled]="disaledactif" #nb_cigarettes matInput placeholder="nombre de cigarettes/jour">
+</mat-form-field>
+<br>
+<mat-radio-button #passiftabac (click)="onChangePassif()" value="passif">Non Fumeur </mat-radio-button>
+<br>
+<mat-radio-button #anterieurtabac (click)="onChangeAnterieur()" value="anterieur">Anterieur – Arrêt depuis :</mat-radio-button>
+<mat-form-field appearance="fill" style="width: 30%">
+
+  <input type="number" [disabled]="disaledanterieur" #annee_arret matInput placeholder="Annee">
+</mat-form-field>
+
+
+<mat-card style=" color : white; background : #323232; "> Pharmacothérapie
+</mat-card>
+<mat-selection-list #cardiovasculaire style="width: 40%; ">
+<p style="font-weight: bold">Cardiovasculaire</p>
+
+
+<mat-list-option #beta_bloqueurs style="margin-left: 1em"  value="Béta-bloqueurs">Béta-bloqueurs</mat-list-option>
+
+  <mat-list-option #asa_aspirine style="margin-left: 1em"  value="ASA - Aspirine">ASA - Aspirine</mat-list-option>
+
+  <mat-list-option #inhibiteurs_enzyme style="margin-left: 1em" value="Inhibiteurs de l’enzyme de conversion de l’angiotensine">Inhibiteurs de l’enzyme de conversion de l’angiotensine</mat-list-option>
+
+<mat-list-option #bloqueur_angiotensine style="margin-left: 1em" value="Bloqueur de récepteur de l’angiotensine II">Bloqueur de récepteur de l’angiotensine II</mat-list-option>
+
+<mat-list-option #bloquer_canaux_calciques style="margin-left: 1em" value="Bloqueurs des canaux calciques">Bloqueurs des canaux calciques</mat-list-option>
+
+<mat-list-option #anti_arythmique  style="margin-left: 1em" value="Anti-arythmique – Cordarone<">Anti-arythmique – Cordarone</mat-list-option>
+
+<mat-list-option #inhibiteurIf style="margin-left: 1em" value="Inhibiteur du courant If (Ibrabadine)">Inhibiteur du courant If (Ivabradine)</mat-list-option>
+<mat-list-option #diurétique_th style="margin-left: 1em" value="Diurétique thiazide">Diurétique thiazide</mat-list-option>
+<mat-list-option #diurétique_anse style="margin-left: 1em" value="Diurétique de l’anse">Diurétique de l’anse</mat-list-option>
+<mat-list-option #coumadin style="margin-left: 1em" value="Anti coagulants (coumadin)">Anti coagulants (coumadin)</mat-list-option>
+<mat-list-option #naco style="margin-left: 1em" value="Anti coagulants (NACO)">Anti coagulants (NACO)</mat-list-option>
+<mat-list-option #anti_plaquettaires style="margin-left: 1em" value="Anti plaquettaires">Anti plaquettaires</mat-list-option>
+</mat-selection-list>
+<br>
+<mat-selection-list #dyslipidemie style="width: 40%; margin-left: 50%; margin-top: -38em; position: relative" >
+  <p style="font-weight: bold">Dyslipidémie</p>
+
+  <mat-list-option #statines style="margin-left: 1em" value="Statines">Statines</mat-list-option>
+
+  <mat-list-option #inhibiteurs_cholesterol style="margin-left: 1em" value="Inhibiteurs de l’absorption du cholestérol (ezetrol)">Inhibiteurs de l’absorption du cholestérol (ezetrol)</mat-list-option>
+
+  <mat-list-option #inhibiteurs_pcsk9 style="margin-left: 1em" value="Inhibiteurs de PCSK9">Inhibiteurs de PCSK9</mat-list-option>
+
+</mat-selection-list>
+<br>
+
+<mat-selection-list #diabete style="width: 40%; margin-left: 50%;position: absolute">
+  <p style="font-weight: bold">Diabète</p>
+  <mat-list-option #biguanide style="margin-left: 1em" value="Biguanide (ex : glucophage)">Biguanide (ex : glucophage)</mat-list-option>
+
+  <mat-list-option #secretaguogues_insuline style="margin-left: 1em" value="Sécrétagogues de l’insuline (ex : diabeta)">Sécrétagogues de l’insuline (ex : diabeta)</mat-list-option>
+
+  <mat-list-option #inhibiteurs_alphaglucosides style="margin-left: 1em" value="Inhibiteurs des alpha-glucosidas">Inhibiteurs des alpha-glucosidas</mat-list-option>
+  <mat-list-option style="margin-left: 1em">Insuline</mat-list-option>
+
+</mat-selection-list>
+
+
+<br>
+<mat-selection-list #others style="width: 40%; margin-left: 50%;position: absolute; margin-top: 16em;">
+  <p style="font-weight: bold">Autres</p>
+
+<mat-list-option #synthroide value="Synthroide" style="margin-left: 1em">Synthroide</mat-list-option>
+
+<mat-list-option #Supplment_fer style="margin-left: 1em" value="Supplément de fer">Supplément de fer</mat-list-option>
+
+<mat-list-option #opioides style="margin-left: 1em" value="Opioides">Opioides</mat-list-option>
+<mat-list-option #anxiolytique style="margin-left: 1em" value="Anxiolytique" >Anxiolytique</mat-list-option>
+<mat-list-option #anti_depresseurs style="margin-left: 1em" value="Anti dépresseurs">Anti dépresseurs</mat-list-option>
+</mat-selection-list>
+<button mat-stroked-button color="primary" (click)="ajouter(cardiovasculaire.selectedOptions.selected,dyslipidemie.selectedOptions.selected
+,diabete.selectedOptions.selected,others.selectedOptions.selected,fc_repos.value,tadrsys.value,tadrdias.value,tagcsys.value,tagcdias.value,poidskg.value,taillecm.value,imc.value,tour_taille.value,
+ actiftabac,nb_cigarettes.value,passiftabac,anterieurtabac,annee_arret.value)" class="btn-block">Enregistrer
+
+</button>
+

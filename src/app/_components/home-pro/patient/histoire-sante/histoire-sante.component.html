@@ -1,0 +1,67 @@
+<mat-form-field class="example-chip-list">
+<mat-chip-list #chipList  aria-label="Antécédents">
+
+  <mat-chip
+    (click)="chipDetails(r)"
+    (removed)="remove(r)"
+    *ngFor="let r of antess"
+    [removable]="removable"
+    [selectable]="selectable"
+    matTooltip = "Cliquer ici pour plus de details">
+    {{r}}
+    <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
+
+  </mat-chip>
+
+  <input
+    #AnteInput
+    (matChipInputTokenEnd)="add($event)"
+    [formControl]="AnteCtrl"
+    [matAutocomplete]="auto"
+    [matChipInputFor]="chipList"
+    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+    placeholder="Antécédents">
+</mat-chip-list>
+
+<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+  <mat-option *ngFor="let r of filteredAntecedents| async" [value]="r">
+    {{r}}
+  </mat-option>
+</mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field class="example-chip-list">
+
+  <mat-chip-list #chipListfact  aria-label="Facteurs de risques">
+
+    <mat-chip
+      (click)="chipDetailsFact(r)"
+      (removed)="removeFact(r)"
+      *ngFor="let r of factess"
+      [removable]="removable"
+      [selectable]="selectable"
+      matTooltip = "Cliquer ici pour plus de details">
+      {{r}}
+      <mat-icon *ngIf="removable" matChipRemove>cancel</mat-icon>
+
+    </mat-chip>
+
+    <input
+      #FactInput
+      (matChipInputTokenEnd)="addFact($event)"
+      [formControl]="FactCtrl"
+      [matAutocomplete]="autofact"
+      [matChipInputFor]="chipListfact"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      placeholder="Facteurs de risques">
+  </mat-chip-list>
+  <mat-autocomplete #autofact="matAutocomplete" (optionSelected)="selectedFact($event)">
+    <mat-option *ngFor="let r of filteredFacteurs| async" [value]="r">
+      {{r}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<button (click)="ajouter()" class="btn-block" color="primary" mat-stroked-button style="">Enregistrer
+
+</button>

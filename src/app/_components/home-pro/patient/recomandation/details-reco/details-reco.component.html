@@ -1,0 +1,213 @@
+<mat-card >
+  <mat-card-title style="width: 100%; background-color: aquamarine;
+  text-align: center; font-weight: bold; border:1px #323232 ; border-radius: 3px;
+  margin-top: 1em; margin-bottom: 1em;"> Caractesristiques de la recommandation</mat-card-title>
+
+  <mat-card-content *ngIf="data.type==1 && data.reco==='Augmenter le nombre de pas'">
+  <h3>{{data.reco}} de combien ?</h3>
+  <mat-slider [(ngModel)]="value"
+              max="25000"
+              min="250"
+              style="width: 50%"
+              thumbLabel
+              tickInterval="250"></mat-slider>
+  <i class="material-icons">
+    directions_walk
+  </i>
+  <mat-form-field appearance="fill">
+    <input #nb [(ngModel)]="value"
+           matInput
+           max="5000"
+           min="250"
+           placeholder="Nombre de pas"
+           type="number">
+  </mat-form-field>
+
+</mat-card-content>
+  <mat-card-content *ngIf="data.type==1 && data.reco==='Atteindre un nombre de minutes de marche'">
+    <h3>Souhaitez vous atteindre combien de minutes de marche ?</h3>
+    <mat-slider [(ngModel)]="value"
+                max="400"
+                min="5"
+                style="width: 50%"
+                thumbLabel
+                tickInterval="5"></mat-slider>
+    <i class="material-icons">
+      directions_walk
+    </i>
+    <mat-form-field appearance="fill">
+      <input #nb [(ngModel)]="value"
+             matInput
+             max="400"
+             min="5"
+             placeholder="Minutes"
+             type="number"> Minutes
+    </mat-form-field>
+
+  </mat-card-content>
+  <mat-card-content *ngIf="data.type==2 ">
+    <h1>{{data.reco}}</h1>
+
+  </mat-card-content>
+  <mat-card-content *ngIf="data.type==2 && data.reco==='faire un nombre de pas par minutes'">
+    <h3>Nombre de pas aux 30 minutes </h3>
+    <mat-slider #nb
+                [(ngModel)]="value"
+                max="500"
+                min="100"
+                style="width: 50%"
+                thumbLabel
+                tickInterval="100"></mat-slider>
+    <i class="material-icons">
+      directions_walk
+    </i>
+    <mat-form-field appearance="fill">
+      <input #nb [(ngModel)]="value"
+             matInput
+             max="300"
+             min="100"
+             placeholder="Pas"
+             type="number"> Pas
+    </mat-form-field>
+
+  </mat-card-content>
+
+  <mat-card-content *ngIf="data.type==3">
+    <h1> {{data.reco}}</h1>
+
+
+  </mat-card-content>
+
+</mat-card>
+<mat-card *ngIf="data.type==1 && data.reco==='Atteindre un nombre de pas'">
+  <mat-card-title style="width: 100%; background-color: aquamarine;
+  text-align: center; font-weight: bold; border:1px #323232 ; border-radius: 3px;
+  margin-top: 1em; margin-bottom: 1em;"> Caractesristiques de la recommandation</mat-card-title>
+
+  <mat-card-content >
+    <h3>{{data.reco}} equivaut a ?</h3>
+    <mat-slider [(ngModel)]="value"
+                max="12500"
+                min="2500"
+                style="width: 50%"
+                thumbLabel
+                tickInterval="500"></mat-slider>
+    <i class="material-icons">
+      directions_walk
+    </i>
+    <mat-form-field appearance="fill">
+      <input #nb [(ngModel)]="value"
+             matInput
+             max="12500"
+             min="2500"
+             placeholder="Nombre de pas"
+             type="number">
+    </mat-form-field>
+
+  </mat-card-content>
+
+</mat-card>
+<mat-radio-group aria-label="Select an option" >
+  <mat-label><h4>fréquence jour/semaine</h4></mat-label>
+  <mat-radio-button #freq value="1-2 jours par semaine">1-2 jours par semaine</mat-radio-button>
+  <mat-radio-button #freq value="Après-midi">3 jours par semaine</mat-radio-button>
+  <mat-radio-button #freq value="4 jours par semaine">4 jours par semaine</mat-radio-button>
+  <mat-radio-button #freq value="5 jours par semaine">5 jours par semaine</mat-radio-button>
+  <mat-radio-button #freq value="6 jours par semaine">6 jours par semaine</mat-radio-button>
+</mat-radio-group>
+<mat-radio-group aria-label="Select an option" >
+  <mat-label><h4>fréquence fois/jour</h4></mat-label>
+  <mat-radio-button #freqJour value="1 fois par jour">1 fois par jour</mat-radio-button>
+  <mat-radio-button #freqJour value="2 fois par jour">2 fois par jour</mat-radio-button>
+  <mat-radio-button #freqJour value="3 fois par jour">3 fois par jour</mat-radio-button>
+</mat-radio-group>
+<mat-selection-list #precautions>
+  <mat-expansion-panel style="  margin-bottom: 2em;">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="color: #323232; font-weight: bold ">
+        <h4>Précautions</h4>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-list-option value="300-echauffement long">Échauffement long (5min)</mat-list-option>
+    <mat-list-option  value="301-Retour au calme long (5min)">Retour au calme long (5min)</mat-list-option>
+    <mat-list-option value="302-Commencer lentement lors des températures froides">Commencer lentement lors des températures
+      froides</mat-list-option>
+    <mat-list-option value="303-Avoir sa nitroglycérines sur soi lors des périodes d'activité physique">Avoir
+      sa nitroglycérines sur soi lors des périodes d'activité physique (près du corps)</mat-list-option>
+    <mat-list-option value="304-Utiliser les crampons">Utiliser les crampons</mat-list-option>
+    <mat-list-option value="305-Utiliser des bâtons de marche/canne">Utiliser des bâtons de marche/canne</mat-list-option>
+    <mat-list-option  value="306-Utiliser des bâtons de marche/canne">L'hiver, s'échauffer avant de pelleter</mat-list-option>
+  </mat-expansion-panel>
+</mat-selection-list>
+
+<mat-selection-list #endroits>
+  <mat-expansion-panel style=" margin-bottom: 2em; ">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="color: #323232; font-weight: bold ">
+        <h4>Endroits</h4>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      <mat-list-option value="200-salle entrainement">Salle d'entrainement</mat-list-option>
+      <mat-list-option value="201-domicile">À domicile</mat-list-option>
+      <mat-list-option value="202-centre achats">Au centre d'achats</mat-list-option>
+      <mat-list-option value="203-centre communautaire">Centre communautaire</mat-list-option>
+      <mat-list-option value="204-Piste cyclable">Piste cyclable</mat-list-option>
+      <mat-list-option value="205-Sur tapis roulant">Sur tapis roulant</mat-list-option>
+      <mat-list-option value="206-Parcs">Parcs</mat-list-option>
+      <mat-list-option value="207-Sentiers">Sentiers</mat-list-option>
+  </mat-expansion-panel>
+</mat-selection-list>
+
+<mat-radio-group aria-label="Select an option" >
+  <mat-expansion-panel style=" margin-top: 2em; margin-bottom: 2em; ">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="color: #323232; font-weight: bold ">
+  <mat-label><h4>Paramètre d'intensité</h4></mat-label>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+  <mat-radio-button #intesity value="faible">Faible</mat-radio-button>
+  <mat-radio-button #intesity value="moderee">Modérée</mat-radio-button>
+  <mat-radio-button #intesity value="faible a moderee">Faible à modérée</mat-radio-button>
+  <mat-radio-button #intesity value="leger essouflement">Léger essoufflement</mat-radio-button>
+  <mat-radio-button #intesity value="essoufflement moderee">Essoufflement modéré</mat-radio-button>
+  <mat-radio-button #intesity value="capable de parler">Être capable de parler pendant l'activité</mat-radio-button>
+  <mat-radio-button #intesity value="continue">Continue</mat-radio-button>
+  <mat-radio-button #intesity value="fractionnee">Fractionnée dans la journée</mat-radio-button>
+  <mat-radio-button #intesity value="intervalle">Par intervalles</mat-radio-button>
+  <mat-radio-button #intesity value="Escaliers">Escaliers</mat-radio-button>
+  <mat-radio-button #intesity value="pente">Avec pente</mat-radio-button>
+  </mat-expansion-panel>
+</mat-radio-group>
+
+<mat-selection-list #moments>
+  <mat-expansion-panel style=" margin-bottom: 2em; ">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="color: #323232; font-weight: bold ">
+        <h4>Moments</h4>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-list-option value="100-Matin">Matin</mat-list-option >
+    <mat-list-option value="101-Après-midi">Après-midi</mat-list-option >
+    <mat-list-option value="102-Soir">Soir</mat-list-option >
+    <mat-list-option value="103-Semaine">Semaine</mat-list-option >
+    <mat-list-option value="104-Fin de semaine">Fin de semaine</mat-list-option >
+    <mat-list-option value="105-Déjeuner">Déjeuner</mat-list-option >
+    <mat-list-option value="106-Dîner">Dîner</mat-list-option >
+    <mat-list-option value="107-Souper">Souper</mat-list-option >
+    <mat-list-option value="108-Au travail">Au travail</mat-list-option >
+
+
+</mat-expansion-panel>
+</mat-selection-list>
+
+
+<button (click)="confirmer(moments.selectedOptions.selected,
+intesity.value, freq.value,freqJour.value,precautions.selectedOptions.selected,endroits.selectedOptions.selected)" [mat-dialog-close]="data" color="primary" mat-button style="background-color: aliceblue; width: 100%; margin-top: 2em;">
+  Enregistrer
+</button>
+
+
+
+

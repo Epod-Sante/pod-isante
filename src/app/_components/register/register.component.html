@@ -1,0 +1,94 @@
+<div class="container">
+<div class="register-wrapper" fxLayout="row" fxLayoutAlign="center center" style=" margin-top: 0em; position: relative;">
+
+  <mat-card class="box" style=" ">
+    <mat-card-header>
+      <mat-card-title style="font-size: small; color: crimson; font-weight: bold">
+        Veuillez Remplir les champs necessaires pour assurer l activation votre compte.</mat-card-title>
+    </mat-card-header>
+
+    <mat-card style=" color : white; background : #323232;"> Informations personnelles (obligatoires)</mat-card>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input #firstname matInput placeholder="Nom"  color="primary"  >
+    </mat-form-field>
+      <mat-form-field appearance="outline" style="width: 30%;">
+        <mat-label>Deuxiemme nom </mat-label>
+        <input #middlename matInput placeholder="Deuxiemme nom" color="primary"  >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 30%;">
+        <mat-label>Prenom</mat-label>
+        <input #lastname matInput placeholder="Prenom">
+      </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Date de naissance</mat-label>
+      <input #birthday matInput [matDatepicker]="picker" placeholder="Date de naissance" (dateChange)="getBirthday($event)"
+             disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <mat-card style=" color : white; background : #323232;"> Informations de connexion (obligatoires)</mat-card>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Nom d`utilisateur</mat-label>
+        <input #username matInput placeholder="Nom d`utilisateur">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input type="password" #password matInput placeholder="Mot de passe">
+      </mat-form-field>
+    <mat-card style=" color : white; background : #323232;"> Adresse </mat-card>
+    <mat-form-field appearance="outline">
+      <mat-label>Numero</mat-label>
+      <input type="number" #streetNumber matInput placeholder="streetNumber">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+
+    <mat-label>Rue</mat-label>
+      <input #street matInput placeholder="Rue">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Code Postal</mat-label>
+      <input #postalCode matInput placeholder="Code Postal">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ville</mat-label>
+      <input #city  matInput placeholder="Ville" [matAutocomplete]="auto" [formControl]="stateCtrl" aria-label="City">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option  *ngFor="let c of filteredStates  | async" [value]="c.city">
+          {{ c.city }}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>province</mat-label>
+      <input #province matInput placeholder="province">
+    </mat-form-field>
+
+
+
+
+
+      <button mat-stroked-button (click)="register(
+      username.value,
+      password.value,
+      firstname.value,
+      lastname.value,
+      middlename.value,
+      city.value,
+      postalCode.value,
+      province.value,
+      street.value,
+      streetNumber.value)" color="primary" class="btn-block">Envoyer
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAA
+        AAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      </button>
+
+  </mat-card>
+</div>
+</div>
+
+

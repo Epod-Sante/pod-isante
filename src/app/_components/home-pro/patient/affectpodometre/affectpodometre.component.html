@@ -1,0 +1,39 @@
+
+<div class="affecter" *ngIf="hiden_affecter===false">
+
+
+<mat-card style=" color : white; background :#323232;">AFFECTER UN PODOMETRE</mat-card>
+
+<mat-form-field appearance="fill" style="width: 100%; margin-top: 2em;">
+  <mat-label>Podometres disponibles</mat-label>
+  <select #podo matInput matNativeControl >
+    <option style="color: red" *ngFor="let device of devices" [value]="device.id">
+      {{device.deviceCode }}  ({{device.type}})
+    </option>
+
+  </select>
+</mat-form-field>
+<mat-form-field appearance="fill" style="width: 100%; margin-top: 2em;">
+  <mat-label>Date de retour</mat-label>
+  <input #returnDate matInput [matDatepicker]="picker"  placeholder="Date de retour*" color="primary"  (dateChange)="getBirthday($event)" >
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker disabled="false"></mat-datepicker>
+</mat-form-field>
+<button mat-stroked-button (click)="affect(podo.value, id)"
+        color="primary" class="btn-block">Affecter
+</button>
+</div>
+<div class="affecter" *ngIf="hiden_affecter===true">
+  <mat-card style=" color : white; background :#323232;">Récupérer un podomètre</mat-card>
+  <mat-card>
+    <b>Model : </b>{{model}}
+  </mat-card>
+  <mat-card>
+    <b>Type : </b> {{type}}
+  </mat-card>
+  <button mat-stroked-button (click)="recuperer(idDevice)"
+          color="primary" class="btn-block">Récupérer
+  </button>
+
+
+</div>

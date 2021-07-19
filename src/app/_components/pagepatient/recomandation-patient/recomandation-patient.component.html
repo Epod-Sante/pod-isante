@@ -1,0 +1,38 @@
+<mat-card *ngFor="let reco of recommandation" class = "tp-card">
+  <mat-card-header>
+    <div class = "tp-header-image" mat-card-avatar></div>
+    <mat-card-title>{{reco?.valeur.toUpperCase()}}</mat-card-title>
+    <mat-card-subtitle>{{recom.dateRecommendation}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+   <mat-list *ngFor="let deta of details">
+     <h3 >{{deta.type.toUpperCase()}}</h3>
+    <mat-list-item *ngFor="let val of deta.value">
+      <h6 > {{val.value}} </h6>
+    </mat-list-item>
+  </mat-list>
+
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button aria-label="Donner votre avis sur cette recommandation"
+            mat-raised-button
+            matTooltip="Donner votre avis sur cette recommandation">
+      Commenter
+    </button>
+    <button mat-button
+            matTooltip="Aimez vous cette recommandation "
+    >
+      <span class="material-icons" style="color: chartreuse">
+        thumb_up
+      </span>
+  </button>
+    <button mat-button
+            matTooltip="">
+      <span class="material-icons" style="color: red">
+        thumb_down
+      </span>
+    </button>
+  </mat-card-actions>
+</mat-card>
