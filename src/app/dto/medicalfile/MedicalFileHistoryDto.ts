@@ -1,8 +1,8 @@
 export class MedicalFileHistoryDto {
-    date : Date ;
+    date : string[] ;
     antecedents : string;
 
-  constructor(date: Date, antecedents: string) {
+  constructor(date: string[], antecedents: string) {
     this.date = date;
     this.antecedents = antecedents;
   }

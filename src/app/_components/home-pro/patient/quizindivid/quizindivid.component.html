@@ -1,0 +1,165 @@
+<h2>INFORMATIONS SOCIO-DÉMOGRAPHIQUES</h2><br>
+Complétez les informations ci-dessous. Cochez une seule case par question.
+<br>
+<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Sexe :  </mat-label>
+<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button value="Femme" > Femme</mat-radio-button>
+  <mat-radio-button value="Homme" > Homme</mat-radio-button>
+  <mat-radio-button value="Autre" > Autre</mat-radio-button>
+  <mat-radio-button value="null" > Préfère ne pas répondre</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> État civil :  </mat-label>
+<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button value="Célibataire" > Célibataire</mat-radio-button>
+  <mat-radio-button value="Marié" >Marié</mat-radio-button>
+  <mat-radio-button value="Conjoint de fait" >Conjoint de fait</mat-radio-button>
+  <mat-radio-button value="Veuf/veuve" > Veuf/veuve</mat-radio-button>
+  <mat-radio-button value="Séparé" >Séparé</mat-radio-button>
+  <mat-radio-button value="Divorcé" >Divorcé</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Scolarité :  </mat-label>
+<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button value="< 11 ans de scolarité (< Diplôme d'études secondaires)" > < 11 ans de scolarité (< Diplôme d'études secondaires)</mat-radio-button>
+  <mat-radio-button value="Diplôme d'études secondaires (DEP)" >Diplôme d'études secondaires (DEP)</mat-radio-button>
+  <mat-radio-button value="Formation professionnelle" >Formation professionnelle</mat-radio-button>
+  <mat-radio-button value="Formation collégiale" > Formation collégiale</mat-radio-button>
+  <mat-radio-button value="Séparé" >Formation universitaire 1er cycle</mat-radio-button>
+  <mat-radio-button value="Divorcé" >Formation universitaire 2ème et 3ème cycle</mat-radio-button>
+</mat-radio-group>
+<br>
+<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Statut d’emploi : </mat-label>
+<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button value="emploi" > À l’emploi </mat-radio-button>
+  <mat-radio-button value="Retraité" >Retraité</mat-radio-button>
+  <mat-radio-button value="Sans emploi" >Sans emploi </mat-radio-button>
+  <mat-radio-button value="Maladie" >Au foyer</mat-radio-button>
+  <mat-radio-button #autre   value="Autre:" >Autre</mat-radio-button>
+  <input matInput appearance="fill"  type="text">
+</mat-radio-group>
+<br>
+  <mat-label><b> Revenu familial annuel moyen : </b></mat-label>
+  <mat-checkbox   value="20000" > < 20 000 $ / année</mat-checkbox>
+  <mat-checkbox   value="39999"   >Entre 20 000 et 39 999 $ / année</mat-checkbox>
+  <mat-checkbox  value="59999" >Entre 40 000 et 59 999$ / année</mat-checkbox>
+  <mat-checkbox   style="width: 100%"  value="79999">Entre 60 000 et 79 999 $ / année</mat-checkbox>
+  <mat-checkbox  style="width: 100%" value="80000" >> 80 000 $ / année</mat-checkbox>
+<br>
+<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Milieu de vie : </mat-label>
+<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button value="Zone urbaine" >Urbain (ville) </mat-radio-button>
+  <mat-radio-button value="Zone rurale" >Rural (campagne)</mat-radio-button>
+</mat-radio-group>
+<br>
+<b> Type d'habitation : </b>
+<mat-checkbox #house_uni  style="width: 100%" value="Maison unifamiliale" >Maison unifamiliale</mat-checkbox>
+<mat-checkbox #cottage  style="width: 100%"  value="Cottage" >Cottage</mat-checkbox>
+<mat-checkbox #bungalow  style="width: 100%" value="Bungalow" >Bungalow</mat-checkbox>
+<mat-checkbox #condo  style="width: 100%"  value="Condo /appartement">Condo /appartement</mat-checkbox>
+<mat-checkbox #app style="width: 100%" value="Appartement" >Appartement</mat-checkbox>
+<br><br><br>
+<h2>ANTÉCÉDANTS MÉDICAUX</h2><br>
+Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
+inscrire les années correspondantes.
+<br><br>
+<section *ngFor="let ant of antecedants ">
+  {{ant.antecedents}} <mat-checkbox  #active [(ngModel)]="disabled" >  Oui </mat-checkbox>
+  <mat-checkbox   value="0"   > Non      </mat-checkbox>
+  ANNEES : <input   type="text" [disabled]="!active.checked" [(ngModel)]="ant.date" >
+  <br>
+</section>
+
+
+
+<!--Infarctus/crise cardiaque <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Pontages coronariens <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Angioplastie coronarienne
+(tuteurs) <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Maladie valvulaire <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Arythmies cardiaques <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Insuffisance cardiaque (NYHA I ou II) <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Insuffisance cardiaque (NYHA III ou IV) <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+AVC <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+ICT (ischémie cérébrale transitoire) <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input  matInput type="text" placeHolder="ANNEE">
+<br>
+Maladie vasculaire périphérique <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Cancer <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Maladie pulmonaire obstructive chronique  (MPOC)<mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Asthme <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Insuffisance rénale/dialyse/transplantation <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+Troubles articulaires (polyarthrite rhumatoide,
+arthrite, spondylarthrite
+ankylosante, arthrose) <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+<br>
+<br>
+Maladie neuro-dégénérative (ex :
+sclérose en plaque,Parkinson, Alzheimer) <mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0"   > Non </mat-checkbox>
+<input matInput type="text" placeHolder="ANNEE">
+Avez-vous l’une des conditions de santé ci-dessous? <br>
+<mat-checkbox   value="Hypertension artérielle " > Hypertension artérielle </mat-checkbox>
+<mat-checkbox   value="Dyslipidémie" > Dyslipidémie</mat-checkbox>
+<mat-checkbox   value="Dépression" > Dépression </mat-checkbox>
+<mat-checkbox   value="Obésité" > Obésité</mat-checkbox>
+<mat-checkbox   value="Diabète de type I ou II" > Diabète de type I ou II</mat-checkbox>
+<mat-checkbox   value="Trouble anxieux" > Trouble anxieux</mat-checkbox>
+<input matInput type="text" placeHolder="Autre">
+<br>
+Troubles musculo-squelettiques
+<br><br>
+Avez-vous déjà eu des fractures?
+<mat-checkbox   value="1" > Oui </mat-checkbox><mat-checkbox   value="0"   > Non </mat-checkbox>
+<br>
+<input matInput type="text" placeHolder="Autre">
+<input matInput type="text" placeHolder="Autre">
+<input matInput type="text" placeHolder="Autre">
+<input matInput type="text" placeHolder="Autre"><br>
+<br>
+À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si OUI, cochez lesquelles dans l’encadrer à droite de l’image. Si NON, cochez « Aucune douleur à rapporter »
+<mat-checkbox   value="1" > Oui </mat-checkbox>
+<mat-checkbox   value="0" > Non </mat-checkbox><br>-->
+
