@@ -173,7 +173,7 @@ export class SociodemoComponent implements OnInit {
 
     }
     let type = hse_uni + cttge + bglv + cdo + ap + rtraite
-    let socioinformation = new SocioDemographicVariablesDto( marital, revenu, profession, scolarity, new LivingEnvironmentDto(zone, type, srvice))
+    let socioinformation = new SocioDemographicVariablesDto( marital, revenu, profession, scolarity, "","","")
     console.log(socioinformation)
     console.log(this.id)
     let request = new Request(socioinformation);

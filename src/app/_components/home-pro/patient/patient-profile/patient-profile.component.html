@@ -5,7 +5,7 @@
     </div>
     <mat-card-title>{{patient?.firstName}}, {{patient?.lastName}}</mat-card-title>
     <span  class="iconify" data-icon="mdi-gender-male" data-inline="false"></span>
-    <mat-card-subtitle>Numero de dossier : {{patient?.fileNumber}}</mat-card-subtitle>
+<!--    <mat-card-subtitle>Numero de dossier : {{patient?.fileNumber}}</mat-card-subtitle>-->
     <mat-card-subtitle *ngIf="lastVisite!=null">Date de la prochaine visite : {{lastVisite.appointmentDate}}</mat-card-subtitle>
     <mat-card-subtitle>Code compte patient : {{patient?.loginCode}}</mat-card-subtitle>
 
@@ -211,6 +211,9 @@ add
       </mat-expansion-panel>
 
 
+    </mat-tab>
+    <mat-tab class="labeltab" label="Questionnaire individuel">
+      <app-quizindivid></app-quizindivid>
     </mat-tab>
     <mat-tab class="labeltab"  label="Saisir les informations du patient">
       <mat-expansion-panel [expanded]="expanded" (opened)="onOpen(true)" style="width:100%; margin-top: 2em; margin-bottom: 2em; ">

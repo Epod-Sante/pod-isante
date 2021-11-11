@@ -54,7 +54,11 @@ export class RapportComponent implements OnInit, OnChanges {
     responsive: true,
   };
   public vigoureux = 0;
-
+  public amotivation = 0;
+  public external : 0;
+  public introjected : 0;
+  public identified : 0;
+  public intrinsic : 0;
   public moderee = 0;
 
   public marche = 0;
@@ -98,6 +102,7 @@ export class RapportComponent implements OnInit, OnChanges {
   barChartLabels: Label[] = this.stepsDate;
   barChartType: ChartType = 'bar';
   barChartLegend = true;
+  definition = false;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
@@ -121,7 +126,13 @@ export class RapportComponent implements OnInit, OnChanges {
     'Intensité  modérée',
     'Intensité élevée',
     "sedentaires"];
+  public pieChartLabelsBreq: string[] = ['Extrinsèque',
+    'Introjectée',
+    'Identified',
+    "Intrinsic",
+  "Amotivation"];
   public pieChartData: SingleDataSet = [this.minu_low, this.minu_medium, this.minu_hight] ;
+  public pieChartDataBreq : SingleDataSet = [];
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
@@ -143,9 +154,7 @@ export class RapportComponent implements OnInit, OnChanges {
     this.minData = []
     this.minData = []
     this.val = []
-    this.marche = 0;
-    this.sedentaire = 0;
-    this.vigoureux = 0;
+
 
 
 
@@ -174,9 +183,7 @@ export class RapportComponent implements OnInit, OnChanges {
     this.minData = []
     this.minData = []
     this.val = []
-    this.marche = 0;
-    this.sedentaire = 0;
-    this.vigoureux = 0;
+
 
     this.getAllVisites()
 
@@ -198,9 +205,7 @@ export class RapportComponent implements OnInit, OnChanges {
     this.minData = []
     this.minData = []
     this.val = []
-    this.marche = 0;
-    this.sedentaire = 0;
-    this.vigoureux = 0;
+
 
     this.clinicalExamination = this.medicalFile.clinicalExamination
     console.log(this.medicalFile.clinicalExamination + " clinical")
@@ -218,7 +223,9 @@ export class RapportComponent implements OnInit, OnChanges {
   }
 
   public chartHovered(e: any): void {
+console.log(e);
   }
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -317,23 +324,12 @@ export class RapportComponent implements OnInit, OnChanges {
     Marche = (rép Q20xrép Q21) + (rép Q8xrép Q9) en minutes
 
     Sédentaire = rép Q22 en minutes*/
-        this.vigoureux = (valeur.reponses[1].jr * (valeur.reponses[2].hr * 60 + valeur.reponses[2].minu)) +
-          (valeur.reponses[13].jr * (valeur.reponses[14].hr * 60 + valeur.reponses[14].minu));
-        this.moderee = (valeur.reponses[4].jr * (valeur.reponses[5].hr * 60 + valeur.reponses[5].minu)) +
-          (valeur.reponses[10].jr * (valeur.reponses[11].hr * 60 + valeur.reponses[11].minu)) +
-          (valeur.reponses[16].jr * (valeur.reponses[17].hr * 60 + valeur.reponses[17].minu));
-        this.marche = (valeur.reponses[19].jr * (valeur.reponses[20].hr * 60 + valeur.reponses[20].minu)) +
-          (valeur.reponses[7].jr * (valeur.reponses[8].hr * 60 + valeur.reponses[8].minu))
-        this.sedentaire = ( valeur.reponses[21].minu);
-        this.barChartDatagpaq =  [
-          { data: [this.vigoureux,0], label: 'Vigoureux' },
-          { data: [this.moderee,0], label: 'Moderee' },
-          { data: [this.marche,0], label: 'Marche' },
-          { data: [this.sedentaire,0], label: 'Sedentaire' }
-        ];
+
 
 
         console.log(valeur.reponses[1].hr)
+      }else{
+
       }
 
       this.val.push( { date :x.date, value : valeur, id : x.id, type: x.type})
@@ -343,6 +339,39 @@ export class RapportComponent implements OnInit, OnChanges {
 
 
   }
+  public show_pieChart  (val : string){
+    let pieChart : SingleDataSet = [];
+    let x =  JSON.parse(JSON.stringify(val));
+    this.intrinsic = x.score.intrinsic;
+    this.external = x.score.external;
+    this.amotivation = x.score.amotivation;
+    this.identified = x.score.identified;
+    this.introjected = x.score.introjected;
+
+    pieChart=[this.intrinsic , this.external,this.amotivation,
+      this.identified,this.introjected];
+    return pieChart;
+  }
+  public show_barChart (valeur : string){
+    let barChar :  ChartDataSets[] ;
+    let x = JSON.parse(JSON.stringify(valeur));
+    this.vigoureux = (x.reponses[1].jr * (x.reponses[2].hr * 60 + x.reponses[2].minu)) +
+      (x.reponses[13].jr * (x.reponses[14].hr * 60 + x.reponses[14].minu));
+    this.moderee = (x.reponses[4].jr * (x.reponses[5].hr * 60 + x.reponses[5].minu)) +
+      (x.reponses[10].jr * (x.reponses[11].hr * 60 + x.reponses[11].minu)) +
+      (x.reponses[16].jr * (x.reponses[17].hr * 60 + x.reponses[17].minu));
+    this.marche = (x.reponses[19].jr * (x.reponses[20].hr * 60 + x.reponses[20].minu)) +
+      (x.reponses[7].jr * (x.reponses[8].hr * 60 + x.reponses[8].minu))
+    this.sedentaire = (x.reponses[22].hr * 60 + x.reponses[22].minu);
+    barChar =  [
+      { data: [this.vigoureux,0], label: 'Vigoureux ' },
+      { data: [this.moderee,0], label: 'Modérée' },
+      { data: [this.marche,0], label: 'Marche' },
+      { data: [this.sedentaire,0], label: 'Sédentaire' }
+    ];
+    return barChar;
+  }
+
   public getMinutes = () => {
 
     let request = new Request(this.datess)

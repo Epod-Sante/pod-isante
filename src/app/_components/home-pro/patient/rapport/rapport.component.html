@@ -87,17 +87,20 @@
            <h3> {{x.date}} :  {{x.type}} </h3>
               <h5>Travail</h5>
               Modéré-vigoureux :   {{(x.value.reponses[5].hr * 60 + x.value.reponses[5].minu) * x.value.reponses[4].jr +
-            (x.value.reponses[3].hr * 60 + x.value.reponses[3].minu) * x.value.reponses[2].jr}} minutes
+            (x.value.reponses[2].hr * 60 + x.value.reponses[2].minu) * x.value.reponses[1].jr}} minutes
               <h5>Transport (déplacement) : </h5>
-              A pied : {{(x.value.reponses[8].hr * 60 + x.value.reponses[8].minu) * x.value.reponses[7].jr }} minutes<br>
+              A pied : {{ (x.value.reponses[8].hr * 60 + x.value.reponses[8].minu) * x.value.reponses[7].jr}}  minutes<br>
               A vélo : {{(x.value.reponses[11].hr * 60 + x.value.reponses[11].minu) * x.value.reponses[10].jr}} minutes
               <h5>Loisirs : </h5>
               Modéré-vigoureux : {{(x.value.reponses[17].hr * 60 + x.value.reponses[17].minu) * x.value.reponses[16].jr +
             (x.value.reponses[14].hr * 60 + x.value.reponses[14].minu) * x.value.reponses[13].jr}} minutes<br>
               Marche : {{(x.value.reponses[20].hr * 60 + x.value.reponses[20].minu) * x.value.reponses[19].jr}} minutes<br>
+
+
               <div style="display: block; float: right; margin-top: -20em;">
+
                 <canvas baseChart
-                        [datasets]="barChartDatagpaq"
+                        [datasets]="show_barChart(x.value)"
                         [labels]="barChartLabelsgpaq"
                         [options]="barChartOptions"
                         [plugins]="barChartPluginsgpaq"
@@ -107,12 +110,24 @@
               </div>
             </div>
             <div *ngIf="x.type === 'BREQ'" >
-              <h3> {{x.date}} :  {{x.type}} </h3>
-              <b>External</b> : {{x.value.score.external}} . <br>
-              <b>Intrinsic</b> : {{x.value.score.intrinsic}} . <br>
-              <b>Identified</b> : {{x.value.score.identified}} . <br>
-              <b>Amotivation</b> : {{x.value.score.amotivation}} . <br>
-              <b>Introjected</b> : {{x.value.score.introjected}} . <br>
+              <h3> {{x.date}}  :  {{x.type}} </h3>
+              <div class="chart" style="margin-top:2em" *ngIf="pieChartLabelsBreq?.length > 0">
+                <div style=" width: 100%;">
+
+                  <canvas baseChart [data]="show_pieChart(x.value)" [labels]="pieChartLabelsBreq" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+                  <div >
+                    <b>External</b>  : Extrinsèque: Recherche de récompenses et évitement de punitions externes. <br>
+                    <b>Introjected</b> : Introjectée: Recherche de récompenses et évitement de punitions internes. (protection et valorisation de l’estime de soi, maintien de la réputation, évitement de culpabilité et de honte). <br>
+                    <b>Identified</b>: Identifiée : En lien avec les valeurs personnelles, importance et utilité sociale de la tâche, sens. Faire des tâches importantes (agréable ou non) qui sont en lien avec les valeurs de l’individu.. <br>
+                    <b>Intrinsic</b>:Intrinsèque: Faire des tâches par plaisir, satisfaction inhérente. Plaisir, concentration intense, émotions positives reliées à la tâche.. <br>
+                    <b>Amotivation</b> : Démotivation : Absence d’autorégulation et d’énergie volontaire. Désengagement, manque de sens, résignation.. <br>
+                  </div>
+
+                </div>
+              </div>
+
+
             </div>
 
           </div>
