@@ -22,6 +22,7 @@ import { RecommmComponent } from './patient/recommm/recommm.component';
 import { ObjectifComponent } from './patient/objectif/objectif.component';
 import {AppModule} from "../../app.module";
 import { QuizindividComponent } from './patient/quizindivid/quizindivid.component';
+import { ObjectifV2Component } from './patient/objectif-v2/objectif-v2.component';
 
 export const homeProRoutes: Routes = [
   {
@@ -44,6 +45,6 @@ export const homeProRoutes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(homeProRoutes), MatRadioModule, MatFormFieldModule, MaterialModule, FormsModule, CommonModule, ReactiveFormsModule, QRCodeModule],
     exports: [RouterModule, HistoireSanteComponent, RaportGComponent, BilanLipidiqueComponent, RecommmComponent, RecommmComponent, RecommmComponent, RecommmComponent, ObjectifComponent, QuizindividComponent],
-  declarations: [AppointComponent, DetailsRecoComponent, BilanLipidiqueComponent, HistoireSanteComponent, RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, QuizindividComponent]
+  declarations: [AppointComponent, DetailsRecoComponent, BilanLipidiqueComponent, HistoireSanteComponent, RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, QuizindividComponent, ObjectifV2Component]
 })
 export class HomeProRoutingModule{ }

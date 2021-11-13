@@ -43,7 +43,7 @@ export class RapportComponent implements OnInit, OnChanges {
   poddon: any
   stepsDate: string [] = [];
   mySubscription: any
-  datess = new Array()
+  datess = []
   visites: AppointmentDto[];
   public patientRow: Patient[] = [];
   public stats: DescStats [];
@@ -339,7 +339,7 @@ console.log(e);
 
 
   }
-  public show_pieChart  (val : string){
+  public show_pieChart(val: object){
     let pieChart : SingleDataSet = [];
     let x =  JSON.parse(JSON.stringify(val));
     this.intrinsic = x.score.intrinsic;

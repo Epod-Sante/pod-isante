@@ -1,13 +1,13 @@
 import {AccountDto} from "./AccountDto";
 import {AddressDto} from "./AddressDto";
-import {EmailDto} from "./EmailDto";
-import {InstitutionDto} from "./InstitutionDto";
-import {RoleDto} from "./roleDto";
+import {EmailDto} from './EmailDto';
+import {InstitutionDto} from './InstitutionDto';
+import {RoleDto} from './RoleDto';
 
 
 export class UserRequestDto{
   id : string;
-  account : AccountDto;
+  account: AccountDto;
   address	: AddressDto;
   birthday	: string;
   email :	EmailDto;
