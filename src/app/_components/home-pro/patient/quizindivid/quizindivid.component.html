@@ -63,13 +63,29 @@ Complétez les informations ci-dessous. Cochez une seule case par question.
 Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
 inscrire les années correspondantes.
 <br><br>
-<section *ngFor="let ant of antecedants ">
-  {{ant.antecedents}} <mat-checkbox  #active [(ngModel)]="disabled" >  Oui </mat-checkbox>
-  <mat-checkbox   value="0"   > Non      </mat-checkbox>
-  ANNEES : <input   type="text" [disabled]="!active.checked" [(ngModel)]="ant.date" >
+<section *ngFor="let ant of antecedants; let  j = index;">
+  {{ant.antecedents}} <mat-checkbox  #active  >  Oui </mat-checkbox>
+  <mat-checkbox   value="0" #desactive  > Non      </mat-checkbox>
+  <section  *ngFor="let dat of ant.date; let i = index; ">
+    ANNEES : <input  [disabled]="!active.checked" type="text"  [(ngModel)]="dat" >
+    {{dat}} <button [disabled]="!active.checked"  (click)="setYear(j,dat)"> valider </button>
+    {{ant.date}}
+  </section>
+
   <br>
 </section>
+<section>
+  Avez-vous l’une des conditions de santé ci-dessous ?
+  <mat-checkbox> Hypertension artérielle </mat-checkbox>
+  <mat-checkbox> Dyslipidémie </mat-checkbox>
+  <mat-checkbox> Dépression </mat-checkbox>
+  <mat-checkbox> Obésité </mat-checkbox>
+  <mat-checkbox> Diabète de type I ou II </mat-checkbox>
+  <mat-checkbox> Trouble anxieux </mat-checkbox>
+  <mat-checkbox #autre > Autre</mat-checkbox>
+  <input [disabled]="!autre.checked" type="text">
 
+</section>
 
 
 <!--Infarctus/crise cardiaque <mat-checkbox   value="1" > Oui </mat-checkbox>
