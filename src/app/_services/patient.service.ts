@@ -39,6 +39,7 @@ export class PatientService {
   GET_STEPS : string
   GET_MINUTES : string
   GET_QUIZ : string
+  ADD_QUIZINDI : string
 
 
 
@@ -64,6 +65,7 @@ export class PatientService {
     this.ALL_RECO = environment.ALL_RECO
     this.GET_MINUTES = environment.GET_ACTIVEMINUTES
     this.GET_QUIZ = environment.GET_QUIZ
+    this.ADD_QUIZINDI = environment.ADD_QUIZINDI
   }
 
 
@@ -169,6 +171,17 @@ export class PatientService {
       .set('patientId', patientId )
     let header = new HttpHeaders({'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'} );
     return this.http.post(this.ADD_EXAM, request, {headers: header, params: params});
+
+
+
+  }
+  addQuizIndi(request: Request, patientId  : string) {
+    let token = localStorage.getItem("currentToken");
+    const obj = JSON.parse(token);
+    let params = new HttpParams()
+      .set('patientId', patientId )
+    let header = new HttpHeaders({'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'} );
+    return this.http.post(this.ADD_QUIZINDI, request, {headers: header, params: params});
 
 
 

@@ -2,15 +2,15 @@
 Complétez les informations ci-dessous. Cochez une seule case par question.
 <br>
 <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Sexe :  </mat-label>
-<mat-radio-group   aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button value="Femme" > Femme</mat-radio-button>
+<mat-radio-group  #gender aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button  value="Femme" > Femme</mat-radio-button>
   <mat-radio-button value="Homme" > Homme</mat-radio-button>
   <mat-radio-button value="Autre" > Autre</mat-radio-button>
   <mat-radio-button value="null" > Préfère ne pas répondre</mat-radio-button>
 </mat-radio-group>
 <br>
 <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> État civil :  </mat-label>
-<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+<mat-radio-group  #civilStatus aria-label="choisissez une option" matNativeControl>
   <mat-radio-button value="Célibataire" > Célibataire</mat-radio-button>
   <mat-radio-button value="Marié" >Marié</mat-radio-button>
   <mat-radio-button value="Conjoint de fait" >Conjoint de fait</mat-radio-button>
@@ -20,7 +20,7 @@ Complétez les informations ci-dessous. Cochez une seule case par question.
 </mat-radio-group>
 <br>
 <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Scolarité :  </mat-label>
-<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+<mat-radio-group #education  aria-label="choisissez une option" matNativeControl>
   <mat-radio-button value="< 11 ans de scolarité (< Diplôme d'études secondaires)" > < 11 ans de scolarité (< Diplôme d'études secondaires)</mat-radio-button>
   <mat-radio-button value="Diplôme d'études secondaires (DEP)" >Diplôme d'études secondaires (DEP)</mat-radio-button>
   <mat-radio-button value="Formation professionnelle" >Formation professionnelle</mat-radio-button>
@@ -30,152 +30,150 @@ Complétez les informations ci-dessous. Cochez une seule case par question.
 </mat-radio-group>
 <br>
 <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Statut d’emploi : </mat-label>
-<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+<mat-radio-group #jobStatus  aria-label="choisissez une option" matNativeControl>
   <mat-radio-button value="emploi" > À l’emploi </mat-radio-button>
   <mat-radio-button value="Retraité" >Retraité</mat-radio-button>
   <mat-radio-button value="Sans emploi" >Sans emploi </mat-radio-button>
   <mat-radio-button value="Maladie" >Au foyer</mat-radio-button>
   <mat-radio-button #autre   value="Autre:" >Autre</mat-radio-button>
-  <input matInput appearance="fill"  type="text">
+  <input  appearance="fill"  type="text">
 </mat-radio-group>
 <br>
   <mat-label><b> Revenu familial annuel moyen : </b></mat-label>
-  <mat-checkbox   value="20000" > < 20 000 $ / année</mat-checkbox>
-  <mat-checkbox   value="39999"   >Entre 20 000 et 39 999 $ / année</mat-checkbox>
-  <mat-checkbox  value="59999" >Entre 40 000 et 59 999$ / année</mat-checkbox>
-  <mat-checkbox   style="width: 100%"  value="79999">Entre 60 000 et 79 999 $ / année</mat-checkbox>
-  <mat-checkbox  style="width: 100%" value="80000" >> 80 000 $ / année</mat-checkbox>
+<mat-radio-group #familyIncome aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button   value="20000" > < 20 000 $ / année </mat-radio-button>
+  <mat-radio-button  value="39999"   >Entre 20 000 et 39 999 $ / année</mat-radio-button>
+  <mat-radio-button  value="59999" >Entre 40 000 et 59 999$ / année</mat-radio-button>
+  <mat-radio-button  style="width: 100%"  value="79999">Entre 60 000 et 79 999 $ / année</mat-radio-button>
+  <mat-radio-button  style="width: 100%" value="80000" >> 80 000 $ / année</mat-radio-button>
+</mat-radio-group>
 <br>
 <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Milieu de vie : </mat-label>
-<mat-radio-group   aria-label="choisissez une option" matNativeControl>
+<mat-radio-group #livingEnvironment  aria-label="choisissez une option" matNativeControl>
   <mat-radio-button value="Zone urbaine" >Urbain (ville) </mat-radio-button>
   <mat-radio-button value="Zone rurale" >Rural (campagne)</mat-radio-button>
 </mat-radio-group>
 <br>
 <b> Type d'habitation : </b>
-<mat-checkbox #house_uni  style="width: 100%" value="Maison unifamiliale" >Maison unifamiliale</mat-checkbox>
-<mat-checkbox #cottage  style="width: 100%"  value="Cottage" >Cottage</mat-checkbox>
-<mat-checkbox #bungalow  style="width: 100%" value="Bungalow" >Bungalow</mat-checkbox>
-<mat-checkbox #condo  style="width: 100%"  value="Condo /appartement">Condo /appartement</mat-checkbox>
-<mat-checkbox #app style="width: 100%" value="Appartement" >Appartement</mat-checkbox>
+
+<mat-radio-group #housingType aria-label="choisissez une option" matNativeControl>
+  <mat-radio-button  value="Maison unifamiliale" >Maison unifamiliale</mat-radio-button>
+  <mat-radio-button  value="Cottage" >Cottage</mat-radio-button>
+  <mat-radio-button   value="Bungalow" >Bungalow</mat-radio-button>
+  <mat-radio-button     value="Condo /appartement">Condo /appartement</mat-radio-button>
+  <mat-radio-button   value="Appartement" >Appartement</mat-radio-button>
+</mat-radio-group>
 <br><br><br>
 <h2>ANTÉCÉDANTS MÉDICAUX</h2><br>
 Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
 inscrire les années correspondantes.
 <br><br>
 <section *ngFor="let ant of antecedants; let  j = index;">
-  {{ant.antecedents}} <mat-checkbox  #active  >  Oui </mat-checkbox>
-  <mat-checkbox   value="0" #desactive  > Non      </mat-checkbox>
-  <section  *ngFor="let dat of ant.date; let i = index; ">
-    ANNEES : <input  [disabled]="!active.checked" type="text"  [(ngModel)]="dat" >
-    {{dat}} <button [disabled]="!active.checked"  (click)="setYear(j,dat)"> valider </button>
-    {{ant.date}}
+  {{ant.antecedents}}
+  <mat-checkbox (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
+  <mat-checkbox  (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
+   <input   *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,ant)"> Ajouter </button>
+  <section   *ngFor="let an of ant.date; let i = index; ">
+     <input  value="" [disabled]="true" type="text"    >
+    <button mat-mini-fab color="warn" [disabled]="!active.checked"  (click)="delette(j,i)"> <mat-icon>delete</mat-icon></button>
+
   </section>
 
   <br>
 </section>
+
 <section>
-  Avez-vous l’une des conditions de santé ci-dessous ?
-  <mat-checkbox> Hypertension artérielle </mat-checkbox>
-  <mat-checkbox> Dyslipidémie </mat-checkbox>
-  <mat-checkbox> Dépression </mat-checkbox>
-  <mat-checkbox> Obésité </mat-checkbox>
-  <mat-checkbox> Diabète de type I ou II </mat-checkbox>
-  <mat-checkbox> Trouble anxieux </mat-checkbox>
-  <mat-checkbox #autre > Autre</mat-checkbox>
-  <input [disabled]="!autre.checked" type="text">
+  <br>
+  <b>Avez-vous l’une des conditions de santé ci-dessous ?</b> <br>
+  <mat-checkbox (change)="setCond($event,hypertension.value)"  #hypertension value="Hypertension artérielle"> Hypertension artérielle </mat-checkbox>
+  <mat-checkbox (change)="setCond($event,dyslipidemie.value)" #dyslipidemie value="Dyslipidémie"> Dyslipidémie </mat-checkbox>
+  <mat-checkbox (change)="setCond($event,depression.value)" #depression value="Dépression"> Dépression </mat-checkbox>
+  <mat-checkbox (change)="setCond($event,obesite.value)" #obesite value="Obésité"> Obésité </mat-checkbox>
+  <mat-checkbox (change)="setCond($event,diabeteI_II.value)" #diabeteI_II value="Diabète de type I ou II" > Diabète de type I ou II </mat-checkbox>
+  <mat-checkbox (change)="setCond($event,trouble_anxieux.value)" #trouble_anxieux value="Trouble anxieux"> Trouble anxieux </mat-checkbox>
+  <mat-checkbox #autre (change)="setCond($event,autre.value)" value="autre" > Autre</mat-checkbox>
+  <input #autre_conditions  [disabled]="!autre.checked" type="text">
+  <br>
 
 </section>
+<img src="assets/douleur.PNG" alt="">
+<section>
+  <br>
+  <b>Troubles musculo-squelettiques</b> <br>
+  Avez-vous déjà eu des fractures ?
+  <br><mat-checkbox #activeT>  Oui </mat-checkbox><mat-checkbox> Non</mat-checkbox>
+  <input #frac1 [disabled]="!activeT.checked" type="text">
+  <input #frac2 [disabled]="!activeT.checked" type="text">
+  <input #frac3 [disabled]="!activeT.checked" type="text">
+  <br><br>
+  À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
+
+  <br>
+  <mat-checkbox (change)="setDouleur($event,no_douleur.value)" value="Aucune douleur" #no_douleur>  Aucune douleur </mat-checkbox>
+  <br>
+  <mat-checkbox (change)="setDouleur($event,cou.value)" value="Cou" [disabled]="no_douleur.checked" #cou>  Cou </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule droite" #epauled>  Epaule droite </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule gauche" #epauleg >  Epaule gauche </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,m_dos.value)" [disabled]="no_douleur.checked"value="Milieu du dos" #m_dos >  Milieu du dos </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,h_dos.value)" [disabled]="no_douleur.checked" value="Haut du dos" #h_dos >  Haut du dos </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,b_dos.value)" [disabled]="no_douleur.checked" value="Bas du dos " #b_dos >  Bas du dos </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,coudeg.value)" [disabled]="no_douleur.checked" value="Coude gauche" #coudeg>  Coude gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,couded.value)" [disabled]="no_douleur.checked" value="Coude droit " #couded>  Coude droit </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,poignetg.value)" [disabled]="no_douleur.checked" value="Poignet gauche" #poignetg>  Poignet gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,poignetd.value)" [disabled]="no_douleur.checked" value="Poignet droit" #poignetd>  Poignet droit </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,maindg.value)" [disabled]="no_douleur.checked" value="Main/doigts gauche " #maindg>  Main/doigts gauche  </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,maindd.value)" [disabled]="no_douleur.checked" value="Main/doigts droit" #maindd>  Main/doigts droit  </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,pouceg.value)" [disabled]="no_douleur.checked" value="Pouce gauche" #pouceg>  Pouce gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,pouced.value)" [disabled]="no_douleur.checked" value="Pouce droit" #pouced>  Pouce droit </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,hancheg.value)" [disabled]="no_douleur.checked" value="Hanche gauche " #hancheg>  Hanche gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,hanched.value)" [disabled]="no_douleur.checked" value="Hanche droite" #hanched>  Hanche droite </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,genoug.value)" [disabled]="no_douleur.checked" value="Genou gauche" #genoug>  Genou gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,genoud.value)" [disabled]="no_douleur.checked" value="Genou droit" #genoud>  Genou droit </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,chevilleg.value)" [disabled]="no_douleur.checked" value="Cheville gauche" #chevilleg>  Cheville gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,chevilled.value)" [disabled]="no_douleur.checked" value="Cheville droite" #chevilled>  Cheville droite </mat-checkbox>
+  <br><mat-checkbox (change)="setDouleur($event,pieds_orteilsg.value)" [disabled]="no_douleur.checked" value="pied/orteils gauche" #pieds_orteilsg>  pied/orteils gauche </mat-checkbox>
+  <mat-checkbox (change)="setDouleur($event,pieds_orteilsd.value)" [disabled]="no_douleur.checked" value="pied/orteils droit" #pieds_orteilsd>  pied/orteils droit </mat-checkbox>
+  <br>
+</section>
+<section>
+  <br>
+  <b>
+  Consommation de produits alcoolisés, tabagiques ou drogues (si actuel/occasionnel, indiquez la fréquence.
+  ex : nombre de cigarette/jour ou nombre de consommation/sem/jour, etc)
+  </b> <br><br>
+  Alcool <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
+  <mat-checkbox #active_consA>  Actuel/occasionnel </mat-checkbox>
+  <input #freqSA [disabled]="!active_consA.checked" type="text" placeholder="frequence" ><br>
+  Tabac <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
+  <mat-checkbox #active_consT>  Actuel/occasionnel </mat-checkbox>
+  <input #freqT  [disabled]="!active_consT.checked" type="text" placeholder="frequence" ><br>
+  Drogue <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
+  <mat-checkbox #active_consD>  Actuel/occasionnel </mat-checkbox>
+  <input #freqD [disabled]="!active_consD.checked" placeholder="frequence" type="text">
+</section>
+<section><br><br>
+  <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
+  le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
+  <br> Ou <br>
+  <mat-checkbox #no_medic> <b>Je ne prends pas de médicaments</b>  </mat-checkbox>
+  <br>
+  <input type="text" [(ngModel)]="medicamant" >
+  <button mat-flat-button color="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant)" >Ajouter un medicament</button>
+  <br>
+  <section *ngIf="medicaments.description.length>0">
+    <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
+      <mat-list-item role="listitem">{{medicaments.description[i]}}</mat-list-item>
+      <button mat-mini-fab color="warn"   (click)="delett_med(i)"> <mat-icon>delete</mat-icon></button>
 
 
-<!--Infarctus/crise cardiaque <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Pontages coronariens <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Angioplastie coronarienne
-(tuteurs) <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Maladie valvulaire <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Arythmies cardiaques <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Insuffisance cardiaque (NYHA I ou II) <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Insuffisance cardiaque (NYHA III ou IV) <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-AVC <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-ICT (ischémie cérébrale transitoire) <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input  matInput type="text" placeHolder="ANNEE">
-<br>
-Maladie vasculaire périphérique <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Cancer <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Maladie pulmonaire obstructive chronique  (MPOC)<mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Asthme <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Insuffisance rénale/dialyse/transplantation <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-Troubles articulaires (polyarthrite rhumatoide,
-arthrite, spondylarthrite
-ankylosante, arthrose) <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-<br>
-<br>
-Maladie neuro-dégénérative (ex :
-sclérose en plaque,Parkinson, Alzheimer) <mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0"   > Non </mat-checkbox>
-<input matInput type="text" placeHolder="ANNEE">
-Avez-vous l’une des conditions de santé ci-dessous? <br>
-<mat-checkbox   value="Hypertension artérielle " > Hypertension artérielle </mat-checkbox>
-<mat-checkbox   value="Dyslipidémie" > Dyslipidémie</mat-checkbox>
-<mat-checkbox   value="Dépression" > Dépression </mat-checkbox>
-<mat-checkbox   value="Obésité" > Obésité</mat-checkbox>
-<mat-checkbox   value="Diabète de type I ou II" > Diabète de type I ou II</mat-checkbox>
-<mat-checkbox   value="Trouble anxieux" > Trouble anxieux</mat-checkbox>
-<input matInput type="text" placeHolder="Autre">
-<br>
-Troubles musculo-squelettiques
-<br><br>
-Avez-vous déjà eu des fractures?
-<mat-checkbox   value="1" > Oui </mat-checkbox><mat-checkbox   value="0"   > Non </mat-checkbox>
-<br>
-<input matInput type="text" placeHolder="Autre">
-<input matInput type="text" placeHolder="Autre">
-<input matInput type="text" placeHolder="Autre">
-<input matInput type="text" placeHolder="Autre"><br>
-<br>
-À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si OUI, cochez lesquelles dans l’encadrer à droite de l’image. Si NON, cochez « Aucune douleur à rapporter »
-<mat-checkbox   value="1" > Oui </mat-checkbox>
-<mat-checkbox   value="0" > Non </mat-checkbox><br>-->
+    </mat-list>
+  </section>
+  <br><br>
+</section>
+<button (click)="enregistrerQuiz(gender.value,civilStatus.value,familyIncome.value,jobStatus.value,livingEnvironment.value,housingType.value
+    ,frac1,frac2,frac3,education.value)" style="float:right;" mat-flat-button color="primary">
+  Enregistrer le questionnaire
+</button>
+
+
 

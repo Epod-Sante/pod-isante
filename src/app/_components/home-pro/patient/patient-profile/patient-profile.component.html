@@ -126,7 +126,7 @@ add
         <h4>Revenu familial </h4>
         <h5 style="color: #039be5">{{socioDemo.familyIncome}} par an</h5>
         <h4>Milieu de vie </h4>
-        <h5 style="color: #039be5">{{socioDemo.livingEnvironment.type}}</h5>
+<!--        <h5 style="color: #039be5">{{socioDemo.livingEnvironment.type}}</h5>-->
 
 
 
@@ -213,7 +213,7 @@ add
 
     </mat-tab>
     <mat-tab class="labeltab" label="Questionnaire individuel">
-      <app-quizindivid></app-quizindivid>
+      <app-quizindivid [patient]="patient" ></app-quizindivid>
     </mat-tab>
     <mat-tab class="labeltab"  label="Saisir les informations du patient">
       <mat-expansion-panel [expanded]="expanded" (opened)="onOpen(true)" style="width:100%; margin-top: 2em; margin-bottom: 2em; ">
