@@ -1,8 +1,8 @@
-import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home.component";
-import {DevicesComponent} from "./devices/devices.component";
-import {InviteComponent} from "./invite/invite.component";
-import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home.component';
+import {DevicesComponent} from './devices/devices.component';
+import {InviteComponent} from './invite/invite.component';
+import {NgModule} from '@angular/core';
 
 export const homeRoutes: Routes = [
   {

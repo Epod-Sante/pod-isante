@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuizindividComponent } from './quizindivid.component';
+import { ObjectifV2Component } from './objectif-v2.component';
 
-describe('QuizindividComponent', () => {
-  let component: QuizindividComponent;
-  let fixture: ComponentFixture<QuizindividComponent>;
+describe('ObjectifV2Component', () => {
+  let component: ObjectifV2Component;
+  let fixture: ComponentFixture<ObjectifV2Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizindividComponent ]
+      declarations: [ ObjectifV2Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuizindividComponent);
+    fixture = TestBed.createComponent(ObjectifV2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

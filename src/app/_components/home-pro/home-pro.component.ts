@@ -1,13 +1,13 @@
 import {Component, HostListener, OnInit, SimpleChanges} from '@angular/core';
-import {Router} from "@angular/router";
-import {UserIdleService} from "angular-user-idle";
-import {BnNgIdleService} from "bn-ng-idle";
-import {AddDialogComponent} from "../dialogs/add/add.dialog.component";
-import {LogiComponent} from "./patient/list-patients/appoint/logi.component";
-import {MatDialog} from "@angular/material/dialog";
-import {LoginComponent} from "../login/login.component";
-import {AuthenticationService} from "../../_services";
-import {IddleUserComponent} from "../iddle-user/iddle-user.component";
+import {Router} from '@angular/router';
+import {UserIdleService} from 'angular-user-idle';
+import {BnNgIdleService} from 'bn-ng-idle';
+import {AddDialogComponent} from '../dialogs/add/add.dialog.component';
+import {LogiComponent} from './patient/list-patients/appoint/logi.component';
+import {MatDialog} from '@angular/material/dialog';
+import {LoginComponent} from '../login/login.component';
+import {AuthenticationService} from '../../_services';
+import {IddleUserComponent} from '../iddle-user/iddle-user.component';
 
 @Component({
   selector: 'app-home-pro',
@@ -15,7 +15,7 @@ import {IddleUserComponent} from "../iddle-user/iddle-user.component";
   styleUrls: ['./home-pro.component.css']
 })
 export class HomeProComponent implements OnInit {
-  currentUser = localStorage.getItem("currentUser")
+  currentUser = localStorage.getItem('currentUser');
   interval;
 
   @HostListener('click') onClick() {
@@ -23,18 +23,18 @@ export class HomeProComponent implements OnInit {
 
 
 
-  constructor(private router : Router,     private bnIdle: BnNgIdleService,
-              public dialog: MatDialog, private authentifcationService : AuthenticationService
+  constructor(private router: Router,     private bnIdle: BnNgIdleService,
+              public dialog: MatDialog, private authentifcationService: AuthenticationService
   ) {
 
-    //this.startTimer(590)
-    console.log(localStorage.getItem("currentRole" ))
-    if (localStorage.getItem("currentRole" ) === "role_professional"){
-      //this.timeLeft = 60
+    // this.startTimer(590)
+    console.log(localStorage.getItem('currentRole' ));
+    if (localStorage.getItem('currentRole' ) === 'role_professional'){
+      // this.timeLeft = 60
 
     } else {
 
-      this.router.navigate(["/login"])
+      this.router.navigate(['/login']);
     }
 
 
