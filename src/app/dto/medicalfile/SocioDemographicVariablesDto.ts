@@ -1,17 +1,15 @@
-import {LivingEnvironmentDto} from "./LivingEnvironmentDto";
-
 export class SocioDemographicVariablesDto {
 
-  civilStatus : string;
-  familyIncome : string;
-  jobStatus : string;
-  education : string;
-  livingEnvironment : string;
+  civilStatus: string;
+  familyIncome: string;
+  jobStatus: string;
+  education: string;
+  livingEnvironment: string;
   housingType: string;
-  gender : string;
+  gender: string;
 
 
-  constructor( civilStatus: string, familyIncome: string, jobStatus: string, education: string, livingEnvironment: string, housingType: string, gender : string) {
+  constructor( civilStatus: string, familyIncome: string, jobStatus: string, education: string, livingEnvironment: string, housingType: string, gender: string) {
     this.civilStatus = civilStatus;
     this.familyIncome = familyIncome;
     this.jobStatus = jobStatus;

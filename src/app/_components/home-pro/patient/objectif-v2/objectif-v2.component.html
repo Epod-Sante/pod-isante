@@ -1,1 +1,363 @@
-<p>objectif-v2 works!</p>
+<nb-card>
+  <nb-card-body>
+    <nb-stepper orientation="horizontal">
+      <!--obj 1-->
+      <nb-step [label]="labelOne">
+        <ng-template #labelOne>Nombre de pas quotidien</ng-template>
+        <h4>Nombre de pas quotidien</h4>
+
+        <nb-card size="medium">
+          <nb-card-body>
+            <nb-stepper orientation="vertical">
+              <nb-step label="Paramètres">
+                <h4>Paramètres de l'objectif #1</h4>
+                <nb-card>
+                  <nb-card-body>
+                    <p class="lorem">A) Augmenter de X lenombre de pas quotidien</p>
+                    <ngx-slider [(value)]="value1Obj1" [options]="options1Obj1"></ngx-slider>
+
+                  </nb-card-body>
+                </nb-card>
+                <nb-card>
+                  <nb-card-body>
+                    <p class="lorem">B) Atteindre un totalde X pas quotidien</p>
+                    <ngx-slider [(value)]="value2Obj1" [options]="options2Obj1"></ngx-slider>
+
+                  </nb-card-body>
+                </nb-card>
+                <button disabled nbButton nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+              <nb-step label="Moyens">
+                <h4>Moyens de l'objectif #1</h4>
+                <nb-card-body>
+
+                  <div *ngFor="let option of moyensObjctif1OptionsCheckbox">
+                    <nb-card>
+                      <nb-card-body>
+                        <nb-checkbox
+                          (checkedChange)="updateCheckedOptionsMoyensObj1(option, $event)">{{option.name}}
+                        </nb-checkbox>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+
+                </nb-card-body>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+              <nb-step label="Recommandations">
+                <h4>Recommandations de l'objectif #1</h4>
+                  <nb-card>
+                    <nb-card-body>
+                      <h6 class="lorem">Fréquence</h6>
+                      <nb-select (selectedChange)="updateCheckedSelectFreqObj1($event)" placeholder="Fréquence">
+                        <nb-option *ngFor="let option of freqObjctif1OptionsSelect" value="{{option.name}}">
+                          {{option.name}}
+                        </nb-option>
+                      </nb-select>
+                    </nb-card-body>
+                  </nb-card>
+                  <nb-card>
+                    <nb-card-body>
+                      <h6 class="lorem">Endroits</h6>
+                      <div *ngFor="let option of endroitsObjctif1OptionsSelect">
+                        <nb-card>
+                          <nb-card-body>
+                            <nb-checkbox
+                              (checkedChange)="updateCheckedOptionsEndroitsObj1(option)">{{option.endroit}}
+                            </nb-checkbox>
+                          </nb-card-body>
+                          <nb-card-body>
+                            <nb-select multiple placeholder="Choisissez les endroits">
+
+                              <nb-option-group  *ngFor="let endroits of option.endroitLevel2; let i = index" title="{{endroits.group}}">
+                                <nb-option *ngFor="let option of endroits.options" value="{{i}}"  (checkedChange)="updateCheckedOptionsEndroitsObj10(option.value, endroits.id, option.group.id)">{{option.group}}</nb-option>
+                                {{i+1}}
+                              </nb-option-group>
+
+                            </nb-select>
+                          </nb-card-body>
+                        </nb-card>
+                      </div>
+                    </nb-card-body>
+                  </nb-card>
+                  <nb-card>
+                    <nb-card-body>
+                      <h6 class="lorem">Moments</h6>
+
+                      <div *ngFor="let option of momentsObjctif1OptionsSelect">
+                        <nb-card>
+                          <nb-card-body>
+                            <nb-checkbox
+                              (checkedChange)="updateCheckedOptionsMomentsObj1(option, $event)">{{option.name}}
+                            </nb-checkbox>
+                          </nb-card-body>
+                        </nb-card>
+                      </div>
+                    </nb-card-body>
+                  </nb-card>
+                  <nb-card>
+                    <nb-card-body>
+                      <h6 class="lorem">Intensité</h6>
+                      <div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+                        <ngx-slider [(value)]="IntensiteOptionsObjectif1Value" [options]="IntensiteOptionsObjectif1"></ngx-slider>
+                      </div>
+                    </nb-card-body>
+                  </nb-card>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+
+              <nb-step label="Précautions">
+                <h4>Précautions de l'objectif #1</h4>
+
+                    <div *ngFor="let option of precautionsObjctif1OptionsSelect">
+                      <nb-card>
+                        <nb-card-body>
+                          <nb-checkbox
+                            (checkedChange)="updateCheckedOptionsPrecautionsObj1(option, $event)">{{option.name}}
+                          </nb-checkbox>
+                        </nb-card-body>
+                      </nb-card>
+                    </div>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button disabled nbButton nbStepperNext>next</button>
+              </nb-step>
+            </nb-stepper>
+          </nb-card-body>
+        </nb-card>
+
+        <button disabled nbButton nbStepperNext>prev</button>
+        <button nbButton nbStepperNext>next</button>
+
+      </nb-step>
+
+
+      <!--obj 2-->
+
+      <nb-step [label]="labelTwo">
+        <ng-template #labelTwo>Minutes quotidiennes actives</ng-template>
+        <h4>Minutes quotidiennes actives</h4>
+
+
+        <nb-card size="medium">
+          <nb-card-body>
+            <nb-stepper orientation="vertical">
+              <nb-step label="Paramètres">
+                <h4>Paramètres de l'objectif #2</h4>
+                <nb-card>
+                  <nb-card-body>
+                    <p class="lorem">A) Augmenter de X le nombre de minutes</p>
+                    <ngx-slider [(value)]="value1Obj2" [options]="options1Obj2"></ngx-slider>
+
+                  </nb-card-body>
+                </nb-card>
+                <nb-card>
+                  <nb-card-body>
+                    <p class="lorem">B) Atteindre un total de X minutes quotidiennes</p>
+                    <ngx-slider [(value)]="value2Obj2" [options]="options2Obj2"></ngx-slider>
+
+                  </nb-card-body>
+                </nb-card>
+                <button disabled nbButton nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+              <nb-step label="Moyens">
+                <h4>Moyens de l'objectif #2</h4>
+                <nb-card-body>
+
+                  <div *ngFor="let option of moyensObjctif2OptionsCheckbox">
+                    <nb-card>
+                      <nb-card-body>
+                        <nb-checkbox
+                          (checkedChange)="updateCheckedOptionsMoyensObj2(option, $event)">{{option.name}}
+                        </nb-checkbox>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+
+                </nb-card-body>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+              <nb-step label="Recommandations">
+                <h4>Recommandations de l'objectif #2</h4>
+                <nb-card>
+                  <nb-card-body>
+                    <h6 class="lorem">Fréquence</h6>
+                    <nb-select (selectedChange)="updateCheckedSelectFreqObj2($event)" placeholder="Fréquence">
+                      <nb-option *ngFor="let option of freqObjctif2OptionsSelect" value="{{option.name}}">
+                        {{option.name}}
+                      </nb-option>
+                    </nb-select>
+                  </nb-card-body>
+                </nb-card>
+                <nb-card>
+                  <nb-card-body>
+                    <h6 class="lorem">Endroits</h6>
+                    <div *ngFor="let option of endroitsObjctif2OptionsSelect">
+                      <nb-card>
+                        <nb-card-body>
+                          <nb-checkbox
+                            (checkedChange)="updateCheckedOptionsEndroitsObj2(option, $event)">{{option.name}}
+                          </nb-checkbox>
+                        </nb-card-body>
+                        <nb-card-body>
+                          <nb-select multiple placeholder="Choisissez les endroits">
+
+                            <nb-option-group *ngFor="let endroit of endroitsGroupsObjctif2; let j = index" title="{{endroit.group}}">
+                              <nb-option *ngFor="let option of endroit.options" value="{{j}}">{{option}}</nb-option>
+                              {{j+1}}
+                            </nb-option-group>
+
+                          </nb-select>
+                        </nb-card-body>
+                      </nb-card>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+                <nb-card>
+                  <nb-card-body>
+                    <h6 class="lorem">Moments</h6>
+
+                    <div *ngFor="let option of momentsObjctif2OptionsSelect">
+                      <nb-card>
+                        <nb-card-body>
+                          <nb-checkbox
+                            (checkedChange)="updateCheckedOptionsMomentsObj2(option, $event)">{{option.name}}
+                          </nb-checkbox>
+                        </nb-card-body>
+                      </nb-card>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+                <nb-card>
+                  <nb-card-body>
+                    <h6 class="lorem">Intensité</h6>
+                    <div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+                      <ngx-slider [(value)]="IntensiteOptionsObjectif2Value" [options]="IntensiteOptionsObjectif2"></ngx-slider>
+                    </div>
+                  </nb-card-body>
+                </nb-card>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+
+              <nb-step label="Précautions">
+                <h4>Précautions de l'objectif #2</h4>
+
+                <div *ngFor="let option of precautionsObjctif2OptionsSelect">
+                  <nb-card>
+                    <nb-card-body>
+                      <nb-checkbox
+                        (checkedChange)="updateCheckedOptionsPrecautionsObj2(option, $event)">{{option.name}}
+                      </nb-checkbox>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button disabled nbButton nbStepperNext>next</button>
+              </nb-step>
+            </nb-stepper>
+          </nb-card-body>
+        </nb-card>
+
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton nbStepperNext>next</button>
+      </nb-step>
+
+      <!--obj 3-->
+      <nb-step [label]="labelThree">
+        <ng-template #labelThree>Temps sédentaire</ng-template>
+        <h4>Temps sédentaire</h4>
+
+
+        <nb-card size="medium">
+          <nb-card-body>
+            <nb-stepper orientation="vertical">
+
+              <nb-step label="Paramètres">
+                <h4>Paramètres de l'objectif #3</h4>
+                <nb-card>
+                  <nb-card-body>
+                    <p class="lorem">A) Diminuer de X le nombre de minutes sédentaires</p>
+                    <ngx-slider [(value)]="value1Obj3" [options]="options1Obj3"></ngx-slider>
+
+                  </nb-card-body>
+                </nb-card>
+                <nb-card>
+                  <nb-card-body>
+                    <p class="lorem">B) Viser un maximum de X minutes consécutives de temps sédentaires</p>
+                    <ngx-slider [(value)]="value2Obj3" [options]="options2Obj3"></ngx-slider>
+
+                  </nb-card-body>
+                </nb-card>
+                <button disabled nbButton nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+
+              <nb-step label="Moyens">
+                <h4>Moyens de l'objectif #3</h4>
+                <nb-card-body>
+
+                  <div *ngFor="let option of moyensObjctif3OptionsCheckbox">
+                    <nb-card>
+                      <nb-card-body>
+                        <nb-checkbox
+                          (checkedChange)="updateCheckedOptionsMoyensObj3(option, $event)">{{option.name}}
+                        </nb-checkbox>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+
+                </nb-card-body>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+
+
+              <nb-step label="Précautions">
+                <h4>Précautions de l'objectif #3</h4>
+
+                <div *ngFor="let option of precautionsObjctif3OptionsSelect">
+                  <nb-card>
+                    <nb-card-body>
+                      <nb-checkbox
+                        (checkedChange)="updateCheckedOptionsPrecautionsObj3(option, $event)">{{option.name}}
+                      </nb-checkbox>
+                    </nb-card-body>
+                  </nb-card>
+                </div>
+
+                <button nbButton nbStepperPrevious>prev</button>
+                <button disabled nbButton nbStepperNext>next</button>
+              </nb-step>
+            </nb-stepper>
+          </nb-card-body>
+        </nb-card>
+
+
+        <button nbButton nbStepperPrevious>prev</button>
+        <button nbButton status="success" (click)="SaveObjectifs()"><nb-icon icon="save-outline"></nb-icon>Envoyer</button>
+      </nb-step>
+
+
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

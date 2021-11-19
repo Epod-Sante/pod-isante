@@ -1,8 +1,6 @@
 import {Component, SimpleChanges} from '@angular/core';
-import { environment } from 'src/environments/environment';
-import {Router} from "@angular/router";
-import {UserIdleService} from "angular-user-idle";
-import {BnNgIdleService} from "bn-ng-idle";
+import {Router} from '@angular/router';
+import {NbIconConfig, NbSidebarService} from '@nebular/theme';
 
 @Component({
   selector: 'app-root',
@@ -12,22 +10,39 @@ import {BnNgIdleService} from "bn-ng-idle";
 
 export class AppComponent {
   title = 'IPOD-SANTE';
-  currentRole = localStorage.getItem("currentRole")
+  currentRole = localStorage.getItem('currentRole');
+  disabledIconConfig: NbIconConfig = { icon: 'settings-2-outline', pack: 'eva' };
 
-  constructor (private router : Router){
+  MENU_ITEMS = [
+    {
+      title: 'Home',
+      link: '/listpatient',
+      icon: 'home-outline',
+      home: true,
+      expanded: true,
+    },
+    {
+      title: 'User account',
+      link: '/listpatient',
+      icon: 'person-outline',
+      expanded: true,
+    },
+    {
+      title: 'Shop',
+      icon: 'shopping-cart-outline',
+      expanded: true,
+    },
+  ];
+
+  constructor(private router: Router, private sidebarService: NbSidebarService){
 
 
 
 
   }
-  ngOnInit() {
 
+  toggle() {
+    this.sidebarService.toggle(true, 'left');
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-
-
-  }
-
 
 }
