@@ -86,51 +86,7 @@ add
 
       </mat-form-field>
 
-      <mat-expansion-panel style=" margin-top: 2em;  margin-bottom: 2em;" *ngIf="list_ante!=null" >
-        <mat-expansion-panel-header>
-          <mat-panel-title style="color: #323232; font-weight: bold ">
-            <h4>Histoire de Sante:</h4>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-list   #antecedants *ngFor="let ante of antecedents ">
-          <mat-list-item *ngFor="let x of ante" >
-            <h4>{{ x?.antecedent }}&nbsp;&nbsp;</h4>
-            <p *ngIf=" x.mounth!=null ">
-              &nbsp;&nbsp;{{ x?.mounth }}- <br>
-            </p>
-            <p *ngIf="x.year!=null">
-              {{ x?.year }} <br>
-            </p>
 
-            <p *ngIf="x?.traitement!=null ">
-              &nbsp;&nbsp; traitement : {{ x.traitement }} <br>
-            </p>
-            <p *ngIf=" x.type!= null">
-              &nbsp;&nbsp; type : {{ x.type }} <br>
-            </p>
-          </mat-list-item>
-        </mat-list>
-      </mat-expansion-panel>
-      <mat-expansion-panel *ngIf="patient?.socioDemographicVariables!=null"  style=" margin-top: 2em;  margin-bottom: 2em;">
-        <mat-expansion-panel-header>
-          <mat-panel-title style="color: #323232; font-weight: bold ">
-            <h4>Informations socio-demographiques :</h4>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <h4>Niveau de scolarite</h4>
-        <h5 style="color: #039be5">{{socioDemo.education}}</h5>
-        <h4>Statut marital actuel</h4>
-        <h5 style="color: #039be5">{{socioDemo.civilStatus}}</h5>
-        <h4>Statut professionnel actuel</h4>
-        <h5 style="color: #039be5">{{socioDemo.jobStatus}}</h5>
-        <h4>Revenu familial </h4>
-        <h5 style="color: #039be5">{{socioDemo.familyIncome}} par an</h5>
-        <h4>Milieu de vie </h4>
-<!--        <h5 style="color: #039be5">{{socioDemo.livingEnvironment.type}}</h5>-->
-
-
-
-      </mat-expansion-panel>
       <mat-expansion-panel *ngIf="this.medicalfile?.clinicalExamination.length > 0"  style=" margin-top: 2em;  margin-bottom: 2em;">
         <mat-expansion-panel-header>
           <mat-panel-title style="color: #323232; font-weight: bold ">
