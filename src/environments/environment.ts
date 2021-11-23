@@ -50,7 +50,8 @@ export const environment = {
   REFRESH_TOKEN : 'https://epod-zuul.herokuapp.com/api/v1/auth-service/oauth/token',
   GET_STEPS : 'https://epod-zuul.herokuapp.com/api/v1/fitbit-service/activity/steps',
   GET_ACTIVEMINUTES : 'https://epod-zuul.herokuapp.com/api/v1/fitbit-service/activity/activeminutes',
-  GET_QUIZ : 'https://epod-zuul.herokuapp.com/api/v1/patient-service/questionnaire/all'
+  GET_QUIZ : 'https://epod-zuul.herokuapp.com/api/v1/patient-service/questionnaire/all',
+  ADD_QUIZINDI : "https://epod-zuul.herokuapp.com/api/v1/patient-service/questionnaire/individual"
 
 
 
