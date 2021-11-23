@@ -30,6 +30,7 @@ export class PatientService {
   GET_STEPS: string;
   GET_MINUTES: string;
   GET_QUIZ: string;
+  ADD_QUIZINDI: string;
 
 
 
@@ -55,6 +56,7 @@ export class PatientService {
     this.ALL_RECO = environment.ALL_RECO;
     this.GET_MINUTES = environment.GET_ACTIVEMINUTES;
     this.GET_QUIZ = environment.GET_QUIZ;
+    this.ADD_QUIZINDI = environment.ADD_QUIZINDI;
   }
 
 
@@ -133,7 +135,6 @@ export class PatientService {
   }
   getPatient(id: string){
     const token = localStorage.getItem('currentToken');
-    console.log(id);
     const obj = JSON.parse(token);
     const params = new HttpParams()
       .set('patientId', id );
@@ -353,7 +354,15 @@ export class PatientService {
 
   }
 
+  addQuizIndi(request: Request, patientId: string) {
+    const token = localStorage.getItem('currentToken');
+    const obj = JSON.parse(token);
+    const params = new HttpParams()
+      .set('patientId', patientId);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
+    return this.http.post(this.ADD_QUIZINDI, request, {headers: header, params});
 
+  }
 
   /*delete(id: number) {
       return this.http.delete(`/users/` + id);

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {SchedulerEvent} from '@progress/kendo-angular-scheduler';
 import {displayDate, sampleData} from './events.utc';
 import {MatDialog} from '@angular/material/dialog';
@@ -21,13 +21,15 @@ import {MatTableDataSource} from '@angular/material/table';
 import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto';
 import {LipidProfileDto} from '../../../../dto/medicalfile/LipidProfileDto';
 import {CardiovascularDto} from '../../../../dto/medicalfile/clinical_examination/cardiovascular/CardiovascularDto';
+import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-patient-profile',
   templateUrl: './patient-profile.component.html',
   styleUrls: ['./patient-profile.component.css']
 })
-export class PatientProfileComponent implements OnDestroy {
+export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
   @Input() id: string;
   expanded = false;
   expandedpodo = false;
@@ -36,8 +38,8 @@ export class PatientProfileComponent implements OnDestroy {
   @ViewChild(SociodemoComponent, {static: false}) child;
   patient: PatientDto = null;
   medicalfile: MedicalFileDto = null;
-  list_ante: MedicalFileHistoryDto[];
-  bilan_lipidique: LipidProfileDto = null;
+  listAnte: MedicalFileHistoryDto[];
+  bilanLipidique: LipidProfileDto = null;
   antecedents: AntecedentsDto[];
   clinicalExam: ClinicalExaminationDto = null;
   displayedColumns: string[] = ['antecedants', 'mois', 'aneee', 'type', 'traitement' ];
@@ -58,18 +60,24 @@ export class PatientProfileComponent implements OnDestroy {
   private modals;
   public events: SchedulerEvent[] = sampleData;
 
+  subscription: Subscription;
+
   constructor(private  patientService: PatientService, private modalService: ModalService,
-              public dialog: MatDialog, public router: Router, private _snackBar: MatSnackBar) {
-
-
+              public dialog: MatDialog, public router: Router, private snackBar: MatSnackBar,
+              private data: PatientDataBetweenComponentsService) {
     this.tabIndex = 1;
     this.dataSource = new MatTableDataSource(this.antecedents);
-
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    this.getAllUsers();
+    this.subscription = this.data.currentMessage.subscribe(message => message = this.patient.toString());
+    this.tabIndex = 0;
+  }
 
   ngOnDestroy() {
     this.patient = null;
+    this.subscription.unsubscribe();
     // this.receiveMessage(this.expanded)
   }
 
@@ -104,15 +112,8 @@ export class PatientProfileComponent implements OnDestroy {
     this.patient = patient;
     window.print();
   }
-  ngOnChanges(changes: SimpleChanges) {
-    this.getAllUsers();
-    this.tabIndex = 0;
-
-
-
-  }
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
+    this.snackBar.open(message, action, {
       duration: 2000,
 
     }); }
@@ -157,13 +158,12 @@ export class PatientProfileComponent implements OnDestroy {
 
   public getAllUsers = () => {
     this.patientService.getPatient(this.id).subscribe(patients => {
+
       const socio = patients as Response;
       this.patient = JSON.parse(JSON.stringify(socio.object))as PatientDto;
       this.medicalfile = this.patient.medicalFile as MedicalFileDto;
       this.socioDemo = JSON.parse(this.patient.socioDemographicVariables) as SocioDemographicVariablesDto;
-      console.log(this.socioDemo);
-      console.log(this.patient);
-      console.log(this.medicalfile);
+
       if (this.medicalfile.clinicalExamination.length > 0)
       {
         this.clinicalExam = this.medicalfile.clinicalExamination[this.medicalfile.clinicalExamination.length - 1];
@@ -180,29 +180,29 @@ export class PatientProfileComponent implements OnDestroy {
       }
       if (this.medicalfile.medicalFileHistory.length > 0)
       {
-        this.list_ante = this.medicalfile.medicalFileHistory;
-        for (let i = 0; i < this.list_ante.length; i++){
+        this.listAnte = this.medicalfile.medicalFileHistory;
+        for (let i = 0; i < this.listAnte.length; i++){
           if (i === 0){
-            this.antecedents = [JSON.parse(this.list_ante[i].antecedents)];
+            this.antecedents = [JSON.parse(this.listAnte[i].antecedents)];
 
           }else{
-            this.antecedents.push(JSON.parse(this.list_ante[i].antecedents)); }
+            this.antecedents.push(JSON.parse(this.listAnte[i].antecedents)); }
         }
         console.log(this.antecedents);
-        console.log(this.list_ante);
+        console.log(this.listAnte);
 
       }else{
-        this.list_ante = null;
+        this.listAnte = null;
 
       }
       if (this.medicalfile.lipidProfiles.length > 0)
       {
-        this.bilan_lipidique = this.medicalfile.lipidProfiles[this.medicalfile.lipidProfiles.length - 1];
+        this.bilanLipidique = this.medicalfile.lipidProfiles[this.medicalfile.lipidProfiles.length - 1];
 
 
 
       }else{
-        this.bilan_lipidique = null;
+        this.bilanLipidique = null;
 
       }
       // this.liste_antecedants = JSON.parse(JSON.stringify(this.patient.medicalFile.medicalFileHistory)) as MedicalFileHistoryDto[]
@@ -225,11 +225,7 @@ export class PatientProfileComponent implements OnDestroy {
       this.lastVisite = this.listVisites[this.listVisites.length - 1];
       console.log(this.listVisites);
       console.log(this.lastVisite);
-
-
-
     });
-    // console.log("yes "+this.users)
   }
 }
 

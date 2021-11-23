@@ -86,7 +86,7 @@ add
 
       </mat-form-field>
 
-      <mat-expansion-panel style=" margin-top: 2em;  margin-bottom: 2em;" *ngIf="list_ante!=null" >
+      <mat-expansion-panel style=" margin-top: 2em;  margin-bottom: 2em;" *ngIf="listAnte!=null" >
         <mat-expansion-panel-header>
           <mat-panel-title style="color: #323232; font-weight: bold ">
             <h4>Histoire de Sante:</h4>
@@ -186,22 +186,22 @@ add
 
 
       </mat-expansion-panel>
-      <mat-expansion-panel *ngIf="bilan_lipidique != null "  style=" margin-top: 2em;  margin-bottom: 2em;">
+      <mat-expansion-panel *ngIf="bilanLipidique != null " style=" margin-top: 2em;  margin-bottom: 2em;">
         <mat-expansion-panel-header>
           <mat-panel-title style="color: #323232; font-weight: bold ">
             <h4>Bilan lipidique :</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <h4>hba1c</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.hba1c}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.hba1c}}</h5>
         <h4>nohdl</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.nohdl}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.nohdl}}</h5>
         <h4>hdl</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.hdl}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.hdl}}</h5>
         <h4>ldl</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.ldl}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.ldl}}</h5>
         <h4>triglyceride</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.triglyceride}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.triglyceride}}</h5>
 
 
 
@@ -213,9 +213,7 @@ add
 
     </mat-tab>
     <mat-tab class="labeltab" label="Questionnaire individuel">
-<!--
-      <app-quizindivid></app-quizindivid>
--->
+      <app-quizindivid [patient]="patient" ></app-quizindivid>
     </mat-tab>
     <mat-tab class="labeltab"  label="Saisir les informations du patient">
       <mat-expansion-panel [expanded]="expanded" (opened)="onOpen(true)" style="width:100%; margin-top: 2em; margin-bottom: 2em; ">

@@ -43,7 +43,8 @@
             "optimization": false,
             "namedChunks": true,
             "allowedCommonJsDependencies": [
-              "rxjs-compat"
+              "rxjs-compat",
+              "lodash"
             ]
           },
           "configurations": {
