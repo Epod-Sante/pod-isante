@@ -283,7 +283,8 @@ export class ObjectifV2Component implements OnInit {
 
   objectif: Array<ObjectifModel> = new Array();
 
-  constructor(private _snackBar : MatSnackBar, private  patientService: PatientService) {
+  constructor(private _snackBar : MatSnackBar,
+              private  patientService: PatientService,) {
 
 
     for (const i in this.moyensObjctif1) {

@@ -1,19 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
-import {MyErrorStateMatcher} from "../../../home/invite/invite.component";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import {PatientDto} from "../../../../dto/patient/PatientDto";
-import {ContactDto} from "../../../../dto/patient/ContactDto";
-import {FamilyDoctorDto} from "../../../../dto/patient/FamilyDoctorDto";
-import {PharmacyDto} from "../../../../dto/patient/PharmacyDto";
-import {ProfessionalDto} from "../../../../dto/patient/ProfessionalDto";
-import {ErrorDto} from "../../../../dto/ErrorDto";
-import {PatientService} from "../../../../_services/patient.service";
-import {first} from "rxjs/operators";
-import {UserService} from "../../../../_services";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Request} from "../../../../dto/Request";
-import {NavigationEnd, Router, RouterModule} from "@angular/router";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {MyErrorStateMatcher} from '../../../home/invite/invite.component';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {PatientDto} from '../../../../dto/patient/PatientDto';
+import {ContactDto} from '../../../../dto/patient/ContactDto';
+import {ProfessionalDto} from '../../../../dto/patient/ProfessionalDto';
+import {PatientService} from '../../../../_services/patient.service';
+import {first} from 'rxjs/operators';
+import {UserService} from '../../../../_services';
+import {Request} from '../../../../dto';
+import {NavigationEnd, Router} from '@angular/router';
+import {NbToastrService} from '@nebular/theme';
 
 
 @Component({
@@ -21,27 +18,36 @@ import {NavigationEnd, Router, RouterModule} from "@angular/router";
   templateUrl: './addpatient.component.html',
   styleUrls: ['./addpatient.component.css']
 })
-export class AddpatientComponent implements OnInit {
-  @Output() exampleOutput = new EventEmitter<PatientDto>()
+export class AddpatientComponent implements OnInit, OnDestroy {
+
+  @Output() exampleOutput = new EventEmitter<PatientDto>();
   @Input() error: string | null;
-  mySubscription: any
-  birthday: string = "";
+  mySubscription: any;
+  birthday = '';
   submitted = false;
-  phonee : string = "";
-  patient_added = true;
-  constructor(private patientService : PatientService,private userService : UserService,
-              private _snackBar : MatSnackBar, private router : Router
-  ) {   this.router.routeReuseStrategy.shouldReuseRoute = function () {
-    return false;
-  };
+  phonee = '';
+  patientAdded = true;
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  matcher = new MyErrorStateMatcher();
+
+
+  constructor(private patientService: PatientService, private userService: UserService,
+              private router: Router,
+              private toastrService: NbToastrService) {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
     this.mySubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Trick the Router into believing it's last link wasn't previously loaded
         this.router.navigated = false;
       }
     });
-
-
   }
 
   ngOnDestroy() {
@@ -49,124 +55,92 @@ export class AddpatientComponent implements OnInit {
       this.mySubscription.unsubscribe();
     }
   }
-  changePhone(value : string){
-    if(value.length == 3 || value.length === 7  ){
-      console.log(value)
-      let tiret = "-";
-      this.phonee = value.concat(tiret)
+
+  changePhone(value: string) {
+    if (value.length === 3 || value.length === 7) {
+      console.log(value);
+      const tiret = '-';
+      this.phonee = value.concat(tiret);
     }
   }
+
   ngOnInit() {
-    this.error = null
+    this.error = null;
   }
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+
   getBirthday(event: MatDatepickerInputEvent<Date>) {
     const d = new Date(event.value);
-    console.log(d)
-
-    let date = d.getDate();
-    let jr = date.toString()
-    if(date>9){
-
-    }else{
-      jr= "0"+date
+    const date = d.getDate();
+    let jr = date.toString();
+    if (date < 9) {
+      jr = '0' + date;
     }
-    console.log(jr)
     const month = d.getMonth() + 1; // Be careful! January is 0 not 1
-    let mois = month.toString()
-    if(month>9){
-
-    }else{
-      mois= "0"+month
+    let mois = month.toString();
+    if (month < 9) {
+      mois = '0' + month;
     }
     const year = d.getFullYear();
-
     this.birthday = year + '-' + mois + '-' + jr;
-    console.log(this.birthday)
+    console.log(this.birthday);
   }
 
-  matcher = new MyErrorStateMatcher();
-  ajouter(firstName : string, lastName : string, motherName : string, phone : string, email : string, gender : string){
-    this.error = null
+  ajouter(firstName: string, lastName: string, motherName: string, phone: string, email: string, gender: string) {
+    this.error = null;
 
-    if(firstName === "" || lastName === "" || motherName === "" || phone === "" || this.birthday === "")
-    {
-      this.openSnackBar("Vous devrez remplir tous les champs obligatoires*\"","Ok")
-    } else if (firstName.length <3 || lastName.length < 3 ){
-      this.openSnackBar("les champs nom et prenoms doivent contenir au minimum 3 caracteres","Ok")
+    if (firstName === '' || lastName === '' || motherName === '' || phone === '' || this.birthday === '') {
+      this.showToast('top-right', 'info', 'Info', 'Vous devrez remplir tous les champs obligatoires *');
+    } else if (firstName.length < 3 || lastName.length < 3) {
+      this.showToast('top-right', 'info', 'Info', 'Les champs nom et prenoms doivent contenir au minimum 3 caracteres');
     } else {
       this.submitted = true;
-      let familyDoctor = null
-      let pharmacy = null
-      let birth = this.birthday
-      for(let i=0; i < phone.length; i++ ){
-        let exist = phone.indexOf("-")
-        if(exist >= 0){
-          let phont = phone.split('')
+      const familyDoctor = null;
+      const pharmacy = null;
+      const birth = this.birthday;
+      for (let i = 0; i < phone.length; i++) {
+        const exist = phone.indexOf('-');
+        if (exist >= 0) {
+          const phont = phone.split('');
           phont.splice(exist, 1);
-          phone = phont.join('')
+          phone = phont.join('');
         }
       }
 
-
-      let user = JSON.parse(localStorage.getItem("currentUser"));
-      this.userService.info_user(user["user_name"]).subscribe(
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      this.userService.info_user(user.user_name).subscribe(
         rep => {
-          console.log(rep)
-          let pro : ProfessionalDto[] = [new ProfessionalDto(rep["id"], rep["firstName"],rep["lastName"], true)]
-      let data = new PatientDto(null,null,firstName,lastName,birth,motherName,
-        new ContactDto(null,phone,email,null),
-        familyDoctor , pharmacy,pro
-        ,true,null,null, null,
-        null,null,null,null, false,gender);
-      let request = new Request(data);
-      console.log(request)
+          const pro: ProfessionalDto[] = [new ProfessionalDto(rep["id"], rep["firstName"],rep["lastName"], true)];
+          const data = new PatientDto(null, null, firstName, lastName, birth, motherName,
+            new ContactDto(null, phone, email, null),
+            familyDoctor, pharmacy, pro
+            , true, null, null, null,
+            null, null, null, null, false, gender);
+          const request = new Request(data);
+          console.log(request);
 
           this.patientService.addPatient(request).pipe(first())
             .subscribe(
               dat => {
-                let obj = JSON.parse(JSON.stringify(dat))
-                if(obj.object != null){
-                  this.patient_added = true;
-                  console.log(dat)
-                  this.exampleOutput.emit(data)
-                  this.openSnackBar("Patient ajoute","Ok")
-                }else {
-                  this.error = obj.error.message
+                const obj = JSON.parse(JSON.stringify(dat));
+                if (obj.object != null) {
+                  this.patientAdded = true;
+                  this.exampleOutput.emit(data);
+                  this.showToast('top-right', 'success', 'Succès', 'Patient ajoute');
+                } else {
+                  this.error = obj.error.message;
                 }
-
-
-
-
               },
               error => {
-                this.openSnackBar(error.error,"Ok")
-
-
+                this.showToast('top-right', 'danger', 'Échec', 'Patient ajoute');
               });
-
-
-
-
-
-
-
-    })
+        });
     }
   }
 
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 20000,
-
-    })
-
-
-
-
-}
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
+  }
 }

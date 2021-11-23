@@ -85,11 +85,21 @@ import {TwoDigitDecimaNumberDirective} from './_components/home-pro/patient/exam
 import {OptionComponent} from './_components/home-pro/patient/histoire-sante/option/option.component';
 import {MatCardModule} from '@angular/material/card';
 import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
-import { NgMaterialMultilevelMenuModule, MultilevelMenuService } from 'ng-material-multilevel-menu';
-import {NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbActionsModule} from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
+import {NgMaterialMultilevelMenuModule, MultilevelMenuService} from 'ng-material-multilevel-menu';
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbMenuModule,
+  NbActionsModule,
+  NbButtonModule, NbIconModule, NbWindowModule, NbPopoverModule, NbCardModule, NbToastrModule
+} from '@nebular/theme';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {ObjectifV2Module} from './_components/home-pro/patient/objectif-v2/objectif-v2.module';
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import {NgxSliderModule} from '@angular-slider/ngx-slider';
+import {ObjectifV2Component} from "./_components/home-pro/patient/objectif-v2/objectif-v2.component";
+import {WindowComponent} from './_components/window/window.component';
+import {PatientDataBetweenComponentsService} from "./_services/PatientDataBetweenComponentsService";
 
 
 @NgModule({
@@ -138,11 +148,13 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     IddleUserComponent,
     RecomandationPatientComponent,
     GpaqComponent,
-    GpaqQuizComponent
-
+    GpaqQuizComponent,
+    WindowComponent
 
   ],
   imports: [
+    NbToastrModule.forRoot(),
+    NbWindowModule.forRoot(),
     NgxSliderModule,
     ObjectifV2Module,
     BrowserModule,
@@ -187,7 +199,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     NbEvaIconsModule, NbSidebarModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbMenuModule, NbActionsModule,
+    NbMenuModule, NbActionsModule, NbButtonModule, NbIconModule, NbPopoverModule, NbCardModule,
   ],
 //
 
@@ -195,7 +207,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: MatDialogRef, useValue: {}},
     {provide: MAT_DIALOG_DATA, useValue: []},
-    MultilevelMenuService
+    MultilevelMenuService,
+    PatientDataBetweenComponentsService
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   entryComponents: [
@@ -204,11 +217,13 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     AddDialogComponent,
     RecomandationComponent,
     GpaqComponent,
-    DetailsRecoComponent, DeleteDialogComponent, EditDialogComponent, IddleUserComponent, BilanLipidiqueComponent],
+    DetailsRecoComponent,
+    DeleteDialogComponent, EditDialogComponent, IddleUserComponent, BilanLipidiqueComponent, WindowComponent],
   exports: [
     RecomandationComponent
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }

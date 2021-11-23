@@ -1,0 +1,66 @@
+<nb-layout>
+
+  <!--
+    <nb-layout-header fixed >
+      <button nbButton status="success" size="tiny" (click)="toggle()">Toggle</button>
+      <div >
+        <nb-actions size="small" >
+          <nb-action icon="search-outline"></nb-action>
+          <nb-action icon="power-outline"></nb-action>
+          <nb-action icon="person-outline"></nb-action>
+          <nb-action icon="home-outline"></nb-action>
+          <nb-action [icon]="disabledIconConfig" disabled></nb-action>
+        </nb-actions>
+
+      </div>
+
+
+      &lt;!&ndash;  <app-main-nav-prof></app-main-nav-prof>&ndash;&gt;
+    </nb-layout-header>-->
+
+  <nb-sidebar class="sidebar" state="compacted" tag="left">
+    <div class="title">
+      <nb-icon *ngIf="toggleOn" class="flex-item1" nbButton icon="menu-arrow-outline" (click)="toggle()"></nb-icon>
+      <h4 *ngIf="toggleOn" class="flex-item1">I-POD SANTE</h4>
+      <nb-icon *ngIf="toggleOff" class="flex-item2" nbButton icon="menu-outline" (click)="toggle()"></nb-icon>
+    </div>
+    <nb-menu class="menu1" tag="menu1" [items]="MENU_ITEMS1"></nb-menu>
+    <nb-menu class="menu2" tag="menu2" [items]="MENU_ITEMS2"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column>
+
+    <router-outlet></router-outlet>
+
+
+    <!--
+        <div class="fab-button-container">
+          <button mat-fab color="primary" (click)="openWindow()" >
+            <nb-icon  icon="plus"  [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+          </button>
+        </div>
+    -->
+
+    <div class="fab-container" (mouseenter) ="onToggleFab() "  (mouseleave) ="onToggleFab()">
+      <button mat-fab class="fab-toggler" [@fabToggler]="{value: fabTogglerState}">
+        <i class="material-icons" >add</i>
+      </button>
+      <div [@speedDialStagger]="buttons.length">
+        <button *ngFor="let btn of buttons"
+                (click)="openWindow(btn.title)"
+                mat-mini-fab
+                class="fab-secondary"
+                color="secondary"
+                nbPopover="{{btn.title}}" nbPopoverTrigger="noop" nbPopoverPlacement="left" #searchGrid>
+          <nb-icon icon="{{btn.icon}}"></nb-icon>
+
+
+        </button>
+      </div>
+    </div>
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+   &lt;!&ndash; Insert footer here &ndash;&gt;
+   </nb-layout-footer>-->
+
+</nb-layout>

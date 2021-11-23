@@ -1,3 +1,4 @@
+/*
 body{
   width: 100%;
   position: absolute;
@@ -95,8 +96,8 @@ tr.example-element-row:active{
 
 }
 @media print {
-  /* invert the display (show/hide) properties of the main */
-  /* aplication component and the printing component       */
+  !* invert the display (show/hide) properties of the main *!
+  !* aplication component and the printing component       *!
 
   .pagel{
    display: none;
@@ -116,4 +117,28 @@ tr.example-element-row:active{
 }
 
 
+
+*/
+.home {
+  display: inline-flex; /* or inline-flex */
+  flex-direction: row;
+
+}
+
+.listPatient {
+  display: inline-flex; /* or inline-flex */
+  flex-direction: column;
+
+}
+
+.item {
+  order: 4; /* default is 0 */
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .home {
+    flex-direction: column;
+  }
+}
 

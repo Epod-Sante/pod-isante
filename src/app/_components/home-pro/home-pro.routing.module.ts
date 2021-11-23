@@ -27,11 +27,12 @@ import {
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
-  NbIconModule,
-  NbSelectModule,
+  NbIconModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
+  NbSelectModule, NbSidebarModule,
   NbStepperModule
 } from "@nebular/theme";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
+import { SideBarFabButtonComponent } from './side-bar-fab-button/side-bar-fab-button.component';
 
 export const homeProRoutes: Routes = [
   {
@@ -55,17 +56,22 @@ export const homeProRoutes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(homeProRoutes),
     MatRadioModule,
-    MatFormFieldModule, MaterialModule, FormsModule, CommonModule, ReactiveFormsModule, QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule, NbButtonModule, NbIconModule],
+    MatFormFieldModule,
+    MaterialModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule, NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule],
   exports: [RouterModule,
     HistoireSanteComponent,
     RaportGComponent,
     BilanLipidiqueComponent,
-    RecommmComponent, RecommmComponent, RecommmComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component],
+    RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent],
   declarations: [AppointComponent,
     DetailsRecoComponent,
     BilanLipidiqueComponent,
     HistoireSanteComponent,
-    RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component]
+    RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent]
 })
 export class HomeProRoutingModule {
 }

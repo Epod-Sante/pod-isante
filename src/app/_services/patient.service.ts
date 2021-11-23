@@ -133,7 +133,6 @@ export class PatientService {
   }
   getPatient(id: string){
     const token = localStorage.getItem('currentToken');
-    console.log(id);
     const obj = JSON.parse(token);
     const params = new HttpParams()
       .set('patientId', id );
