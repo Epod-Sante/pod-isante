@@ -213,7 +213,7 @@ add
 
     </mat-tab>
     <mat-tab class="labeltab" label="Questionnaire individuel">
-      <app-quizindivid></app-quizindivid>
+      <app-quizindivid [patient]="patient" ></app-quizindivid>
     </mat-tab>
     <mat-tab class="labeltab"  label="Saisir les informations du patient">
       <mat-expansion-panel [expanded]="expanded" (opened)="onOpen(true)" style="width:100%; margin-top: 2em; margin-bottom: 2em; ">

@@ -33,6 +33,7 @@ import {
 } from "@nebular/theme";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
 import { SideBarFabButtonComponent } from './side-bar-fab-button/side-bar-fab-button.component';
+import {ExamencliniqueComponent} from "./patient/examenclinique/examenclinique.component";
 
 export const homeProRoutes: Routes = [
   {

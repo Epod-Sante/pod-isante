@@ -142,3 +142,6 @@ tr.example-element-row:active{
   }
 }
 
+.home > div {
+  margin: 5px;  /* and that, will result in a 10px gap */
+}

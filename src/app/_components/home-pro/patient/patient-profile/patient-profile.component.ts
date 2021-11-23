@@ -70,7 +70,6 @@ export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('*************************************************');
     this.getAllUsers();
     this.subscription = this.data.currentMessage.subscribe(message => message = this.patient.toString());
     this.tabIndex = 0;
@@ -162,7 +161,6 @@ export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
 
       const socio = patients as Response;
       this.patient = JSON.parse(JSON.stringify(socio.object))as PatientDto;
-      console.log('=====================================================' + this.patient.medicalFile);
       this.medicalfile = this.patient.medicalFile as MedicalFileDto;
       this.socioDemo = JSON.parse(this.patient.socioDemographicVariables) as SocioDemographicVariablesDto;
 

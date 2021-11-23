@@ -18,6 +18,7 @@ import {ObjectifV2Component} from '../patient/objectif-v2/objectif-v2.component'
 import {Subscription} from 'rxjs';
 import {PatientDataBetweenComponentsService} from '../../../_services/PatientDataBetweenComponentsService';
 import {PatientDto} from '../../../dto/patient/PatientDto';
+import {ExamencliniqueComponent} from "../patient/examenclinique/examenclinique.component";
 
 
 @Component({
@@ -47,12 +48,12 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
       link: '/listpatient',
       icon: 'home-outline',
       home: true,
-    },
+    }, /*
     {
       title: 'Profile',
       icon: 'person-outline',
       link: '/profile',
-    },
+    },*/
   ];
 
   MENU_ITEMS2: NbMenuItem[] = [
@@ -69,10 +70,6 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
   ];
 
   fabButtons = [
-    {
-      icon: 'file-add-outline',
-      title: 'Barieres et solutions',
-    },
     {
       icon: 'file-add-outline',
       title: 'Objectif',
@@ -161,7 +158,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
       component = ObjectifV2Component;
       title = 'Fitbit';
     } else if (window === 'Examen clinique'){
-      component = ObjectifV2Component;
+      component = ExamencliniqueComponent;
       title = 'Examen clinique';
     } else if (window === 'Bilan lipide'){
       component = ObjectifV2Component;

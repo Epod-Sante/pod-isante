@@ -100,6 +100,7 @@ import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {ObjectifV2Component} from "./_components/home-pro/patient/objectif-v2/objectif-v2.component";
 import {WindowComponent} from './_components/window/window.component';
 import {PatientDataBetweenComponentsService} from "./_services/PatientDataBetweenComponentsService";
+import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/quizindivid.component";
 
 
 @NgModule({
@@ -149,7 +150,8 @@ import {PatientDataBetweenComponentsService} from "./_services/PatientDataBetwee
     RecomandationPatientComponent,
     GpaqComponent,
     GpaqQuizComponent,
-    WindowComponent
+    WindowComponent,
+    QuizindividComponent
 
   ],
   imports: [
