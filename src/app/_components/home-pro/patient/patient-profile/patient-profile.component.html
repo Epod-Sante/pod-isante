@@ -86,7 +86,51 @@ add
 
       </mat-form-field>
 
+      <mat-expansion-panel style=" margin-top: 2em;  margin-bottom: 2em;" *ngIf="listAnte!=null" >
+        <mat-expansion-panel-header>
+          <mat-panel-title style="color: #323232; font-weight: bold ">
+            <h4>Histoire de Sante:</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-list   #antecedants *ngFor="let ante of antecedents ">
+          <mat-list-item *ngFor="let x of ante" >
+            <h4>{{ x?.antecedent }}&nbsp;&nbsp;</h4>
+            <p *ngIf=" x.mounth!=null ">
+              &nbsp;&nbsp;{{ x?.mounth }}- <br>
+            </p>
+            <p *ngIf="x.year!=null">
+              {{ x?.year }} <br>
+            </p>
 
+            <p *ngIf="x?.traitement!=null ">
+              &nbsp;&nbsp; traitement : {{ x.traitement }} <br>
+            </p>
+            <p *ngIf=" x.type!= null">
+              &nbsp;&nbsp; type : {{ x.type }} <br>
+            </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel *ngIf="patient?.socioDemographicVariables!=null"  style=" margin-top: 2em;  margin-bottom: 2em;">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="color: #323232; font-weight: bold ">
+            <h4>Informations socio-demographiques :</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <h4>Niveau de scolarite</h4>
+        <h5 style="color: #039be5">{{socioDemo.education}}</h5>
+        <h4>Statut marital actuel</h4>
+        <h5 style="color: #039be5">{{socioDemo.civilStatus}}</h5>
+        <h4>Statut professionnel actuel</h4>
+        <h5 style="color: #039be5">{{socioDemo.jobStatus}}</h5>
+        <h4>Revenu familial </h4>
+        <h5 style="color: #039be5">{{socioDemo.familyIncome}} par an</h5>
+        <h4>Milieu de vie </h4>
+        <h5 style="color: #039be5">{{socioDemo.livingEnvironment}}</h5>
+
+
+
+      </mat-expansion-panel>
       <mat-expansion-panel *ngIf="this.medicalfile?.clinicalExamination.length > 0"  style=" margin-top: 2em;  margin-bottom: 2em;">
         <mat-expansion-panel-header>
           <mat-panel-title style="color: #323232; font-weight: bold ">
@@ -142,22 +186,22 @@ add
 
 
       </mat-expansion-panel>
-      <mat-expansion-panel *ngIf="bilan_lipidique != null "  style=" margin-top: 2em;  margin-bottom: 2em;">
+      <mat-expansion-panel *ngIf="bilanLipidique != null " style=" margin-top: 2em;  margin-bottom: 2em;">
         <mat-expansion-panel-header>
           <mat-panel-title style="color: #323232; font-weight: bold ">
             <h4>Bilan lipidique :</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <h4>hba1c</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.hba1c}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.hba1c}}</h5>
         <h4>nohdl</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.nohdl}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.nohdl}}</h5>
         <h4>hdl</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.hdl}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.hdl}}</h5>
         <h4>ldl</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.ldl}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.ldl}}</h5>
         <h4>triglyceride</h4>
-        <h5 style="color: #039be5">{{bilan_lipidique.triglyceride}}</h5>
+        <h5 style="color: #039be5">{{bilanLipidique.triglyceride}}</h5>
 
 
 

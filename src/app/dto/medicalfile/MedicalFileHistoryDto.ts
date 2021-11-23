@@ -1,8 +1,8 @@
 export class MedicalFileHistoryDto {
-    private _date : string[] ;
-    private _antecedents : string;
-    private _response : Boolean;
-    private _description : string[];
+  private _date : string[] ;
+  private _antecedents : string;
+  private _response : Boolean;
+  private _description : string[];
 
   constructor(date: string[], antecedents: string, response : Boolean, description : string []) {
     this._date = date;
