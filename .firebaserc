@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ipodsante-92c27"
+  },
+  "targets": {
+    "ipodsante-92c27": {
+      "hosting": {
+        "fitbitinter": [
+          "ipodsante-92c27"
+        ]
+      }
+    }
   }
 }
