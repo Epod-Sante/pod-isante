@@ -1,4 +1,4 @@
-<mat-card *ngFor="let reco of recommandation" class = "tp-card">
+<div *ngFor="let reco of recommandation" class = "tp-card">
   <mat-card-header>
     <div class = "tp-header-image" mat-card-avatar></div>
     <mat-card-title>{{reco?.valeur.toUpperCase()}}</mat-card-title>
@@ -35,4 +35,4 @@
       </span>
     </button>
   </mat-card-actions>
-</mat-card>
+</div>

@@ -1,40 +1,40 @@
-import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
-import {PatientDto} from "../../../../dto/patient/PatientDto";
-import {AppointmentDto} from "../../../../dto/AppointmentDto";
-import {PatientService} from "../../../../_services/patient.service";
-import {ClinicalExaminationDto} from "../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto";
-import {LipidProfileDto} from "../../../../dto/medicalfile/LipidProfileDto";
-import {MedicalFileHistoryDto} from "../../../../dto/medicalfile/MedicalFileHistoryDto";
-import {SocioDemographicVariablesDto} from "../../../../dto/medicalfile/SocioDemographicVariablesDto";
-import {MedicalFileDto} from "../../../../dto/medicalfile/MedicalFileDto";
-import {AntecedentsDto} from "../../../../dto/medicalfile/AntecedentsDto";
-import {Response} from "../../../../dto";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {PatientDto} from '../../../../dto/patient/PatientDto';
+import {AppointmentDto} from '../../../../dto/AppointmentDto';
+import {PatientService} from '../../../../_services/patient.service';
+import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto';
+import {LipidProfileDto} from '../../../../dto/medicalfile/LipidProfileDto';
+import {MedicalFileHistoryDto} from '../../../../dto/medicalfile/MedicalFileHistoryDto';
+import {SocioDemographicVariablesDto} from '../../../../dto/medicalfile/SocioDemographicVariablesDto';
+import {MedicalFileDto} from '../../../../dto/medicalfile/MedicalFileDto';
+import {AntecedentsDto} from '../../../../dto/medicalfile/AntecedentsDto';
+import {Response} from '../../../../dto';
 
 @Component({
   selector: 'app-raport-g',
   templateUrl: './raport-g.component.html',
   styleUrls: ['./raport-g.component.css']
 })
-export class RaportGComponent implements OnInit {
+export class RaportGComponent implements OnInit, OnChanges {
 
   @Input() patient: PatientDto;
-  date = new Date()
-  pharmacotherapy : any []
-  antecedents : AntecedentsDto[] = null
-  clinicalExamination : ClinicalExaminationDto []
-  lipidProfiles : LipidProfileDto[]
-  medicalFileHistory : MedicalFileHistoryDto [] = null
-  medicalFile : MedicalFileDto
-  socioDemographicVariables : SocioDemographicVariablesDto = null;
-  nombre_visites : number = 0;
-  lis_visites : AppointmentDto [] = null
-  barriersRecommendation : string[] = null
-  barriersRecommendationSolutions : string[]= null
-  recommandation : any[] = null
-  recomm : any;
-  detaills : any[]
+  date = new Date();
+  pharmacotherapy: any [];
+  antecedents: AntecedentsDto[] = null;
+  clinicalExamination: ClinicalExaminationDto [];
+  lipidProfiles: LipidProfileDto[];
+  medicalFileHistory: MedicalFileHistoryDto [] = null;
+  medicalFile: MedicalFileDto;
+  socioDemographicVariables: SocioDemographicVariablesDto = null;
+  nombreVisites = 0;
+  visites: AppointmentDto [] = null;
+  barriersRecommendation: string[] = null;
+  barriersRecommendationSolutions: string[] = null;
+  recommandation: any[] = null;
+  recomm: any;
+  detaills: any[];
 
-  constructor(private patientService : PatientService, ) {
+  constructor(private patientService: PatientService, ) {
 
   }
 
@@ -55,69 +55,69 @@ export class RaportGComponent implements OnInit {
 
 
   }
-  ngOnChanges(changes : SimpleChanges){
+  ngOnChanges(changes: SimpleChanges){
 
     // stocker parse dans une variavble et l utiliser
-    if(JSON.parse(this.patient.socioDemographicVariables) != null){
-      this.socioDemographicVariables = JSON.parse(this.patient.socioDemographicVariables)
+    if (JSON.parse(this.patient.socioDemographicVariables) != null){
+      this.socioDemographicVariables = JSON.parse(this.patient.socioDemographicVariables);
     }
-    if(this.patient.medicalFile!=null){
-      this.medicalFile = this.patient.medicalFile
-    }
-
-    if(this.medicalFile.medicalFileHistory!=null){
-      this.medicalFileHistory = this.medicalFile.medicalFileHistory
+    if (this.patient.medicalFile != null){
+      this.medicalFile = this.patient.medicalFile;
     }
 
-    if(this.medicalFile.lipidProfiles!=null){
-      this.lipidProfiles = this.medicalFile.lipidProfiles
+    if (this.medicalFile.medicalFileHistory != null){
+      this.medicalFileHistory = this.medicalFile.medicalFileHistory;
     }
 
-    if(this.medicalFile.clinicalExamination!=null){
-      this.clinicalExamination = this.medicalFile.clinicalExamination
+    if (this.medicalFile.lipidProfiles != null){
+      this.lipidProfiles = this.medicalFile.lipidProfiles;
     }
 
-    for(let i=0; i<this.medicalFileHistory.length; i++){
-      if(i==0){
-        this.antecedents = [JSON.parse(this.medicalFileHistory[i].antecedents)]
+    if (this.medicalFile.clinicalExamination != null){
+      this.clinicalExamination = this.medicalFile.clinicalExamination;
+    }
+
+    for (let i = 0; i < this.medicalFileHistory.length; i++){
+      if (i === 0){
+        this.antecedents = [JSON.parse(this.medicalFileHistory[i].antecedents)];
 
       }else{
-        this.antecedents.push(JSON.parse(this.medicalFileHistory[i].antecedents))}
+        this.antecedents.push(JSON.parse(this.medicalFileHistory[i].antecedents)); }
     }
-    this.getAllVisites()
-    this.getAllReco()
+    this.getAllVisites();
+    this.getAllReco();
   }
   public getAllVisites = () => {
     this.patientService.getRdv(this.patient.id).subscribe( visites => {
       // let tabusers = JSON.parse(JSON.stringify(users.toString()))
-      let vis = JSON.parse(JSON.stringify(visites))
-      console.log(vis)
-      this.lis_visites = vis;
-      this.nombre_visites = this.lis_visites.length
+      const vis = JSON.parse(JSON.stringify(visites));
+      console.log(vis);
+      this.visites = vis;
+      this.nombreVisites = this.visites.length;
     });
     // console.log("yes "+this.users)
   }
-  getAllReco (){
+  getAllReco(){
     this.patientService.getReco(this.patient.id).subscribe(recommandations => {
-      let reco = recommandations as Response
-      this.recomm = reco.object
+      const reco = recommandations as Response;
+      this.recomm = reco.object;
       this.barriersRecommendation = JSON.parse(JSON.stringify(this.recomm.barriersRecommendation));
       this.barriersRecommendationSolutions = JSON.parse(JSON.parse(JSON.stringify(this.recomm.barriersRecommendationSolutions)));
-      this.recommandation = JSON.parse(this.recomm.recommendation)
-      for (let i = 0 ; i<this.recommandation.length; i++){
-        if(i==0) {
-          this.detaills = this.recommandation[i].details
+      this.recommandation = JSON.parse(this.recomm.recommendation);
+      for (let i = 0 ; i < this.recommandation.length; i++){
+        if (i === 0) {
+          this.detaills = this.recommandation[i].details;
         }
         else {
-          this.detaills.push(this.recommandation[i].details)
+          this.detaills.push(this.recommandation[i].details);
         }
 
       }
 
 
 
-      //this.liste_antecedants = JSON.parse(JSON.stringify(this.patient.medicalFile.medicalFileHistory)) as MedicalFileHistoryDto[]
-      //console.log(this.liste_antecedants[0].antecedents)
+      // this.liste_antecedants = JSON.parse(JSON.stringify(this.patient.medicalFile.medicalFileHistory)) as MedicalFileHistoryDto[]
+      // console.log(this.liste_antecedants[0].antecedents)
 
 
     });

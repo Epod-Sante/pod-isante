@@ -27,9 +27,9 @@ import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-patient-profile',
   templateUrl: './patient-profile.component.html',
-  styleUrls: ['./patient-profile.component.css']
+  styleUrls: ['./patient-profile.component.scss']
 })
-export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
+export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, OnChanges{
   @Input() id: string;
   expanded = false;
   expandedpodo = false;
@@ -61,17 +61,29 @@ export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
   public events: SchedulerEvent[] = sampleData;
 
   subscription: Subscription;
+  private message: string;
+  private patients: PatientDto[];
 
   constructor(private  patientService: PatientService, private modalService: ModalService,
               public dialog: MatDialog, public router: Router, private snackBar: MatSnackBar,
               private data: PatientDataBetweenComponentsService) {
     this.tabIndex = 1;
     this.dataSource = new MatTableDataSource(this.antecedents);
+
+
+    this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
+    this.patients = this.message as unknown as PatientDto[];
+    this.patients.forEach(elm => console.log(elm.id));
+  }
+
+  ngOnInit() {
+    console.log('2ngOnInit');
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.getAllUsers();
-    this.subscription = this.data.currentMessage.subscribe(message => message = this.patient.toString());
+    console.log('2ngOnChanges');
+    this.getOnePatient();
     this.tabIndex = 0;
   }
 
@@ -82,8 +94,7 @@ export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
   }
 
   mattab($event){
-    this.getAllUsers();
-
+    this.getOnePatient();
   }
   onOpen(expanded: boolean) {
     this.expanded = expanded;
@@ -156,8 +167,13 @@ export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
     this.modalService.close(id);
   }
 
-  public getAllUsers = () => {
+  public getOnePatient = () => {
+    let patient: PatientDto;
+    this.patients.forEach(elm => {
+      if (elm.id === this.id) { patient = elm; }
+    });
     this.patientService.getPatient(this.id).subscribe(patients => {
+
 
       const socio = patients as Response;
       this.patient = JSON.parse(JSON.stringify(socio.object))as PatientDto;
@@ -210,22 +226,14 @@ export class PatientProfileComponent implements OnDestroy, OnDestroy, OnChanges{
 
 
     });
-
-    this.getAllVisites();
-
-
-
+    if (patient.appointments.length !== 0) {
+      this.getAppointmentsPerPatientId(patient);
+    }
   }
-  public getAllVisites = () => {
-    this.patientService.getRdv(this.id).subscribe( patients => {
-      // let tabusers = JSON.parse(JSON.stringify(users.toString()))
-      const pat = JSON.parse(JSON.stringify(patients));
-      console.log(pat);
-      this.listVisites = pat.object as AppointmentDto[];
+
+  public getAppointmentsPerPatientId(patient: PatientDto) {
+      this.listVisites = patient.appointments as AppointmentDto[];
       this.lastVisite = this.listVisites[this.listVisites.length - 1];
-      console.log(this.listVisites);
-      console.log(this.lastVisite);
-    });
   }
 }
 

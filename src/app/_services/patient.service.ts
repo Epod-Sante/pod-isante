@@ -305,7 +305,7 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('patientId', id);
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
+    const header = new HttpHeaders();
     return this.http.get(this.ADD_RECO, {headers: header, params});
 
   }

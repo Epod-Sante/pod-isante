@@ -1,70 +1,77 @@
-<h2>INFORMATIONS SOCIO-DÉMOGRAPHIQUES</h2><br>
-Complétez les informations ci-dessous. Cochez une seule case par question.
-<br>
-<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Sexe :  </mat-label>
-<mat-radio-group  #gender aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button  value="Femme" > Femme</mat-radio-button>
-  <mat-radio-button value="Homme" > Homme</mat-radio-button>
-  <mat-radio-button value="Autre" > Autre</mat-radio-button>
-  <mat-radio-button value="null" > Préfère ne pas répondre</mat-radio-button>
-</mat-radio-group>
-<br>
-<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> État civil :  </mat-label>
-<mat-radio-group  #civilStatus aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button value="Célibataire" > Célibataire</mat-radio-button>
-  <mat-radio-button value="Marié" >Marié</mat-radio-button>
-  <mat-radio-button value="Conjoint de fait" >Conjoint de fait</mat-radio-button>
-  <mat-radio-button value="Veuf/veuve" > Veuf/veuve</mat-radio-button>
-  <mat-radio-button value="Séparé" >Séparé</mat-radio-button>
-  <mat-radio-button value="Divorcé" >Divorcé</mat-radio-button>
-</mat-radio-group>
-<br>
-<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Scolarité :  </mat-label>
-<mat-radio-group #education  aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button value="< 11 ans de scolarité (< Diplôme d'études secondaires)" > < 11 ans de scolarité (< Diplôme d'études secondaires)</mat-radio-button>
-  <mat-radio-button value="Diplôme d'études secondaires (DEP)" >Diplôme d'études secondaires (DEP)</mat-radio-button>
-  <mat-radio-button value="Formation professionnelle" >Formation professionnelle</mat-radio-button>
-  <mat-radio-button value="Formation collégiale" > Formation collégiale</mat-radio-button>
-  <mat-radio-button value="Séparé" >Formation universitaire 1er cycle</mat-radio-button>
-  <mat-radio-button value="Divorcé" >Formation universitaire 2ème et 3ème cycle</mat-radio-button>
-</mat-radio-group>
-<br>
-<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Statut d’emploi : </mat-label>
-<mat-radio-group #jobStatus  aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button value="emploi" > À l’emploi </mat-radio-button>
-  <mat-radio-button value="Retraité" >Retraité</mat-radio-button>
-  <mat-radio-button value="Sans emploi" >Sans emploi </mat-radio-button>
-  <mat-radio-button value="Maladie" >Au foyer</mat-radio-button>
-  <mat-radio-button #autre   value="Autre:" >Autre</mat-radio-button>
-  <input  appearance="fill"  type="text">
-</mat-radio-group>
-<br>
-  <mat-label><b> Revenu familial annuel moyen : </b></mat-label>
-<mat-radio-group #familyIncome aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button   value="20000" > < 20 000 $ / année </mat-radio-button>
-  <mat-radio-button  value="39999"   >Entre 20 000 et 39 999 $ / année</mat-radio-button>
-  <mat-radio-button  value="59999" >Entre 40 000 et 59 999$ / année</mat-radio-button>
-  <mat-radio-button  style="width: 100%"  value="79999">Entre 60 000 et 79 999 $ / année</mat-radio-button>
-  <mat-radio-button  style="width: 100%" value="80000" >> 80 000 $ / année</mat-radio-button>
-</mat-radio-group>
-<br>
-<mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Milieu de vie : </mat-label>
-<mat-radio-group #livingEnvironment  aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button value="Zone urbaine" >Urbain (ville) </mat-radio-button>
-  <mat-radio-button value="Zone rurale" >Rural (campagne)</mat-radio-button>
-</mat-radio-group>
-<br>
-<b> Type d'habitation : </b>
+<nb-card status="danger">
+  <nb-card-header>INFORMATIONS SOCIO-DÉMOGRAPHIQUES</nb-card-header>
+  <nb-card-body>
+    Complétez les informations ci-dessous. Cochez une seule case par question.
+    <br>
+    <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Sexe :  </mat-label>
+    <mat-radio-group  #gender aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button  value="Femme" > Femme</mat-radio-button>
+      <mat-radio-button value="Homme" > Homme</mat-radio-button>
+      <mat-radio-button value="Autre" > Autre</mat-radio-button>
+      <mat-radio-button value="null" > Préfère ne pas répondre</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> État civil :  </mat-label>
+    <mat-radio-group  #civilStatus aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button value="Célibataire" > Célibataire</mat-radio-button>
+      <mat-radio-button value="Marié" >Marié</mat-radio-button>
+      <mat-radio-button value="Conjoint de fait" >Conjoint de fait</mat-radio-button>
+      <mat-radio-button value="Veuf/veuve" > Veuf/veuve</mat-radio-button>
+      <mat-radio-button value="Séparé" >Séparé</mat-radio-button>
+      <mat-radio-button value="Divorcé" >Divorcé</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Scolarité :  </mat-label>
+    <mat-radio-group #education  aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button value="< 11 ans de scolarité (< Diplôme d'études secondaires)" > < 11 ans de scolarité (< Diplôme d'études secondaires)</mat-radio-button>
+      <mat-radio-button value="Diplôme d'études secondaires (DEP)" >Diplôme d'études secondaires (DEP)</mat-radio-button>
+      <mat-radio-button value="Formation professionnelle" >Formation professionnelle</mat-radio-button>
+      <mat-radio-button value="Formation collégiale" > Formation collégiale</mat-radio-button>
+      <mat-radio-button value="Séparé" >Formation universitaire 1er cycle</mat-radio-button>
+      <mat-radio-button value="Divorcé" >Formation universitaire 2ème et 3ème cycle</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Statut d’emploi : </mat-label>
+    <mat-radio-group #jobStatus  aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button value="emploi" > À l’emploi </mat-radio-button>
+      <mat-radio-button value="Retraité" >Retraité</mat-radio-button>
+      <mat-radio-button value="Sans emploi" >Sans emploi </mat-radio-button>
+      <mat-radio-button value="Maladie" >Au foyer</mat-radio-button>
+      <mat-radio-button #autre   value="Autre:" >Autre</mat-radio-button>
+      <input  appearance="fill"  type="text">
+    </mat-radio-group>
+    <br>
+    <mat-label><b> Revenu familial annuel moyen : </b></mat-label>
+    <mat-radio-group #familyIncome aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button   value="20000" > < 20 000 $ / année </mat-radio-button>
+      <mat-radio-button  value="39999"   >Entre 20 000 et 39 999 $ / année</mat-radio-button>
+      <mat-radio-button  value="59999" >Entre 40 000 et 59 999$ / année</mat-radio-button>
+      <mat-radio-button  style="width: 100%"  value="79999">Entre 60 000 et 79 999 $ / année</mat-radio-button>
+      <mat-radio-button  style="width: 100%" value="80000" >> 80 000 $ / année</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Milieu de vie : </mat-label>
+    <mat-radio-group #livingEnvironment  aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button value="Zone urbaine" >Urbain (ville) </mat-radio-button>
+      <mat-radio-button value="Zone rurale" >Rural (campagne)</mat-radio-button>
+    </mat-radio-group>
+    <br>
+    <b> Type d'habitation : </b>
 
-<mat-radio-group #housingType aria-label="choisissez une option" matNativeControl>
-  <mat-radio-button  value="Maison unifamiliale" >Maison unifamiliale</mat-radio-button>
-  <mat-radio-button  value="Cottage" >Cottage</mat-radio-button>
-  <mat-radio-button   value="Bungalow" >Bungalow</mat-radio-button>
-  <mat-radio-button     value="Condo /appartement">Condo /appartement</mat-radio-button>
-  <mat-radio-button   value="Appartement" >Appartement</mat-radio-button>
-</mat-radio-group>
-<br><br><br>
-<h2>ANTÉCÉDANTS MÉDICAUX</h2><br>
+    <mat-radio-group #housingType aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button  value="Maison unifamiliale" >Maison unifamiliale</mat-radio-button>
+      <mat-radio-button  value="Cottage" >Cottage</mat-radio-button>
+      <mat-radio-button   value="Bungalow" >Bungalow</mat-radio-button>
+      <mat-radio-button     value="Condo /appartement">Condo /appartement</mat-radio-button>
+      <mat-radio-button   value="Appartement" >Appartement</mat-radio-button>
+    </mat-radio-group>
+    <br><br><br>
+  </nb-card-body>
+</nb-card>
+
+<nb-card status="danger">
+  <nb-card-header>ANTÉCÉDANTS MÉDICAUX</nb-card-header>
+  <nb-card-body>
 Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
 inscrire les années correspondantes.
 <br><br>
@@ -158,7 +165,11 @@ inscrire les années correspondantes.
   <mat-checkbox #no_medic> <b>Je ne prends pas de médicaments</b>  </mat-checkbox>
   <br>
   <input type="text" [(ngModel)]="medicamant" >
-  <button mat-flat-button color="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant)" >Ajouter un medicament</button>
+
+  <button nbButton status="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant)">
+    Ajouter un medicament<nb-icon icon="plus-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+  </button>
+
   <br>
   <section *ngIf="medicaments.description.length>0">
     <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
@@ -170,10 +181,12 @@ inscrire les années correspondantes.
   </section>
   <br><br>
 </section>
-<button (click)="enregistrerQuiz(gender.value,civilStatus.value,familyIncome.value,jobStatus.value,livingEnvironment.value,housingType.value
-    ,frac1,frac2,frac3,education.value)" style="float:right;" mat-flat-button color="primary">
-  Enregistrer le questionnaire
+
+  </nb-card-body>
+</nb-card>
+
+<button nbButton status="success" style="margin-bottom: 1em" fullWidth
+        (click)="enregistrerQuiz(gender.value,civilStatus.value,familyIncome.value,jobStatus.value,livingEnvironment.value,housingType.value
+    ,frac1,frac2,frac3,education.value)">
+  Enregistrer le questionnaire<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
 </button>
-
-
-

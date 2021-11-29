@@ -89,7 +89,7 @@ export class AddpatientComponent implements OnInit, OnDestroy {
     this.error = null;
 
     if (firstName === '' || lastName === '' || motherName === '' || phone === '' || this.birthday === '') {
-      this.showToast('top-right', 'info', 'Info', 'Vous devrez remplir tous les champs obligatoires *');
+      this.showToast('top-right', 'info', 'Info', 'Vous devrez remplir tous les champs');
     } else if (firstName.length < 3 || lastName.length < 3) {
       this.showToast('top-right', 'info', 'Info', 'Les champs nom et prenoms doivent contenir au minimum 3 caracteres');
     } else {

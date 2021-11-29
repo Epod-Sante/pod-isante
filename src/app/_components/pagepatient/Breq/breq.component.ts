@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import { QuizComponent } from './quiz/quiz.component';
 
@@ -7,5 +7,11 @@ import { QuizComponent } from './quiz/quiz.component';
   templateUrl: './breq.component.html',
   styleUrls: ['./breq.component.css']
 })
-export class BreqComponent {
+export class BreqComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }

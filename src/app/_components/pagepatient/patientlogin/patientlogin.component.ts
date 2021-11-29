@@ -1,13 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MyErrorStateMatcher} from "../../home/invite/invite.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AlertService, AuthenticationService, UserService} from "../../../_services";
-import {PatientService} from "../../../_services/patient.service";
-import {PatientDto} from "../../../dto/patient/PatientDto";
-import {ContactDto} from "../../../dto/patient/ContactDto";
-import {Request, Response} from "../../../dto";
-import {first, map} from "rxjs/operators";
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MyErrorStateMatcher} from '../../home/invite/invite.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AlertService, AuthenticationService, UserService} from '../../../_services';
+import {PatientService} from '../../../_services/patient.service';
+import {PatientDto} from '../../../dto/patient/PatientDto';
+import {ContactDto} from '../../../dto/patient/ContactDto';
+import {Request, Response} from '../../../dto';
+import {first, map} from 'rxjs/operators';
+import {PatientLoginService} from '../../../_services/PatientLoginService';
+import {NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'app-patientlogin',
@@ -15,62 +17,59 @@ import {first, map} from "rxjs/operators";
   styleUrls: ['./patientlogin.component.css']
 })
 export class PatientloginComponent implements OnInit {
-  obj = null;
+  @ViewChild('emailInput') emailInput: ElementRef;
+  @ViewChild('pinInput') pinInput: ElementRef;
 
   constructor(private router: Router,
               private patientService: PatientService,
-              private route: ActivatedRoute) { }
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  matcher = new MyErrorStateMatcher();
+              private patientLoginService: PatientLoginService,
+              private route: ActivatedRoute,
+              private toastrService: NbToastrService) { }
+  obj: PatientDto;
 
   ngOnInit() {
   }
-  form: FormGroup = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
 
   submit() {
-    if (this.form.valid) {
-      //this.submitEM.emit(this.form.value);
-      if(this.form.value.password=="" || this.emailFormControl.value==""){
-          this.error = "Veuillez Remplir tous les champs"
-      }else if(this.form.value.password.length>4){
-        this.error = "NIP INVALIDE"
+      // this.submitEM.emit(this.form.value);
+      if (this.emailInput.nativeElement.value === '' || this.pinInput.nativeElement.value === ''){
+        this.showToast('top-right', 'info', 'Échec', 'Veuillez Remplir tous les champs');
+      }else if (this.pinInput.nativeElement.value.length !== 4){
+        this.showToast('top-right', 'info', 'Échec', 'NIP invalide');
       }else {
-       let data = new  PatientDto(null,null,null,null,null,null,
-         new ContactDto(null,null ,this.emailFormControl.value,null),null,null,
-         null, null, null, this.form.value.password,null,
-         null,null, null,null, null,null);
-        let request = new Request(data)
-        this.patientService.login(request).pipe(first())
-          .subscribe(token =>  {
-            console.log(token)
-            //this.router.navigate(["patient/questionnaire"])
-              this.obj = JSON.parse(JSON.stringify(token))
-            if(this.obj.object!=null){
-              localStorage.setItem("currentPatientToken",this.obj.object.questionnaireToken)
-              this.router.navigate(["patient/questionnaire"])
+       const data = new  PatientDto(null, null, null, null, null, null,
+         new ContactDto(null, null , this.emailInput.nativeElement.value, null), null, null,
+         null, null, null, this.pinInput.nativeElement.value, null,
+         null, null, null, null, null, null);
+       const request = new Request(data);
+       this.patientService.login(request).pipe(first())
+          .subscribe(patient => {
+            // this.router.navigate(["patient/questionnaire"])
+              const response = patient as Response;
+              this.obj = JSON.parse(JSON.stringify(response.object)) as PatientDto;
+              if (this.obj != null){
+                this.patientLoginService.changeMessage(response.object as string);
+                localStorage.setItem('currentPatientToken', this.obj.questionnaireToken);
+                localStorage.setItem('patientId', this.obj.id);
+                localStorage.setItem('patientName', this.obj.firstName + ' ' + this.obj.lastName);
+                this.router.navigate(['patient/questionnaire']);
             }else{
-              this.error =this.obj.error.message
-
+                this.showToast('top-right', 'danger', 'Échec', 'Authentification échouée');
             }
 
         }, error => {
-          console.log(error)
-          this.error = error.error.error_description+" "+error.error.message+" : "+error.status
+            this.showToast('top-right', 'danger', 'Échec', 'Authentification échouée');
           }
-        )
+        );
       }
 
-    }
+
   }
-  @Input() error: string | null;
 
- // @Output() submitEM = new EventEmitter();
-
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
+  }
 }

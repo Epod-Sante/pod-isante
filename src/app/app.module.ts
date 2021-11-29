@@ -73,7 +73,7 @@ import {AngularFireModule} from '@angular/fire/compat';
 import {environment} from '../environments/environment';
 import {ErrorInterceptor} from './_helpers';
 import {EncrDecrService} from './_services/EncrDecrService';
-import {IddleUserComponent} from './_components/iddle-user/iddle-user.component';
+import {IddleUserDialogComponent} from './_components/iddle-user-dialog/iddle-user-dialog.component';
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
 import {BilanLipidiqueComponent} from './_components/home-pro/patient/bilan-lipidique/bilan-lipidique.component';
 import {SociodemoComponentPatient} from './_components/pagepatient/sociodemopatient/sociodemo-component-patient.component';
@@ -92,15 +92,22 @@ import {
   NbSidebarModule,
   NbMenuModule,
   NbActionsModule,
-  NbButtonModule, NbIconModule, NbWindowModule, NbPopoverModule, NbCardModule, NbToastrModule
+  NbButtonModule,
+  NbIconModule,
+  NbWindowModule,
+  NbPopoverModule,
+  NbCardModule,
+  NbToastrModule,
+  NbFormFieldModule,
+  NbInputModule, NbAlertModule, NbCheckboxModule, NbDialogModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {ObjectifV2Module} from './_components/home-pro/patient/objectif-v2/objectif-v2.module';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
-import {ObjectifV2Component} from "./_components/home-pro/patient/objectif-v2/objectif-v2.component";
 import {WindowComponent} from './_components/window/window.component';
-import {PatientDataBetweenComponentsService} from "./_services/PatientDataBetweenComponentsService";
-import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/quizindivid.component";
+import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/quizindivid.component';
+import {OverlayContainer} from "@angular/cdk/overlay";
+
 
 
 @NgModule({
@@ -146,7 +153,7 @@ import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/q
     AddDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
-    IddleUserComponent,
+    IddleUserDialogComponent,
     RecomandationPatientComponent,
     GpaqComponent,
     GpaqQuizComponent,
@@ -155,6 +162,7 @@ import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/q
 
   ],
   imports: [
+    NbDialogModule.forRoot(),
     NbToastrModule.forRoot(),
     NbWindowModule.forRoot(),
     NgxSliderModule,
@@ -163,7 +171,7 @@ import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/q
     FormsModule, MatCardModule,
     NgxMatTimepickerModule,
     NgxMatDatetimePickerModule,
-    UserIdleModule.forRoot({idle: 600, timeout: 10, ping: 30}),
+    UserIdleModule.forRoot({idle: 5, timeout: 2, ping: 1200}),
     AngularFireModule.initializeApp(environment.firebase),
     ModalModule,
     FlexLayoutModule,
@@ -201,7 +209,10 @@ import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/q
     NbEvaIconsModule, NbSidebarModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    NbMenuModule, NbActionsModule, NbButtonModule, NbIconModule, NbPopoverModule, NbCardModule,
+    NbMenuModule,
+    NbActionsModule, NbButtonModule, NbIconModule,
+    NbPopoverModule, NbCardModule, NbFormFieldModule,
+    NbInputModule, NbAlertModule, NbCheckboxModule,
   ],
 //
 
@@ -210,7 +221,6 @@ import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/q
     {provide: MatDialogRef, useValue: {}},
     {provide: MAT_DIALOG_DATA, useValue: []},
     MultilevelMenuService,
-    PatientDataBetweenComponentsService
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   entryComponents: [
@@ -218,9 +228,9 @@ import {QuizindividComponent} from "./_components/home-pro/patient/quizindivid/q
     SociodemoComponent,
     AddDialogComponent,
     RecomandationComponent,
-    GpaqComponent,
+    GpaqComponent, BreqComponent, GpaqQuizComponent, QuizComponent,
     DetailsRecoComponent,
-    DeleteDialogComponent, EditDialogComponent, IddleUserComponent, BilanLipidiqueComponent, WindowComponent],
+    DeleteDialogComponent, EditDialogComponent, IddleUserDialogComponent, BilanLipidiqueComponent, WindowComponent],
   exports: [
     RecomandationComponent
   ],

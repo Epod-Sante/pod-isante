@@ -2,15 +2,20 @@
   <div class="listPatient">
     <nb-card>
       <nb-card-body>
-        <div class="item">
-          <mat-form-field appearance="fill">
-            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Chercher">
-          </mat-form-field>
-        </div>
-        <button mat-raised-button color="primary" class="material-icons item" (click)="ajouter()">
-          <mat-icon>add_circle</mat-icon>
-          Ajouter un patient
+
+        <button nbButton status="primary" style="margin-bottom: 1em" fullWidth (click)="ajouter()">
+          Ajouter un patient<nb-icon icon="person-add-outline" [options]="{ animation: { type: 'shake' } }"></nb-icon>
         </button>
+
+        <div class="item">
+
+          <nb-form-field>
+            <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+            <input type="text" nbInput fullWidth shape="round" placeholder="Chercher" (keyup)="doFilter($event.target.value)" >
+          </nb-form-field>
+
+        </div>
+
 
         <table class="item" mat-table [dataSource]="dataSource" matSort>
 <!--
@@ -19,22 +24,24 @@
             <td mat-cell *matCellDef="let element"> {{element.fileNumber}} </td>
           </ng-container>-->
 
-          <ng-container matColumnDef="nom">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
-            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+          <ng-container class="mat-column-firstname" matColumnDef="nom">
+            <th class="w-75 th-center" mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
+            <td mat-cell *matCellDef="let element"  style="text-transform: capitalize;"> {{element.firstName}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="prenom">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Prenom</th>
-            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+          <ng-container  class="mat-column-lastname" matColumnDef="prenom">
+            <th class="w-75 th-center" mat-header-cell *matHeaderCellDef mat-sort-header> Prenom</th>
+            <td mat-cell *matCellDef="let element"  style="text-transform: capitalize;"> {{element.lastName}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> Selectioner</th>
+          <ng-container  class="mat-column-action" matColumnDef="action">
+            <th class="w-75 th-center" mat-header-cell *matHeaderCellDef>Selectioner</th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="primary" (click)="show_profile(element.id)">
-                Ouvrir
+
+              <button nbButton outline status="info" shape="round" size="tiny" fullWidth (click)="show_profile(element.id)">
+                Ouvrir<nb-icon icon="book-open-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
               </button>
+
               <span *ngIf="selected==element.id" class="material-icons" style="font-size: small; color: red">
              place
           </span>
@@ -54,10 +61,12 @@
   <div class="patientDetails">
     <app-addpatient (exampleOutput)="refresh_list($event)" [id]="id" *ngIf="addpatient===true"></app-addpatient>
     <app-patient-profile [id]="id" *ngIf="showProfile===true"></app-patient-profile>
-    <app-antecedants [id]="id" *ngIf="ante===true"></app-antecedants>
-    <app-sociodemo [id]="id" *ngIf="socio===true"></app-sociodemo>
-    <app-examenclinique [id]="id" *ngIf="exam===true"></app-examenclinique>
-    <app-affectpodometre [id]="id" *ngIf="podo===true"></app-affectpodometre>
+    <!-- <app-antecedants [id]="id" *ngIf="ante===true"></app-antecedants>
+        <app-sociodemo [id]="id" *ngIf="socio===true"></app-sociodemo>
+        <app-examenclinique [id]="id" *ngIf="exam===true"></app-examenclinique>
+
+          <app-affectpodometre [id]="id" *ngIf="podo===true"></app-affectpodometre>
+      -->
 
   </div>
 </div>
