@@ -106,7 +106,6 @@ import {ObjectifV2Module} from './_components/home-pro/patient/objectif-v2/objec
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {WindowComponent} from './_components/window/window.component';
 import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/quizindivid.component';
-import {OverlayContainer} from "@angular/cdk/overlay";
 
 
 
