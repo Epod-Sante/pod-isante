@@ -1,45 +1,18 @@
+<nb-layout>
+  <nb-layout-column>
+    <nb-card>
+      <nb-card-body>
 
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" >
+        <h1>I-POD SANTE</h1>
+        <h4>Connexion</h4>
 
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title style="font-family: 'Helvetica Neue'; font-weight: bold; color: blue; margin-bottom: 1em; margin-top: 1em;">Connexion</mat-card-title>
-    </mat-card-header>
+        <input #usernameInput type="text" nbInput placeholder="Nom d'utilisateur" fieldSize="large">
+        <input #passwordInput type="password" nbInput placeholder="Mot de passe" fieldSize="large">
 
-    <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-      <mat-card-content>
-        <mat-form-field  appearance="outline">
-          <mat-label>Nom d utilisateur </mat-label>
-          <input  style="font-weight: bold; font-size: medium;" formControlName="username"  matInput placeholder="Username" formControlName="username"
-          [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
-        </mat-form-field>
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required" style="color: brown; font-size: larger;">le nom d'utilisateur est obligatoire</div>
-      </div>
+        <button nbButton status="primary" (click)="onSubmit()">Connexion</button>
+        <a   routerLink="/forgetpassword">Mot de passe oublié ?</a>
 
-        <mat-form-field appearance="outline">
-          <mat-label>mot de passe</mat-label>
-          <input formControlName="password" matInput type="password" placeholder="mot de passe"
-          [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-        </mat-form-field>
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required" style="color: brown; font-size: larger;">le mot de passe est obligatoire</div>
-      </div>
-
-
-
-
-
-      </mat-card-content>
-      <button mat-stroked-button color="primary" class="btn-block" >Connexion
-        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAA
-        AAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      </button>
-
-
-
-
-    </form>
-    <a   routerLink="/forgetpassword">Mot de passe oublié ?</a>
-  </mat-card>
-  </div>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

@@ -7,7 +7,7 @@ import {LogiComponent} from './patient/list-patients/appoint/logi.component';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginComponent} from '../login/login.component';
 import {AuthenticationService} from '../../_services';
-import {IddleUserComponent} from '../iddle-user/iddle-user.component';
+import {IddleUserDialogComponent} from '../iddle-user-dialog/iddle-user-dialog.component';
 
 @Component({
   selector: 'app-home-pro',
@@ -63,7 +63,7 @@ export class HomeProComponent implements OnInit {
         localStorage.removeItem("currentUser")
         localStorage.removeItem("currentToken")
         localStorage.removeItem("currentRole")
-        const dialogRef = this.dialog.open(IddleUserComponent, {
+        const dialogRef = this.dialog.open(IddleUserDialogComponent, {
           disableClose : true
         });
         dialogRef.afterClosed().subscribe(result => {

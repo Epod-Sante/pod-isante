@@ -1,21 +1,14 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-
+import {Component, Input, OnInit} from '@angular/core';
 import {QuizService} from '../services/quiz.service';
-import {HelperService} from '../services/helper.service';
 import {Option, Question, Quiz, QuizConfig} from '../models';
 import {Reponse} from '../models/reponse';
-import *  as  data from '../data/breq.json';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {QuestionnaireDto} from "../../../../dto/QuestionnaireDto";
-import {ActivatedRoute} from "@angular/router";
-import {PatientDto} from "../../../../dto/patient/PatientDto";
-import {Patient} from "../../../../_models/patient";
-import {PatientService} from "../../../../_services/patient.service";
-import {Request} from "../../../../dto";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
-
+import {HttpClient} from '@angular/common/http';
+import {QuestionnaireDto} from '../../../../dto/QuestionnaireDto';
+import {ActivatedRoute} from '@angular/router';
+import {PatientDto} from '../../../../dto/patient/PatientDto';
+import {PatientService} from '../../../../_services/patient.service';
+import {Request} from '../../../../dto';
+import {NbToastrService} from '@nebular/theme';
 
 
 @Component({
@@ -25,41 +18,41 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   providers: [QuizService]
 })
 export class QuizComponent implements OnInit {
-  @Input () patient : PatientDto
+  @Input() patient: PatientDto;
   quizes: any[];
-  obj
-  comfirmer : boolean = false;
-   data  = require('../data/breq.json');
+  obj;
+  comfirmer = false;
+  data = require('../data/breq.json');
   regulations: any [];
   rep: Reponse[] = [];
   quiz: Quiz = new Quiz(null);
   mode = 'quiz';
-  quizName: string = 'breq.json';
-  value : any
-  patientId : string =""
+  quizName = 'breq.json';
+  value: any;
+  patientId = '';
   poid = 0;
   poid1 = 0;
   poid2 = 0;
   poid3 = 0;
   poid4 = 0;
-  introjected_regulation = 0;
-  amotivation_regulation = 0;
-  identified_regulation = 0;
-  external_regulation = 0;
-  intrinsic_regulation = 0;
+  introjectedRegulation = 0;
+  amotivationRegulation = 0;
+  identifiedRegulation = 0;
+  externalRegulation = 0;
+  intrinsicRegulation = 0;
   config: QuizConfig = {
-    'allowBack': true,
-    'allowReview': true,
-    'autoMove': false,  // if true, it will move to next question automatically when answered.
-    'duration': 600,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
-    'pageSize': 1,
-    'requiredAll': false,  // indicates if you must answer all the questions before submitting.
-    'richText': false,
-    'shuffleQuestions': false,
-    'shuffleOptions': false,
-    'showClock': false,
-    'showPager': true,
-    'theme': 'none'
+    allowBack: true,
+    allowReview: true,
+    autoMove: false,  // if true, it will move to next question automatically when answered.
+    duration: 600,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    pageSize: 1,
+    requiredAll: false,  // indicates if you must answer all the questions before submitting.
+    richText: false,
+    shuffleQuestions: false,
+    shuffleOptions: false,
+    showClock: false,
+    showPager: true,
+    theme: 'none'
   };
 
   pager = {
@@ -74,38 +67,33 @@ export class QuizComponent implements OnInit {
   duration = '';
   questionnaireToken: string;
 
-  constructor(private quizService: QuizService, private http :HttpClient,private  route : ActivatedRoute,
-              private patientService : PatientService,
-              public dialogRef: MatDialogRef<QuizComponent>,
-              private _snackBar : MatSnackBar
-              ) {
-    this.questionnaireToken = localStorage.getItem("currentPatientToken")
+  constructor(private quizService: QuizService, private http: HttpClient, private route: ActivatedRoute,
+              private patientService: PatientService,
+              private toastrService: NbToastrService) {
+    this.questionnaireToken = localStorage.getItem('currentPatientToken');
   }
 
   ngOnInit() {
-    console.log(this.data)
-     this.getCodeFromURI()
+    console.log(this.data);
+    this.getCodeFromURI();
 
-   /* this.quizName = this.quizes[0].id;*/
-   // console.log(this.quizName)
+    /* this.quizName = this.quizes[0].id;*/
+    // console.log(this.quizName)
     this.loadQuiz();
 
   }
-  fermer(){
-    this.dialogRef.close()
-  }
 
   loadQuiz() {
-   // this.quizService.get(this.quizName).subscribe(res => {
-      this.quiz = new Quiz(this.data);
-      this.pager.count = this.quiz.questions.length;
-      this.startTime = new Date();
-      this.ellapsedTime = '00:00';
-      this.timer = setInterval(() => {
-        this.tick();
-      }, 1000);
-      this.duration = this.parseTime(this.config.duration);
-    //});
+    // this.quizService.get(this.quizName).subscribe(res => {
+    this.quiz = new Quiz(this.data);
+    this.pager.count = this.quiz.questions.length;
+    this.startTime = new Date();
+    this.ellapsedTime = '00:00';
+    this.timer = setInterval(() => {
+      this.tick();
+    }, 1000);
+    this.duration = this.parseTime(this.config.duration);
+    // });
     this.mode = 'quiz';
   }
 
@@ -114,7 +102,7 @@ export class QuizComponent implements OnInit {
     const diff = (now.getTime() - this.startTime.getTime()) / 1000;
     if (diff >= this.config.duration) {
       this.mode = 'result';
-      //this.onSubmit();
+      // this.onSubmit();
     }
     this.ellapsedTime = this.parseTime(diff);
   }
@@ -133,32 +121,33 @@ export class QuizComponent implements OnInit {
   }
 
   onSelect(question: Question, option: Option) {
-    if (question.questionTypeId === 1 ) {
+    if (question.questionTypeId === 1) {
       question.options.forEach((x) => {
         if (x.id !== option.id) {
           x.selected = false;
         } else {
 
           let exist = false;
-          for(let i=0 ; i< this.rep.length; i++){
-            if(this.rep[i].questionId ===question.id){
+          for (let i = 0; i < this.rep.length; i++) {
+            if (this.rep[i].questionId === question.id) {
               exist = true;
-              this.rep[i] =  new Reponse(
+              this.rep[i] = new Reponse(
                 question.id,
-                option.poids)        }
+                option.poids);
+            }
           }
-          if(exist == false)
-          {
-          this.rep.push(new Reponse(
-            question.id,
-            option.poids));
+          if (exist === false) {
+            this.rep.push(new Reponse(
+              question.id,
+              option.poids));
 
-          console.log(this.rep);
-          this.score(question, option);
-          if(this.rep.length === 19){
-            this.comfirmer = true
+            console.log(this.rep);
+            this.score(question, option);
+            if (this.rep.length === 19) {
+              this.comfirmer = true;
+            }
           }
-        }}
+        }
       });
     }
 
@@ -193,32 +182,32 @@ export class QuizComponent implements OnInit {
 
   score(question: Question, option: Option) {
 
-  if (question.regulation.id === 1) {
+    if (question.regulation.id === 1) {
 
-      this.amotivation_regulation = this.amotivation_regulation + 1;
+      this.amotivationRegulation = this.amotivationRegulation + 1;
       this.poid = option.poids + this.poid;
       console.log(this.poid);
-      console.log(this.amotivation_regulation);
+      console.log(this.amotivationRegulation);
     } else if (question.regulation.id === 2) {
-      this.external_regulation = this.external_regulation + 1;
+      this.externalRegulation = this.externalRegulation + 1;
       this.poid1 = option.poids + this.poid1;
       console.log(this.poid1);
-      console.log(this.external_regulation);
+      console.log(this.externalRegulation);
     } else if (question.regulation.id === 3) {
-      this.introjected_regulation = this.introjected_regulation + 1;
+      this.introjectedRegulation = this.introjectedRegulation + 1;
       this.poid2 = option.poids + this.poid2;
       console.log(this.poid2);
-      console.log(this.introjected_regulation);
+      console.log(this.introjectedRegulation);
     } else if (question.regulation.id === 4) {
-      this.identified_regulation = this.identified_regulation + 1;
+      this.identifiedRegulation = this.identifiedRegulation + 1;
       this.poid3 = option.poids + this.poid3;
       console.log(this.poid3);
-      console.log(this.identified_regulation);
+      console.log(this.identifiedRegulation);
     } else if (question.regulation.id === 5) {
-      this.intrinsic_regulation = this.intrinsic_regulation + 1;
+      this.intrinsicRegulation = this.intrinsicRegulation + 1;
       this.poid4 = option.poids + this.poid4;
       console.log(this.poid4);
-      console.log(this.intrinsic_regulation);
+      console.log(this.intrinsicRegulation);
     }
     console.log(question.regulation.name);
 
@@ -227,78 +216,65 @@ export class QuizComponent implements OnInit {
 
   onSubmit() {
     console.log(this.rep);
-    const moy_amotivation = this.poid / this.amotivation_regulation;
-    const moy_external = this.poid1 / this.external_regulation;
-    const moy_introjected = this.poid2 / this.introjected_regulation;
-    const moy_identified = this.poid3 / this.identified_regulation;
-    const moy_intrinsic = this.poid4 / this.intrinsic_regulation;
-    console.log(' score moyen Amotivation :' + moy_amotivation);
-    console.log('  score moyen external_regulation : ' + moy_external);
-    console.log(' score moyen introjected_regulation : ' + moy_introjected);
-    console.log(' score moyen identified_regulation : ' + moy_identified);
-    console.log(' score moyen intrinsic_regulation : ' + moy_intrinsic);
+    const moyAmotivation = this.poid / this.amotivationRegulation;
+    const moyExternal = this.poid1 / this.externalRegulation;
+    const moyIntrojected = this.poid2 / this.introjectedRegulation;
+    const moyIdentified = this.poid3 / this.identifiedRegulation;
+    const moyIntrinsic = this.poid4 / this.intrinsicRegulation;
+    console.log(' score moyen Amotivation :' + moyAmotivation);
+    console.log('  score moyen external_regulation : ' + moyExternal);
+    console.log(' score moyen introjected_regulation : ' + moyIntrojected);
+    console.log(' score moyen identified_regulation : ' + moyIdentified);
+    console.log(' score moyen intrinsic_regulation : ' + moyIntrinsic);
     this.value = {
-      reponses : this.rep,
-      score : {
-        amotivation : moy_amotivation,
-        external : moy_external,
-        introjected : moy_introjected,
-        identified : moy_identified,
-        intrinsic : moy_intrinsic
+      reponses: this.rep,
+      score: {
+        amotivation: moyAmotivation,
+        external: moyExternal,
+        introjected: moyIntrojected,
+        identified: moyIdentified,
+        intrinsic: moyIntrinsic
       }
 
-    }
+    };
 
-      let breq = new QuestionnaireDto(null, this.patientId, "BREQ", JSON.stringify(this.value), null)
-    let request = new Request(breq)
-    this.patientService.addQuiz(request).subscribe( reponse =>{
-      this.openSnackBar(" AJOUT REUSSI","Ok")
-      this.dialogRef.close()
-
+    const breq = new QuestionnaireDto(null, this.patientId, 'BREQ', JSON.stringify(this.value), null);
+    const request = new Request(breq);
+    this.patientService.addQuiz(request).subscribe(reponse => {
+      this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
     }, error => {
-      this.openSnackBar(" Erreur !! Assurez-vous que le formulaire est bien rempli","Ok")
+      this.showToast('top-right', 'info', 'Échec', 'Assurez-vous que le formulaire est bien rempli');
 
-    })
-      console.log(breq)
-
-
+    });
   }
+
   getCodeFromURI() {
+    this.patientService.recup_token(this.questionnaireToken).subscribe(
+      response => {
+        this.obj = JSON.parse(JSON.stringify(response));
+        this.patient = this.obj.object;
+        if (this.patient != null) {
+          this.patientId = this.obj.object.id;
+          console.log(this.obj);
+        } else {
+
+        }
+        if (this.obj.error != null) {
+          this.questionnaireToken = null;
+        }
 
 
+      },
+      error => {
 
-
-        this.patientService.recup_token(this.questionnaireToken).subscribe(
-          response => {
-            this.obj = JSON.parse(JSON.stringify(response))
-            this.patient = this.obj.object
-            if(this.patient!=null) {
-
-
-
-              this.patientId = this.obj.object.id
-              console.log(this.obj)
-            }else{
-
-            }
-            if(this.obj.error != null){
-              this.questionnaireToken = null
-            }
-
-
-          },
-          error => {
-
-          }
-        );
-
-
-
-
+      }
+    );
   }
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 2000,
 
-    })}
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      {position, status});
+  }
 }

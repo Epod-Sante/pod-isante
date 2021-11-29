@@ -1,87 +1,55 @@
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-  height: 100%;
 
+.column1 {
+  flex: 1 !important;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+  background-color: #edf1f7;
 
 }
 
-
-
-mat-sidenav {
-  width: 250px;
-  height: 10em;
+.column2 {
+  flex: 4 !important;
+  box-shadow: 10.8px 19.5px 13.2px rgba(0, 0, 0, 0.048),
+  15.5px 28.1px 27.8px rgba(0, 0, 0, 0.072),
+  32px 58px 95px rgba(0, 0, 0, 0.12);
 }
 
-a {
-  text-decoration: none;
-  color: gray;
+.column2 nb-card{
+  box-shadow: 10.8px 19.5px 13.2px rgba(0, 0, 0, 0.048),
+  15.5px 28.1px 27.8px rgba(0, 0, 0, 0.072),
+  32px 58px 95px rgba(0, 0, 0, 0.12);
+}
+
+.column1 nb-card {
+  display: flex;
+  flex-direction: row;
+  flex-basis: calc(100%);
+  align-items: center;
   text-align: center;
-  font-weight: bold;
-  font-size: large;
-  width: 20%;
-
+  border: 0;
+  background-color: #5cc9f3;
+  font-size: 200%;
+  color: white;
 }
 
-a:hover,
-a:active {
-  color: indigo;
-}
-.pagel{
-  width: 100%;
-  position: absolute;
-
-  margin-top: 2em;
-  margin-left: 1em;
-  margin-bottom: 2em;
-
-
-
-}
-.example-header-image {
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR2pKfz6MeqrIgC0FDDhcn6pnFoxf3nF1iqjgv1XmWlUEXeoDy3');
-  background-size: cover;
-}
-@media(max-width: 800px) {
-  .pagel{
-    width: 100%;
-    position: relative;
-  }
-
-  .page{
-    width: 100%;
-    position: relative;
-    margin-left: 0;
-
-
-  }}
-.page{
-  width: 100%;
-  position: relative; margin-left: 35%; width: 50%;
-  margin-top: 2em;
-  margin-right: 1em;
-
-}
-
-.navigation-items {
-  list-style: none;
-  font-size: medium;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-.icon {
-  display: inline-block;
-  height: 30px;
-  margin: 0 auto;
-  padding-right: 5px;
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   text-align: center;
-  vertical-align: middle;
-  width: 15%;
+  position: fixed;
+  top: 3%;
+  left: calc(100% - 195px);
+  background-color: #fd99ff;
+  border: 0;
+  color: white;
 }
 
-.label {
-  display: inline-block;
-  line-height: 30px;
-  margin: 0;
-  width: 85%;
+.actions nb-card-body nb-actions nb-action nb-icon, .actions nb-card-body nb-actions nb-action{
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
 }

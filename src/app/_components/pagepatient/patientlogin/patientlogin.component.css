@@ -1,28 +1,37 @@
-:host {
+nb-card-body {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 30em;
+}
+
+nb-card{
+  width: 50em;
+  height: 40em;
+  box-shadow:
+    0px 3.7px 10.8px rgba(0, 0, 0, 0.031),
+    0px 12.5px 36.4px rgba(0, 0, 0, 0.044),
+    0px 56px 163px rgba(0, 0, 0, 0.07);
+
+
+}
+
+nb-layout-column{
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
+  background-color: rgb(237, 242, 247);
+
 }
 
-.mat-form-field {
-  width: 100%;
-  min-width: 300px;
+button{
+  width: 10em;
 }
 
-mat-card-title,
-mat-card-content {
-  display: flex;
-  justify-content: center;
-}
-
-.error {
-  padding: 16px;
-  width: 300px;
-  color: white;
-  background-color: red;
-}
-
-.button {
-  display: flex;
-  justify-content: flex-end;
+input{
+  width: 40em;
 }

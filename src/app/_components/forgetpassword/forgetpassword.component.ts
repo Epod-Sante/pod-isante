@@ -1,11 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {LoginClientDTO} from "../../dto/LoginClientDTO";
-import {first} from "rxjs/operators";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import { AuthenticationService, AlertService } from '../../_services';
-import {ActivatedRoute, Router} from "@angular/router";
-import {MyErrorStateMatcher} from "../register/register.component";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {first} from 'rxjs/operators';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import { AuthenticationService } from '../../_services';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MyErrorStateMatcher} from '../register/register.component';
+import {NbToastrService} from '@nebular/theme';
 
 
 @Component({
@@ -14,30 +13,30 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./forgetpassword.component.css']
 })
 export class ForgetpasswordComponent implements OnInit {
-  forgetForm: FormGroup;
-  loading = false;
-  submitted = false;
-   email : string;
+  @ViewChild('emailInput') emailInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
               private authenticationService: AuthenticationService,
-              private _snackBar : MatSnackBar
-  ) {
+              private toastrService: NbToastrService) {
     if (this.authenticationService.currentUser === undefined) {
       this.router.navigate(['/home']);
     }
   }
-
-  connexionr () {
-    this.router.navigate(["login"])
-  }
-  matcher = new MyErrorStateMatcher();
   get f() { return this.forgetForm.controls; }
+  forgetForm: FormGroup;
+  loading = false;
+  submitted = false;
+   email: string;
+  matcher = new MyErrorStateMatcher();
+
+  connexionr() {
+    this.router.navigate(['login']);
+  }
   ngOnInit() {
     this.forgetForm = this.formBuilder.group({
-      'email': ['', [
+      email: ['', [
 
 
       ]]
@@ -52,35 +51,35 @@ export class ForgetpasswordComponent implements OnInit {
     }
 
     this.loading = false;
-    this.forgetPassword()
+    this.forgetPassword();
 
   }
 
   forgetPassword(){
-    this.authenticationService.forgetPassword(this.f.email.value)
-      .pipe(first())
-      .subscribe(
-        result => {
-          console.log(result)
-          //var json = JSON.parse(<string>result.valueOf());
-          this.email = result["email"]
-          if (result["emailExist"]){
-            this.openSnackBar("Vous avez un mail, de recuperation de mot de passe","OK")
-
-          } else {
-            this.openSnackBar("le mail n`existe pas ","OK")
-          }
-
-        });
+    const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    if (this.emailInput.nativeElement.value.length === 0) {
+      this.showToast('top-right', 'info', 'Info', 'Veuillez saisir votre adresse e-mail');
+    } else if (!regexp.test(this.emailInput.nativeElement.value)) {
+      this.showToast('top-right', 'warning', 'Échec', 'E-mail invalide');
+    } else {
+      this.authenticationService.forgetPassword(this.emailInput.nativeElement.value)
+        .pipe(first())
+        .subscribe(
+          result => {
+            // @ts-ignore
+            if (result.emailExist) {
+              this.showToast('top-right', 'success', 'Success', 'Nous vous avons envoyé un e-mail pour réinitialiser votre mot de passe');
+            } else {
+              this.showToast('top-right', 'danger', 'Échec', 'L\'e-mail n\'existe pas');
+            }
+          });
+    }
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 20000,
-
-    })
-    //this.router.navigate(["login"]);
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
   }
-
-
 }
