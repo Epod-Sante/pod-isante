@@ -61,4 +61,39 @@ app-raport-g {
 }
 
 
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
 
+.item-name, .item-date, .item-code, .item-print-report{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.header div nb-icon{
+  margin-right: 0.5em;
+  transform: scale(1.5);
+}
+
+.contact{
+  display: flex;
+  column-gap: 10em;
+}
+
+.infos{
+  display: flex;
+  column-gap: 10em;
+}
+
+.tab1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5em;
+}
+.infos, .contact{ padding-top: 5em;
+}

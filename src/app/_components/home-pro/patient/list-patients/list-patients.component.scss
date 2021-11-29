@@ -128,6 +128,9 @@ tr.example-element-row:active{
 .listPatient {
   display: inline-flex; /* or inline-flex */
   flex-direction: column;
+  max-height: 100vh;
+  position: sticky;
+  top: 1rem;
 
 }
 
@@ -144,4 +147,25 @@ tr.example-element-row:active{
 
 .home > div {
   margin: 5px;  /* and that, will result in a 10px gap */
+}
+
+.w-75{
+  width: 75px;
+}
+
+.w-100{
+  width: 100px;
+}
+
+.th-center{
+  text-align: center;
+}
+.th-left{
+  text-align: left;
+}
+.th-right{
+  text-align: right;
+}
+::ng-deep nb-layout-column {
+  padding: 1rem !important;
 }

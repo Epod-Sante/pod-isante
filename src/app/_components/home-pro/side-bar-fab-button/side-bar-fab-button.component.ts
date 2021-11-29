@@ -13,12 +13,13 @@ import {Router} from '@angular/router';
 import {NbIconConfig, NbMenuItem, NbMenuService, NbPopoverDirective, NbSidebarService} from '@nebular/theme';
 import {NbWindowService} from '@nebular/theme';
 import {AuthenticationService} from '../../../_services';
-import {speedDialFabAnimations} from './speed-dial-fab.animations';
+import {speedDialFabAnimations} from '../../../../assets/speed-dial-fab.animations';
 import {ObjectifV2Component} from '../patient/objectif-v2/objectif-v2.component';
 import {Subscription} from 'rxjs';
 import {PatientDataBetweenComponentsService} from '../../../_services/PatientDataBetweenComponentsService';
 import {PatientDto} from '../../../dto/patient/PatientDto';
 import {ExamencliniqueComponent} from "../patient/examenclinique/examenclinique.component";
+import {AffectpodometreComponent} from "../patient/affectpodometre/affectpodometre.component";
 
 
 @Component({
@@ -107,7 +108,9 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -158,7 +161,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
       component = ObjectifV2Component;
       title = 'Fitbit';
     } else if (window === 'Examen clinique'){
-      component = ExamencliniqueComponent;
+      component = ObjectifV2Component;
       title = 'Examen clinique';
     } else if (window === 'Bilan lipide'){
       component = ObjectifV2Component;
@@ -196,7 +199,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   updatePatient() {
-    this.data.changeMessage('Hello from Sibling');
+    // this.data.changeMessage('Hello from Sibling');
   }
 
 }
