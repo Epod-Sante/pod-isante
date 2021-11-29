@@ -43,7 +43,7 @@ export class PagepatientComponent implements OnInit {
   id: string;
   mySubscription: Subscription;
   private message: string;
-  private username: string;
+  username: string;
 
   constructor(private router: Router,
               private patientService: PatientService,
