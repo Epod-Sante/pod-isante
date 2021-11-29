@@ -159,7 +159,6 @@ import {OverlayContainer} from "@angular/cdk/overlay";
     GpaqQuizComponent,
     WindowComponent,
     QuizindividComponent
-
   ],
   imports: [
     NbDialogModule.forRoot(),
@@ -171,7 +170,6 @@ import {OverlayContainer} from "@angular/cdk/overlay";
     FormsModule, MatCardModule,
     NgxMatTimepickerModule,
     NgxMatDatetimePickerModule,
-    UserIdleModule.forRoot({idle: 5, timeout: 2, ping: 1200}),
     AngularFireModule.initializeApp(environment.firebase),
     ModalModule,
     FlexLayoutModule,
