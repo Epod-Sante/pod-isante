@@ -25,6 +25,7 @@
     ],
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial" // Add this line
+    "angularCompilerOptions": { "fullTemplateTypeCheck": true, "strictInjectionParameters": true}
+
   }
 }

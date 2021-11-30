@@ -108,7 +108,6 @@ import {WindowComponent} from './_components/window/window.component';
 import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/quizindivid.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
