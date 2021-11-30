@@ -2,10 +2,10 @@
   "name": "fitbitinter",
   "version": "0.0.0",
   "scripts": {
-    "build-dev": "ng build --configuration production -c production && firebase deploy --token 1//0duDSH3KiO0L1CgYIARAAGA0SNwF-L9Ir2s4oDH18GbABAn49kJEahp2O8-5K5jSQS3qA6L6i3YHFZy1a0nrAq7aO1W4xRZ8JrZ8  --project ipodsante-92c27",
+    "build-dev": "ng build --prod",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
