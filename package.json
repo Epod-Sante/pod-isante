@@ -2,14 +2,14 @@
   "name": "fitbitinter",
   "version": "0.0.0",
   "scripts": {
-    "build-dev": "ng build --configuration production -c production && firebase deploy --token 1//0duDSH3KiO0L1CgYIARAAGA0SNwF-L9Ir2s4oDH18GbABAn49kJEahp2O8-5K5jSQS3qA6L6i3YHFZy1a0nrAq7aO1W4xRZ8JrZ8  --project ipodsante-92c27",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "build:prod": "ng build --prod --aot",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+
   "private": true,
   "dependencies": {
     "@angular-material-components/datetime-picker": "^6.0.3",
@@ -80,14 +80,14 @@
     "node-pre-gyp": "^0.17.0",
     "popper.js": "^1.16.1",
     "rxfire": "^6.0.3",
-    "rxjs": "^7.4.0",
+    "rxjs": "^6.6.7",
     "simple-statistics": "^7.7.0",
     "tslib": "^2.3.1",
     "xlsx": "^0.17.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1002.1",
+    "@angular-devkit/build-angular": "^12.2.13",
     "@angular/compiler-cli": "^12.2.13",
     "@angular/language-service": "~13.0.1",
     "@angular/localize": "^12.2.13",

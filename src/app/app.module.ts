@@ -106,8 +106,6 @@ import {ObjectifV2Module} from './_components/home-pro/patient/objectif-v2/objec
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {WindowComponent} from './_components/window/window.component';
 import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/quizindivid.component';
-import {OverlayContainer} from "@angular/cdk/overlay";
-
 
 
 @NgModule({
@@ -159,7 +157,6 @@ import {OverlayContainer} from "@angular/cdk/overlay";
     GpaqQuizComponent,
     WindowComponent,
     QuizindividComponent
-
   ],
   imports: [
     NbDialogModule.forRoot(),
@@ -171,7 +168,6 @@ import {OverlayContainer} from "@angular/cdk/overlay";
     FormsModule, MatCardModule,
     NgxMatTimepickerModule,
     NgxMatDatetimePickerModule,
-    UserIdleModule.forRoot({idle: 5, timeout: 2, ping: 1200}),
     AngularFireModule.initializeApp(environment.firebase),
     ModalModule,
     FlexLayoutModule,
