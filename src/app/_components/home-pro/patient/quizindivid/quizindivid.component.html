@@ -77,11 +77,11 @@ inscrire les années correspondantes.
 <br><br>
 <section *ngFor="let ant of antecedants; let  j = index;">
   {{ant.antecedents}}
-  <mat-checkbox (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
-  <mat-checkbox  (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
-   <input   *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,ant)"> Ajouter </button>
+  <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
+  <mat-checkbox [checked]="selected === j-200" (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
+   <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
   <section   *ngFor="let an of ant.date; let i = index; ">
-     <input  value="" [disabled]="true" type="text"    >
+     <input  value="{{an}}" [disabled]="true" type="text"    >
     <button mat-mini-fab color="warn" [disabled]="!active.checked"  (click)="delette(j,i)"> <mat-icon>delete</mat-icon></button>
 
   </section>
@@ -114,7 +114,7 @@ inscrire les années correspondantes.
   <input #frac3 [disabled]="!activeT.checked" type="text">
   <br><br>
   À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
-
+  <img src="assets/douleur.PNG" alt="">
   <br>
   <mat-checkbox (change)="setDouleur($event,no_douleur.value)" value="Aucune douleur" #no_douleur>  Aucune douleur </mat-checkbox>
   <br>
