@@ -38,7 +38,7 @@ export class QuizindividComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let socio = new SocioDemographicVariablesDto();
+
     this.selected = -1
     let mdh = new MedicalFileHistoryDto([], 'Angine', false, ['']);
     this.antecedants.push(mdh);
