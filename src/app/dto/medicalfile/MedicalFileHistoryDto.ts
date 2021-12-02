@@ -5,7 +5,7 @@ export class MedicalFileHistoryDto {
   private _description : string[];
 
   constructor(date: string[], antecedents: string, response : Boolean, description : string []) {
-    this._date = date;
+    this._date = [];
     this._antecedents = antecedents;
     this._response = response;
     this._description = description;

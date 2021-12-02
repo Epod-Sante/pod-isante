@@ -80,7 +80,7 @@
     </mat-tab>-->
     <mat-tab  label="Questionnaire">
 
-      <div class="col-sm-4 text-center" >
+      <div class="col-sm-12 text-center" >
 
           <div *ngFor="let x of this.val">
             <div *ngIf="x.type === 'GPAQ'" style="border: 2px 0px solid gray;">
@@ -97,7 +97,7 @@
               Marche : {{(x.value.reponses[20].hr * 60 + x.value.reponses[20].minu) * x.value.reponses[19].jr}} minutes<br>
 
 
-              <div style="display: block; float: right; margin-top: -20em;">
+              <div>
 
                 <canvas baseChart
                         [datasets]="show_barChart(x.value)"
@@ -111,17 +111,17 @@
             </div>
             <div *ngIf="x.type === 'BREQ'" >
               <h3> {{x.date}}  :  {{x.type}} </h3>
-              <div class="chart" style="margin-top:2em" *ngIf="pieChartLabelsBreq?.length > 0">
+              <div class="chart"  *ngIf="pieChartLabelsBreq?.length > 0">
                 <div style=" width: 100%;">
 
-                  <canvas baseChart [data]="show_pieChart(x.value)" [labels]="pieChartLabelsBreq" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
-                          (chartClick)="chartClicked($event)"></canvas>
+                  <canvas baseChart [data]="show_pieChart(x.value)" [labels]="pieChartLabelsBreq" [chartType]="pieChartType"
+                          ></canvas>
                   <div >
-                    <b>External</b>  : Extrinsèque: Recherche de récompenses et évitement de punitions externes. <br>
-                    <b>Introjected</b> : Introjectée: Recherche de récompenses et évitement de punitions internes. (protection et valorisation de l’estime de soi, maintien de la réputation, évitement de culpabilité et de honte). <br>
-                    <b>Identified</b>: Identifiée : En lien avec les valeurs personnelles, importance et utilité sociale de la tâche, sens. Faire des tâches importantes (agréable ou non) qui sont en lien avec les valeurs de l’individu.. <br>
-                    <b>Intrinsic</b>:Intrinsèque: Faire des tâches par plaisir, satisfaction inhérente. Plaisir, concentration intense, émotions positives reliées à la tâche.. <br>
-                    <b>Amotivation</b> : Démotivation : Absence d’autorégulation et d’énergie volontaire. Désengagement, manque de sens, résignation.. <br>
+                     Extrinsèque: Recherche de récompenses et évitement de punitions externes. <br>
+                     Introjectée: Recherche de récompenses et évitement de punitions internes. (protection et valorisation de l’estime de soi, maintien de la réputation, évitement de culpabilité et de honte). <br>
+                     Identifiée : En lien avec les valeurs personnelles, importance et utilité sociale de la tâche, sens. Faire des tâches importantes (agréable ou non) qui sont en lien avec les valeurs de l’individu.. <br>
+                     Intrinsèque: Faire des tâches par plaisir, satisfaction inhérente. Plaisir, concentration intense, émotions positives reliées à la tâche.. <br>
+                     Démotivation : Absence d’autorégulation et d’énergie volontaire. Désengagement, manque de sens, résignation.. <br>
                   </div>
 
                 </div>

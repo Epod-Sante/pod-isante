@@ -43,6 +43,7 @@ export class RapportComponent implements OnInit, OnChanges {
   stepsDate: string [] = [];
   mySubscription: any;
   datess = [];
+  barChar: ChartDataSets [];
   visites: AppointmentDto[];
   public patientRow: Patient[] = [];
   public stats: DescStats [];
@@ -125,6 +126,7 @@ export class RapportComponent implements OnInit, OnChanges {
     'Intensité  modérée',
     'Intensité élevée',
     'sedentaires'];
+  pieChartBreqTab: SingleDataSet [];
   public pieChartLabelsBreq: string[] = ['Extrinsèque',
     'Introjectée',
     'Identified',
@@ -335,7 +337,11 @@ export class RapportComponent implements OnInit, OnChanges {
   }
 
   public show_barChart(valeur: string) {
-    let barChar: ChartDataSets[];
+    this.barChar= [];
+    this.vigoureux = 0;
+    this.moderee = 0;
+    this.marche = 0;
+    this.sedentaire = 0;
     const x = JSON.parse(JSON.stringify(valeur));
     this.vigoureux = (x.reponses[1].jr * (x.reponses[2].hr * 60 + x.reponses[2].minu)) +
       (x.reponses[13].jr * (x.reponses[14].hr * 60 + x.reponses[14].minu));
@@ -345,13 +351,13 @@ export class RapportComponent implements OnInit, OnChanges {
     this.marche = (x.reponses[19].jr * (x.reponses[20].hr * 60 + x.reponses[20].minu)) +
       (x.reponses[7].jr * (x.reponses[8].hr * 60 + x.reponses[8].minu));
     this.sedentaire = (x.reponses[22].hr * 60 + x.reponses[22].minu);
-    barChar = [
+    this.barChar = [
       {data: [this.vigoureux, 0], label: 'Vigoureux '},
       {data: [this.moderee, 0], label: 'Modérée'},
       {data: [this.marche, 0], label: 'Marche'},
       {data: [this.sedentaire, 0], label: 'Sédentaire'}
     ];
-    return barChar;
+    return this.barChar;
   }
 
   public getMinutes = () => {
