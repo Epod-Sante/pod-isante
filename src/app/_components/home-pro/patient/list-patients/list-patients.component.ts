@@ -11,8 +11,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddDialogComponent} from '../../../dialogs/add/add.dialog.component';
 import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
 import {Subscription} from 'rxjs';
-import {IddleUserDialogComponent} from '../../../iddle-user-dialog/iddle-user-dialog.component';
 import {UserIdleService} from 'angular-user-idle';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto';
+import {MedicalFileDto} from "../../../../dto/medicalfile/MedicalFileDto";
 
 
 @Component({
@@ -21,15 +24,16 @@ import {UserIdleService} from 'angular-user-idle';
   styleUrls: ['./list-patients.component.scss']
 })
 
-export class ListPatientsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ListPatientsComponent implements OnDestroy, AfterViewInit {
   patients: PatientDto[];
-  patient = false;
+  patient: PatientDto;
+  patientCE: ClinicalExaminationDto[];
   newPatient;
   addpatient;
   selected;
   colorSelected;
   appointment;
-  name;
+  name: string;
   id: string;
   idante: string;
   mySubscription: any;
@@ -43,7 +47,7 @@ export class ListPatientsComponent implements OnInit, OnDestroy, AfterViewInit {
   currentUser = localStorage.getItem('currentUser');
   message: string;
   subscription: Subscription;
-  private pingSubscription: Subscription;
+  medicalFile: MedicalFileDto;
 
 
   constructor(private router: Router, private patientService: PatientService,
@@ -57,16 +61,6 @@ export class ListPatientsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.getAllUsers();
     this.mySubscription = this.data.currentMessage.subscribe(message => this.message = message);
-   /* localStorage.clear();
-    const dialogRef = this.dialog.open(IddleUserDialogComponent, {
-      disableClose : true
-
-    });*/
-
-  }
-
-  ngOnInit() {
-
   }
 
   ngAfterViewInit(): void {
@@ -78,25 +72,6 @@ export class ListPatientsComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
     }
-  }
-
-  ngOnChange(){
-    console.log('1ngOnChange');
-
-  }
-
-  addNew() {
-    const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {Appointment: this.appointment}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-      }
-      console.log(this.dataSource.data);
-
-    });
   }
 
   ajouter() {
@@ -118,14 +93,16 @@ export class ListPatientsComponent implements OnInit, OnDestroy, AfterViewInit {
       const pat = JSON.parse(JSON.stringify(patients)).object as PatientDto[];
       this.dataSource.data = pat;
       this.patients = pat;
-      this.show_profile(this.patients[this.patients.length - 1].id);
-      this.data.changeMessage(JSON.parse(JSON.stringify(patients)).object);
+      this.show_profile(this.patients[0]);
     });
 
   }
 
-  show_profile(id: string) {
-    this.id = id;
+  show_profile(patient: PatientDto) {
+    this.data.changeMessage(patient.id);
+    this.id = patient.id;
+    this.patient = patient;
+    this.name = patient.firstName + ' ' + patient.lastName;
     this.addpatient = false;
     this.showProfile = true;
   }
@@ -139,6 +116,5 @@ export class ListPatientsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.blocKChecked = false;
     }
   }
-
 
 }

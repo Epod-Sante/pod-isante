@@ -254,23 +254,10 @@ export class PatientService {
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
     return this.http.post(this.RECUP_DEVICE, request, {
       headers: header})
-
       .pipe(map(token => {
-          // login successful if there's a jwt token in the response
-          console.log(token);
-
-          if (token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(token);
-            return token;
-
-          }
           return token;
-
         })
       );
-
-
   }
   affectPodo(request: Request){
     const token = localStorage.getItem('currentToken');
@@ -278,9 +265,6 @@ export class PatientService {
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
     console.log(obj.access_token);
     return this.http.post(this.AFFECT_DEVICE, request, {headers: header});
-
-
-
 
   }
   addReco(request: Request){

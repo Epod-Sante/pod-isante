@@ -22,7 +22,14 @@ import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_exami
 import {LipidProfileDto} from '../../../../dto/medicalfile/LipidProfileDto';
 import {CardiovascularDto} from '../../../../dto/medicalfile/clinical_examination/cardiovascular/CardiovascularDto';
 import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
-import {Subscription} from 'rxjs';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import {RapportGlobalComponent} from '../rapport-global/rapport-global.component';
+
+
+export interface DialogDataReport {
+  patient: PatientDto;
+}
 
 @Component({
   selector: 'app-patient-profile',
@@ -60,9 +67,12 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   private modals;
   public events: SchedulerEvent[] = sampleData;
 
-  subscription: Subscription;
-  private message: string;
   private patients: PatientDto[];
+
+  customColumn = 'name';
+  defaultColumns = [ 'size', 'kind', 'items' ];
+  clinicalExamColumns = [ this.customColumn, ...this.defaultColumns ];
+
 
   constructor(private  patientService: PatientService, private modalService: ModalService,
               public dialog: MatDialog, public router: Router, private snackBar: MatSnackBar,
@@ -71,9 +81,6 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
     this.dataSource = new MatTableDataSource(this.antecedents);
 
 
-    this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
-    this.patients = this.message as unknown as PatientDto[];
-    this.patients.forEach(elm => console.log(elm.id));
   }
 
   ngOnInit() {
@@ -89,7 +96,6 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
 
   ngOnDestroy() {
     this.patient = null;
-    this.subscription.unsubscribe();
     // this.receiveMessage(this.expanded)
   }
 
@@ -168,10 +174,8 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   }
 
   public getOnePatient = () => {
+    // tslint:disable-next-line:prefer-const
     let patient: PatientDto;
-    this.patients.forEach(elm => {
-      if (elm.id === this.id) { patient = elm; }
-    });
     this.patientService.getPatient(this.id).subscribe(patients => {
 
 
@@ -204,9 +208,6 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
           }else{
             this.antecedents.push(JSON.parse(this.listAnte[i].antecedents)); }
         }
-        console.log(this.antecedents);
-        console.log(this.listAnte);
-
       }else{
         this.listAnte = null;
 
@@ -235,6 +236,34 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
       this.listVisites = patient.appointments as AppointmentDto[];
       this.lastVisite = this.listVisites[this.listVisites.length - 1];
   }
+
+
+  public printPDF(): void {
+    const DATA = document.getElementById('htmlData');
+
+    html2canvas(DATA).then(canvas => {
+
+      const fileWidth = 208;
+      const fileHeight = canvas.height * fileWidth / canvas.width;
+
+      const FILEURI = canvas.toDataURL('image/png');
+      const PDF = new jsPDF('p', 'mm', 'a4');
+      const position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+
+      const title = 'Rapport global-' + this.patient.firstName + ' ' + this.patient.lastName;
+      PDF.save(title);
+    });
+  }
+
+  report(){
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`/report/${this.patient.id}`])
+    );
+
+    window.open(url, '_blank');
+  }
+
 }
 
 

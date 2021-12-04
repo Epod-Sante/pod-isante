@@ -1,5 +1,5 @@
-<div class="container" >
-
+<nb-card>
+  <nb-card-body>
 
 
 
@@ -27,8 +27,9 @@
         <mat-list-option  value="Crainte de se blesser">Crainte de se blesser</mat-list-option>
 
       </mat-selection-list>
-      <button (click)="comfirmerBar(bar.selectedOptions.selected)" color="primary" mat-button style="background-color: aliceblue; width: 100%; margin-top: 2em;">
-        Enregistrer
+
+      <button nbButton status="success" fullWidth (click)="comfirmerBar(bar.selectedOptions.selected)">
+        Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
       </button>
     </mat-tab>
 
@@ -55,26 +56,21 @@
         <mat-list-option  value="Faire une liste des bénéfices à faire de l’activité physique et la laisser accessible en tout temps pour consultation quand la motivation est plus difficile.">Faire une liste des bénéfices à faire de l’activité physique et la laisser accessible en tout temps pour consultation quand la motivation est plus difficile.</mat-list-option>
 
       </mat-selection-list>
-      <button (click)="comfirmerSol(sol.selectedOptions.selected)" color="primary" mat-button style="background-color: aliceblue; width: 100%; margin-top: 2em;">
-        Enregistrer
+      <button nbButton status="success" fullWidth (click)="comfirmerSol(sol.selectedOptions.selected)">
+        Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
       </button>
-
-
-    </mat-tab>
-
-    <mat-tab  label=" Sélectionner le nombre d’objectifs souhaités">
-      <app-objectif-v2 [patient]="patient" ></app-objectif-v2>
-
     </mat-tab>
 
 
+
+    <mat-tab label="  Sélectionner le nombre d’objectifs souhaités ">
+      <mat-selection-list #obj>
+        <app-objectif-v2></app-objectif-v2>
+      </mat-selection-list>
+    </mat-tab>
   </mat-tab-group>
-  <!--  </mat-expansion-panel>-->
 
 
+  </nb-card-body>
+</nb-card>
 
-
-
-
-
-</div>

@@ -1,11 +1,11 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {PatientloginComponent} from "./patientlogin/patientlogin.component";
-import {PagepatientComponent} from "./pagepatient.component";
-import {BreqComponent} from "./Breq/breq.component";
-import {SociodemoComponentPatient} from "./sociodemopatient/sociodemo-component-patient.component";
-import {RecomandationPatientComponent} from "./recomandation-patient/recomandation-patient.component";
-import {GpaqComponent} from "./gpaq/gpaq.component";
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {PatientloginComponent} from './patientlogin/patientlogin.component';
+import {PagepatientComponent} from './pagepatient.component';
+import {BreqComponent} from './Breq/breq.component';
+import {SociodemoComponentPatient} from './sociodemopatient/sociodemo-component-patient.component';
+import {RecomandationPatientComponent} from './recomandation-patient/recomandation-patient.component';
+import {GpaqComponent} from './gpaq/gpaq.component';
 
 
 const pagePatientRoutes: Routes = [

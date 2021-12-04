@@ -26,14 +26,16 @@ import {ObjectifV2Component} from './patient/objectif-v2/objectif-v2.component';
 import {
   NbButtonModule,
   NbCardModule,
-  NbCheckboxModule,
+  NbCheckboxModule, NbDatepickerModule,
   NbIconModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
   NbSelectModule, NbSidebarModule,
-  NbStepperModule
+  NbStepperModule, NbWindowModule, NbWindowRef, NbWindowService
 } from "@nebular/theme";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
 import { SideBarFabButtonComponent } from './side-bar-fab-button/side-bar-fab-button.component';
 import {ExamencliniqueComponent} from "./patient/examenclinique/examenclinique.component";
+import { FabButtonComponent } from './patient/fab-button/fab-button.component';
+import { RapportGlobalComponent } from './patient/rapport-global/rapport-global.component';
 
 export const homeProRoutes: Routes = [
   {
@@ -48,6 +50,7 @@ export const homeProRoutes: Routes = [
       {path: 'addpatient', component: AddpatientComponent},
       {path: 'listpatient', component: ListPatientsComponent},
       {path: 'logi', component: LogiComponent},
+      {path: 'report/:id', component: RapportGlobalComponent},
 
       {path: 'reco', component: HistoireSanteComponent},
     ]
@@ -67,12 +70,13 @@ export const homeProRoutes: Routes = [
     HistoireSanteComponent,
     RaportGComponent,
     BilanLipidiqueComponent,
-    RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent],
+    RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent, FabButtonComponent],
   declarations: [AppointComponent,
     DetailsRecoComponent,
     BilanLipidiqueComponent,
     HistoireSanteComponent,
-    RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent]
+    RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent, FabButtonComponent, RapportGlobalComponent],
+  providers: []
 })
 export class HomeProRoutingModule {
 }

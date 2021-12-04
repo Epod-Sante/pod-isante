@@ -97,3 +97,8 @@ app-raport-g {
 }
 .infos, .contact{ padding-top: 5em;
 }
+
+::ng-deep .head nb-card{
+  border : 0px;
+}
+

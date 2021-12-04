@@ -1,5 +1,5 @@
-<app-raport-g [patient]="patient"></app-raport-g>
-<nb-card class="parent" accent="info">
+
+<nb-card class="parent" accent="info" id="g">
   <nb-card-header class="header" style="background-color: rgba(238,248,255,0.58)">
 
     <div class="item-name">
@@ -16,10 +16,14 @@
       <mat-card-subtitle>Code compte patient : {{patient?.loginCode}}</mat-card-subtitle>
     </div>
 
-    <button class="item-print-report" nbButton status="warning" (click)="printPage(patient)">
-      Imprimer le rapport Global
+    <button class="item-print-report" nbButton status="warning" (click)="report()">
+      Générer le rapport Global
       <nb-icon icon="printer-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
     </button>
+    <!--<a class="item-print-report" nbButton status="warning" href="/report/{{this.patient.id}}" target="_blank">
+      Générer le rapport Global
+      <nb-icon icon="printer-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+    </a>-->
 
 
   </nb-card-header>
@@ -74,15 +78,15 @@
             <p>Poids (kg)</p>
             <h6 style="text-transform: capitalize;">{{weight}}</h6>
           </div>
-        <div>
-          <p>IMC</p>
-          <h6 style="text-transform: capitalize;">{{imc}}</h6>
-        </div>
+          <div>
+            <p>IMC</p>
+            <h6 style="text-transform: capitalize;">{{imc}}</h6>
+          </div>
         </div>
 
-        <nb-card class="parent" status="info" >
+        <nb-card class="parent" status="info">
           <nb-card-header>Informations personnels (obligatoires)</nb-card-header>
-          <nb-card-body class="child" >
+          <nb-card-body class="child">
 
           </nb-card-body>
         </nb-card>
@@ -216,28 +220,8 @@
         <app-quizindivid [patient]="patient"></app-quizindivid>
       </mat-tab>
 
-      <mat-tab class="labeltab" label="Saisir les informations du patient">
-        <mat-expansion-panel [expanded]="expandedExam" (opened)="onOpenExam(true)"
-                             style="width:100%; margin-top: 2em; margin-bottom: 2em; ">
-          <mat-expansion-panel-header>
-            <mat-panel-title style="color: #323232; font-weight: bold ">
-              <span class="material-icons">accessibility_new</span>
-              Examen clinique
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-examenclinique [id]="id" (expandedEvent)="receiveMessage($event)"></app-examenclinique>
-        </mat-expansion-panel>
-        <mat-expansion-panel [expanded]="expandedpodo" (opened)="onOpenPodo(true)"
-                             style="width:100%; margin-top: 2em; margin-bottom: 2em; ">
-          <mat-expansion-panel-header>
-            <mat-panel-title style="color: #323232; font-weight: bold ">
-              <span class="material-icons">watch</span>
-              PODOMETRE
-            </mat-panel-title>
-
-          </mat-expansion-panel-header>
-          <app-affectpodometre [id]="id" (expandedEvent)="receiveMessage($event)"></app-affectpodometre>
-        </mat-expansion-panel>
+      <mat-tab class="labeltab" label="Examen clinique et bilan lipidique">
+        Afichage de l'examen clinique et bilan lipidique par visite.
       </mat-tab>
 
       <mat-tab class="labeltab" label="Visites">
@@ -247,7 +231,7 @@
 
       </mat-tab>
       <mat-tab class="labeltab" label="Objectifs">
-        <app-objectif [patient]="patient"></app-objectif>
+        Afichage de l'objectifs, barrieres et solutions par visite.
       </mat-tab>
       <mat-tab label="Rapport visuel">
 
@@ -255,146 +239,6 @@
       </mat-tab>
 
 
-      <!--
-          <mat-tab label="Resultats de l examen">
-            <mat-form-field appearance="fill" style="  margin-left: 40%">
-            <select #afficher_par style="" matInput matNativeControl >
-              <option>
-                Derniere visite : 19/02/2020
-              </option>
-              <option>
-                visite : 12/12/2019
-              </option>
-              <option>
-                visite : 15/11/2019
-              </option>
-              <option>
-                visite : 19/09/2019
-              </option>
-              <option>
-              </option>
-            </select>
-            </mat-form-field>
-          <mat-card style=" color : white; background : #323232; width: 80%"> Cardiovasculaire (* repos de 10 minutes minimum
-            doit précéder l’examen)
-          </mat-card>
-          <mat-form-field appearance="fill">
-            <mat-label>FC (repos)</mat-label>
-            <input type="number" disabled ="true" value="37" #fc_repos matInput placeholder="FC repos"> batt. / par minute
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>TA (bras dr)</mat-label>
-            <input type="number" disabled ="true" #tadr matInput placeholder="TA (bras dr)"> mmHg
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>TA (bras gche)</mat-label>
-            <input type="number" disabled ="true" #tagc matInput placeholder="TA (bras dr)"> mmHg
-          </mat-form-field>
-          <mat-card style=" color : white; background : #323232; width: 80%"> Données anthropométriques
-          </mat-card>
-          <mat-form-field appearance="fill" style="width: 30%">
-            <mat-label>Poids</mat-label>
-            <input type="number" disabled ="true" value="58" #poidskg   matInput placeholder="Kg"/>
-
-          </mat-form-field>
-          Kg ou Lb
-          <mat-form-field appearance="fill" style="width: 30%">
-            <mat-label>Poids</mat-label>
-            <input type="number" disabled ="true" #poidslb  matInput placeholder="Lb">
-          </mat-form-field>
-          <mat-form-field appearance="fill" style="width: 30%">
-            <mat-label>Taille</mat-label>
-            <input type="number" disabled ="true" #taillecm matInput placeholder="taille en cm" value="175 "/>
-
-          </mat-form-field>
-          cm ou pi
-          <mat-form-field appearance="fill" style="width: 30%">
-            <mat-label>Taille</mat-label>
-            <input type="number" disabled ="true"  #taillepi matInput placeholder="taille en pi" value="5.74">
-          </mat-form-field>
-
-          <mat-form-field appearance="fill" >
-            <mat-label>IMC</mat-label>
-            <input type="number"  disabled ="true" step="0.000000000000001" #imc  matInput placeholder="IMC" value="19">
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>tour de taille</mat-label>
-            <input type="number" disabled ="true"  #tour_taille matInput placeholder="tour de taille" value="10">
-          </mat-form-field>
-          <mat-card style=" color : white; background : #323232;width: 80%"> Tabagisme
-          </mat-card>
-          <mat-radio-button [checked]="true"  disabled ="true" value="actif">Actif – nombre de cigarettes/jour</mat-radio-button>
-          <mat-form-field appearance="fill">
-
-            <input type="number"   disabled ="true" #nb_cigarettes matInput placeholder="nombre de cigarettes/jour" value="8">
-          </mat-form-field>
-          <br>
-          <mat-radio-button #passiftabac  disabled ="true"  value="passif">Passif </mat-radio-button>
-          <br>
-          <mat-radio-button #anterieurtabac  disabled ="true"  value="anterieur">Anterieur – Arrêt depuis :</mat-radio-button>
-          <mat-form-field appearance="fill" style="width: 30%">
-
-            <input type="number"  disabled ="true" #annee_arret matInput placeholder="Annee">
-          </mat-form-field>
-          <mat-card style=" color : white; background : #323232; font-weight: bold;width: 80%"> Pharmacothérapie
-          </mat-card>
-          <p style="font-weight: bold">Cardiovasculaire</p>
-
-          <mat-checkbox #beta_bloqueurs [checked]="true"  disabled ="true"  style="margin-left: 1em"  value="Béta-bloqueurs">Béta-bloqueurs</mat-checkbox>
-
-          <mat-checkbox #inhibiteurs_enzyme style="margin-left: 1em" [checked]="true"  disabled ="true"  value="Inhibiteurs de l’enzyme de conversion de l’angiotensine">Inhibiteurs de l’enzyme de conversion de l’angiotensine</mat-checkbox>
-
-          <mat-checkbox #bloqueur_angiotensine style="margin-left: 1em" disabled ="true" value="Bloqueur de récepteur de l’angiotensine II">Bloqueur de récepteur de l’angiotensine II</mat-checkbox>
-            <br>
-
-          <mat-checkbox #bloquer_canaux_calciques style="margin-left: 1em"  disabled ="true" value="Bloqueurs des canaux calciques">Bloqueurs des canaux calciques</mat-checkbox>
-
-          <mat-checkbox #anti_arythmique  style="margin-left: 1em" disabled ="true"  value="Anti-arythmique – Cordarone<">Anti-arythmique – Cordarone</mat-checkbox>
-            <br>
-          <mat-checkbox #inhibiteurIf style="margin-left: 1em" disabled ="true"  value="Inhibiteur du courant If (Ibrabadine)">Inhibiteur du courant If (Ibrabadine)</mat-checkbox>
-          <mat-checkbox #diurétique_th style="margin-left: 1em" disabled ="true" value="Diurétique thiazide">Diurétique thiazide</mat-checkbox>
-          <mat-checkbox #diurétique_anse style="margin-left: 1em" disabled ="true" value="Diurétique de l’anse">Diurétique de l’anse</mat-checkbox>
-          <mat-checkbox #coumadin style="margin-left: 1em" disabled ="true" value="Anti coagulants (coumadin)">Anti coagulants (coumadin)</mat-checkbox>
-          <mat-checkbox #naco style="margin-left: 1em" disabled ="true" value="Anti coagulants (NACO)">Anti coagulants (NACO)</mat-checkbox>
-          <mat-checkbox #anti_plaquettaires disabled ="true" style="margin-left: 1em" value="Anti plaquettaires">Anti plaquettaires</mat-checkbox>
-
-          <br>
-          <p style="font-weight: bold">Dyslipidémie</p>
-
-          <mat-checkbox #statines checked="true" disabled ="true" style="margin-left: 1em" value="Statines">Statines</mat-checkbox>
-
-          <mat-checkbox #inhibiteurs_cholesterol disabled ="true"  style="margin-left: 1em" value="Inhibiteurs de l’absorption du cholestérol (ezetrol)">Inhibiteurs de l’absorption du cholestérol (ezetrol)</mat-checkbox>
-
-          <mat-checkbox #inhibiteurs_pcsk9 disabled ="true"  style="margin-left: 1em" value="Inhibiteurs de PCSK9">Inhibiteurs de PCSK9</mat-checkbox>
-
-
-          <br>
-          <p style="font-weight: bold">Diabète</p>
-
-          <mat-checkbox disabled ="true"  #biguanide style="margin-left: 1em" value="Biguanide (ex : glucophage)">Biguanide (ex : glucophage)</mat-checkbox>
-
-          <mat-checkbox disabled ="true"  #secretaguogues_insuline style="margin-left: 1em" value="Sécrétagogues de l’insuline (ex : diabeta)">Sécrétagogues de l’insuline (ex : diabeta)</mat-checkbox>
-
-          <mat-checkbox disabled ="true"  #inhibiteurs_alphaglucosides style="margin-left: 1em" value="Inhibiteurs des alpha-glucosidas">Inhibiteurs des alpha-glucosidas</mat-checkbox>
-            <br>
-          <mat-checkbox disabled ="true"  style="margin-left: 1em">Insuline</mat-checkbox>
-
-
-
-
-          <br>
-          <p style="font-weight: bold">Autres</p>
-
-          <mat-checkbox #synthroide style="margin-left: 1em" disabled ="true"  value="Synthroide">Synthroide</mat-checkbox>
-
-          <mat-checkbox #Supplment_fer style="margin-left: 1em"  disabled ="true" value="Supplément de fer">Supplément de fer</mat-checkbox>
-
-          <mat-checkbox #opioides style="margin-left: 1em" disabled ="true"  value="Opioides">Opioides</mat-checkbox>
-          <mat-checkbox #anxiolytique style="margin-left: 1em" disabled ="true"  value="Anxiolytique" >Anxiolytique</mat-checkbox>
-          <mat-checkbox #anti_depresseurs style="margin-left: 1em" disabled ="true"  value="Anti dépresseurs">Anti dépresseurs</mat-checkbox>
-          </mat-tab>
-      -->
     </mat-tab-group>
     <!--<app-recommm></app-recommm>-->
 

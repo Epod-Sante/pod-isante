@@ -1,34 +1,19 @@
-<div class="container">
-  <h3 mat-dialog-title>Planifier une Visite</h3>
+
+<nb-card>
+  <nb-card-header>Modifier une Visite</nb-card-header>
+  <nb-card-body>
+
+    <p>De : {{dateInit.substr(0, 10)}} {{dateInit.substr(11, 5)}}</p>
+    <p>À : </p>
+    <input [(ngModel)]="date" nbInput placeholder="Sélectionner une date" [nbDatepicker]="dateTimePicker2">
+    <nb-date-timepicker #dateTimePicker2></nb-date-timepicker>
+    <p></p>
+    <button class="close-button" nbButton (click)="closeDialog()">Fermer</button>
+    <button nbButton status="success" (click)="updateAppointment()">
+      Modifier
+      <nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+    </button>
 
 
-
-  <mat-card-content>
-
-    <mat-dialog-content class="mat-typography">
-      <mat-form-field appearance="fill">
-        <mat-label>Date</mat-label>
-        <input #datev (dateChange)="getBirthday($event)" [matDatepicker]="picker" disabled matInput
-               placeholder="Date de naissance">
-        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker disabled="false"></mat-datepicker>
-      </mat-form-field>
-    </mat-dialog-content>
-    <mat-dialog-content class="mat-typography">
-      <mat-form-field appearance="fill">
-        <mat-label>Patients</mat-label>
-        <input #patientt [value]="patient.fileNumber" aria-label="Patient" disabled="true"  matInput placeholder="Numero  du patient">
-
-      </mat-form-field>
-    </mat-dialog-content>
-
-    <mat-dialog-actions align="end" appearance="fill">
-      <button mat-button mat-dialog-close>Fermer</button>
-      <button (click)="comfirmer(patientt.value,datev.value)" [mat-dialog-close]="true" cdkFocusInitial mat-button>Comfirmer</button>
-    </mat-dialog-actions>
-
-
-
-
-  </mat-card-content>
-</div>
+</nb-card-body>
+</nb-card>

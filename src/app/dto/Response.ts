@@ -1,6 +1,6 @@
 export class Response {
-    object : Object;
-    error : Error;
+    object: Object;
+    error: Error;
 
 
   constructor(object: Object, error: Error) {
