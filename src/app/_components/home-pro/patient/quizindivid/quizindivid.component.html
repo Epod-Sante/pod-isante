@@ -75,7 +75,7 @@
     Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
     inscrire les années correspondantes.
     <br><br>
-    <div *ngFor="let ant of antecedants; let  j = index;">
+    <mat-card-content *ngFor="let ant of antecedants; let  j = index;">
       {{ant.antecedents}}
       <mat-checkbox [checked]="selected === j-200" (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
       <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
@@ -88,9 +88,9 @@
       </nb-card>
 
       <br>
-    </div>
+    </mat-card-content>
 
-    <div>
+    <mat-card-content>
       <br>
       <b>Avez-vous l’une des conditions de santé ci-dessous ?</b> <br>
       <mat-checkbox (change)="setCond($event,hypertension.value)"  #hypertension value="Hypertension artérielle"> Hypertension artérielle </mat-checkbox>
@@ -103,11 +103,11 @@
       <input #autre_conditions  [disabled]="!autre.checked" type="text">
       <br>
 
-    </div>
+    </mat-card-content>
 <!--
     <img src="assets/douleur.PNG" alt="">
 -->
-    <div>
+    <mat-card-content>
       <br>
       <b>Troubles musculo-squelettiques</b> <br>
       Avez-vous déjà eu des fractures ?
@@ -144,8 +144,8 @@
       <br><mat-checkbox (change)="setDouleur($event,pieds_orteilsg.value)" [disabled]="no_douleur.checked" value="pied/orteils gauche" #pieds_orteilsg>  pied/orteils gauche </mat-checkbox>
       <mat-checkbox (change)="setDouleur($event,pieds_orteilsd.value)" [disabled]="no_douleur.checked" value="pied/orteils droit" #pieds_orteilsd>  pied/orteils droit </mat-checkbox>
       <br>
-    </div>
-    <div>
+    </mat-card-content>
+    <mat-card-content>
       <br>
       <b>
         Consommation de produits alcoolisés, tabagiques ou drogues (si actuel/occasionnel, indiquez la fréquence.
@@ -160,8 +160,8 @@
       Drogue <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
       <mat-checkbox #active_consD>  Actuel/occasionnel </mat-checkbox>
       <input #freqD [disabled]="!active_consD.checked" placeholder="frequence" type="text">
-    </div>
-    <div><br><br>
+    </mat-card-content>
+    <mat-card-content><br><br>
       <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
         le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
       <br> Ou <br>
@@ -183,7 +183,7 @@
         </mat-list>
       </nb-card>
       <br><br>
-    </div>
+    </mat-card-content>
 
   </nb-card-body>
 </nb-card>
