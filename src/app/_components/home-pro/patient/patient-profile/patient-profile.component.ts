@@ -5,12 +5,12 @@ import {MatDialog} from '@angular/material/dialog';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {PatientService} from '../../../../_services/patient.service';
 import {SocioDemographicVariablesDto} from '../../../../dto/medicalfile/SocioDemographicVariablesDto';
-import { Response} from '../../../../dto';
+import {Response} from '../../../../dto';
 import {MedicalFileHistoryDto} from '../../../../dto/medicalfile/MedicalFileHistoryDto';
 import {AntecedentsDto} from '../../../../dto/medicalfile/AntecedentsDto';
 import {ModalService} from '../../../_modal';
 import {RecomandationComponent} from '../recomandation/recomandation.component';
-import { Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {BilanLipidiqueComponent} from '../bilan-lipidique/bilan-lipidique.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MedicalFileDto} from '../../../../dto/medicalfile/MedicalFileDto';
@@ -25,6 +25,12 @@ import {PatientDataBetweenComponentsService} from '../../../../_services/Patient
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import {RapportGlobalComponent} from '../rapport-global/rapport-global.component';
+import {MatTabChangeEvent} from '@angular/material/tabs';
+import {RecommandationDto} from "../../../../dto/RecommandationDto";
+import {ObjectifReadComponent} from "../objectif-read/objectif-read.component";
+import {
+  ExamenCliniqueBilanLipidiqueReadComponent
+} from "../examen-clinique-bilan-lipidique-read/examen-clinique-bilan-lipidique-read.component";
 
 
 export interface DialogDataReport {
@@ -36,20 +42,22 @@ export interface DialogDataReport {
   templateUrl: './patient-profile.component.html',
   styleUrls: ['./patient-profile.component.scss']
 })
-export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, OnChanges{
+export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, OnChanges {
   @Input() id: string;
+  @ViewChild(SociodemoComponent, {static: false}) child;
+  @ViewChild(ObjectifReadComponent) objectifReadChild;
+  @ViewChild(ExamenCliniqueBilanLipidiqueReadComponent) examenCliniqueBilanLipidiqueReadChild;
   expanded = false;
   expandedpodo = false;
   expandedAnte = false;
   expandedExam = false;
-  @ViewChild(SociodemoComponent, {static: false}) child;
   patient: PatientDto = null;
   medicalfile: MedicalFileDto = null;
   listAnte: MedicalFileHistoryDto[];
   bilanLipidique: LipidProfileDto = null;
   antecedents: AntecedentsDto[];
   clinicalExam: ClinicalExaminationDto = null;
-  displayedColumns: string[] = ['antecedants', 'mois', 'aneee', 'type', 'traitement' ];
+  displayedColumns: string[] = ['antecedants', 'mois', 'aneee', 'type', 'traitement'];
   dataSource;
   socioDemo: SocioDemographicVariablesDto = null;
   cardiovascular: CardiovascularDto = null;
@@ -70,11 +78,12 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   private patients: PatientDto[];
 
   customColumn = 'name';
-  defaultColumns = [ 'size', 'kind', 'items' ];
-  clinicalExamColumns = [ this.customColumn, ...this.defaultColumns ];
+  defaultColumns = ['size', 'kind', 'items'];
+  clinicalExamColumns = [this.customColumn, ...this.defaultColumns];
 
+  recommendations: RecommandationDto[] = [];
 
-  constructor(private  patientService: PatientService, private modalService: ModalService,
+  constructor(private patientService: PatientService, private modalService: ModalService,
               public dialog: MatDialog, public router: Router, private snackBar: MatSnackBar,
               private data: PatientDataBetweenComponentsService) {
     this.tabIndex = 1;
@@ -84,75 +93,92 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   }
 
   ngOnInit() {
-    console.log('2ngOnInit');
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('2ngOnChanges');
     this.getOnePatient();
     this.tabIndex = 0;
+    this.getRecommendations();
   }
 
   ngOnDestroy() {
     this.patient = null;
-    // this.receiveMessage(this.expanded)
   }
 
-  mattab($event){
+  tabClick(event: MatTabChangeEvent) {
+    const tab = event.tab.textLabel;
     this.getOnePatient();
+    if (tab === 'Objectifs') {
+      this.objectifReadChild.onChange();
+    }
+    if (tab === 'Examen clinique et bilan lipidique') {
+      this.examenCliniqueBilanLipidiqueReadChild.onChangeClinicalExamination();
+      this.examenCliniqueBilanLipidiqueReadChild.onChangeBilanLipidique();
+    }
   }
+
   onOpen(expanded: boolean) {
     this.expanded = expanded;
   }
+
   onOpenPodo(expanded: boolean) {
     this.expandedpodo = expanded;
   }
+
   onOpenAnte(expanded: boolean) {
     this.expandedAnte = expanded;
   }
+
   onOpenExam(expanded: boolean) {
     this.expandedExam = expanded;
   }
-  expan($event){
-    console.log($event);
+
+  expan($event) {
     this.expandedExam = $event;
     this.expandedAnte = $event;
     this.expanded = $event;
     this.expandedpodo = $event;
-    console.log(this.expanded);
   }
+
   receiveMessage($event) {
     this.expan($event);
   }
+
   printPage(patient: any) {
     this.patient = patient;
     window.print();
   }
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
 
-    }); }
-  reco(patient: PatientDto){
+    });
+  }
+
+  reco(patient: PatientDto) {
     const dialogRef = this.dialog.open(RecomandationComponent, {
-      data: {patient }
+      data: {patient}
     });
 
   }
-  add_antecedent(id: string){
+
+  add_antecedent(id: string) {
     const dialogRef = this.dialog.open(HistoireSanteComponent, {
-      data: {id }
+      data: {id}
     });
   }
-  add_socio(id: string){
+
+  add_socio(id: string) {
     const dialogRef = this.dialog.open(SociodemoComponent, {
-      data: {id }
+      data: {id}
     });
   }
-  lipdProfile(patient: PatientDto){
+
+  lipdProfile(patient: PatientDto) {
     const dialogRef = this.dialog.open(BilanLipidiqueComponent, {
-      data: {patient,
+      data: {
+        patient,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -163,6 +189,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   openModal(id: string) {
     this.modalService.open(id);
   }
+
   close(id: string) {
     // close modal specified by id
     const modal = this.modals.find(x => x.id === id);
@@ -174,67 +201,49 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   }
 
   public getOnePatient = () => {
-    // tslint:disable-next-line:prefer-const
-    let patient: PatientDto;
-    this.patientService.getPatient(this.id).subscribe(patients => {
-
-
-      const socio = patients as Response;
-      this.patient = JSON.parse(JSON.stringify(socio.object))as PatientDto;
+    this.patientService.getPatient(this.id).subscribe(patient => {
+      const response = patient as Response;
+      this.patient = JSON.parse(JSON.stringify(response.object)) as PatientDto;
       this.medicalfile = this.patient.medicalFile as MedicalFileDto;
       this.socioDemo = JSON.parse(this.patient.socioDemographicVariables) as SocioDemographicVariablesDto;
 
-      if (this.medicalfile.clinicalExamination.length > 0)
-      {
+      if (this.medicalfile.clinicalExamination.length > 0) {
         this.clinicalExam = this.medicalfile.clinicalExamination[this.medicalfile.clinicalExamination.length - 1];
         this.weight = this.medicalfile.clinicalExamination[this.medicalfile.clinicalExamination.length - 1].anthropometry.weight;
         this.weight = this.medicalfile.clinicalExamination[this.medicalfile.clinicalExamination.length - 1].anthropometry.weight;
         this.imc = this.medicalfile.clinicalExamination[this.medicalfile.clinicalExamination.length - 1].anthropometry.imc;
         this.height = this.medicalfile.clinicalExamination[this.medicalfile.clinicalExamination.length - 1].anthropometry.height;
-      }
-      else{
+      } else {
         this.weight = null;
         this.age = null;
         this.imc = null;
         this.height = null;
       }
-      if (this.medicalfile.medicalFileHistory.length > 0)
-      {
+      if (this.medicalfile.medicalFileHistory.length > 0) {
         this.listAnte = this.medicalfile.medicalFileHistory;
-        for (let i = 0; i < this.listAnte.length; i++){
-          if (i === 0){
+        for (let i = 0; i < this.listAnte.length; i++) {
+          if (i === 0) {
             this.antecedents = [JSON.parse(this.listAnte[i].antecedents)];
 
-          }else{
-            this.antecedents.push(JSON.parse(this.listAnte[i].antecedents)); }
+          } else {
+            this.antecedents.push(JSON.parse(this.listAnte[i].antecedents));
+          }
         }
-      }else{
+      } else {
         this.listAnte = null;
 
       }
-      if (this.medicalfile.lipidProfiles.length > 0)
-      {
+      if (this.medicalfile.lipidProfiles.length > 0) {
         this.bilanLipidique = this.medicalfile.lipidProfiles[this.medicalfile.lipidProfiles.length - 1];
-
-
-
-      }else{
+      } else {
         this.bilanLipidique = null;
-
       }
-      // this.liste_antecedants = JSON.parse(JSON.stringify(this.patient.medicalFile.medicalFileHistory)) as MedicalFileHistoryDto[]
-      // console.log(this.liste_antecedants[0].antecedents)
-
-
     });
-    if (patient.appointments.length !== 0) {
-      this.getAppointmentsPerPatientId(patient);
-    }
   }
 
   public getAppointmentsPerPatientId(patient: PatientDto) {
-      this.listVisites = patient.appointments as AppointmentDto[];
-      this.lastVisite = this.listVisites[this.listVisites.length - 1];
+    this.listVisites = patient.appointments as AppointmentDto[];
+    this.lastVisite = this.listVisites[this.listVisites.length - 1];
   }
 
 
@@ -256,7 +265,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
     });
   }
 
-  report(){
+  report() {
     const url = this.router.serializeUrl(
       this.router.createUrlTree([`/report/${this.patient.id}`])
     );
@@ -264,6 +273,15 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
     window.open(url, '_blank');
   }
 
+
+  public getRecommendations = () => {
+    this.patientService.getAllReco(this.id).subscribe(response => {
+      const res = response as Response;
+      this.recommendations = JSON.parse(JSON.stringify(res.object));
+      console.log('------------' + this.recommendations);
+
+    });
+  }
 }
 
 

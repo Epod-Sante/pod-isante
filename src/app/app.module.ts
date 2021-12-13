@@ -64,7 +64,6 @@ import {HomeRoutingModule} from './_components/home/home-routing.module';
 import {HomeProRoutingModule} from './_components/home-pro/home-pro.routing.module';
 import {HomeSeaRoutingModule} from './_components/homesea/homesea.routing.module';
 import {PagePatientRoutingModule} from './_components/pagepatient/pagepatient.routing';
-import {LogiComponent} from './_components/home-pro/patient/list-patients/appoint/logi.component';
 import {AddDialogComponent} from './_components/dialogs/add/add.dialog.component';
 import {DeleteDialogComponent} from './_components/dialogs/delete/delete.dialog.component';
 import {EditDialogComponent} from './_components/dialogs/edit/edit.dialog.component';
@@ -150,7 +149,6 @@ import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/q
     QuizComponent,
     CreaterdvComponent,
     RdvComponent,
-    LogiComponent,
     AddDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,

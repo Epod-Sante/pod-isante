@@ -109,7 +109,6 @@ export class ListPatientsComponent implements OnDestroy, AfterViewInit {
 
   public redirectToUpdate = (element: UserRequestDto) => {
     const obj = JSON.parse(JSON.stringify(element));
-    console.log(obj.account.enabled);
     if (element.account.enabled === false) {
       this.blocKChecked = true;
     } else {

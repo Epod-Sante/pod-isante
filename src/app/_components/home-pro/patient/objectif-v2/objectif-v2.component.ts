@@ -5,8 +5,6 @@ import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {RecommandationDto} from '../../../../dto/RecommandationDto';
 import {Request} from '../../../../dto';
 import {PatientService} from '../../../../_services/patient.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {NbToastrService, NbWindowRef} from "@nebular/theme";
 import {Subscription} from "rxjs";
 import {PatientDataBetweenComponentsService} from "../../../../_services/PatientDataBetweenComponentsService";
@@ -486,8 +484,6 @@ export class ObjectifV2Component implements OnInit {
         null,
         this.precautionsObjctif3OptionsSelect));
     }
-
-    console.log(this.objectif);
 
     this.patient = new PatientDto(this.message, null, null, null, null,
       null, null, null, null, null, null,

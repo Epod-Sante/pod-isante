@@ -1,0 +1,129 @@
+<nb-card>
+      <nb-card-body *ngIf="recommendations.length !== 0">
+        <p>Selectionner une date</p>
+        <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem"  (selectedChange)="onChange()" >
+          <nb-option *ngFor="let recommendation of recommendations; let i = index;"  [value]="i">{{recommendation.dateRecommendation}}</nb-option>
+        </nb-select>
+      </nb-card-body>
+
+  <nb-card-body *ngIf="recommendations.length === 0">Pas de recommendation</nb-card-body>
+
+  <nb-card-body *ngIf="recommendations.length > 0">
+    <p><b>Objectif date:</b> {{recommendations.at(selectedItem).dateRecommendation}}</p>
+
+
+    <h3>Objectifs:</h3>
+    <div *ngFor="let obj of objectif; index as i;">
+      <h4>{{i + 1}}- {{obj.objectif.objectif}}</h4>
+      <div *ngFor="let param of obj.objectif.parametre">
+        <p>{{param.param}}: {{param.value}}</p>
+      </div>
+      <h4>Moyens</h4>
+      <div *ngIf="i === 0">
+        <p *ngIf="obj1Moyen.length === 0">Pas de moyens</p>
+        <div *ngIf="obj1Moyen.length > 0">
+          <div *ngFor="let moyen of obj1Moyen">
+            <p>{{moyen}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="i === 1">
+        <p *ngIf="obj2Moyen.length === 0">Pas de moyens</p>
+        <div *ngIf="obj2Moyen.length > 0">
+          <div *ngFor="let moyen of obj2Moyen">
+            <p>{{moyen}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="i === 2">
+        <p *ngIf="obj3Moyen.length === 0">Pas de moyens</p>
+        <div *ngIf="obj3Moyen.length > 0">
+          <div *ngFor="let moyen of obj3Moyen">
+            <p>{{moyen}}</p>
+          </div>
+        </div>
+      </div>
+
+
+      <h4>Precautions</h4>
+      <div *ngIf="i === 0">
+        <p *ngIf="obj1Precaution.length === 0">Pas de precautions</p>
+        <div *ngIf="obj1Precaution.length > 0">
+          <div *ngFor="let precaution of obj1Precaution">
+            <p>{{precaution}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="i === 1">
+        <p *ngIf="obj2Precaution.length === 0">Pas de precautions</p>
+        <div *ngIf="obj2Precaution.length > 0">
+          <div *ngFor="let precaution of obj2Precaution">
+            <p>{{precaution}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="i === 2">
+        <p *ngIf="obj3Precaution.length === 0">Pas de precautions</p>
+        <div *ngIf="obj3Precaution.length > 0">
+          <div *ngFor="let precaution of obj3Precaution">
+            <p>{{precaution}}</p>
+          </div>
+        </div>
+      </div>
+
+      <h4 *ngIf="i === 0 || i === 1">Recommendations</h4>
+      <div *ngIf="i === 0">
+        <h5>Frequence</h5>
+        <p *ngIf="!obj.recommandation.frequence">Pas de frequence</p>
+        <p *ngIf="obj.recommandation.frequence">{{obj.recommandation.frequence}}</p>
+
+        <h5>Moment</h5>
+        <p *ngIf="obj1Moment.length === 0">Pas de moments</p>
+        <div *ngIf="obj1Moment.length > 0">
+          <div *ngFor="let moment of obj1Moment">
+            <p>{{moment}}</p>
+          </div>
+        </div>
+
+        <h5>Intensite</h5>
+        <p>{{obj.recommandation.intensite.echelleString}} | {{obj.recommandation.intensite.echelleNumber}}</p>
+      </div>
+
+      <div *ngIf="i === 1">
+
+        <h5>Frequence</h5>
+        <p *ngIf="!obj.recommandation.frequence">Pas de frequence</p>
+        <p *ngIf="obj.recommandation.frequence">{{obj.recommandation.frequence}}</p>
+
+        <h5>Moment</h5>
+        <p *ngIf="obj2Moment.length === 0">Pas de moments</p>
+        <div *ngIf="obj2Moment.length > 0">
+          <div *ngFor="let moment of obj2Moment">
+            <p>{{moment}}</p>
+          </div>
+        </div>
+
+        <h5>Intensite</h5>
+        <p>{{obj.recommandation.intensite.echelleString}} | {{obj.recommandation.intensite.echelleNumber}}</p>
+      </div>
+
+
+    </div>
+
+
+    <h3>Barriers:</h3>
+    <div *ngFor="let br of barriersRecommendation; index as i;">
+      <p>{{i + 1}}- {{br}}</p>
+    </div>
+    <h3>barriers solutions:</h3>
+    <div *ngFor="let brs of barriersRecommendationSolutions; index as i;">
+      <p>{{i + 1}}- {{brs}}</p>
+    </div>
+
+  </nb-card-body>
+
+</nb-card>

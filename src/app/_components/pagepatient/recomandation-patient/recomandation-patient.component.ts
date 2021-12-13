@@ -1,12 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Response} from '../../../dto';
-import {PatientDto} from '../../../dto/patient/PatientDto';
 import {PatientService} from '../../../_services/patient.service';
 import {RecommandationDto} from '../../../dto/RecommandationDto';
-import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
-import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {PatientLoginService} from '../../../_services/PatientLoginService';
+import {ObjectifModel} from '../../home-pro/patient/objectif-v2/ObjectifModel';
 
 @Component({
   selector: 'app-recomandation-patient',
@@ -19,9 +17,21 @@ export class RecomandationPatientComponent implements OnInit {
   id: string = null;
   recom: any;
   details: any[];
-  recommandation: any[];
+  recommandation: RecommandationDto;
   mySubscription: Subscription;
   private patientId: string;
+  barriersRecommendation: string[] = [];
+  barriersRecommendationSolutions: string[] = [];
+  objectif: ObjectifModel[] = [];
+
+  obj1Moyen = [];
+  obj2Moyen = [];
+  obj3Moyen = [];
+  obj1Precaution = [];
+  obj2Precaution = [];
+  obj3Precaution = [];
+  obj1Moment = [];
+  obj2Moment = [];
 
 
   constructor(private patientService: PatientService, private patientLoginService: PatientLoginService) {
@@ -32,32 +42,84 @@ export class RecomandationPatientComponent implements OnInit {
     this.getRecoById();
   }
 
-
-  getRecoById(){
-    console.log('********* ' + this.patientId);
+  getRecoById() {
     this.patientService.getReco(this.patientId).subscribe(recommandations => {
-      const reco = recommandations as Response;
-      this.recom = reco.object;
-      console.log(recommandations);
-      console.log(this.recom);
-      this.recommandation = JSON.parse(this.recom.recommendation);
-      console.log(this.recommandation);
-      for (let i = 0 ; i < this.recommandation.length; i++){
-        if (i === 0) {this.details = this.recommandation[i].details; }
-        else {
-          this.details.push(this.recommandation[i].details);
+      const response = recommandations as Response;
+      this.recommandation = JSON.parse(JSON.stringify(response.object)) as RecommandationDto;
+      this.barriersRecommendation = JSON.parse(this.recommandation.barriersRecommendation) as string[];
+      this.barriersRecommendationSolutions = JSON.parse(this.recommandation.barriersRecommendationSolutions) as string[];
+      this.objectif = JSON.parse(this.recommandation.recommendation) as ObjectifModel[];
+      let i = 0;
+      this.objectif.forEach(elm => {
+        if (i === 0) {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          const moment = JSON.parse(JSON.stringify(elm.recommandation.moment)) as Moment[];
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj1Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj1Precaution.push(p.name);
+            }
+          });
+          moment.forEach(mm => {
+            if (mm.checked) {
+              this.obj1Precaution.push(mm.name);
+            }
+          });
+        } else if (i === 1) {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          const moment = JSON.parse(JSON.stringify(elm.recommandation.moment)) as Moment[];
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj2Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj2Precaution.push(p.name);
+            }
+          });
+          moment.forEach(mm => {
+            if (mm.checked) {
+              this.obj1Precaution.push(mm.name);
+            }
+          });
+        } else {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj3Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj3Precaution.push(p.name);
+            }
+          });
         }
-
-      }
-
-
-
-      // this.liste_antecedants = JSON.parse(JSON.stringify(this.patient.medicalFile.medicalFileHistory)) as MedicalFileHistoryDto[]
-      // console.log(this.liste_antecedants[0].antecedents)
-
-
+        i = i + 1;
+      });
     });
-
   }
+}
 
+class Moyen {
+  name: string;
+  checked: boolean;
+}
+
+class Precaution {
+  name: string;
+  checked: boolean;
+}
+
+class Moment {
+  name: string;
+  checked: boolean;
 }

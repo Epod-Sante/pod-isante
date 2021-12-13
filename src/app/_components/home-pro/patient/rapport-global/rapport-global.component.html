@@ -117,14 +117,13 @@
         </nb-card-body>
         <nb-card-body *ngIf="questionnaireObj.length > 0">
           <h4>BREQ</h4>
-          <nb-card-body *ngIf="!breq">
+          <nb-card-body *ngIf="questionnaireBREQ.length === 0">
             <p >Pas de questionnaire BREQ</p>
           </nb-card-body>
-          <nb-card *ngIf="breq">
-            <div *ngFor="let q of questionnaires">
-              <nb-card-body *ngIf="q.type === 'BREQ'">
-                <p><b>Date : </b>{{q.date}}</p>
-
+          <nb-card *ngIf="questionnaireBREQ.length > 0">
+            <div *ngFor="let breq of questionnaireBREQ; index as i">
+              <nb-card-body>
+                <p><b>Date : </b>{{breq.date}}</p>
                 <table class="table table-hover">
                   <thead>
                   <tr>
@@ -137,11 +136,11 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td>{{breqScore.at(0).amotivation}}</td>
-                    <td>{{breqScore.at(0).external}}</td>
-                    <td>{{breqScore.at(0).identified}}</td>
-                    <td>{{breqScore.at(0).intrinsic}}</td>
-                    <td>{{breqScore.at(0).introjected}}</td>
+                    <td>{{breq.value.score.amotivation}}</td>
+                    <td>{{breq.value.score.external}}</td>
+                    <td>{{breq.value.score.identified}}</td>
+                    <td>{{breq.value.score.intrinsic}}</td>
+                    <td>{{breq.value.score.introjected}}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -153,13 +152,23 @@
 
 
           <h4>GPAQ</h4>
-          <nb-card-body *ngIf="!gpaq">
+          <nb-card-body *ngIf="questionnaireGPAQ.length === 0">
             <p>Pas de questionnaire GPAQ</p>
           </nb-card-body>
-          <nb-card *ngIf="gpaq">
-            <div *ngFor="let q of questionnaires">
-              <nb-card-body *ngIf="q.type === 'GPAQ'">
-                <p><b>Date : </b>{{q.date}}</p>
+          <nb-card *ngIf="questionnaireGPAQ.length > 0">
+            <div *ngFor="let gpaq of questionnaireGPAQ; index as i">
+              <nb-card-body>
+                <p><b>Date : </b>{{gpaq.date}}</p>
+                <h5>Travail</h5>
+                Modéré-vigoureux :   {{(gpaq.value.reponses[5].hr * 60 + gpaq.value.reponses[5].minu) * gpaq.value.reponses[4].jr +
+              (gpaq.value.reponses[2].hr * 60 + gpaq.value.reponses[2].minu) * gpaq.value.reponses[1].jr}} minutes
+                <h5>Transport (déplacement) : </h5>
+                A pied : {{ (gpaq.value.reponses[8].hr * 60 + gpaq.value.reponses[8].minu) * gpaq.value.reponses[7].jr}}  minutes<br>
+                A vélo : {{(gpaq.value.reponses[11].hr * 60 + gpaq.value.reponses[11].minu) * gpaq.value.reponses[10].jr}} minutes
+                <h5>Loisirs : </h5>
+                Modéré-vigoureux : {{(gpaq.value.reponses[17].hr * 60 + gpaq.value.reponses[17].minu) * gpaq.value.reponses[16].jr +
+              (gpaq.value.reponses[14].hr * 60 + gpaq.value.reponses[14].minu) * gpaq.value.reponses[13].jr}} minutes<br>
+                Marche : {{(gpaq.value.reponses[20].hr * 60 + gpaq.value.reponses[20].minu) * gpaq.value.reponses[19].jr}} minutes<br>
 
               </nb-card-body>
             </div>

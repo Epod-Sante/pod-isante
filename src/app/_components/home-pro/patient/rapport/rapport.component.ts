@@ -7,11 +7,10 @@ import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {AppointmentDto} from '../../../../dto/AppointmentDto';
 import {PatientService} from '../../../../_services/patient.service';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
-import {NavigationEnd, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Request} from '../../../../dto';
 import {DatePipe} from '@angular/common';
 import * as ss from 'simple-statistics';
-import {AntecedentsDto} from '../../../../dto/medicalfile/AntecedentsDto';
 import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto';
 import {LipidProfileDto} from '../../../../dto/medicalfile/LipidProfileDto';
 import {MedicalFileHistoryDto} from '../../../../dto/medicalfile/MedicalFileHistoryDto';
@@ -30,14 +29,14 @@ export class RapportComponent implements OnInit, OnChanges {
   canvaData: Steps [] = [];
   minData: Minutes [] = [];
   steps: number[] = [];
-  minu_hight: number;
-  minu_low: number;
+  minuHight: number;
+  minuLow: number;
   sedentary: number;
-  minu_medium: number;
-  list_sedentary = [];
-  list_lowIntesity = [];
-  list_hightIntensity = [];
-  list_mediumIntensity = [];
+  minuMedium: number;
+  listSedentary = [];
+  listLowIntesity = [];
+  listHightIntensity = [];
+  listMediumIntensity = [];
   minutesDate: string [] = [];
   poddon: any;
   stepsDate: string [] = [];
@@ -146,8 +145,6 @@ export class RapportComponent implements OnInit, OnChanges {
   public barChartDatagpaq: ChartDataSets[] = [];
 
   constructor(private patientService: PatientService, private router: Router, public datepipe: DatePipe) {
-
-
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
     this.visites = [];
@@ -156,20 +153,10 @@ export class RapportComponent implements OnInit, OnChanges {
     this.minData = [];
     this.minData = [];
     this.val = [];
-    this.pieChartData = [this.minu_low, this.minu_medium, this.minu_hight];
-
-
-  }
-
-  ngOnDestroy() {
-
+    this.pieChartData = [this.minuLow, this.minuMedium, this.minuHight];
   }
 
   ngOnInit() {
-    this.medicalFile = this.patient.medicalFile;
-    this.clinicalExamination = this.medicalFile.clinicalExamination;
-
-
     this.visites = [];
     this.steps = [];
     this.statis = [];
@@ -178,17 +165,10 @@ export class RapportComponent implements OnInit, OnChanges {
     this.minData = [];
     this.minData = [];
     this.val = [];
-
-
     this.getAllVisites();
-
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // this.lineChartLabels = ["j1","j2","j3"];
-    // this.lineChartData = [58,62,60];
-
     this.visites = [];
     this.statis = [];
     this.datess = [];
@@ -197,29 +177,17 @@ export class RapportComponent implements OnInit, OnChanges {
     this.minData = [];
     this.minData = [];
     this.val = [];
-
-
-    this.clinicalExamination = this.medicalFile.clinicalExamination;
-    console.log(this.medicalFile.clinicalExamination + ' clinical');
     this.getAllVisites();
-
   }
 
   public chartClicked(e: any): void {
   }
 
   public chartHovered(e: any): void {
-    console.log(e);
   }
-
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  mattab($event) {
-    this.getAllVisites();
-    this.getQuiz();
   }
 
   public getSteps = () => {
@@ -246,11 +214,7 @@ export class RapportComponent implements OnInit, OnChanges {
               {data: this.steps, label: 'Nombre de pas par jour'}
             ];
             this.barChartLabels = this.stepsDate;
-
-
           }
-
-
         }
       } else {
         this.steps = [];
@@ -260,11 +224,6 @@ export class RapportComponent implements OnInit, OnChanges {
         ];
         this.barChartLabels = this.stepsDate;
       }
-
-
-      // this.list_dates = [JSON.parse(steps)]
-
-
     }, error => {
       this.steps = [];
       this.stepsDate = [];
@@ -273,51 +232,43 @@ export class RapportComponent implements OnInit, OnChanges {
         {data: this.steps, label: 'Nombre de pas par jour'}
       ];
       this.barChartLabels = this.stepsDate;
-      console.log('ahah');
     });
   }
+
   public getQuiz = () => {
-
     this.patientService.getQuiz(this.patient.id).subscribe(quiz => {
-      console.log(quiz);
       quiz = JSON.parse(JSON.stringify(quiz));
-      console.log(quiz);
       this.quiz = quiz;
-      console.log(this.quiz);
-    });
 
-    for (const x of this.quiz.object) {
-      const valeur = JSON.parse(x.value);
-      if (x.type === 'GPAQ') {
-        for (let i = 0; i < valeur.reponses.length; i++) {
-          if ((valeur.reponses[i].hr === null || valeur.reponses[i].hr === undefined) && x.type === 'GPAQ') {
-            valeur.reponses[i].hr = 0;
+      for (const x of this.quiz.object) {
+        const valeur = JSON.parse(x.value);
+        if (x.type === 'GPAQ') {
+          for (let i = 0; i < valeur.reponses.length; i++) {
+            if ((valeur.reponses[i].hr === null || valeur.reponses[i].hr === undefined) && x.type === 'GPAQ') {
+              valeur.reponses[i].hr = 0;
+            }
+            if ((valeur.reponses[i].minu === null || valeur.reponses[i].minu === undefined) && x.type === 'GPAQ') {
+              valeur.reponses[i].minu = 0;
+            }
+            if ((valeur.reponses[i].jr === null || valeur.reponses[i].jr === undefined) && x.type === 'GPAQ') {
+              valeur.reponses[i].jr = 0;
+            }
           }
-          if ((valeur.reponses[i].minu === null || valeur.reponses[i].minu === undefined) && x.type === 'GPAQ') {
-            valeur.reponses[i].minu = 0;
-          }
-          if ((valeur.reponses[i].jr === null || valeur.reponses[i].jr === undefined) && x.type === 'GPAQ') {
-            valeur.reponses[i].jr = 0;
-          }
+          /*  Vigoureux = (rép Q2xrép Q3) + (rép Q14xrép Q15) en minutes
+
+      Modérée = (rép Q5xrép Q6) + (rép Q11xrép Q12) + (rép Q17xrép Q18) en minutes
+
+      Marche = (rép Q20xrép Q21) + (rép Q8xrép Q9) en minutes
+
+      Sédentaire = rép Q22 en minutes*/
         }
-        /*  Vigoureux = (rép Q2xrép Q3) + (rép Q14xrép Q15) en minutes
 
-    Modérée = (rép Q5xrép Q6) + (rép Q11xrép Q12) + (rép Q17xrép Q18) en minutes
-
-    Marche = (rép Q20xrép Q21) + (rép Q8xrép Q9) en minutes
-
-    Sédentaire = rép Q22 en minutes*/
-
-
-        console.log(valeur.reponses[1].hr);
-      } else {
+        this.val.push({date: x.date, value: valeur, id: x.id, type: x.type});
 
       }
-
-      this.val.push({date: x.date, value: valeur, id: x.id, type: x.type});
-      console.log(this.val);
-
-    }
+      this.val.forEach(elm => console.log(elm));
+      this.val.forEach(elm => this.show_barChart(elm.value.toString()));
+    });
 
 
   }
@@ -337,7 +288,7 @@ export class RapportComponent implements OnInit, OnChanges {
   }
 
   public show_barChart(valeur: string) {
-    this.barChar= [];
+    this.barChar = [];
     this.vigoureux = 0;
     this.moderee = 0;
     this.marche = 0;
@@ -364,66 +315,57 @@ export class RapportComponent implements OnInit, OnChanges {
 
     const request = new Request(this.datess);
     this.patientService.getMinutes(this.patient.medicalFile.patient, request).subscribe(minutes => {
-      this.minu_hight = 0;
-      this.minu_medium = 0;
-      this.minu_low = 0;
+      this.minuHight = 0;
+      this.minuMedium = 0;
+      this.minuLow = 0;
       this.sedentary = 0;
       const min = JSON.parse(JSON.stringify(minutes)) as Request;
       if (min.object != null) {
 
         for (let i = 0; i < this.visites.length; i++) {
           this.minData.push(min.object[this.datepipe.transform(this.visites[i].appointmentDate.toString(), 'yyyy-MM-dd')]);
-          console.log(this.visites[i].appointmentDate.toString());
-          console.log(this.datepipe.transform(this.visites[i].appointmentDate.toString(), 'yyyy-MM-dd'));
         }
-        console.log(this.minData);
         for (const x of this.minData) {
-          console.log(x);
           for (const i in x) {
             const date = new Date(x[i].date);
-            this.list_sedentary.push(x[i].sedentary);
-            this.list_hightIntensity.push(x[i].very_active);
-            this.list_mediumIntensity.push(x[i].fairly_active);
-            this.list_lowIntesity.push(x[i].lightly_active);
+            this.listSedentary.push(x[i].sedentary);
+            this.listHightIntensity.push(x[i].very_active);
+            this.listMediumIntensity.push(x[i].fairly_active);
+            this.listLowIntesity.push(x[i].lightly_active);
             this.statis = [
-              new DescStats('Intensité faible', +ss.max(this.list_lowIntesity).toFixed(2), +ss.min(this.list_lowIntesity).toFixed(2), +ss.average(this.list_lowIntesity).toFixed(2), +ss.median(this.list_lowIntesity).toFixed(2), +ss.variance(this.list_lowIntesity).toFixed(2), +ss.standardDeviation(this.list_lowIntesity).toFixed(2)),
-              new DescStats('Intensité modérée', +ss.max(this.list_mediumIntensity).toFixed(2), +ss.min(this.list_mediumIntensity).toFixed(2), +ss.average(this.list_mediumIntensity).toFixed(2), +ss.median(this.list_mediumIntensity).toFixed(2), +ss.variance(this.list_mediumIntensity).toFixed(2), +ss.standardDeviation(this.list_mediumIntensity).toFixed(2)),
-              new DescStats('Intensité elevée', +ss.max(this.list_hightIntensity).toFixed(2), +ss.min(this.list_hightIntensity).toFixed(2), +ss.average(this.list_hightIntensity).toFixed(2), +ss.median(this.list_hightIntensity).toFixed(2), +ss.variance(this.list_hightIntensity).toFixed(2), +ss.standardDeviation(this.list_hightIntensity).toFixed(2)),
-              new DescStats('Sedentaires', +ss.max(this.list_sedentary).toFixed(2), +ss.min(this.list_sedentary).toFixed(2), +ss.average(this.list_sedentary).toFixed(2), +ss.median(this.list_sedentary).toFixed(2), +ss.variance(this.list_sedentary).toFixed(2), +ss.standardDeviation(this.list_sedentary).toFixed(2))
+              new DescStats('Intensité faible', +ss.max(this.listLowIntesity).toFixed(2), +ss.min(this.listLowIntesity).toFixed(2), +ss.average(this.listLowIntesity).toFixed(2), +ss.median(this.listLowIntesity).toFixed(2), +ss.variance(this.listLowIntesity).toFixed(2), +ss.standardDeviation(this.listLowIntesity).toFixed(2)),
+              new DescStats('Intensité modérée', +ss.max(this.listMediumIntensity).toFixed(2), +ss.min(this.listMediumIntensity).toFixed(2), +ss.average(this.listMediumIntensity).toFixed(2), +ss.median(this.listMediumIntensity).toFixed(2), +ss.variance(this.listMediumIntensity).toFixed(2), +ss.standardDeviation(this.listMediumIntensity).toFixed(2)),
+              new DescStats('Intensité elevée', +ss.max(this.listHightIntensity).toFixed(2), +ss.min(this.listHightIntensity).toFixed(2), +ss.average(this.listHightIntensity).toFixed(2), +ss.median(this.listHightIntensity).toFixed(2), +ss.variance(this.listHightIntensity).toFixed(2), +ss.standardDeviation(this.listHightIntensity).toFixed(2)),
+              new DescStats('Sedentaires', +ss.max(this.listSedentary).toFixed(2), +ss.min(this.listSedentary).toFixed(2), +ss.average(this.listSedentary).toFixed(2), +ss.median(this.listSedentary).toFixed(2), +ss.variance(this.listSedentary).toFixed(2), +ss.standardDeviation(this.listSedentary).toFixed(2))
             ];
 
             this.dataSource.data = this.statis;
             this.minutesDate.push(date.toLocaleDateString('fr', {
               year: 'numeric', month: '2-digit', day: '2-digit',
             }));
-            this.minu_hight = x[i].very_active + this.minu_hight;
-            this.minu_low = x[i].lightly_active + this.minu_low;
-            this.minu_medium = x[i].fairly_active + this.minu_medium;
-
+            this.minuHight = x[i].very_active + this.minuHight;
+            this.minuLow = x[i].lightly_active + this.minuLow;
+            this.minuMedium = x[i].fairly_active + this.minuMedium;
             this.sedentary = x[i].sedentary + this.sedentary;
-
-
           }
-
-
         }
-        this.pieChartData = [this.minu_low, this.minu_medium, this.minu_hight, this.sedentary];
-        console.log(minutes);
+        this.pieChartData = [this.minuLow, this.minuMedium, this.minuHight, this.sedentary];
       } else {
-        this.minu_hight = 0;
-        this.minu_medium = 0;
-        this.minu_low = 0;
+        this.minuHight = 0;
+        this.minuMedium = 0;
+        this.minuLow = 0;
         this.sedentary = 0;
-        this.pieChartData = [this.minu_low, this.minu_medium, this.minu_hight, this.sedentary];
+        this.pieChartData = [this.minuLow, this.minuMedium, this.minuHight, this.sedentary];
       }
     }, error => {
-      this.minu_hight = 0;
-      this.minu_medium = 0;
-      this.minu_low = 0;
+      this.minuHight = 0;
+      this.minuMedium = 0;
+      this.minuLow = 0;
       this.sedentary = 0;
-      this.pieChartData = [this.minu_low, this.minu_medium, this.minu_hight, this.sedentary];
+      this.pieChartData = [this.minuLow, this.minuMedium, this.minuHight, this.sedentary];
     });
   }
+
   public getAllVisites = () => {
     this.getQuiz();
     const poids: number [] = [];
@@ -434,10 +376,6 @@ export class RapportComponent implements OnInit, OnChanges {
       poids.push(+this.patient.medicalFile.clinicalExamination[i].anthropometry.weight.toFixed(2));
       trtaille.push(+this.patient.medicalFile.clinicalExamination[i].anthropometry.waist.toFixed(2));
       dates.push(this.patient.medicalFile.clinicalExamination[i].date);
-      console.log(this.patient.medicalFile.clinicalExamination[i].anthropometry.weight);
-      console.log(poids[i]);
-      console.log(this.patient.medicalFile.clinicalExamination.length);
-      console.log(i);
       i++;
     }
     this.lineChartData = [
@@ -447,45 +385,32 @@ export class RapportComponent implements OnInit, OnChanges {
       {data: trtaille, label: 'Tour de taille'},
     ];
     this.lineChartLabels = dates;
-    console.log(this.patient);
     this.patientService.getRdv(this.patient.id).subscribe(patients => {
-      // let tabusers = JSON.parse(JSON.stringify(users.toString()))
-
       this.visites = JSON.parse(JSON.stringify(patients)).object as AppointmentDto[];
-      console.log(this.visites);
       if (this.visites.length > 0) {
         for (let i = 0; i < this.visites.length; i++) {
           this.datess.push(Date.parse(this.visites[i].appointmentDate + ''));
-          console.log(this.datess);
         }
         this.getSteps();
         this.getMinutes();
-
       } else {
         this.steps = [];
         this.stepsDate = [];
         this.minData = [];
         this.minData = [];
-
-        this.pieChartData = [this.minu_low, this.minu_medium, this.minu_hight, this.sedentary];
+        this.pieChartData = [this.minuLow, this.minuMedium, this.minuHight, this.sedentary];
         this.barChartData = [
           {data: this.steps, label: 'Nombre de pas par jour'}
         ];
-
       }
-
-
     }, error => {
       this.visites = [];
       this.steps = [];
       this.stepsDate = [];
       this.minData = [];
       this.minData = [];
-
     });
   }
-
-
 }
 
 export interface Steps {

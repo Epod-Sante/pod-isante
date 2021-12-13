@@ -28,7 +28,7 @@
 
   </nb-card-header>
   <nb-card-body class="child">
-    <mat-tab-group (selectedTabChange)="mattab($event)" [(selectedIndex)]="this.tabIndex" *ngIf="patient!=null">
+    <mat-tab-group (selectedTabChange)="tabClick($event)" [(selectedIndex)]="this.tabIndex" *ngIf="patient!=null">
 
       <mat-tab class="labeltab tab1" label="Identification du patient">
 
@@ -221,7 +221,7 @@
       </mat-tab>
 
       <mat-tab class="labeltab" label="Examen clinique et bilan lipidique">
-        Afichage de l'examen clinique et bilan lipidique par visite.
+        <app-examen-clinique-bilan-lipidique-read  [patient]="patient"></app-examen-clinique-bilan-lipidique-read>
       </mat-tab>
 
       <mat-tab class="labeltab" label="Visites">
@@ -231,7 +231,7 @@
 
       </mat-tab>
       <mat-tab class="labeltab" label="Objectifs">
-        Afichage de l'objectifs, barrieres et solutions par visite.
+        <app-objectif-read [recommendations]="recommendations"></app-objectif-read>
       </mat-tab>
       <mat-tab label="Rapport visuel">
 
