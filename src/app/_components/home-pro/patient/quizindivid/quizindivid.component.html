@@ -72,116 +72,118 @@
 <nb-card status="danger">
   <nb-card-header>ANTÉCÉDANTS MÉDICAUX</nb-card-header>
   <nb-card-body>
-Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
-inscrire les années correspondantes.
-<br><br>
-<nb-card *ngFor="let ant of antecedants; let  j = index;">
-  {{ant.antecedents}}
-  <mat-checkbox [checked]="selected === j-200" (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
-  <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
+    Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
+    inscrire les années correspondantes.
+    <br><br>
+    <div *ngFor="let ant of antecedants; let  j = index;">
+      {{ant.antecedents}}
+      <mat-checkbox [checked]="selected === j-200" (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
+      <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
 
-  <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
-  <nb-card   *ngFor="let an of ant.date; let i = index; ">
-     <input  value="{{an}}" [disabled]="true" type="text"    >
-    <button mat-mini-fab color="warn" [disabled]="!active.checked"  (click)="delette(j,i)"> <mat-icon>delete</mat-icon></button>
+      <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
+      <nb-card   *ngFor="let an of ant.date; let i = index; ">
+        <input  value="{{an}}" [disabled]="true" type="text"    >
+        <button mat-mini-fab color="warn" [disabled]="!active.checked"  (click)="delette(j,i)"> <mat-icon>delete</mat-icon></button>
 
-  </nb-card>
+      </nb-card>
 
-  <br>
-</nb-card>
+      <br>
+    </div>
 
-<nb-card>
-  <br>
-  <b>Avez-vous l’une des conditions de santé ci-dessous ?</b> <br>
-  <mat-checkbox (change)="setCond($event,hypertension.value)"  #hypertension value="Hypertension artérielle"> Hypertension artérielle </mat-checkbox>
-  <mat-checkbox (change)="setCond($event,dyslipidemie.value)" #dyslipidemie value="Dyslipidémie"> Dyslipidémie </mat-checkbox>
-  <mat-checkbox (change)="setCond($event,depression.value)" #depression value="Dépression"> Dépression </mat-checkbox>
-  <mat-checkbox (change)="setCond($event,obesite.value)" #obesite value="Obésité"> Obésité </mat-checkbox>
-  <mat-checkbox (change)="setCond($event,diabeteI_II.value)" #diabeteI_II value="Diabète de type I ou II" > Diabète de type I ou II </mat-checkbox>
-  <mat-checkbox (change)="setCond($event,trouble_anxieux.value)" #trouble_anxieux value="Trouble anxieux"> Trouble anxieux </mat-checkbox>
-  <mat-checkbox #autre (change)="setCond($event,autre.value)" value="autre" > Autre</mat-checkbox>
-  <input #autre_conditions  [disabled]="!autre.checked" type="text">
-  <br>
+    <div>
+      <br>
+      <b>Avez-vous l’une des conditions de santé ci-dessous ?</b> <br>
+      <mat-checkbox (change)="setCond($event,hypertension.value)"  #hypertension value="Hypertension artérielle"> Hypertension artérielle </mat-checkbox>
+      <mat-checkbox (change)="setCond($event,dyslipidemie.value)" #dyslipidemie value="Dyslipidémie"> Dyslipidémie </mat-checkbox>
+      <mat-checkbox (change)="setCond($event,depression.value)" #depression value="Dépression"> Dépression </mat-checkbox>
+      <mat-checkbox (change)="setCond($event,obesite.value)" #obesite value="Obésité"> Obésité </mat-checkbox>
+      <mat-checkbox (change)="setCond($event,diabeteI_II.value)" #diabeteI_II value="Diabète de type I ou II" > Diabète de type I ou II </mat-checkbox>
+      <mat-checkbox (change)="setCond($event,trouble_anxieux.value)" #trouble_anxieux value="Trouble anxieux"> Trouble anxieux </mat-checkbox>
+      <mat-checkbox #autre (change)="setCond($event,autre.value)" value="autre" > Autre</mat-checkbox>
+      <input #autre_conditions  [disabled]="!autre.checked" type="text">
+      <br>
 
-</nb-card>
-<img src="assets/douleur.PNG" alt="">
-<nb-card>
-  <br>
-  <b>Troubles musculo-squelettiques</b> <br>
-  Avez-vous déjà eu des fractures ?
-  <br><mat-checkbox #activeT>  Oui </mat-checkbox><mat-checkbox> Non</mat-checkbox>
-  <input #frac1 [disabled]="!activeT.checked" type="text">
-  <input #frac2 [disabled]="!activeT.checked" type="text">
-  <input #frac3 [disabled]="!activeT.checked" type="text">
-  <br><br>
-  À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
-  <img src="assets/douleur.PNG" alt="">
-  <br>
-  <mat-checkbox (change)="setDouleur($event,no_douleur.value)" value="Aucune douleur" #no_douleur>  Aucune douleur </mat-checkbox>
-  <br>
-  <mat-checkbox (change)="setDouleur($event,cou.value)" value="Cou" [disabled]="no_douleur.checked" #cou>  Cou </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule droite" #epauled>  Epaule droite </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule gauche" #epauleg >  Epaule gauche </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,m_dos.value)" [disabled]="no_douleur.checked"value="Milieu du dos" #m_dos >  Milieu du dos </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,h_dos.value)" [disabled]="no_douleur.checked" value="Haut du dos" #h_dos >  Haut du dos </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,b_dos.value)" [disabled]="no_douleur.checked" value="Bas du dos " #b_dos >  Bas du dos </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,coudeg.value)" [disabled]="no_douleur.checked" value="Coude gauche" #coudeg>  Coude gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,couded.value)" [disabled]="no_douleur.checked" value="Coude droit " #couded>  Coude droit </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,poignetg.value)" [disabled]="no_douleur.checked" value="Poignet gauche" #poignetg>  Poignet gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,poignetd.value)" [disabled]="no_douleur.checked" value="Poignet droit" #poignetd>  Poignet droit </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,maindg.value)" [disabled]="no_douleur.checked" value="Main/doigts gauche " #maindg>  Main/doigts gauche  </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,maindd.value)" [disabled]="no_douleur.checked" value="Main/doigts droit" #maindd>  Main/doigts droit  </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,pouceg.value)" [disabled]="no_douleur.checked" value="Pouce gauche" #pouceg>  Pouce gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,pouced.value)" [disabled]="no_douleur.checked" value="Pouce droit" #pouced>  Pouce droit </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,hancheg.value)" [disabled]="no_douleur.checked" value="Hanche gauche " #hancheg>  Hanche gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,hanched.value)" [disabled]="no_douleur.checked" value="Hanche droite" #hanched>  Hanche droite </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,genoug.value)" [disabled]="no_douleur.checked" value="Genou gauche" #genoug>  Genou gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,genoud.value)" [disabled]="no_douleur.checked" value="Genou droit" #genoud>  Genou droit </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,chevilleg.value)" [disabled]="no_douleur.checked" value="Cheville gauche" #chevilleg>  Cheville gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,chevilled.value)" [disabled]="no_douleur.checked" value="Cheville droite" #chevilled>  Cheville droite </mat-checkbox>
-  <br><mat-checkbox (change)="setDouleur($event,pieds_orteilsg.value)" [disabled]="no_douleur.checked" value="pied/orteils gauche" #pieds_orteilsg>  pied/orteils gauche </mat-checkbox>
-  <mat-checkbox (change)="setDouleur($event,pieds_orteilsd.value)" [disabled]="no_douleur.checked" value="pied/orteils droit" #pieds_orteilsd>  pied/orteils droit </mat-checkbox>
-  <br>
-</nb-card>
-<nb-card>
-  <br>
-  <b>
-  Consommation de produits alcoolisés, tabagiques ou drogues (si actuel/occasionnel, indiquez la fréquence.
-  ex : nombre de cigarette/jour ou nombre de consommation/sem/jour, etc)
-  </b> <br><br>
-  Alcool <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
-  <mat-checkbox #active_consA>  Actuel/occasionnel </mat-checkbox>
-  <input #freqSA [disabled]="!active_consA.checked" type="text" placeholder="frequence" ><br>
-  Tabac <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
-  <mat-checkbox #active_consT>  Actuel/occasionnel </mat-checkbox>
-  <input #freqT  [disabled]="!active_consT.checked" type="text" placeholder="frequence" ><br>
-  Drogue <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
-  <mat-checkbox #active_consD>  Actuel/occasionnel </mat-checkbox>
-  <input #freqD [disabled]="!active_consD.checked" placeholder="frequence" type="text">
-</nb-card>
-<nb-card><br><br>
-  <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
-  le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
-  <br> Ou <br>
-  <mat-checkbox #no_medic> <b>Je ne prends pas de médicaments</b>  </mat-checkbox>
-  <br>
-  <input type="text" [(ngModel)]="medicamant" >
+    </div>
+<!--
+    <img src="assets/douleur.PNG" alt="">
+-->
+    <div>
+      <br>
+      <b>Troubles musculo-squelettiques</b> <br>
+      Avez-vous déjà eu des fractures ?
+      <br><mat-checkbox #activeT>  Oui </mat-checkbox><mat-checkbox> Non</mat-checkbox>
+      <input #frac1 [disabled]="!activeT.checked" type="text">
+      <input #frac2 [disabled]="!activeT.checked" type="text">
+      <input #frac3 [disabled]="!activeT.checked" type="text">
+      <br><br>
+      À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
+      <img src="assets/douleur.PNG" alt="">
+      <br>
+      <mat-checkbox (change)="setDouleur($event,no_douleur.value)" value="Aucune douleur" #no_douleur>  Aucune douleur </mat-checkbox>
+      <br>
+      <mat-checkbox (change)="setDouleur($event,cou.value)" value="Cou" [disabled]="no_douleur.checked" #cou>  Cou </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule droite" #epauled>  Epaule droite </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule gauche" #epauleg >  Epaule gauche </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,m_dos.value)" [disabled]="no_douleur.checked"value="Milieu du dos" #m_dos >  Milieu du dos </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,h_dos.value)" [disabled]="no_douleur.checked" value="Haut du dos" #h_dos >  Haut du dos </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,b_dos.value)" [disabled]="no_douleur.checked" value="Bas du dos " #b_dos >  Bas du dos </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,coudeg.value)" [disabled]="no_douleur.checked" value="Coude gauche" #coudeg>  Coude gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,couded.value)" [disabled]="no_douleur.checked" value="Coude droit " #couded>  Coude droit </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,poignetg.value)" [disabled]="no_douleur.checked" value="Poignet gauche" #poignetg>  Poignet gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,poignetd.value)" [disabled]="no_douleur.checked" value="Poignet droit" #poignetd>  Poignet droit </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,maindg.value)" [disabled]="no_douleur.checked" value="Main/doigts gauche " #maindg>  Main/doigts gauche  </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,maindd.value)" [disabled]="no_douleur.checked" value="Main/doigts droit" #maindd>  Main/doigts droit  </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,pouceg.value)" [disabled]="no_douleur.checked" value="Pouce gauche" #pouceg>  Pouce gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,pouced.value)" [disabled]="no_douleur.checked" value="Pouce droit" #pouced>  Pouce droit </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,hancheg.value)" [disabled]="no_douleur.checked" value="Hanche gauche " #hancheg>  Hanche gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,hanched.value)" [disabled]="no_douleur.checked" value="Hanche droite" #hanched>  Hanche droite </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,genoug.value)" [disabled]="no_douleur.checked" value="Genou gauche" #genoug>  Genou gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,genoud.value)" [disabled]="no_douleur.checked" value="Genou droit" #genoud>  Genou droit </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,chevilleg.value)" [disabled]="no_douleur.checked" value="Cheville gauche" #chevilleg>  Cheville gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,chevilled.value)" [disabled]="no_douleur.checked" value="Cheville droite" #chevilled>  Cheville droite </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,pieds_orteilsg.value)" [disabled]="no_douleur.checked" value="pied/orteils gauche" #pieds_orteilsg>  pied/orteils gauche </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,pieds_orteilsd.value)" [disabled]="no_douleur.checked" value="pied/orteils droit" #pieds_orteilsd>  pied/orteils droit </mat-checkbox>
+      <br>
+    </div>
+    <div>
+      <br>
+      <b>
+        Consommation de produits alcoolisés, tabagiques ou drogues (si actuel/occasionnel, indiquez la fréquence.
+        ex : nombre de cigarette/jour ou nombre de consommation/sem/jour, etc)
+      </b> <br><br>
+      Alcool <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
+      <mat-checkbox #active_consA>  Actuel/occasionnel </mat-checkbox>
+      <input #freqSA [disabled]="!active_consA.checked" type="text" placeholder="frequence" ><br>
+      Tabac <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
+      <mat-checkbox #active_consT>  Actuel/occasionnel </mat-checkbox>
+      <input #freqT  [disabled]="!active_consT.checked" type="text" placeholder="frequence" ><br>
+      Drogue <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
+      <mat-checkbox #active_consD>  Actuel/occasionnel </mat-checkbox>
+      <input #freqD [disabled]="!active_consD.checked" placeholder="frequence" type="text">
+    </div>
+    <div><br><br>
+      <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
+        le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
+      <br> Ou <br>
+      <mat-checkbox #no_medic> <b>Je ne prends pas de médicaments</b>  </mat-checkbox>
+      <br>
+      <input type="text" [(ngModel)]="medicamant" >
 
-  <button nbButton status="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant)">
-    Ajouter un medicament<nb-icon icon="plus-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
-  </button>
+      <button nbButton status="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant)">
+        Ajouter un medicament<nb-icon icon="plus-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+      </button>
 
-  <br>
-  <nb-card *ngIf="medicaments.description.length>0">
-    <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
-      <mat-list-item role="listitem">{{medicaments.description[i]}}</mat-list-item>
-      <button mat-mini-fab color="warn"   (click)="delett_med(i)"> <mat-icon>delete</mat-icon></button>
+      <br>
+      <nb-card *ngIf="medicaments.description.length>0">
+        <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
+          <mat-list-item role="listitem">{{medicaments.description[i]}}</mat-list-item>
+          <button mat-mini-fab color="warn"   (click)="delett_med(i)"> <mat-icon>delete</mat-icon></button>
 
 
-    </mat-list>
-  </nb-card>
-  <br><br>
-</nb-card>
+        </mat-list>
+      </nb-card>
+      <br><br>
+    </div>
 
   </nb-card-body>
 </nb-card>

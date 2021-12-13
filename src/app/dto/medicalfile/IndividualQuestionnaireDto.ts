@@ -1,10 +1,10 @@
 export class IndividualQuestionnaireDto {
 
-  patientId : string;
-  fileNumber : string;
-  initial : string;
-  socioDemographicVariables : string;
-  medicalFileHistory : string;
+  patientId: string;
+  fileNumber: string;
+  initial: string;
+  socioDemographicVariables: string;
+  medicalFileHistory: string;
 
 
   constructor(patientId: string, fileNumber: string, initial: string, socioDemographicVariables: string, medicalFileHistory: string) {
