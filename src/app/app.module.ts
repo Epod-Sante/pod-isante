@@ -64,7 +64,6 @@ import {HomeRoutingModule} from './_components/home/home-routing.module';
 import {HomeProRoutingModule} from './_components/home-pro/home-pro.routing.module';
 import {HomeSeaRoutingModule} from './_components/homesea/homesea.routing.module';
 import {PagePatientRoutingModule} from './_components/pagepatient/pagepatient.routing';
-import {LogiComponent} from './_components/home-pro/patient/list-patients/appoint/logi.component';
 import {AddDialogComponent} from './_components/dialogs/add/add.dialog.component';
 import {DeleteDialogComponent} from './_components/dialogs/delete/delete.dialog.component';
 import {EditDialogComponent} from './_components/dialogs/edit/edit.dialog.component';
@@ -84,29 +83,32 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {TwoDigitDecimaNumberDirective} from './_components/home-pro/patient/examenclinique/two-digit-decima-number.directive';
 import {OptionComponent} from './_components/home-pro/patient/histoire-sante/option/option.component';
 import {MatCardModule} from '@angular/material/card';
-import {DateTimePickerModule} from '@syncfusion/ej2-angular-calendars';
 import {NgMaterialMultilevelMenuModule, MultilevelMenuService} from 'ng-material-multilevel-menu';
 import {
-  NbThemeModule,
-  NbLayoutModule,
-  NbSidebarModule,
-  NbMenuModule,
-  NbActionsModule,
-  NbButtonModule,
-  NbIconModule,
-  NbWindowModule,
-  NbPopoverModule,
-  NbCardModule,
-  NbToastrModule,
-  NbFormFieldModule,
-  NbInputModule, NbAlertModule, NbCheckboxModule, NbDialogModule
+    NbThemeModule,
+    NbLayoutModule,
+    NbSidebarModule,
+    NbMenuModule,
+    NbActionsModule,
+    NbButtonModule,
+    NbIconModule,
+    NbWindowModule,
+    NbPopoverModule,
+    NbCardModule,
+    NbToastrModule,
+    NbFormFieldModule,
+    NbInputModule,
+    NbAlertModule,
+    NbCheckboxModule,
+    NbDialogModule,
+    NbSelectModule,
+    NbTabsetModule, NbDatepickerModule, NbTimepickerModule, NbTreeGridModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {ObjectifV2Module} from './_components/home-pro/patient/objectif-v2/objectif-v2.module';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {WindowComponent} from './_components/window/window.component';
 import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/quizindivid.component';
-
 
 @NgModule({
   declarations: [
@@ -147,7 +149,6 @@ import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/q
     QuizComponent,
     CreaterdvComponent,
     RdvComponent,
-    LogiComponent,
     AddDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
@@ -158,65 +159,66 @@ import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/q
     WindowComponent,
     QuizindividComponent
   ],
-  imports: [
-    NbDialogModule.forRoot(),
-    NbToastrModule.forRoot(),
-    NbWindowModule.forRoot(),
-    NgxSliderModule,
-    ObjectifV2Module,
-    BrowserModule,
-    FormsModule, MatCardModule,
-    NgxMatTimepickerModule,
-    NgxMatDatetimePickerModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    ModalModule,
-    FlexLayoutModule,
-    HomeRoutingModule,
-    HomeProRoutingModule,
-    HomeSeaRoutingModule,
-    PagePatientRoutingModule,
-    FormsModule,
-    DateTimePickerModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    HttpClientModule,
-    RouterModule,
-    MatInputModule,
-    NgMaterialMultilevelMenuModule,
-    MainNavModuleProf,
-    RouterModule,
-    ChartsModule,
-    MatDialogModule,
-    RouterModule,
-    NgIdleKeepaliveModule.forRoot(),
-    OAuthModule.forRoot(),
-    SchedulerModule,
-    MatButtonToggleModule,
-    NbThemeModule.forRoot({name: 'default'}),
-    NbLayoutModule,
-    NbEvaIconsModule, NbSidebarModule,
-    NbSidebarModule.forRoot(),
-    NbMenuModule.forRoot(),
-    NbMenuModule,
-    NbActionsModule, NbButtonModule, NbIconModule,
-    NbPopoverModule, NbCardModule, NbFormFieldModule,
-    NbInputModule, NbAlertModule, NbCheckboxModule,
-  ],
+    imports: [
+        NbTimepickerModule.forRoot(),
+        NbDatepickerModule.forRoot(),
+        NbDialogModule.forRoot(),
+        NbToastrModule.forRoot(),
+        NbWindowModule.forRoot(),
+        NgxSliderModule,
+        ObjectifV2Module,
+        BrowserModule,
+        FormsModule, MatCardModule,
+        NgxMatTimepickerModule,
+        NgxMatDatetimePickerModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        ModalModule,
+        FlexLayoutModule,
+        HomeRoutingModule,
+        HomeProRoutingModule,
+        HomeSeaRoutingModule,
+        PagePatientRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        HttpClientModule,
+        RouterModule,
+        MatInputModule,
+        NgMaterialMultilevelMenuModule,
+        MainNavModuleProf,
+        RouterModule,
+        ChartsModule,
+        MatDialogModule,
+        RouterModule,
+        NgIdleKeepaliveModule.forRoot(),
+        OAuthModule.forRoot(),
+        SchedulerModule,
+        MatButtonToggleModule,
+        NbThemeModule.forRoot({name: 'default'}),
+        NbLayoutModule,
+        NbEvaIconsModule, NbSidebarModule,
+        NbSidebarModule.forRoot(),
+        NbMenuModule.forRoot(),
+        NbMenuModule,
+        NbActionsModule, NbButtonModule, NbIconModule,
+        NbPopoverModule, NbCardModule, NbFormFieldModule,
+        NbInputModule, NbAlertModule, NbCheckboxModule, NbSelectModule, NbTabsetModule, NbDatepickerModule, NbTreeGridModule,
+    ],
 //
 
   providers: [EncrDecrService, DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: MatDialogRef, useValue: {}},
     {provide: MAT_DIALOG_DATA, useValue: []},
-    MultilevelMenuService,
+    MultilevelMenuService
     // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   entryComponents: [

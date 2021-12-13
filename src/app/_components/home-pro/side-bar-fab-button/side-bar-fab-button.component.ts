@@ -13,20 +13,16 @@ import {Router} from '@angular/router';
 import {NbIconConfig, NbMenuItem, NbMenuService, NbPopoverDirective, NbSidebarService} from '@nebular/theme';
 import {NbWindowService} from '@nebular/theme';
 import {AuthenticationService} from '../../../_services';
-import {speedDialFabAnimations} from '../../../../assets/speed-dial-fab.animations';
 import {ObjectifV2Component} from '../patient/objectif-v2/objectif-v2.component';
 import {Subscription} from 'rxjs';
 import {PatientDataBetweenComponentsService} from '../../../_services/PatientDataBetweenComponentsService';
 import {PatientDto} from '../../../dto/patient/PatientDto';
-import {ExamencliniqueComponent} from "../patient/examenclinique/examenclinique.component";
-import {AffectpodometreComponent} from "../patient/affectpodometre/affectpodometre.component";
 
 
 @Component({
   selector: 'app-side-bar-fab-button',
   templateUrl: './side-bar-fab-button.component.html',
-  styleUrls: ['./side-bar-fab-button.component.scss'],
-  animations: speedDialFabAnimations
+  styleUrls: ['./side-bar-fab-button.component.scss']
 })
 export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
 
@@ -70,27 +66,6 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
     }
   ];
 
-  fabButtons = [
-    {
-      icon: 'file-add-outline',
-      title: 'Objectif',
-    },
-    {
-      icon: 'file-add-outline',
-      title: 'Fitbit',
-    },
-    {
-      icon: 'file-add-outline',
-      title: 'Examen clinique',
-    },
-    {
-      icon: 'file-add-outline',
-      title: 'Bilan lipide',
-    },
-  ];
-  buttons = [];
-  fabTogglerState = 'inactive';
-
   message: string;
   subscription: Subscription;
   patient: PatientDto;
@@ -125,28 +100,6 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
     } else if (this.toggleOff) {
       this.toggleOn = true;
       this.toggleOff = false;
-    }
-  }
-
-  showItems() {
-    this.fabTogglerState = 'active';
-    this.buttons = this.fabButtons;
-    setTimeout(() => {
-      this.openPopover();
-    }, 5);
-  }
-
-  hideItems() {
-    this.fabTogglerState = 'inactive';
-    this.buttons = [];
-    this.closePopover();
-  }
-
-  onToggleFab() {
-    if (this.buttons.length) {
-      this.hideItems();
-    } else {
-      this.showItems();
     }
   }
 

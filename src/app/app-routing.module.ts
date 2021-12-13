@@ -28,9 +28,7 @@ export const routes: Routes = [
   {path: 'registration/confirm', component: ConfirmaccountComponent},
   {path: 'update/password', component: ResetpasswordComponent},
   {path: 'user/invite', component: RegisterComponent},
-  {
-    path: 'patient/login', component: PatientloginComponent
-  },
+  {path: 'patient/login', component: PatientloginComponent},
   {path: 'patient/questionnaire', component: PagepatientComponent},
   {path: '**', component: Error404Component},
 

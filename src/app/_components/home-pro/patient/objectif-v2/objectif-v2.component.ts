@@ -1,11 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
 import {Options} from '@angular-slider/ngx-slider';
 import {Endroit, Intensite, Objectif, ObjectifModel, Parametre, Recommandation} from './ObjectifModel';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {RecommandationDto} from '../../../../dto/RecommandationDto';
 import {Request} from '../../../../dto';
 import {PatientService} from '../../../../_services/patient.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {NbToastrService, NbWindowRef} from "@nebular/theme";
+import {Subscription} from "rxjs";
+import {PatientDataBetweenComponentsService} from "../../../../_services/PatientDataBetweenComponentsService";
 
 
 @Component({
@@ -14,7 +16,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./objectif-v2.component.css']
 })
 export class ObjectifV2Component implements OnInit {
-  @Input() patient: PatientDto;
+  patient: PatientDto;
 
   parametres: Array<Parametre> = new Array();
   parametres2: Array<Parametre> = new Array();
@@ -283,8 +285,15 @@ export class ObjectifV2Component implements OnInit {
 
   objectif: Array<ObjectifModel> = new Array();
 
-  constructor(private _snackBar : MatSnackBar,
-              private  patientService: PatientService,) {
+  message: string;
+  subscription: Subscription;
+
+  constructor(private  patientService: PatientService, @Optional() protected windowRef: NbWindowRef,
+              private data: PatientDataBetweenComponentsService,
+              private toastrService: NbToastrService) {
+    this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
+
+    console.log('**************' + this.message);
 
 
     for (const i in this.moyensObjctif1) {
@@ -476,23 +485,24 @@ export class ObjectifV2Component implements OnInit {
         this.precautionsObjctif3OptionsSelect));
     }
 
-    console.log(this.objectif);
-
-
-    const professionel = JSON.parse(localStorage.getItem('currentUser'));
+    this.patient = new PatientDto(this.message, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null);
     const recomm = new RecommandationDto(null, this.patient, null, JSON.stringify(this.objectif), null, null, null);
     const request = new Request(recomm);
     this.patientService.addReco(request).subscribe( reponse => {
-      this.openSnackBar('Ajout reussi', 'Ok');
+      this.windowRef.close();
+      this.showToast('top-right', 'success', 'Succès', 'Objectif ajoute');
     }, error => {
-      this.openSnackBar('Operation echoue', 'Ok');
+      this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
     });
-
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 500,
-    });
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
   }
 }

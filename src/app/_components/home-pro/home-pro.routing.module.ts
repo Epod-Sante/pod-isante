@@ -3,9 +3,6 @@ import {HomeProComponent} from './home-pro.component';
 import {PatientComponent} from './patient/patient.component';
 import {AddpatientComponent} from './patient/addpatient/addpatient.component';
 import {ListPatientsComponent} from './patient/list-patients/list-patients.component';
-import {RecomandationComponent} from './patient/recomandation/recomandation.component';
-import {AppointComponent} from './patient/patient-profile/appoint/appoint.component';
-import {LogiComponent} from './patient/list-patients/appoint/logi.component';
 import {DetailsRecoComponent} from './patient/recomandation/details-reco/details-reco.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -26,14 +23,17 @@ import {ObjectifV2Component} from './patient/objectif-v2/objectif-v2.component';
 import {
   NbButtonModule,
   NbCardModule,
-  NbCheckboxModule,
+  NbCheckboxModule, NbDatepickerModule,
   NbIconModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
   NbSelectModule, NbSidebarModule,
-  NbStepperModule
-} from "@nebular/theme";
-import {NgxSliderModule} from "@angular-slider/ngx-slider";
+  NbStepperModule, NbWindowModule, NbWindowRef, NbWindowService
+} from '@nebular/theme';
+import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import { SideBarFabButtonComponent } from './side-bar-fab-button/side-bar-fab-button.component';
-import {ExamencliniqueComponent} from "./patient/examenclinique/examenclinique.component";
+import { FabButtonComponent } from './patient/fab-button/fab-button.component';
+import { RapportGlobalComponent } from './patient/rapport-global/rapport-global.component';
+import { ObjectifReadComponent } from './patient/objectif-read/objectif-read.component';
+import { ExamenCliniqueBilanLipidiqueReadComponent } from './patient/examen-clinique-bilan-lipidique-read/examen-clinique-bilan-lipidique-read.component';
 
 export const homeProRoutes: Routes = [
   {
@@ -47,7 +47,7 @@ export const homeProRoutes: Routes = [
       {path: 'patient', component: PatientComponent},
       {path: 'addpatient', component: AddpatientComponent},
       {path: 'listpatient', component: ListPatientsComponent},
-      {path: 'logi', component: LogiComponent},
+      {path: 'report/:id', component: RapportGlobalComponent},
 
       {path: 'reco', component: HistoireSanteComponent},
     ]
@@ -62,17 +62,20 @@ export const homeProRoutes: Routes = [
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule, NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule],
-  exports: [RouterModule,
-    HistoireSanteComponent,
-    RaportGComponent,
-    BilanLipidiqueComponent,
-    RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent],
-  declarations: [AppointComponent,
+    QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
+    NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule],
+    exports: [RouterModule,
+        HistoireSanteComponent,
+        RaportGComponent,
+        BilanLipidiqueComponent,
+        RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent, FabButtonComponent, ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent],
+  declarations: [
     DetailsRecoComponent,
     BilanLipidiqueComponent,
     HistoireSanteComponent,
-    RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent]
+    RaportGComponent, OptionComponent, RecommmComponent, ObjectifComponent, ObjectifV2Component,
+    SideBarFabButtonComponent, FabButtonComponent, RapportGlobalComponent, ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent],
+  providers: []
 })
 export class HomeProRoutingModule {
 }

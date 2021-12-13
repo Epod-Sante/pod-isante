@@ -1,12 +1,15 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {PatientService} from "../../../_services/patient.service";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
-import {AppointmentDto} from "../../../dto/AppointmentDto";
-import {Request, Response} from "../../../dto";
-import {first} from "rxjs/operators";
-import {PatientDto} from "../../../dto/patient/PatientDto";
+import {PatientService} from '../../../_services/patient.service';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {AppointmentDto} from '../../../dto/AppointmentDto';
+import {Request, Response} from '../../../dto';
+import {first} from 'rxjs/operators';
+import {PatientDto} from '../../../dto/patient/PatientDto';
+import {PatientDataBetweenComponentsService} from "../../../_services/PatientDataBetweenComponentsService";
+import {NbToastrService} from "@nebular/theme";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-baza.dialog',
@@ -14,93 +17,52 @@ import {PatientDto} from "../../../dto/patient/PatientDto";
   styleUrls: ['../../dialogs/edit/edit.dialog.css']
 })
 export class EditDialogComponent {
-  patientsId : string
-  birthday: string
-  patient
-  patientId
-  formControl = new FormControl('', [
-    Validators.required
-    // Validators.email,
-  ]);
+  patientId: string;
+  dateInit: string;
+  date = '';
+  subscription: Subscription;
 
   constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public patientService: PatientService) {
-    this.getPatientById()
+              @Inject(MAT_DIALOG_DATA) public data: any, public patientService: PatientService,
+              private dataService: PatientDataBetweenComponentsService,
+              private toastrService: NbToastrService) {
+    this.subscription = this.dataService.currentMessage.subscribe(message => this.patientId = message);
+
+    this.dateInit = data.request.object.appointmentDate;
   }
 
-  onNoClick(): void {
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  updateAppointment(){
+    if (this.date !== ''){
+      this.data.request.object.appointmentDate = new Date(this.date);
+      this.patientService.updateRdv(this.data.request).pipe(first())
+          .subscribe(
+            data => {
+              this.date = '';
+              this.closeDialog();
+              this.showToast('top-right', 'success', 'Succès', 'Modification reussi');
+            },
+            error => {
+              this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
+            });
+    }else {
+      this.showToast('top-right', 'info', 'Info', 'Veuillez ajouter une date');
+    }
+  }
+
+  closeDialog() {
     this.dialogRef.close();
   }
 
-
-  getBirthday(event: MatDatepickerInputEvent<Date>) {
-    const d = new Date(event.value);
-    console.log(d)
-
-    let date = d.getDate();
-    let jr = date.toString()
-    if(date>9){
-
-    }else{
-      jr= "0"+date
-    }
-    console.log(jr)
-    const month = d.getMonth() + 1; // Be careful! January is 0 not 1
-    let mois = month.toString()
-    if(month>9){
-
-    }else{
-      mois= "0"+month
-    }
-    const year = d.getFullYear();
-
-    this.birthday = year + '-' + mois + '-' + jr;
-    console.log(this.birthday)
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
   }
-
-  comfirmer(patientId : string, datev: string){
-    if(patientId!="" || datev!=""){
-
-      this.data.request.object.appointmentDate = this.birthday
-        this.patientService.updateRdv(this.data.request).pipe(first())
-          .subscribe(
-            data => {
-              console.log(" AJOUT REUSSI","Ok")
-
-
-            },
-            error => {
-              console.log("error")
-
-
-            });
-
-
-
-    }else {
-      console.log("Veuillez Remplir tous les champs ")
-
-    }
-
-  }
-  getPatientById(){
-    console.log(this.data.request.object.id)
-    this.patientService.getPatient(this.data.request.object.patientId).subscribe(patients => {
-      let socio = patients as Response
-      this.patient = socio.object as PatientDto
-      console.log(patients)
-      console.log( this.patient)
-
-
-
-      //this.liste_antecedants = JSON.parse(JSON.stringify(this.patient.medicalFile.medicalFileHistory)) as MedicalFileHistoryDto[]
-      //console.log(this.liste_antecedants[0].antecedents)
-
-
-    });
-
-  }
-
-
-
 }

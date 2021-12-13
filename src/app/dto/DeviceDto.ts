@@ -1,16 +1,16 @@
-import {PatientDeviceDto} from "./PatientDeviceDto";
+import {PatientDeviceDto} from './PatientDeviceDto';
 
 export class DeviceDto{
-  id : string;
-  deviceCode : string;
-  deviceVersion : string;
-  type : string;
-  lastSyncDate : Date;
-  adminId : string;
-  available : boolean;
-  institutionCode : string;
-  auth : string;
-  patientDevices : PatientDeviceDto[];
+  id: string;
+  deviceCode: string;
+  deviceVersion: string;
+  type: string;
+  lastSyncDate: Date;
+  adminId: string;
+  available: boolean;
+  institutionCode: string;
+  auth: string;
+  patientDevices: PatientDeviceDto[];
 
 
   constructor(id: string, deviceCode: string, deviceVersion: string, type: string, lastSyncDate: Date, adminId: string, available: boolean, institutionCode: string, auth: string, patientDevices: PatientDeviceDto[]) {

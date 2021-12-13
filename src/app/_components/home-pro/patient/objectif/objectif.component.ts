@@ -1,62 +1,80 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PatientDto} from "../../../../dto/patient/PatientDto";
-import {PatientService} from "../../../../_services/patient.service";
-import {RecommandationDto} from "../../../../dto/RecommandationDto";
-import {Request} from "../../../../dto";
-import {MatDialog} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Component, Input, OnDestroy, OnInit, Optional} from '@angular/core';
+import {PatientDto} from '../../../../dto/patient/PatientDto';
+import {PatientService} from '../../../../_services/patient.service';
+import {RecommandationDto} from '../../../../dto/RecommandationDto';
+import {Request} from '../../../../dto';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ContactDto} from '../../../../dto/patient/ContactDto';
+import {Subscription} from 'rxjs';
+import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
+import {NbToastrService, NbWindowRef} from '@nebular/theme';
 
 @Component({
   selector: 'app-objectif',
   templateUrl: './objectif.component.html',
   styleUrls: ['./objectif.component.css']
 })
-export class ObjectifComponent implements OnInit {
-  @Input() patient: PatientDto;
-  message : string
-  barriers : string[] = [];
-  solutions : string[] = [];
-  constructor(private  patientService: PatientService,
-              private _snackBar : MatSnackBar) { }
+export class ObjectifComponent implements OnInit, OnDestroy {
+  patient: PatientDto;
+  id: string;
+  barriers: string[] = [];
+  solutions: string[] = [];
+  message: string;
+  subscription: Subscription;
+
+  constructor(private  patientService: PatientService, private data: PatientDataBetweenComponentsService,
+              private toastrService: NbToastrService, @Optional() protected windowRef: NbWindowRef, ) {
+    this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
+
+    this.patient = new PatientDto(this.message, null, null, null, null,
+      null, null, null, null, null, null,
+      null, null, null, null, null,
+      null, null, null, null);
+  }
 
   ngOnInit() {
   }
-  comfirmerBar(bar : any[]){
-    for (let i =0; i<bar.length; i++){
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  comfirmerBar(bar: any[]){
+    for (let i = 0; i < bar.length; i++){
       this.barriers.push(bar[i].value);
     }
 
-    let recomm = new RecommandationDto(null, this.patient, null,null,null, JSON.stringify(this.barriers), null)
-    let request = new Request(recomm)
-    this.patientService.upReco(request).subscribe( reponse =>{
-      console.log("Ajout reussi")
-      this.message = "Ajout reussi"
-      this.openSnackBar(this.message,"Ok")
+    const recomm = new RecommandationDto(null, this.patient, null, null, null, JSON.stringify(this.barriers), null);
+    const request = new Request(recomm);
+    this.patientService.upReco(request).subscribe( reponse => {
+      this.windowRef.close();
+      this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
     }, error => {
-      this.message = "OPERATION ECHOUE"
-      this.openSnackBar(this.message,"Ok")
-      console.log(this.message)
-    })
+      this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
+    });
   }
-  comfirmerSol(sol : any[]){
-    for (let i =0; i<sol.length; i++){
+  comfirmerSol(sol: any[]){
+    for (let i = 0; i < sol.length; i++){
       this.solutions.push(sol[i].value);
     }
-    let recomm = new RecommandationDto(null, this.patient, null,null,null, null, JSON.stringify(this.solutions))
-    let request = new Request(recomm)
-    this.patientService.upReco(request).subscribe( reponse =>{
-      console.log("Ajout reussi")
-      this.message = "Ajout reussi"
-      this.openSnackBar(this.message,"Ok")
+    const recomm = new RecommandationDto(null, this.patient, null, null, null, null, JSON.stringify(this.solutions));
+    const request = new Request(recomm);
+    this.patientService.upReco(request).subscribe( reponse => {
+      this.windowRef.close();
+      this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
     }, error => {
-      this.message = "OPERATION ECHOUE"
-      this.openSnackBar(this.message,"Ok")
-      console.log(this.message)
-    })
+      this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
+    });
   }
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 5000,
 
-    })}
+
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
+  }
 }

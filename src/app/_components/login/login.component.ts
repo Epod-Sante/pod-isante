@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           if (localStorage.getItem('currentRole') === 'role_admin') {
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
           } else if (localStorage.getItem('currentRole') === 'role_professional') {
             this.router.navigate(['listpatient']);
           } else if (localStorage.getItem('currentRole') === 'role_searcher') {

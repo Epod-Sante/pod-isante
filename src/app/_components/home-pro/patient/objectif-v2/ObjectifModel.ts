@@ -1,9 +1,9 @@
 
 export class ObjectifModel {
-  private objectif: Objectif;
-  private moyen: string[];
-  private recommandation: Recommandation;
-  private precaution: string[];
+  objectif: Objectif;
+  moyen: string[];
+  recommandation: Recommandation;
+  precaution: string[];
 
 
   constructor(objectif: Objectif, moyen: string[], recommandation: Recommandation, precaution: string[]) {
@@ -38,7 +38,6 @@ export class Recommandation{
     this.intensite = intensite;
   }
 }
-
 
 export class Endroit{
   endroit: string;

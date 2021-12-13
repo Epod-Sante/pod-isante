@@ -64,39 +64,13 @@ export class AuthenticationService {
 
 
           if (token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(token);
             localStorage.setItem('currentToken', JSON.stringify(token));
             const code = localStorage.getItem('currentToken');
             const decoded = jwtDecode(code);
             const role = decoded.role;
-            console.log(role);
-            /*            let found = role.indexOf("ROLE_ADMIN");
-                        if(found >= 0){
-                          console.log(found)
-                        }else {
-                          found = role.indexOf("ROLE_PROFESSIONAL");
-                          if(found  >= 0){
-                            console.log(found)
-                            } else
-                            {
-                              found = role.indexOf("ROLE_SEARCHER");
-                              if(found  >= 0){
-                                console.log(found)
-                              } else
-                              {
-
-                              }
-                            }
-
-                        }*/
-            console.log(role.toLowerCase());
             window.localStorage.time = new Date().getTime();
-            console.log(window.localStorage.time);
             localStorage.setItem('currentRole', role.toLowerCase());
             localStorage.setItem('currentUser', JSON.stringify(decoded));
-            console.log(localStorage.getItem('currentRole'));
-
           }
 
           return LoginClientDTO;
@@ -134,45 +108,19 @@ export class AuthenticationService {
 
 
           if (tokken) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.clear();
-            console.log(tokken);
 
             localStorage.setItem('currentToken', JSON.stringify(tokken));
             const code = localStorage.getItem('currentToken');
             const decoded = jwtDecode(code);
             const role = decoded.role;
-            console.log(role);
-            /*           let found = role.indexOf("ROLE_ADMIN");
-                        if(found >= 0){
-                          console.log(found)
-                        }else {
-                          found = role.indexOf("ROLE_PROFESSIONAL");
-                          if(found  >= 0){
-                            console.log(found)
-                            } else
-                            {
-                              found = role.indexOf("ROLE_SEARCHER");
-                              if(found  >= 0){
-                                console.log(found)
-                              } else
-                              {
-
-                              }
-                            }
-
-                        }*/
-            console.log(role.toLowerCase());
             window.localStorage.time = new Date().getTime();
-            console.log(window.localStorage.time);
             localStorage.setItem('currentRole', role.toLowerCase());
             localStorage.setItem('currentUser', JSON.stringify(decoded));
-            console.log(localStorage.getItem('currentRole'));
             return Promise.resolve(tokken);
             // this.router.navigate([this.route.url])
 
           }else{
-            console.log('No Token');
             return of (null);
           }
 
@@ -232,13 +180,8 @@ export class AuthenticationService {
 
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
     this.http.delete(this.LOG_OUT_URL, {headers: header}).subscribe(reponse => {
-      console.log('gg');
       localStorage.clear();
       this.router.navigate(['/login']);
     });
-
-
-
-
   }
 }
