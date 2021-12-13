@@ -75,21 +75,22 @@
 Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
 inscrire les années correspondantes.
 <br><br>
-<section *ngFor="let ant of antecedants; let  j = index;">
+<nb-card *ngFor="let ant of antecedants; let  j = index;">
   {{ant.antecedents}}
-  <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
   <mat-checkbox [checked]="selected === j-200" (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
-   <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
-  <section   *ngFor="let an of ant.date; let i = index; ">
+  <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
+
+  <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
+  <nb-card   *ngFor="let an of ant.date; let i = index; ">
      <input  value="{{an}}" [disabled]="true" type="text"    >
     <button mat-mini-fab color="warn" [disabled]="!active.checked"  (click)="delette(j,i)"> <mat-icon>delete</mat-icon></button>
 
-  </section>
+  </nb-card>
 
   <br>
-</section>
+</nb-card>
 
-<section>
+<nb-card>
   <br>
   <b>Avez-vous l’une des conditions de santé ci-dessous ?</b> <br>
   <mat-checkbox (change)="setCond($event,hypertension.value)"  #hypertension value="Hypertension artérielle"> Hypertension artérielle </mat-checkbox>
@@ -102,9 +103,9 @@ inscrire les années correspondantes.
   <input #autre_conditions  [disabled]="!autre.checked" type="text">
   <br>
 
-</section>
+</nb-card>
 <img src="assets/douleur.PNG" alt="">
-<section>
+<nb-card>
   <br>
   <b>Troubles musculo-squelettiques</b> <br>
   Avez-vous déjà eu des fractures ?
@@ -141,8 +142,8 @@ inscrire les années correspondantes.
   <br><mat-checkbox (change)="setDouleur($event,pieds_orteilsg.value)" [disabled]="no_douleur.checked" value="pied/orteils gauche" #pieds_orteilsg>  pied/orteils gauche </mat-checkbox>
   <mat-checkbox (change)="setDouleur($event,pieds_orteilsd.value)" [disabled]="no_douleur.checked" value="pied/orteils droit" #pieds_orteilsd>  pied/orteils droit </mat-checkbox>
   <br>
-</section>
-<section>
+</nb-card>
+<nb-card>
   <br>
   <b>
   Consommation de produits alcoolisés, tabagiques ou drogues (si actuel/occasionnel, indiquez la fréquence.
@@ -157,8 +158,8 @@ inscrire les années correspondantes.
   Drogue <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
   <mat-checkbox #active_consD>  Actuel/occasionnel </mat-checkbox>
   <input #freqD [disabled]="!active_consD.checked" placeholder="frequence" type="text">
-</section>
-<section><br><br>
+</nb-card>
+<nb-card><br><br>
   <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
   le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
   <br> Ou <br>
@@ -171,16 +172,16 @@ inscrire les années correspondantes.
   </button>
 
   <br>
-  <section *ngIf="medicaments.description.length>0">
+  <nb-card *ngIf="medicaments.description.length>0">
     <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
       <mat-list-item role="listitem">{{medicaments.description[i]}}</mat-list-item>
       <button mat-mini-fab color="warn"   (click)="delett_med(i)"> <mat-icon>delete</mat-icon></button>
 
 
     </mat-list>
-  </section>
+  </nb-card>
   <br><br>
-</section>
+</nb-card>
 
   </nb-card-body>
 </nb-card>
