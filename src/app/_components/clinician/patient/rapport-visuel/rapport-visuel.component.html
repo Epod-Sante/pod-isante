@@ -1,0 +1,96 @@
+<nb-card>
+
+  <nb-card class="stats">
+    <nb-card-body><h6>Statistiques descriptives</h6></nb-card-body>
+    <nb-card-body *ngIf="this.appointments?.length === 0">Pas de statistiques descriptives.</nb-card-body>
+    <table *ngIf="stats.length > 0"
+           mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Minutes">
+        <th mat-header-cell *matHeaderCellDef> Minutes</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Max Column -->
+      <ng-container matColumnDef="Maximum">
+        <th mat-header-cell *matHeaderCellDef> Maximum</th>
+        <td mat-cell *matCellDef="let element"> {{element.max}} </td>
+      </ng-container>
+
+      <!-- Min Column -->
+      <ng-container matColumnDef="Minimum">
+        <th mat-header-cell *matHeaderCellDef> Minimum</th>
+        <td mat-cell *matCellDef="let element"> {{element.min}} </td>
+      </ng-container>
+
+      <!-- Average Column -->
+      <ng-container matColumnDef="Moyenne">
+        <th mat-header-cell *matHeaderCellDef> Moyenne</th>
+        <td mat-cell *matCellDef="let element"> {{element.average}} </td>
+      </ng-container>
+
+      <!-- Median Column -->
+      <ng-container matColumnDef="Mediane">
+        <th mat-header-cell *matHeaderCellDef> Mediane</th>
+        <td mat-cell *matCellDef="let element"> {{element.median}} </td>
+      </ng-container>
+
+      <!-- Variance Column -->
+      <ng-container matColumnDef="Variance">
+        <th mat-header-cell *matHeaderCellDef> Variance</th>
+        <td mat-cell *matCellDef="let element"> {{element.variance}} </td>
+      </ng-container>
+
+      <!-- SD Column -->
+      <ng-container matColumnDef="sd">
+        <th mat-header-cell *matHeaderCellDef> SD</th>
+        <td mat-cell *matCellDef="let element"> {{element.sd}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="active" mat-row *matRowDef="let row; columns: displayedColumns;"
+          class="example-element-row"></tr>
+    </table>
+
+
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Questionnaires">
+
+        <nb-card-body>
+          <h4>GPAQ</h4>
+          <nb-card-body *ngIf="this.gpaq.length > 0">
+            <p>Selectionner une date</p>
+            <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem" >
+              <nb-option *ngFor="let g of gpaq; let i = index;" [value]="i" (selectionChange)="gpaqOnChange(i)">{{g.date}}</nb-option>
+            </nb-select>
+          </nb-card-body>
+
+        <!--  <h3> {{gpaq.at(selectedItem).date}} :  {{gpaq.at(selectedItem).type}} </h3>
+          <h5>Travail</h5>
+          Modéré-vigoureux :   {{(gpaq.at(selectedItem).value.reponses[5].hr * 60 + x.value.reponses[5].minu) * x.value.reponses[4].jr +
+        (x.value.reponses[2].hr * 60 + x.value.reponses[2].minu) * x.value.reponses[1].jr}} minutes
+          <h5>Transport (déplacement) : </h5>
+          A pied : {{ (x.value.reponses[8].hr * 60 + x.value.reponses[8].minu) * x.value.reponses[7].jr}}  minutes<br>
+          A vélo : {{(x.value.reponses[11].hr * 60 + x.value.reponses[11].minu) * x.value.reponses[10].jr}} minutes
+          <h5>Loisirs : </h5>
+          Modéré-vigoureux : {{(x.value.reponses[17].hr * 60 + x.value.reponses[17].minu) * x.value.reponses[16].jr +
+        (x.value.reponses[14].hr * 60 + x.value.reponses[14].minu) * x.value.reponses[13].jr}} minutes<br>
+          Marche : {{(x.value.reponses[20].hr * 60 + x.value.reponses[20].minu) * x.value.reponses[19].jr}} minutes<br>-->
+
+        </nb-card-body>
+      </mat-tab>
+
+      <mat-tab label="Podomètre">
+
+      </mat-tab>
+
+      <mat-tab label="Mesures cliniques">
+
+      </mat-tab>
+
+    </mat-tab-group>
+
+
+  </nb-card>
+</nb-card>

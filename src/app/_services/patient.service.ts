@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserInviteDto} from '../dto/UserInviteDto';
 import {Request} from '../dto';
 import {catchError, map, retry, shareReplay} from 'rxjs/operators';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,6 @@ export class PatientService {
   ADD_QUIZINDI: string;
 
 
-
   constructor(private http: HttpClient) {
     this.ADD_PATIENT_URL = environment.ADD_PATIENT_URL;
     this.LIST_PATIENT_URL = environment.LIST_PATIENT_URL;
@@ -44,7 +44,7 @@ export class PatientService {
     this.GET_PATIENT_BY_ID = environment.GET_PATIENT_BY_ID;
     this.VERIF_TOKEN_PATIENT = environment.VERIF_TOKEN_PATIENT;
     this.LOGIN_PATIENT = environment.LOGIN_PATIENT;
-    this. LIST_DEVICE_AVAILABLE = environment.LIST_DEVICE_AVAILABLE;
+    this.LIST_DEVICE_AVAILABLE = environment.LIST_DEVICE_AVAILABLE;
     this.AFFECT_DEVICE = environment.AFFECT_DEVICE;
     this.RECUP_DEVICE = environment.RECUP_DEVICE;
     this.ADD_RDV = environment.ADD_RDV;
@@ -60,10 +60,7 @@ export class PatientService {
   }
 
 
-
-
-
-  getAll(){
+  getAll() {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
@@ -82,36 +79,36 @@ export class PatientService {
   addPatient(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     console.log(obj.access_token);
     return this.http.post(this.ADD_PATIENT_URL, request, {headers: header});
 
 
-
   }
+
   addSocio(request: Request, patientId: string) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', patientId );
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+      .set('patientId', patientId);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.post(this.ADD_SOCIO, request, {headers: header, params});
 
 
-
   }
+
   addLipid(request: Request, patientId: string) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', patientId );
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+      .set('patientId', patientId);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.post(this.ADD_LIPID, request, {headers: header, params});
 
 
-
   }
-  deleteRdv(request: Request){
+
+  deleteRdv(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const options = {
@@ -123,32 +120,35 @@ export class PatientService {
     return this.http.delete(this.ADD_RDV, options);
 
   }
+
   getSocio(id: string) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', id );
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
-    return this.http.get(this.GET_SOCIO,  {headers: header, params});
+      .set('patientId', id);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
+    return this.http.get(this.GET_SOCIO, {headers: header, params});
 
 
   }
-  getPatient(id: string){
+
+  getPatient(id: string) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', id );
+      .set('patientId', id);
 
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
-    return this.http.get(this.GET_PATIENT_BY_ID, { headers: header, params});
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
+    return this.http.get(this.GET_PATIENT_BY_ID, {headers: header, params});
 
   }
+
   addAntecedants(request: Request, patientId: string) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', patientId );
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+      .set('patientId', patientId);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.post(this.ADD_ANTE, request, {headers: header, params});
 
 
@@ -158,87 +158,91 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', patientId );
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+      .set('patientId', patientId);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.post(this.ADD_EXAM, request, {headers: header, params});
 
 
-
   }
-  addRdv(request: Request){
+
+  addRdv(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.post(this.ADD_RDV, request, {headers: header});
 
 
-
-
   }
-  updateRdv(request: Request){
+
+  updateRdv(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.put(this.ADD_RDV, request, {headers: header});
 
 
-
-
   }
-  addQuiz(request: Request){
+
+  addQuiz(request: Request) {
     return this.http.post(this.ADD_QUIZ, request);
   }
+
   getRdv(id: string){
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', id );
+      .set('patientId', id);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
-    return this.http.get(this.LIST_RDV, {headers: header, params});
-
+    const data = this.http.get(this.LIST_RDV, {headers: header, params});
+    return data;
   }
-  editRdv(request: Request){
+
+  editRdv(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     return this.http.put(this.ADD_RDV, request, {headers: header});
 
 
   }
 
-  recup_token(token: string){
-    return this.http.get(this.VERIF_TOKEN_PATIENT + token);  }
+  recup_token(token: string) {
+    return this.http.get(this.VERIF_TOKEN_PATIENT + token);
+  }
 
   inviter(userInviteDto: UserInviteDto) {
 
 
   }
+
   login(request: Request) {
 
     const header = new HttpHeaders({'Content-type': 'application/json; charset=utf-8'});
 
-    let rep ;
+    let rep;
     return this.http.post(this.LOGIN_PATIENT, request, {
-      headers: header})
+      headers: header
+    })
 
       .pipe(map(token => {
           // login successful if there's a jwt token in the response
-        console.log(token);
-        rep = token;
+          console.log(token);
+          rep = token;
 
-        if (token) {
+          if (token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             console.log(token);
             return token;
 
           }
-        return token;
+          return token;
 
         })
       );
 
 
   }
+
   // podometres
   getPodosavailable(id: string) {
     const token = localStorage.getItem('currentToken');
@@ -248,43 +252,49 @@ export class PatientService {
     return this.http.get(this.LIST_DEVICE_AVAILABLE, {headers: header, params});
 
   }
-  recup_podo(request: Request){
+
+  recup_podo(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
     return this.http.post(this.RECUP_DEVICE, request, {
-      headers: header})
+      headers: header
+    })
       .pipe(map(token => {
           return token;
         })
       );
   }
-  affectPodo(request: Request){
+
+  affectPodo(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     console.log(obj.access_token);
     return this.http.post(this.AFFECT_DEVICE, request, {headers: header});
 
   }
-  addReco(request: Request){
+
+  addReco(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     console.log(obj.access_token);
     return this.http.post(this.ADD_RECO, request, {headers: header});
 
 
   }
-  upReco(request: Request){
+
+  upReco(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     console.log(obj.access_token);
     return this.http.put(this.ADD_RECO, request, {headers: header});
 
 
   }
+
   getReco(id: string) {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('patientId', id);
@@ -293,6 +303,7 @@ export class PatientService {
     return this.http.get(this.ADD_RECO, {headers: header, params});
 
   }
+
   getAllReco(id: string) {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('patientId', id);
@@ -306,20 +317,21 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('medicalFileId', id);
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
- /* const options = {
-      headers: new HttpHeaders({
-        'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'})
-      ,params: params
-    };*/
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
+    /* const options = {
+         headers: new HttpHeaders({
+           'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'})
+         ,params: params
+       };*/
     return this.http.post(this.GET_STEPS, request, {headers: header, params});
 
   }
+
   getMinutes(id: string, request: Request) {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('medicalFileId', id);
     const obj = JSON.parse(token);
-    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'} );
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
     /* const options = {
          headers: new HttpHeaders({
            'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'})
@@ -328,11 +340,12 @@ export class PatientService {
     return this.http.post(this.GET_MINUTES, request, {headers: header, params});
 
   }
-  getQuiz(id: string){
+
+  getQuiz(id: string) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const params = new HttpParams()
-      .set('patientId', id );
+      .set('patientId', id);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
     return this.http.get(this.GET_QUIZ, {headers: header, params});
 

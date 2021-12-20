@@ -8,7 +8,6 @@ import {LoginClientDTO} from '../dto/LoginClientDTO';
 import {PasswordUpdateDto} from '../dto';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
-import {Timer} from '../_components/Timer';
 import 'rxjs-compat/add/observable/of';
 
 @Injectable({providedIn: 'root'})

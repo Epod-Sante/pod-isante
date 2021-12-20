@@ -1,0 +1,201 @@
+<nb-card>
+
+  <nb-card class="clinical-examination">
+    <nb-card-body><h3>Statistiques descriptives</h3></nb-card-body>
+    <nb-card-body *ngIf="this.stats.length > 0">
+      <p>Selectionner une date</p>
+      <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem"  (selectedChange)="onChange()" >
+        <nb-option *ngFor="let cl of this.patient.medicalFile.clinicalExamination; let i = index;"  [value]="i">{{cl.date}}</nb-option>
+      </nb-select>
+    </nb-card-body>
+
+    <nb-card-body *ngIf="this.patient.medicalFile.clinicalExamination.length === 0">Pas d'examen clinique.</nb-card-body>
+  <mat-card>Statistiques descriptives:</mat-card>
+  <table *ngIf="stats.length>0"
+         mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Minutes">
+      <th mat-header-cell *matHeaderCellDef> Minutes </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Max Column -->
+    <ng-container matColumnDef="Maximum">
+      <th mat-header-cell *matHeaderCellDef> Maximum </th>
+      <td mat-cell *matCellDef="let element"> {{element.max}} </td>
+    </ng-container>
+
+    <!-- Min Column -->
+    <ng-container matColumnDef="Minimum">
+      <th mat-header-cell *matHeaderCellDef> Minimum </th>
+      <td mat-cell *matCellDef="let element"> {{element.min}} </td>
+    </ng-container>
+
+    <!-- Average Column -->
+    <ng-container matColumnDef="Moyenne">
+      <th mat-header-cell *matHeaderCellDef> Moyenne </th>
+      <td mat-cell *matCellDef="let element"> {{element.average}} </td>
+    </ng-container>
+
+    <!-- Median Column -->
+    <ng-container matColumnDef="Mediane">
+      <th mat-header-cell *matHeaderCellDef> Mediane </th>
+      <td mat-cell *matCellDef="let element"> {{element.median}} </td>
+    </ng-container>
+
+    <!-- Variance Column -->
+    <ng-container matColumnDef="Variance">
+      <th mat-header-cell *matHeaderCellDef> Variance </th>
+      <td mat-cell *matCellDef="let element"> {{element.variance}} </td>
+    </ng-container>
+
+    <!-- SD Column -->
+    <ng-container matColumnDef="sd">
+      <th mat-header-cell *matHeaderCellDef> SD </th>
+      <td mat-cell *matCellDef="let element"> {{element.sd}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="active" mat-row *matRowDef="let row; columns: displayedColumns;"
+        class="example-element-row"></tr>
+  </table>
+<!--  </mat-expansion-panel>-->
+
+<!--  <mat-divider></mat-divider>
+  <mat-expansion-panel style=" margin-top: 2em;  margin-bottom: 2em;" >
+    <mat-expansion-panel-header>
+      <mat-panel-title style="color: #323232;">
+        Graphes : (PODOMETRE)
+      </mat-panel-title>
+    </mat-expansion-panel-header>-->
+
+
+  <mat-tab-group mat-align-tabs="center"  >
+   <!-- <mat-tab label="recommandation">
+    </mat-tab>-->
+    <mat-tab  label="Questionnaire">
+
+      <div class="col-sm-12 text-center" >
+
+          <div *ngFor="let x of this.val">
+            <div *ngIf="x.type === 'GPAQ'" style="border: 2px 0px solid gray;">
+           <h3> {{x.date}} :  {{x.type}} </h3>
+              <h5>Travail</h5>
+              Modéré-vigoureux :   {{(x.value.reponses[5].hr * 60 + x.value.reponses[5].minu) * x.value.reponses[4].jr +
+            (x.value.reponses[2].hr * 60 + x.value.reponses[2].minu) * x.value.reponses[1].jr}} minutes
+              <h5>Transport (déplacement) : </h5>
+              A pied : {{ (x.value.reponses[8].hr * 60 + x.value.reponses[8].minu) * x.value.reponses[7].jr}}  minutes<br>
+              A vélo : {{(x.value.reponses[11].hr * 60 + x.value.reponses[11].minu) * x.value.reponses[10].jr}} minutes
+              <h5>Loisirs : </h5>
+              Modéré-vigoureux : {{(x.value.reponses[17].hr * 60 + x.value.reponses[17].minu) * x.value.reponses[16].jr +
+            (x.value.reponses[14].hr * 60 + x.value.reponses[14].minu) * x.value.reponses[13].jr}} minutes<br>
+              Marche : {{(x.value.reponses[20].hr * 60 + x.value.reponses[20].minu) * x.value.reponses[19].jr}} minutes<br>
+
+
+              <div>
+
+                <canvas baseChart
+                        [datasets]="show_barChart(x.value)"
+                        [labels]="barChartLabelsgpaq"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPluginsgpaq"
+                        [legend]="barChartLegendgpaq"
+                        [chartType]="barChartTypegpaq">
+                </canvas>
+              </div>
+            </div>
+            <div *ngIf="x.type === 'BREQ'" >
+              <h3> {{x.date}}  :  {{x.type}} </h3>
+              <div class="chart"  *ngIf="pieChartLabelsBreq?.length > 0">
+                <div style=" width: 100%;">
+
+                  <canvas baseChart [data]="show_pieChart(x.value)" [labels]="pieChartLabelsBreq" [chartType]="pieChartType"
+                          ></canvas>
+                  <div >
+                     Extrinsèque: Recherche de récompenses et évitement de punitions externes. <br>
+                     Introjectée: Recherche de récompenses et évitement de punitions internes. (protection et valorisation de l’estime de soi, maintien de la réputation, évitement de culpabilité et de honte). <br>
+                     Identifiée : En lien avec les valeurs personnelles, importance et utilité sociale de la tâche, sens. Faire des tâches importantes (agréable ou non) qui sont en lien avec les valeurs de l’individu.. <br>
+                     Intrinsèque: Faire des tâches par plaisir, satisfaction inhérente. Plaisir, concentration intense, émotions positives reliées à la tâche.. <br>
+                     Démotivation : Absence d’autorégulation et d’énergie volontaire. Désengagement, manque de sens, résignation.. <br>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="Podomètre" style="display: inline-block; ">
+      <div class="col-sm-4 text-center" >
+        <h2 class="text-center">Minutes</h2>
+      </div>
+      <div class="chart" style="margin-top:2em" *ngIf="pieChartLabels?.length > 0">
+        <div style=" width: 40%;">
+          <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <h2 class="text-center">Nombre de pas</h2>
+      </div>
+      <div class="chart" style=" width: 40%;">
+        <div style="display: block;">
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label=" Mesures cliniques ">
+      <div class="col-sm-4 text-center">
+        <h2 class="text-center">Poids</h2>
+      </div>
+      <div class="chart" style="margin-top:2em" *ngIf="lineChartLabels?.length > 0">
+        <div style="display: block; width: 40%">
+          <canvas baseChart width="150" height="150"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+      </div>
+      <div class="chart" style="margin-top:2em" *ngIf="lineChartLabels?.length > 0">
+        <div style="display: block;">
+          <canvas baseChart width="400" height="400"
+                  [datasets]="lineChartDatat"
+                  [labels]="lineChartLabelst"
+                  [options]="lineChartOptionst"
+                  [colors]="lineChartColorst"
+                  [legend]="lineChartLegendt"
+                  [chartType]="lineChartTypet"
+                  [plugins]="lineChartPluginst">
+          </canvas>
+        </div>
+      </div>
+    </mat-tab>
+
+
+
+
+  </mat-tab-group>
+<!--  </mat-expansion-panel>-->
+
+
+
+
+
+</nb-card>
+</nb-card>

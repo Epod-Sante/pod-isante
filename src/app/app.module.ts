@@ -13,10 +13,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material/material.module';
-import {LoginComponent} from './_components/login/login.component';
+import {LoginComponent} from './_components/clinician/login/login.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MainNavComponent} from './_components/home/main-nav/main-nav.component';
+import {MainNavComponent} from './_components/admin/main-nav/main-nav.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -25,63 +25,59 @@ import {MatIconModule} from '@angular/material/icon';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {MatInputModule} from '@angular/material/input';
 import {Error404Component} from './_components/error404/error404.component';
-import {RegisterComponent} from './_components/register/register.component';
-import {HomeComponent} from './_components/home/home.component';
-import {ProfileComponent} from './_components/profile/profile.component';
-import {PatientComponent} from './_components/home-pro/patient/patient.component';
-import {ForgetpasswordComponent} from './_components/forgetpassword/forgetpassword.component';
-import {ConfirmaccountComponent} from './_components/confirmaccount/confirmaccount.component';
-import {ResetpasswordComponent} from './_components/resetpassword/resetpassword.component';
-import {InviteComponent} from './_components/home/invite/invite.component';
-import {MainNavProfComponent} from './_components/home-pro/patient/main-nav-prof/main-nav-prof.component';
-import {MainNavModuleProf} from './_components/home-pro/patient/main-nav-prof/main-nav.module-prof';
-import {HomeProComponent} from './_components/home-pro/home-pro.component';
-import {ListUsersComponent} from './_components/home/list-users/list-users.component';
-import {HomeseaComponent} from './_components/homesea/homesea.component';
-import {MainNavSeaComponent} from './_components/homesea/main-nav-sea/main-nav-sea.component';
-import {RechercheComponent} from './_components/homesea/recherche/recherche.component';
-import {ListPatientsComponent} from './_components/home-pro/patient/list-patients/list-patients.component';
-import {PatientProfileComponent} from './_components/home-pro/patient/patient-profile/patient-profile.component';
-import {AddpatientComponent} from './_components/home-pro/patient/addpatient/addpatient.component';
-import {ExamencliniqueComponent} from './_components/home-pro/patient/examenclinique/examenclinique.component';
-import {SociodemoComponent} from './_components/home-pro/patient/sociodemo/sociodemo.component';
-import {AntecedantsComponent} from './_components/home-pro/patient/antecedants/antecedants.component';
+import {RegisterComponent} from './_components/admin/register/register.component';
+import {HomeComponent} from './_components/admin/home.component';
+import {ProfileComponent} from './_components/admin/profile/profile.component';
+import {PatientComponent} from './_components/clinician/patient/patient.component';
+import {ForgetpasswordComponent} from './_components/clinician/forgetpassword/forgetpassword.component';
+import {ResetpasswordComponent} from './_components/clinician/resetpassword/resetpassword.component';
+import {InviteComponent} from './_components/admin/invite/invite.component';
+import {MainNavProfComponent} from './_components/clinician/patient/main-nav-prof/main-nav-prof.component';
+import {MainNavModuleProf} from './_components/clinician/patient/main-nav-prof/main-nav.module-prof';
+import {HomeProComponent} from './_components/clinician/home-pro.component';
+import {ListUsersComponent} from './_components/admin/list-users/list-users.component';
+import {HomeseaComponent} from './_components/searcher/homesea.component';
+import {MainNavSeaComponent} from './_components/searcher/main-nav-sea/main-nav-sea.component';
+import {RechercheComponent} from './_components/searcher/recherche/recherche.component';
+import {ListPatientsComponent} from './_components/clinician/patient/list-patients/list-patients.component';
+import {PatientProfileComponent} from './_components/clinician/patient/patient-profile/patient-profile.component';
+import {AddpatientComponent} from './_components/clinician/patient/addpatient/addpatient.component';
+import {ExamencliniqueComponent} from './_components/clinician/patient/examenclinique/examenclinique.component';
+import {SociodemoComponent} from './_components/clinician/patient/sociodemo/sociodemo.component';
+import {AntecedantsComponent} from './_components/clinician/patient/antecedants/antecedants.component';
 import {SchedulerModule} from '@progress/kendo-angular-scheduler';
-import {ListVisitesComponent} from './_components/home-pro/patient/list-visites/list-visites.component';
-import {RapportComponent} from './_components/home-pro/patient/rapport/rapport.component';
-import {AffectpodometreComponent} from './_components/home-pro/patient/affectpodometre/affectpodometre.component';
+import {ListVisitesComponent} from './_components/clinician/patient/list-visites/list-visites.component';
+import {RapportComponent} from './_components/clinician/patient/rapport/rapport.component';
+import {AffectpodometreComponent} from './_components/clinician/patient/affectpodometre/affectpodometre.component';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {DevicesComponent} from './_components/home/devices/devices.component';
-import {RecomandationComponent} from './_components/home-pro/patient/recomandation/recomandation.component';
-import {PagepatientComponent} from './_components/pagepatient/pagepatient.component';
-import {PatientloginComponent} from './_components/pagepatient/patientlogin/patientlogin.component';
-import {BreqComponent} from './_components/pagepatient/Breq/breq.component';
-import {QuizComponent} from './_components/pagepatient/Breq/quiz/quiz.component';
-import {ModalModule} from './_components/_modal';
-import {CreaterdvComponent} from './_components/createrdv/createrdv.component';
-import {RdvComponent} from './_components/home-pro/rdv/rdv.component';
-import {HomeRoutingModule} from './_components/home/home-routing.module';
-import {HomeProRoutingModule} from './_components/home-pro/home-pro.routing.module';
-import {HomeSeaRoutingModule} from './_components/homesea/homesea.routing.module';
-import {PagePatientRoutingModule} from './_components/pagepatient/pagepatient.routing';
-import {AddDialogComponent} from './_components/dialogs/add/add.dialog.component';
-import {DeleteDialogComponent} from './_components/dialogs/delete/delete.dialog.component';
-import {EditDialogComponent} from './_components/dialogs/edit/edit.dialog.component';
-import {DetailsRecoComponent} from './_components/home-pro/patient/recomandation/details-reco/details-reco.component';
+import {DevicesComponent} from './_components/admin/devices/devices.component';
+import {RecomandationComponent} from './_components/clinician/patient/recomandation/recomandation.component';
+import {PagepatientComponent} from './_components/patient/pagepatient.component';
+import {PatientloginComponent} from './_components/patient/patientlogin/patientlogin.component';
+import {BreqComponent} from './_components/patient/Breq/breq.component';
+import {QuizComponent} from './_components/patient/Breq/quiz/quiz.component';
+import {HomeRoutingModule} from './_components/admin/home-routing.module';
+import {HomeProRoutingModule} from './_components/clinician/home-pro.routing.module';
+import {HomeSeaRoutingModule} from './_components/searcher/homesea.routing.module';
+import {PagePatientRoutingModule} from './_components/patient/pagepatient.routing';
+import {AddDialogComponent} from './_components/clinician/appointment-dialogs/add/add.dialog.component';
+import {DeleteDialogComponent} from './_components/clinician/appointment-dialogs/delete/delete.dialog.component';
+import {EditDialogComponent} from './_components/clinician/appointment-dialogs/edit/edit.dialog.component';
+import {DetailsRecoComponent} from './_components/clinician/patient/recomandation/details-reco/details-reco.component';
 import {AngularFireModule} from '@angular/fire/compat';
 import {environment} from '../environments/environment';
 import {ErrorInterceptor} from './_helpers';
 import {EncrDecrService} from './_services/EncrDecrService';
 import {IddleUserDialogComponent} from './_components/iddle-user-dialog/iddle-user-dialog.component';
 import {NgIdleKeepaliveModule} from '@ng-idle/keepalive';
-import {BilanLipidiqueComponent} from './_components/home-pro/patient/bilan-lipidique/bilan-lipidique.component';
-import {SociodemoComponentPatient} from './_components/pagepatient/sociodemopatient/sociodemo-component-patient.component';
-import {RecomandationPatientComponent} from './_components/pagepatient/recomandation-patient/recomandation-patient.component';
-import {GpaqComponent} from './_components/pagepatient/gpaq/gpaq.component';
-import {GpaqQuizComponent} from './_components/pagepatient/gpaq/quiz/quiz.component';
+import {BilanLipidiqueComponent} from './_components/clinician/patient/bilan-lipidique/bilan-lipidique.component';
+import {SociodemoComponentPatient} from './_components/patient/sociodemopatient/sociodemo-component-patient.component';
+import {RecomandationPatientComponent} from './_components/patient/recomandation-patient/recomandation-patient.component';
+import {GpaqComponent} from './_components/patient/gpaq/gpaq.component';
+import {GpaqQuizComponent} from './_components/patient/gpaq/quiz/quiz.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {TwoDigitDecimaNumberDirective} from './_components/home-pro/patient/examenclinique/two-digit-decima-number.directive';
-import {OptionComponent} from './_components/home-pro/patient/histoire-sante/option/option.component';
+import {TwoDigitDecimaNumberDirective} from './_components/clinician/patient/examenclinique/two-digit-decima-number.directive';
+import {OptionComponent} from './_components/clinician/patient/histoire-sante/option/option.component';
 import {MatCardModule} from '@angular/material/card';
 import {NgMaterialMultilevelMenuModule, MultilevelMenuService} from 'ng-material-multilevel-menu';
 import {
@@ -105,10 +101,11 @@ import {
     NbTabsetModule, NbDatepickerModule, NbTimepickerModule, NbTreeGridModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
-import {ObjectifV2Module} from './_components/home-pro/patient/objectif-v2/objectif-v2.module';
+import {ObjectifV2Module} from './_components/clinician/patient/objectif-v2/objectif-v2.module';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import {WindowComponent} from './_components/window/window.component';
-import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/quizindivid.component';
+import {QuizindividComponent} from './_components/clinician/patient/quizindivid/quizindivid.component';
+
 
 @NgModule({
   declarations: [
@@ -125,7 +122,6 @@ import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/q
     DevicesComponent,
     ListPatientsComponent,
     ForgetpasswordComponent,
-    ConfirmaccountComponent,
     ResetpasswordComponent,
     MainNavProfComponent,
     HomeProComponent,
@@ -147,8 +143,6 @@ import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/q
     InviteComponent,
     BreqComponent,
     QuizComponent,
-    CreaterdvComponent,
-    RdvComponent,
     AddDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
@@ -172,7 +166,6 @@ import {QuizindividComponent} from './_components/home-pro/patient/quizindivid/q
         NgxMatTimepickerModule,
         NgxMatDatetimePickerModule,
         AngularFireModule.initializeApp(environment.firebase),
-        ModalModule,
         FlexLayoutModule,
         HomeRoutingModule,
         HomeProRoutingModule,
