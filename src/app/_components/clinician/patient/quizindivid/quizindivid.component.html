@@ -60,10 +60,9 @@
 
     <mat-radio-group #housingType aria-label="choisissez une option" matNativeControl>
       <mat-radio-button  value="Maison unifamiliale" >Maison unifamiliale</mat-radio-button>
-      <mat-radio-button  value="Cottage" >Cottage</mat-radio-button>
-      <mat-radio-button   value="Bungalow" >Bungalow</mat-radio-button>
-      <mat-radio-button     value="Condo /appartement">Condo /appartement</mat-radio-button>
-      <mat-radio-button   value="Appartement" >Appartement</mat-radio-button>
+      <mat-radio-button  value="Appartement/Condo" >Appartement/Condo</mat-radio-button>
+      <mat-radio-button   value="Maison de retraite" >Maison de retraite</mat-radio-button>
+      <mat-radio-button     value="CHSLD/Soins longue durée">CHSLD/Soins longue durée</mat-radio-button>
     </mat-radio-group>
     <br><br><br>
   </nb-card-body>
@@ -77,15 +76,19 @@
     <br><br>
     <mat-card-content *ngFor="let ant of antecedants; let  j = index;">
       {{ant.antecedents}}
-      <mat-checkbox [checked]="selected === j-200" (change)="showOptions1($event,j)" #desactive  matNativeControl> Non      </mat-checkbox>
-      <mat-checkbox [checked]="selected === j-100" (change)="showOptions($event,j)"  #active  matNativeControl>  Oui </mat-checkbox>
+      <mat-checkbox  (change)="showOptions1($event,j)" [checked]="selected===j-100"  #desactive  name="desactive{{j}}"  matNativeControl> Non      </mat-checkbox>
+      <mat-checkbox  (change)="showOptions($event,j)" [checked]="selected===j-200"  #active  name="active{{j}}" matNativeControl>  Oui   </mat-checkbox>
 
-      <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
-      <nb-card   *ngFor="let an of ant.date; let i = index; ">
-        <input  value="{{an}}" [disabled]="true" type="text"    >
-        <button mat-mini-fab color="warn" [disabled]="!active.checked"  (click)="delette(j,i)"> <mat-icon>delete</mat-icon></button>
+      <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button style="idth: 100px; height: 40px; height: 55px; margin-left: 20px;" mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
 
-      </nb-card>
+        <mat-list role="list" *ngFor="let an of ant.date; let i = index;">
+          <mat-list-item role="listitem">{{an}}
+            <button mat-flat-button color="warn" style="width: 100px; height: 40px; margin-left: 20px;"  [disabled]="!active.checked"  (click)="delette(j,i)"> supprimer </button>
+          </mat-list-item>
+
+        </mat-list>
+
+
 
       <br>
     </mat-card-content>
@@ -176,8 +179,8 @@
       <br>
       <nb-card *ngIf="medicaments.description.length>0">
         <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
-          <mat-list-item role="listitem">{{medicaments.description[i]}}</mat-list-item>
-          <button mat-mini-fab color="warn"   (click)="delett_med(i)"> <mat-icon>delete</mat-icon></button>
+          <mat-list-item role="listitem">{{medicaments.description[i]}}<button mat-flat-button color="warn" style="width: 100px; height: 40px; margin-left: 20px;"  (click)="delett_med(i)"> supprimer </button>
+          </mat-list-item>
 
 
         </mat-list>

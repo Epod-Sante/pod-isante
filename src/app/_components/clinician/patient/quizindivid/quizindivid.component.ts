@@ -82,17 +82,27 @@ export class QuizindividComponent implements OnInit {
   }
 
   setYear(j: number, val: string) {
+    if((val != null) &&
+    (val !== '') )
+    {
+      if (isNaN(Number(val))){
+        alert("Veuillez saisir une valeur numerique");
+      }else{
+        this.antecedants[j].date.push(val);
+        this.antecedants[j].response = true;
+        this.yr = '';
+        console.log(this.antecedants);
 
-    this.antecedants[j].date.push(val);
-    this.antecedants[j].response = true;
-    this.yr = '';
-    console.log(this.antecedants);
+      }
+    }
+
+
 
 
   }
 
   showOptions(event, j: number): void {
-    this.selected = j - 100;
+    this.selected = j-200;
     if (event.checked) {
       this.antecedants[j].response = true;
     }
@@ -115,7 +125,7 @@ export class QuizindividComponent implements OnInit {
   }
 
   showOptions1(event, j: number): void {
-    this.selected = j - 200;
+    this.selected = j-100;
     if (event.checked) {
       this.antecedants[j].date = [];
       this.antecedants[j].response = false;
