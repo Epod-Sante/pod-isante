@@ -11,8 +11,8 @@
   </nb-card-body>
   <nb-card-footer>
 
-
-    <table *ngIf="patient!=null" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 50%">
+    <div *ngIf="dataSource.data.length === 0">Pas de visites.</div>
+    <table *ngIf="dataSource.data.length > 0 && patient!=null" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 50%">
       <ng-container matColumnDef="Date">
         <th mat-header-cell *matHeaderCellDef > Date</th>
         <td mat-cell *matCellDef="let element"> {{element.appointmentDate.toString().substr(0, 10)}} </td>
@@ -46,7 +46,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator  [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
 
   </nb-card-footer>
 </nb-card>

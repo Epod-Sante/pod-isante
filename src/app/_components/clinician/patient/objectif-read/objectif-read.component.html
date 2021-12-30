@@ -1,10 +1,17 @@
 <nb-card>
-      <nb-card-body *ngIf="recommendations.length !== 0">
-        <p>Selectionner une date</p>
-        <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem"  (selectedChange)="onChange()" >
-          <nb-option *ngFor="let recommendation of recommendations; let i = index;"  [value]="i">{{recommendation.dateRecommendation}}</nb-option>
-        </nb-select>
-      </nb-card-body>
+  <nb-card-body id="title-ob">
+    <h2>Objectifs</h2>
+    <button nbButton status="danger" shape="round" size="small" (click)="addRecommendation()">Ajouter un objectif
+      <nb-icon icon="plus"></nb-icon>
+    </button>
+  </nb-card-body>
+  <nb-card-body *ngIf="recommendations.length !== 0">
+    <p>Selectionner une date</p>
+    <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem" (selectedChange)="onChange()">
+      <nb-option *ngFor="let recommendation of recommendations; let i = index;"
+                 [value]="i">{{recommendation.dateRecommendation}}</nb-option>
+    </nb-select>
+  </nb-card-body>
 
   <nb-card-body *ngIf="recommendations.length === 0">Pas de recommendation</nb-card-body>
 
@@ -116,12 +123,27 @@
 
 
     <h3>Barriers:</h3>
-    <div *ngFor="let br of barriersRecommendation; index as i;">
-      <p>{{i + 1}}- {{br}}</p>
+    <nb-card-body *ngIf="barriersRecommendation === undefined || barriersRecommendation === null">Pas de barriers</nb-card-body>
+    <div *ngIf="barriersRecommendation !== undefined && barriersRecommendation !== null">
+      <nb-card-body *ngIf="barriersRecommendation.length === 0">Pas de barriers</nb-card-body>
+      <div *ngIf="barriersRecommendation.length > 0">
+        <div *ngFor="let br of barriersRecommendation; index as i;">
+          <p>{{i + 1}}- {{br}}</p>
+        </div>
+      </div>
     </div>
-    <h3>barriers solutions:</h3>
-    <div *ngFor="let brs of barriersRecommendationSolutions; index as i;">
-      <p>{{i + 1}}- {{brs}}</p>
+
+
+    <h3>Barriers solutions:</h3>
+    <nb-card-body *ngIf="barriersRecommendationSolutions === undefined || barriersRecommendationSolutions === null">Pas de solutions</nb-card-body>
+    <div *ngIf="barriersRecommendationSolutions !== undefined && barriersRecommendationSolutions !== null">
+      <nb-card-body *ngIf="barriersRecommendationSolutions.length === 0">Pas de solutions</nb-card-body>
+
+      <div *ngIf="barriersRecommendationSolutions.length > 0">
+        <div *ngFor="let brs of barriersRecommendationSolutions; index as i;">
+          <p>{{i + 1}}- {{brs}}</p>
+        </div>
+      </div>
     </div>
 
   </nb-card-body>

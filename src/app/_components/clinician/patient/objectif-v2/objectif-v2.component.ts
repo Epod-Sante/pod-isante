@@ -1,13 +1,13 @@
-import {Component, Inject, Input, OnInit, Optional} from '@angular/core';
+import {Component, ElementRef, Inject, Input, OnInit, Optional, QueryList, ViewChildren} from '@angular/core';
 import {Options} from '@angular-slider/ngx-slider';
 import {Endroit, Intensite, Objectif, ObjectifModel, Parametre, Recommandation} from './ObjectifModel';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {RecommandationDto} from '../../../../dto/RecommandationDto';
 import {Request} from '../../../../dto';
 import {PatientService} from '../../../../_services/patient.service';
-import {NbToastrService, NbWindowRef} from "@nebular/theme";
-import {Subscription} from "rxjs";
-import {PatientDataBetweenComponentsService} from "../../../../_services/PatientDataBetweenComponentsService";
+import {NbToastrService, NbWindowRef} from '@nebular/theme';
+import {Subscription} from 'rxjs';
+import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
 
 
 @Component({
@@ -27,39 +27,13 @@ export class ObjectifV2Component implements OnInit {
 
 // *************************************************************   Objectif
   value1Obj1 = 0;
-  options1Obj1: Options = {
-    floor: 0,
-    ceil: 25000
-  };
   value2Obj1 = 0;
-  options2Obj1: Options = {
-    floor: 0,
-    ceil: 25000
-  };
-
 
   value1Obj2 = 0;
-  options1Obj2: Options = {
-    floor: 0,
-    ceil: 25000
-  };
   value2Obj2 = 0;
-  options2Obj2: Options = {
-    floor: 0,
-    ceil: 25000
-  };
-
 
   value1Obj3 = 0;
-  options1Obj3: Options = {
-    floor: 0,
-    ceil: 25000
-  };
   value2Obj3 = 0;
-  options2Obj3: Options = {
-    floor: 0,
-    ceil: 25000
-  };
 
   // **************************************************************************** Paramètres de l'objectif
 
@@ -87,32 +61,29 @@ export class ObjectifV2Component implements OnInit {
   ];
 
   groupOptionEndroitsObj1 = [
-    {id: 1, group: 'Espaces plein air', checked: false, options: [
+    {
+      id: 1, group: 'Espaces plein air', checked: false, options: [
         {id: 1, group: 'Pistes cyclables', checked: false},
-        {id: 1, group: 'Parcs', checked: false},
-        {id: 1, group: 'Sentiers pédestres', checked: false}]},
-    {id: 2, group: 'Centre d\'entrainement', checked: false, options: [
+        {id: 2, group: 'Parcs', checked: false},
+        {id: 3, group: 'Sentiers pédestres', checked: false}]
+    },
+    {
+      id: 2, group: 'Centre d\'entrainement', checked: false, options: [
         {id: 1, group: 'Tapis roulant', checked: false},
-        {id: 1, group: 'Vélo stationnaire', checked: false},
-        {id: 1, group: 'Elliptique', checked: false},
-        {id: 1, group: 'Escaladeur', checked: false},
-        {id: 1, group: 'Rameur', checked: false}]},
-    {id: 3, group: 'Au travail', checked: false, options: [
+        {id: 2, group: 'Vélo stationnaire', checked: false},
+        {id: 3, group: 'Elliptique', checked: false},
+        {id: 4, group: 'Escaladeur', checked: false},
+        {id: 5, group: 'Rameur', checked: false}]
+    },
+    {
+      id: 3, group: 'Au travail', checked: false, options: [
         {id: 1, group: 'Utiliser les escaliers', checked: false},
-        {id: 1, group: 'Se stationner plus loin', checked: false},
-        {id: 1, group: 'Prendre une marche sur', checked: false},
-        {id: 1, group: 'La paused îner', checked: false}]}
-  ];
-
-  private endroitsObjctif10 ;
-
-  private endroitsObjctif1: string[] = [
-    'À domicile.',
-    'Au travail.',
-    'Espace plein air.',
-    'Centre d\'entrainement.',
-    'Centre communautaire.',
-    'Centre d\'achat.'
+        {id: 2, group: 'Se stationner plus loin', checked: false},
+        {id: 3, group: 'Prendre une marche sur l’heure de la pause dîner', checked: false}]
+    },
+    {id: 4, group: 'À domicile', checked: false},
+    {id: 5, group: 'Centre communautaire', checked: false},
+    {id: 6, group: 'Centre d\'achat', checked: false}
   ];
 
   private momentsObjctif1: string[] = [
@@ -130,25 +101,19 @@ export class ObjectifV2Component implements OnInit {
     vertical: true,
     showTicksValues: true,
     stepsArray: [
-      { value: 0, legend: 'Aucun effort' },
-      { value: 1, legend: 'Très très facile' },
-      { value: 2, legend: 'Très facile' },
-      { value: 3, legend: 'Facile' },
-      { value: 4, legend: 'Effort modéré' },
-      { value: 5, legend: 'Moyen' },
-      { value: 6, legend: 'Un peu dur' },
-      { value: 7, legend: 'Dur' },
-      { value: 8, legend: 'Très dur' },
-      { value: 9, legend: 'Très très dur' },
-      { value: 10, legend: 'Maximal' }
+      {value: 0, legend: 'Aucun effort'},
+      {value: 1, legend: 'Très très facile'},
+      {value: 2, legend: 'Très facile'},
+      {value: 3, legend: 'Facile'},
+      {value: 4, legend: 'Effort modéré'},
+      {value: 5, legend: 'Moyen'},
+      {value: 6, legend: 'Un peu dur'},
+      {value: 7, legend: 'Dur'},
+      {value: 8, legend: 'Très dur'},
+      {value: 9, legend: 'Très très dur'},
+      {value: 10, legend: 'Maximal'}
     ]
   };
-
-  endroitsGroupsObjctif1 = [
-    {id: 1, group: 'Espaces plein air', options: ['Pistes cyclables', 'Parcs', 'Sentiers pédestres']},
-    {id: 2, group: 'Centre d\'entrainement', options: ['Tapis roulant', 'Vélo stationnaire', 'Elliptique', 'Escaladeur', 'Rameur']},
-    {id: 3, group: 'Autravail', options: ['Utiliser les escaliers', 'Se stationner plus loin', 'Prendre une marche sur', 'La paused îner']},
-  ];
 
   private precautionsObjctif1: string[] = [
     'Faire un échauffement long(5 minutes).',
@@ -195,13 +160,29 @@ export class ObjectifV2Component implements OnInit {
     '3x/jour'
   ];
 
-  private endroitsObjctif2: string[] = [
-    'À domicile',
-    'Au travail',
-    'Espace plein air',
-    'Centre d\'entrainement',
-    'Centre communautaire',
-    'Centre d\'achat'
+  groupOptionEndroitsObj2 = [{
+    id: 1, group: 'Espaces plein air', checked: false, options: [
+      {id: 1, group: 'Pistes cyclables', checked: false},
+      {id: 2, group: 'Parcs', checked: false},
+      {id: 3, group: 'Sentiers pédestres', checked: false}]
+  },
+    {
+      id: 2, group: 'Centre d\'entrainement', checked: false, options: [
+        {id: 1, group: 'Tapis roulant', checked: false},
+        {id: 2, group: 'Vélo stationnaire', checked: false},
+        {id: 3, group: 'Elliptique', checked: false},
+        {id: 4, group: 'Escaladeur', checked: false},
+        {id: 5, group: 'Rameur', checked: false}]
+    },
+    {
+      id: 3, group: 'Au travail', checked: false, options: [
+        {id: 1, group: 'Utiliser les escaliers', checked: false},
+        {id: 2, group: 'Se stationner plus loin', checked: false},
+        {id: 3, group: 'Prendre une marche sur l’heure de la pause dîner', checked: false}]
+    },
+    {id: 4, group: 'À domicile', checked: false},
+    {id: 5, group: 'Centre communautaire', checked: false},
+    {id: 6, group: 'Centre d\'achat', checked: false}
   ];
 
   private momentsObjctif2: string[] = [
@@ -219,25 +200,19 @@ export class ObjectifV2Component implements OnInit {
     vertical: true,
     showTicksValues: true,
     stepsArray: [
-      { value: 0, legend: 'Aucun effort' },
-      { value: 1, legend: 'Très très facile' },
-      { value: 2, legend: 'Très facile' },
-      { value: 3, legend: 'Facile' },
-      { value: 4, legend: 'Effort modéré' },
-      { value: 5, legend: 'Moyen' },
-      { value: 6, legend: 'Un peu dur' },
-      { value: 7, legend: 'Dur' },
-      { value: 8, legend: 'Très dur' },
-      { value: 9, legend: 'Très très dur' },
-      { value: 10, legend: 'Maximal' }
+      {value: 0, legend: 'Aucun effort'},
+      {value: 1, legend: 'Très très facile'},
+      {value: 2, legend: 'Très facile'},
+      {value: 3, legend: 'Facile'},
+      {value: 4, legend: 'Effort modéré'},
+      {value: 5, legend: 'Moyen'},
+      {value: 6, legend: 'Un peu dur'},
+      {value: 7, legend: 'Dur'},
+      {value: 8, legend: 'Très dur'},
+      {value: 9, legend: 'Très très dur'},
+      {value: 10, legend: 'Maximal'}
     ]
   };
-
-  endroitsGroupsObjctif2 = [
-    {id: 1, group: 'Espaces plein air', options: ['Pistes cyclables', 'Parcs', 'Sentiers pédestres']},
-    {id: 2, group: 'Centre d\'entrainement', options: ['Tapis roulant', 'Vélo stationnaire', 'Elliptique', 'Escaladeur', 'Rameur']},
-    {id: 3, group: 'Autravail', options: ['Utiliser les escaliers', 'Se stationner plus loin', 'Prendre une marche sur', 'La paused îner']},
-  ];
 
   private precautionsObjctif2: string[] = [
     'Faire un échauffement long(5 minutes).',
@@ -266,20 +241,6 @@ export class ObjectifV2Component implements OnInit {
     'Avoir un maximum d\'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.).',
     'Ajouter une marche de loisir à un moment opportun de votre journé.'
   ];
-
-
-  private precautionsObjctif3: string[] = [
-    'Faire un échauffement long(5 minutes).',
-    'Faire un retour au calme long(5 minutes).',
-    'Commencer à faible intensité lors des températures froides.',
-    'Avoir sa nitroglycérine sur soir lors des périodes d\'activité physique (prèsducorps, ne doit pas gelée).',
-    'Utiliser des crampons l\'hiver pour la marche.',
-    'Utiliser des bâtons de marche/canne pour la marche.',
-    'L\'hiver, prévoir une période d\'échauffement avant de pelleter.',
-    'Envisager consulter un professionnel de la santé en cas de doute (infirmière, kinésiologue, médecin, nutritionniste).',
-    'Aucune précaution.'
-  ];
-
   moyensObjctif3OptionsCheckbox = [];
   precautionsObjctif3OptionsSelect = [];
 
@@ -288,7 +249,7 @@ export class ObjectifV2Component implements OnInit {
   message: string;
   subscription: Subscription;
 
-  constructor(private  patientService: PatientService, @Optional() protected windowRef: NbWindowRef,
+  constructor(private patientService: PatientService, @Optional() protected windowRef: NbWindowRef,
               private data: PatientDataBetweenComponentsService,
               private toastrService: NbToastrService) {
     this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
@@ -296,56 +257,51 @@ export class ObjectifV2Component implements OnInit {
     console.log('**************' + this.message);
 
 
+    // tslint:disable-next-line:forin
     for (const i in this.moyensObjctif1) {
       this.moyensObjctif1OptionsCheckbox.push({name: this.moyensObjctif1[i], value: i, checked: false});
     }
 
+    // tslint:disable-next-line:forin
     for (const i in this.freqObjctif1) {
       this.freqObjctif1OptionsSelect.push({name: this.freqObjctif1[i], value: i, checked: false});
     }
 
-    for (const i in this.endroitsObjctif1) {
-      this.endroitsObjctif1OptionsSelect.push(
-        {endroit: this.endroitsObjctif1[i], value: i, checked: false, endroitLevel2: this.groupOptionEndroitsObj1}
-      );
-    }
-
+    // tslint:disable-next-line:forin
     for (const i in this.momentsObjctif1) {
       this.momentsObjctif1OptionsSelect.push({name: this.momentsObjctif1[i], value: i, checked: false});
     }
 
+    // tslint:disable-next-line:forin
     for (const i in this.precautionsObjctif1) {
       this.precautionsObjctif1OptionsSelect.push({name: this.precautionsObjctif1[i], value: i, checked: false});
     }
 
     // ********************
 
+    // tslint:disable-next-line:forin
     for (const i in this.moyensObjctif2) {
       this.moyensObjctif2OptionsCheckbox.push({name: this.moyensObjctif2[i], value: i, checked: false});
     }
 
+    // tslint:disable-next-line:forin
     for (const i in this.freqObjctif2) {
       this.freqObjctif2OptionsSelect.push({name: this.freqObjctif2[i], value: i, checked: false});
     }
 
-    for (const i in this.endroitsObjctif2) {
-      this.endroitsObjctif2OptionsSelect.push({name: this.endroitsObjctif2[i], value: i, checked: false});
-    }
-
+    // tslint:disable-next-line:forin
     for (const i in this.momentsObjctif2) {
       this.momentsObjctif2OptionsSelect.push({name: this.momentsObjctif2[i], value: i, checked: false});
     }
 
+    // tslint:disable-next-line:forin
     for (const i in this.precautionsObjctif2) {
       this.precautionsObjctif2OptionsSelect.push({name: this.precautionsObjctif2[i], value: i, checked: false});
     }
 // *******************
+    // tslint:disable-next-line:forin
     for (const i in this.moyensObjctif3) {
       this.moyensObjctif3OptionsCheckbox.push({name: this.moyensObjctif3[i], value: i, checked: false});
-    }
-
-    for (const i in this.precautionsObjctif3) {
-      this.precautionsObjctif3OptionsSelect.push({name: this.precautionsObjctif3[i], value: i, checked: false});
     }
 
   }
@@ -353,137 +309,98 @@ export class ObjectifV2Component implements OnInit {
   ngOnInit() {
   }
 
-  updateCheckedOptionsMoyensObj1(option, event){
+  updateCheckedOptionsMoyensObj1(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.moyensObjctif1OptionsCheckbox.find(element => element.value === option.value).checked = ((this.moyensObjctif1OptionsCheckbox.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
 
-  updateCheckedSelectFreqObj1(option){
-    // this.freqObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.freqObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
+  updateCheckedSelectFreqObj1(option) {
     this.freqObj1 = option;
-    console.log(option );
   }
 
-  updateCheckedOptionsEndroitsObj1(option){
-    this.endroitsObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.endroitsObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
-  }
-
-  updateCheckedOptionsEndroitsObj10(optionValue, endroitsId, optionGroupId){
-    // this.endroitsObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.endroitsObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('optionValue', optionValue );
-    console.log('endroitsId', endroitsId );
-    console.log('optionGroupId', optionGroupId );
-  }
-
-
-  updateCheckedOptionsMomentsObj1(option, event){
+  updateCheckedOptionsMomentsObj1(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.momentsObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.momentsObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
-  }
-  updateCheckedOptionsPrecautionsObj1(option, event){
-    this.precautionsObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.precautionsObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
 
-  updateIntensiteObj1($event){
-    console.log('option', $event );
+  updateCheckedOptionsPrecautionsObj1(option, event) {
+    // tslint:disable-next-line:max-line-length
+    this.precautionsObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.precautionsObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
+  }
+
+  updateIntensiteObj1($event) {
   }
 
   // ********************
 
-  updateCheckedOptionsMoyensObj2(option, event){
+  updateCheckedOptionsMoyensObj2(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.moyensObjctif2OptionsCheckbox.find(element => element.value === option.value).checked = ((this.moyensObjctif2OptionsCheckbox.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
 
-  updateCheckedSelectFreqObj2(option){
+  updateCheckedSelectFreqObj2(option) {
     this.freqObj2 = option;
-    console.log(option );
+    console.log(option);
   }
 
-  updateCheckedOptionsEndroitsObj2(option, event){
-    this.endroitsObjctif2OptionsSelect.find(element => element.value === option.value).checked = ((this.endroitsObjctif2OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
-  }
-
-  updateCheckedOptionsMomentsObj2(option, event){
+  updateCheckedOptionsMomentsObj2(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.momentsObjctif2OptionsSelect.find(element => element.value === option.value).checked = ((this.momentsObjctif2OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
-  updateCheckedOptionsPrecautionsObj2(option, event){
+
+  updateCheckedOptionsPrecautionsObj2(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.precautionsObjctif2OptionsSelect.find(element => element.value === option.value).checked = ((this.precautionsObjctif2OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
 
   // ************************
-  updateCheckedOptionsMoyensObj3(option, event){
+  updateCheckedOptionsMoyensObj3(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.moyensObjctif3OptionsCheckbox.find(element => element.value === option.value).checked = ((this.moyensObjctif3OptionsCheckbox.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
 
-  updateCheckedOptionsPrecautionsObj3(option, event){
+  updateCheckedOptionsPrecautionsObj3(option, event) {
+    // tslint:disable-next-line:max-line-length
     this.precautionsObjctif3OptionsSelect.find(element => element.value === option.value).checked = ((this.precautionsObjctif3OptionsSelect.find(element => element.value === option.value).checked === false));
-    console.log('option', option );
   }
 
   // ---------------------------------------------------------------------------------------------------------------------
+  SaveObjectifs() {
 
-  SaveObjectifs(){
+    this.parametres.push(new Parametre('Augmenter le nombre de pas quotidien de', this.value1Obj1));
+    this.parametres.push(new Parametre('Atteindre un total de pas quotidien de', this.value2Obj1));
+    this.objectif.push(new ObjectifModel(new Objectif('Nombre de pas quotidien', this.parametres),
+      this.moyensObjctif1OptionsCheckbox,
+      new Recommandation(
+        this.freqObj2,
+        JSON.stringify(this.groupOptionEndroitsObj1),
+        this.momentsObjctif1OptionsSelect,
+        new Intensite(
+          this.IntensiteOptionsObjectif1Value,
+          this.IntensiteOptionsObjectif1.stepsArray.find(element => element.value === this.IntensiteOptionsObjectif1Value).legend)),
+      this.precautionsObjctif1OptionsSelect));
 
-    if (this.value1Obj1 !== 0 || this.value2Obj1 !== 0){
-      if (this.value1Obj1 !== 0){
-        this.parametres.push(new Parametre('Augmenter de X lenombre de pas quotidien', this.value1Obj1));
-      }
-      if (this.value2Obj1 !== 0){
-        this.parametres.push(new Parametre('Atteindre un totalde X pas quotidien', this.value2Obj1));
-      }
+    this.parametres2.push(new Parametre('Augmenter le nombre de minutes actives quotidiennes de', this.value1Obj2));
+    this.parametres2.push(new Parametre('Atteindre un nombre de minutes actives quotidiennes totales de', this.value2Obj2));
+    this.objectif.push(new ObjectifModel(new Objectif('Minutes quotidiennes actives', this.parametres2),
+      this.moyensObjctif2OptionsCheckbox,
+      new Recommandation(
+        this.freqObj1,
+        JSON.stringify(this.groupOptionEndroitsObj2),
+        this.momentsObjctif2OptionsSelect,
+        new Intensite(
+          this.IntensiteOptionsObjectif2Value,
+          this.IntensiteOptionsObjectif2.stepsArray.find(element => element.value === this.IntensiteOptionsObjectif2Value).legend)),
+      this.precautionsObjctif2OptionsSelect));
 
-      this.objectif.push(new ObjectifModel(new Objectif('Nombre de pas quotidien', this.parametres),
-        this.moyensObjctif1OptionsCheckbox,
-        new Recommandation(
-          this.freqObj2,
-          new Endroit([''], [''], ['']),
-          this.momentsObjctif1OptionsSelect,
-          new Intensite(
-            this.IntensiteOptionsObjectif1Value,
-            this.IntensiteOptionsObjectif1.stepsArray.find(element => element.value === this.IntensiteOptionsObjectif1Value).legend)),
-        this.precautionsObjctif1OptionsSelect));
-    }
 
-    if (this.value1Obj2 !== 0 || this.value2Obj2 !== 0){
-      if (this.value1Obj2 !== 0){
-        this.parametres2.push(new Parametre('Augmenter de X le nombre de minutes', this.value1Obj2));
-      }
-      if (this.value2Obj2 !== 0){
-        this.parametres2.push(new Parametre('Atteindre un total de X minutes quotidiennes', this.value2Obj2));
-      }
+    this.parametres3.push(new Parametre('Diminuer le nombre de minutes sédentaires de', this.value1Obj3));
+    this.parametres3.push(new Parametre('Viser un maximum de minutes consécutives sédentaires de', this.value2Obj3));
+    this.objectif.push(new ObjectifModel(new Objectif('Temps sédentaire', this.parametres3),
+      this.moyensObjctif3OptionsCheckbox,
+      null,
+      null));
 
-      this.objectif.push(new ObjectifModel(new Objectif('Minutes quotidiennes actives', this.parametres2),
-        this.moyensObjctif2OptionsCheckbox,
-        new Recommandation(
-          this.freqObj1,
-          new Endroit([''], [''], ['']),
-          this.momentsObjctif2OptionsSelect,
-          new Intensite(
-            this.IntensiteOptionsObjectif2Value,
-            this.IntensiteOptionsObjectif2.stepsArray.find(element => element.value === this.IntensiteOptionsObjectif2Value).legend)),
-        this.precautionsObjctif2OptionsSelect));
-    }
-
-    if (this.value1Obj3 !== 0 || this.value2Obj3 !== 0){
-      if (this.value1Obj3 !== 0){
-        this.parametres3.push(new Parametre('Diminuer de X le nombre de minutes sédentaires', this.value1Obj3));
-      }
-      if (this.value2Obj3 !== 0){
-        this.parametres3.push(new Parametre('Viser un maximum de X minutes consécutives de temps sédentaires', this.value2Obj3));
-      }
-
-      this.objectif.push(new ObjectifModel(new Objectif('Temps sédentaire', this.parametres3),
-        this.moyensObjctif3OptionsCheckbox,
-        null,
-        this.precautionsObjctif3OptionsSelect));
-    }
 
     this.patient = new PatientDto(this.message, null, null, null, null,
       null, null, null, null, null, null,
@@ -491,7 +408,7 @@ export class ObjectifV2Component implements OnInit {
       null, null, null, null);
     const recomm = new RecommandationDto(null, this.patient, null, JSON.stringify(this.objectif), null, null, null);
     const request = new Request(recomm);
-    this.patientService.addReco(request).subscribe( reponse => {
+    this.patientService.addReco(request).subscribe(reponse => {
       this.windowRef.close();
       this.showToast('top-right', 'success', 'Succès', 'Objectif ajoute');
     }, error => {
@@ -503,6 +420,37 @@ export class ObjectifV2Component implements OnInit {
     this.toastrService.show(
       statusFR || 'success',
       title,
-      { position, status });
+      {position, status});
+  }
+
+
+  endroitCheckboxObjectiv1(id: number) {
+    this.groupOptionEndroitsObj1.at(id - 1).checked = !this.groupOptionEndroitsObj1.at(id - 1).checked;
+    if (this.groupOptionEndroitsObj1.at(id - 1).checked === false){
+      this.groupOptionEndroitsObj1.at(id - 1).options.forEach(elm => {
+        elm.checked = false;
+      });
+    }
+  }
+
+  endroitOptionObjectiv1(id: number, id2: number) {
+    // tslint:disable-next-line:max-line-length
+    this.groupOptionEndroitsObj1.at(id - 1).options.at(id2 - 1).checked = !this.groupOptionEndroitsObj1.at(id - 1).options.at(id2 - 1).checked;
+
+  }
+
+  endroitCheckboxObjectiv2(id: number) {
+    this.groupOptionEndroitsObj2.at(id - 1).checked = !this.groupOptionEndroitsObj2.at(id - 1).checked;
+    if (this.groupOptionEndroitsObj2.at(id - 1).checked === false){
+      this.groupOptionEndroitsObj2.at(id - 1).options.forEach(elm => {
+        elm.checked = false;
+      });
+    }
+
+  }
+
+  endroitOptionObjectiv2(id: number, id2: number) {
+    // tslint:disable-next-line:max-line-length
+    this.groupOptionEndroitsObj2.at(id - 1).options.at(id2 - 1).checked = !this.groupOptionEndroitsObj2.at(id - 1).options.at(id2 - 1).checked;
   }
 }

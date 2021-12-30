@@ -95,10 +95,14 @@ app-raport-g {
   justify-content: center;
   row-gap: 5em;
 }
-.infos, .contact{ padding-top: 5em;
+.infos, .contact{
+  padding-top: 20px;
 }
 
 ::ng-deep .head nb-card{
   border : 0px;
 }
 
+.parent{
+  margin-top: 20px;
+}

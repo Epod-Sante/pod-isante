@@ -54,35 +54,119 @@
     </table>
 
 
-    <mat-tab-group mat-align-tabs="center">
+    <mat-tab-group mat-align-tabs="center" dynamicHeight>
       <mat-tab label="Questionnaires">
 
         <nb-card-body>
           <h4>GPAQ</h4>
+            <nb-card-body *ngIf="this.gpaq.length === 0">Pas de GPAQ.</nb-card-body>
           <nb-card-body *ngIf="this.gpaq.length > 0">
             <p>Selectionner une date</p>
-            <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem" >
-              <nb-option *ngFor="let g of gpaq; let i = index;" [value]="i" (selectionChange)="gpaqOnChange(i)">{{g.date}}</nb-option>
+            <nb-select placeholder="Selectionner une date" [(selected)]="selectedItemGpaq">
+              <nb-option *ngFor="let g of gpaq; let i = index;" [value]="i"
+                         (selectionChange)="gpaqOnChange(i)">{{g.date}}</nb-option>
             </nb-select>
+            <div>
+              <h5>Travail</h5>
+              Modéré-vigoureux
+              :   {{travailModereVigoureuxUI}}
+              minutes
+              <h5>Transport (déplacement) : </h5>
+              A pied
+              : {{transportPiedUI}}
+              minutes<br>
+              A vélo
+              : {{transportVeloUI}}
+              minutes
+              <h5>Loisirs : </h5>
+              Modéré-vigoureux
+              : {{loisirsModereVigoureuxUI}}
+              minutes<br>
+              Marche
+              : {{loisirsMarcheUI}}
+              minutes<br>
+            </div>
+
+            <div>
+              <canvas baseChart height="80vh"
+                      [datasets]="barChar"
+                      [options]="gpaqBarChartOptions"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+
           </nb-card-body>
 
-        <!--  <h3> {{gpaq.at(selectedItem).date}} :  {{gpaq.at(selectedItem).type}} </h3>
-          <h5>Travail</h5>
-          Modéré-vigoureux :   {{(gpaq.at(selectedItem).value.reponses[5].hr * 60 + x.value.reponses[5].minu) * x.value.reponses[4].jr +
-        (x.value.reponses[2].hr * 60 + x.value.reponses[2].minu) * x.value.reponses[1].jr}} minutes
-          <h5>Transport (déplacement) : </h5>
-          A pied : {{ (x.value.reponses[8].hr * 60 + x.value.reponses[8].minu) * x.value.reponses[7].jr}}  minutes<br>
-          A vélo : {{(x.value.reponses[11].hr * 60 + x.value.reponses[11].minu) * x.value.reponses[10].jr}} minutes
-          <h5>Loisirs : </h5>
-          Modéré-vigoureux : {{(x.value.reponses[17].hr * 60 + x.value.reponses[17].minu) * x.value.reponses[16].jr +
-        (x.value.reponses[14].hr * 60 + x.value.reponses[14].minu) * x.value.reponses[13].jr}} minutes<br>
-          Marche : {{(x.value.reponses[20].hr * 60 + x.value.reponses[20].minu) * x.value.reponses[19].jr}} minutes<br>-->
+          <h4>BREQ</h4>
+          <nb-card-body *ngIf="this.breq.length === 0">Pas de BREQ.</nb-card-body>
+          <nb-card-body *ngIf="this.breq.length > 0">
+            <p>Selectionner une date</p>
+            <nb-select placeholder="Selectionner une date" [(selected)]="selectedItemBreq">
+              <nb-option *ngFor="let b of breq; let i = index;" [value]="i"
+                         (selectionChange)="breqOnChange(i)">{{b.date}}</nb-option>
+            </nb-select>
+            <div>
+              <canvas baseChart height="30vh" width="80vw"
+                      [data]="pieChart"
+                      [labels]="pieChartLabelsBreq"
+                      [chartType]="pieChartType"
+                      [options]="pieChartOptions">
+              </canvas>
+            </div>
 
+            <div>
+              <b>Extrinsèque :</b> Recherche de récompenses et évitement de punitions externes. <br>
+              <b>Introjectée :</b> Recherche de récompenses et évitement de punitions internes. (protection et valorisation de l’estime de soi, maintien de la réputation, évitement de culpabilité et de honte). <br>
+              <b>Identifiée :</b> En lien avec les valeurs personnelles, importance et utilité sociale de la tâche, sens. Faire des tâches importantes (agréable ou non) qui sont en lien avec les valeurs de l’individu.. <br>
+              <b>Intrinsèque :</b> Faire des tâches par plaisir, satisfaction inhérente. Plaisir, concentration intense, émotions positives reliées à la tâche.. <br>
+              <b>Démotivation :</b> Absence d’autorégulation et d’énergie volontaire. Désengagement, manque de sens, résignation.. <br>
+            </div>
+
+
+
+          </nb-card-body>
         </nb-card-body>
       </mat-tab>
 
       <mat-tab label="Podomètre">
+        <nb-card-body>
+          <h4>Minutes</h4>
+          <nb-card-body *ngIf="this.minutesData?.length === 0">Pas de minutes.</nb-card-body>
+          <nb-card-body *ngIf="this.minutesData?.length > 0">
+            <p>Selectionner une date</p>
+            <nb-select placeholder="Selectionner une date" [(selected)]="selectedItemMin">
+              <nb-option *ngFor="let m of minutesData; let i = index;" [value]="i"
+                         (selectionChange)="minutesOnChange(i)">{{m.appointment}}</nb-option>
+            </nb-select>
+            <div>
+              <canvas baseChart height="120vh"
+                      [data]="minutesPieChartData"
+                      [labels]="pieChartLabels"
+                      [chartType]="pieChartType"
+                      [options]="pieChartOptions">
+              </canvas>
+            </div>
+          </nb-card-body>
 
+          <h4>Nombre de pas</h4>
+          <nb-card-body *ngIf="this.steps.length === 0">Pas de données.</nb-card-body>
+          <nb-card-body *ngIf="this.steps.length > 0">
+            <p>Selectionner une date</p>
+            <nb-select placeholder="Selectionner une date" [(selected)]="selectedItemSteps">
+              <nb-option *ngFor="let s of steps; let i = index;" [value]="i"
+                         (selectionChange)="stepsOnChange(i)">{{s.date}}</nb-option>
+            </nb-select>
+            <div>
+              <canvas baseChart height="80vh"
+                      [datasets]="stepsBar"
+                      [labels]="stepsChartLabels"
+                      [options]="gpaqBarChartOptions"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+
+          </nb-card-body>
+        </nb-card-body>
       </mat-tab>
 
       <mat-tab label="Mesures cliniques">

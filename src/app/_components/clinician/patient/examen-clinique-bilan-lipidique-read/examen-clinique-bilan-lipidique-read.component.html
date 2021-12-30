@@ -1,7 +1,12 @@
 <nb-card>
 
   <nb-card class="clinical-examination">
-    <nb-card-body><h2>Examen clinique</h2></nb-card-body>
+
+
+    <nb-card-body id="title-ce">
+      <h2>Examen clinique</h2>
+      <button nbButton status="danger" shape="round" size="small" (click)="addClinicalExamination()">Ajouter un examen clinique<nb-icon icon="plus"></nb-icon></button>
+    </nb-card-body>
     <nb-card-body *ngIf="this.patient.medicalFile.clinicalExamination.length !== 0">
      <p>Selectionner une date</p>
       <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem"  (selectedChange)="onChangeClinicalExamination()" >
@@ -13,14 +18,14 @@
 
     <nb-card *ngIf="patient?.medicalFile.clinicalExamination !== undefined && patient?.medicalFile.clinicalExamination.length > 0">
       <nb-card-body>
-        <h5>Anthropometry</h5>
+        <h5>Anthropométrie</h5>
         <table class="table table-hover">
           <thead>
           <tr>
             <th scope="col">Poids</th>
-            <th scope="col">Hauteur</th>
+            <th scope="col">Grandeur</th>
             <th scope="col">IMC</th>
-            <th scope="col">Taille</th>
+            <th scope="col">Tour de taille</th>
           </tr>
           </thead>
           <tbody>
@@ -36,20 +41,16 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th scope="col">TA (bras D) Diastolique</th>
-            <th scope="col">TA (bras G) Diastolique</th>
-            <th scope="col">TA (bras D) Systolique</th>
-            <th scope="col">TA (bras G) Systolique</th>
+            <th scope="col">Bras droit</th>
+            <th scope="col">Bras gauche</th>
             <th scope="col">FC (repos)</th>
-            <th scope="col">Regulier</th>
+            <th scope="col">Régulier</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}}</td>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
+            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}} / {{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
+            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureLeftHandSystolique}} / {{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
             <td>{{examenClinique.at(selectedItem)?.cardiovascular.heartRate.value}}</td>
             <td *ngIf="examenClinique.at(selectedItem)?.cardiovascular.heartRate.regular === true">Oui</td>
             <td *ngIf="examenClinique.at(selectedItem)?.cardiovascular.heartRate.regular === false">Non</td>
@@ -60,16 +61,19 @@
     </nb-card>
   </nb-card>
 
-
   <nb-card class="lipid-profile">
-    <nb-card-body><h2>Bilan lipidique</h2></nb-card-body>
+
+    <nb-card-body id="title-lp">
+      <h2>Bilan lipidique</h2>
+      <button nbButton status="danger" shape="round" size="small" (click)="addBilanLipidique()">Ajouter un bilan lipidique<nb-icon icon="plus"></nb-icon></button>
+    </nb-card-body>
     <nb-card-body *ngIf="bilanLipidique.length !== 0">
       <p>Selectionner une date</p>
       <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem2"  (selectedChange)="onChangeBilanLipidique()" >
         <nb-option *ngFor="let lp of bilanLipidique; let i = index;"  [value]="i">{{lp.date}}</nb-option>
       </nb-select>
     </nb-card-body>
-    <nb-card-body *ngIf="this.patient.medicalFile.clinicalExamination.length === 0">Pas de bilan lipidique</nb-card-body>
+    <nb-card-body *ngIf="this.patient.medicalFile.lipidProfiles.length === 0">Pas de bilan lipidique</nb-card-body>
 
     <nb-card *ngIf="bilanLipidique.length > 0">
       <nb-card-body>

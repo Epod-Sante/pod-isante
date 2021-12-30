@@ -31,6 +31,8 @@ import {
   ExamenCliniqueBilanLipidiqueReadComponent
 } from '../examen-clinique-bilan-lipidique-read/examen-clinique-bilan-lipidique-read.component';
 import {RapportVisuelComponent} from '../rapport-visuel/rapport-visuel.component';
+import {NbWindowControlButtonsConfig, NbWindowService} from '@nebular/theme';
+import {AffectpodometreComponent} from '../affectpodometre/affectpodometre.component';
 
 
 export interface DialogDataReport {
@@ -84,7 +86,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
 
   recommendations: RecommandationDto[] = [];
 
-  constructor(private patientService: PatientService,
+  constructor(private patientService: PatientService, private windowService: NbWindowService,
               public dialog: MatDialog, public router: Router, private snackBar: MatSnackBar,
               private data: PatientDataBetweenComponentsService) {
     this.tabIndex = 1;
@@ -116,7 +118,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
       this.examenCliniqueBilanLipidiqueReadChild.onChangeClinicalExamination();
       this.examenCliniqueBilanLipidiqueReadChild.onChangeBilanLipidique();
     }
-    if (tab === 'Rapport visuel 2') {
+    if (tab === 'Rapport visuel') {
       this.rapportVisuelComponent.onChange();
     }
   }
@@ -274,9 +276,19 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
     this.patientService.getAllReco(this.id).subscribe(response => {
       const res = response as Response;
       this.recommendations = JSON.parse(JSON.stringify(res.object));
-      console.log('------------' + this.recommendations);
-
     });
+  }
+
+  podometre() {
+    const component = AffectpodometreComponent;
+    const title = 'Affecter/Récupérer un podometre';
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: true,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(component, {title  , buttons: buttonsConfig} );
   }
 }
 

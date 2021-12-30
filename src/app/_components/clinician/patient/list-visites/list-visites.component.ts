@@ -92,7 +92,6 @@ export class ListVisitesComponent implements OnInit {
     this.patientService.getRdv(this.patient.id).subscribe(patients => {
       // let tabusers = JSON.parse(JSON.stringify(users.toString()))
       const pat = JSON.parse(JSON.stringify(patients));
-      console.log(pat);
       this.dataSource.data = pat.object as AppointmentDto[];
       this.patients = pat.object as AppointmentDto[];
     });

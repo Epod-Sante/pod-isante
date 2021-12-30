@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card class="v">
   <nb-card-body>
     <nb-stepper orientation="horizontal">
       <!--obj 1-->
@@ -13,15 +13,15 @@
                 <h4>Paramètres de l'objectif #1</h4>
                 <nb-card>
                   <nb-card-body>
-                    <p class="lorem">A) Augmenter de X lenombre de pas quotidien</p>
-                    <ngx-slider [(value)]="value1Obj1" [options]="options1Obj1"></ngx-slider>
+                    <p class="lorem">A) Augmenter le nombre de pas quotidien de </p>
+                    <input type="number" nbInput placeholder="" [(ngModel)]="value1Obj1">
 
                   </nb-card-body>
                 </nb-card>
                 <nb-card>
                   <nb-card-body>
-                    <p class="lorem">B) Atteindre un totalde X pas quotidien</p>
-                    <ngx-slider [(value)]="value2Obj1" [options]="options2Obj1"></ngx-slider>
+                    <p class="lorem">B) Atteindre un total de pas quotidien de </p>
+                    <input type="number" nbInput placeholder="" [(ngModel)]="value2Obj1">
 
                   </nb-card-body>
                 </nb-card>
@@ -64,21 +64,15 @@
                   <nb-card>
                     <nb-card-body>
                       <h6 class="lorem">Endroits</h6>
-                      <div *ngFor="let option of endroitsObjctif1OptionsSelect">
+                      <div *ngFor="let endroit of groupOptionEndroitsObj1, let i = index">
                         <nb-card>
                           <nb-card-body>
-                            <nb-checkbox
-                              (checkedChange)="updateCheckedOptionsEndroitsObj1(option)">{{option.endroit}}
-                            </nb-checkbox>
+                            <nb-checkbox (checkedChange)="endroitCheckboxObjectiv1(endroit.id)">{{endroit.group}}</nb-checkbox>
                           </nb-card-body>
                           <nb-card-body>
-                            <nb-select multiple placeholder="Choisissez les endroits">
-
-                              <nb-option-group  *ngFor="let endroits of option.endroitLevel2; let i = index" title="{{endroits.group}}">
-                                <nb-option *ngFor="let option of endroits.options" value="{{i}}"  (checkedChange)="updateCheckedOptionsEndroitsObj10(option.value, endroits.id, option.group.id)">{{option.group}}</nb-option>
-                                {{i+1}}
-                              </nb-option-group>
-
+                            <nb-select multiple placeholder="Choisissez les endroits" *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3" disabled="{{!endroit.checked}}">
+                              {{i+1}}
+                                <nb-option  *ngFor="let option of endroit.options" value="{{i}}"  (selectionChange)="endroitOptionObjectiv1(endroit.id, option.id)">{{option.group}}</nb-option>
                             </nb-select>
                           </nb-card-body>
                         </nb-card>
@@ -154,15 +148,15 @@
                 <h4>Paramètres de l'objectif #2</h4>
                 <nb-card>
                   <nb-card-body>
-                    <p class="lorem">A) Augmenter de X le nombre de minutes</p>
-                    <ngx-slider [(value)]="value1Obj2" [options]="options1Obj2"></ngx-slider>
+                    <p class="lorem">A) Augmenter le nombre de minutes actives quotidiennes de</p>
+                    <input type="number" nbInput placeholder="" [(ngModel)]="value1Obj2">
 
                   </nb-card-body>
                 </nb-card>
                 <nb-card>
                   <nb-card-body>
-                    <p class="lorem">B) Atteindre un total de X minutes quotidiennes</p>
-                    <ngx-slider [(value)]="value2Obj2" [options]="options2Obj2"></ngx-slider>
+                    <p class="lorem">B) Atteindre un nombre de minutes actives quotidiennes totales de</p>
+                    <input type="number" nbInput placeholder="" [(ngModel)]="value2Obj2">
 
                   </nb-card-body>
                 </nb-card>
@@ -205,21 +199,15 @@
                 <nb-card>
                   <nb-card-body>
                     <h6 class="lorem">Endroits</h6>
-                    <div *ngFor="let option of endroitsObjctif2OptionsSelect">
+                    <div *ngFor="let endroit of groupOptionEndroitsObj2, let j=index">
                       <nb-card>
                         <nb-card-body>
-                          <nb-checkbox
-                            (checkedChange)="updateCheckedOptionsEndroitsObj2(option, $event)">{{option.name}}
-                          </nb-checkbox>
+                          <nb-checkbox (checkedChange)="endroitCheckboxObjectiv2(endroit.id)">{{endroit.group}}</nb-checkbox>
                         </nb-card-body>
                         <nb-card-body>
-                          <nb-select multiple placeholder="Choisissez les endroits">
-
-                            <nb-option-group *ngFor="let endroit of endroitsGroupsObjctif2; let j = index" title="{{endroit.group}}">
-                              <nb-option *ngFor="let option of endroit.options" value="{{j}}">{{option}}</nb-option>
-                              {{j+1}}
-                            </nb-option-group>
-
+                          <nb-select multiple placeholder="Choisissez les endroits" *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3" disabled="{{!endroit.checked}}">
+                            {{j+1}}
+                              <nb-option *ngFor="let option of endroit.options" value="{{j}}"  (selectionChange)="endroitOptionObjectiv2(endroit.id, option.id)">{{option.group}}</nb-option>
                           </nb-select>
                         </nb-card-body>
                       </nb-card>
@@ -294,15 +282,15 @@
                 <h4>Paramètres de l'objectif #3</h4>
                 <nb-card>
                   <nb-card-body>
-                    <p class="lorem">A) Diminuer de X le nombre de minutes sédentaires</p>
-                    <ngx-slider [(value)]="value1Obj3" [options]="options1Obj3"></ngx-slider>
+                    <p class="lorem">A) Diminuer le nombre de minutes sédentaires de  </p>
+                    <input type="number" nbInput placeholder="" [(ngModel)]="value1Obj3">
 
                   </nb-card-body>
                 </nb-card>
                 <nb-card>
                   <nb-card-body>
-                    <p class="lorem">B) Viser un maximum de X minutes consécutives de temps sédentaires</p>
-                    <ngx-slider [(value)]="value2Obj3" [options]="options2Obj3"></ngx-slider>
+                    <p class="lorem">B) Viser un maximum de minutes consécutives sédentaires de</p>
+                    <input type="number" nbInput placeholder="" [(ngModel)]="value2Obj3">
 
                   </nb-card-body>
                 </nb-card>
@@ -331,30 +319,16 @@
                 <button nbButton nbStepperNext>next</button>
               </nb-step>
 
-
-              <nb-step label="Précautions">
-                <h4>Précautions de l'objectif #3</h4>
-
-                <div *ngFor="let option of precautionsObjctif3OptionsSelect">
-                  <nb-card>
-                    <nb-card-body>
-                      <nb-checkbox
-                        (checkedChange)="updateCheckedOptionsPrecautionsObj3(option, $event)">{{option.name}}
-                      </nb-checkbox>
-                    </nb-card-body>
-                  </nb-card>
-                </div>
-
-                <button nbButton nbStepperPrevious>prev</button>
-                <button disabled nbButton nbStepperNext>next</button>
-              </nb-step>
             </nb-stepper>
           </nb-card-body>
         </nb-card>
 
 
-        <button nbButton nbStepperPrevious>prev</button>
-        <button nbButton status="success" (click)="SaveObjectifs()"><nb-icon icon="save-outline"></nb-icon>Envoyer</button>
+        <nb-card-body id="saveButton">
+
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton status="success" (click)="SaveObjectifs()">Ajouter<nb-icon icon="save-outline"></nb-icon></button>
+        </nb-card-body>
       </nb-step>
 
 

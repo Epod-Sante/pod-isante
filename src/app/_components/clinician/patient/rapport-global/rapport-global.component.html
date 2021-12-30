@@ -33,14 +33,14 @@
         <nb-card *ngIf="patient?.medicalFile.clinicalExamination.length > 0">
           <nb-card-body *ngFor="let ce of patient?.medicalFile.clinicalExamination">
             <p><b>Date : </b>{{ce.date}}</p>
-            <h5>Anthropometry</h5>
+            <h5>Anthropométrie</h5>
             <table class="table table-hover">
               <thead>
               <tr>
                 <th scope="col">Poids</th>
-                <th scope="col">Hauteur</th>
+                <th scope="col">Grandeur</th>
                 <th scope="col">IMC</th>
-                <th scope="col">Taille</th>
+                <th scope="col">Tour de taille</th>
               </tr>
               </thead>
               <tbody>
@@ -56,21 +56,17 @@
             <table class="table table-hover">
               <thead>
               <tr>
-                <th scope="col">TA (bras D) Diastolique</th>
-                <th scope="col">TA (bras G) Diastolique</th>
-                <th scope="col">TA (bras D) Systolique</th>
-                <th scope="col">TA (bras G) Systolique</th>
+                <th scope="col">Bras droit</th>
+                <th scope="col">Bras gauche</th>
                 <th scope="col">FC (repos)</th>
-                <th scope="col">Regulier</th>
+                <th scope="col">Régulier</th>
               </tr>
               </thead>
               <tbody>
               <tr>
-                <td>{{ce.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
-                <td>{{ce.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
-                <td>{{ce.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}}</td>
-                <td>{{ce.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
-                <td>{{ce.cardiovascular.heartRate.value}}</td>
+                <td>{{ce?.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}} / {{ce?.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
+                <td>{{ce?.cardiovascular.bloodPressure.bloodPressureLeftHandSystolique}} / {{ce?.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
+                <td>{{ce?.cardiovascular.heartRate.value}}</td>
                 <td *ngIf="ce.cardiovascular.heartRate.regular === true">Oui</td>
                 <td *ngIf="ce.cardiovascular.heartRate.regular === false">Non</td>
               </tr>

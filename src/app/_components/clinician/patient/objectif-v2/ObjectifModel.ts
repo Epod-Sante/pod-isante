@@ -27,11 +27,11 @@ export class Objectif{
 
 export class Recommandation{
   frequence: string;
-  endroit: Endroit;
+  endroit: string;
   moment: string[];
   intensite: Intensite;
 
-  constructor(frequence: string, endroit: Endroit, moment: string[], intensite: Intensite) {
+  constructor(frequence: string, endroit: string, moment: string[], intensite: Intensite) {
     this.frequence = frequence;
     this.endroit = endroit;
     this.moment = moment;

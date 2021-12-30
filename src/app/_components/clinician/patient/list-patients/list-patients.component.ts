@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, OnDestroy, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, OnDestroy, AfterViewInit} from '@angular/core';
 import {UserRequestDto} from '../../../../dto';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
@@ -8,15 +8,11 @@ import {PatientService} from '../../../../_services/patient.service';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {AddpatientComponent} from '../addpatient/addpatient.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AddDialogComponent} from '../../appointment-dialogs/add/add.dialog.component';
 import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
 import {Subscription} from 'rxjs';
 import {UserIdleService} from 'angular-user-idle';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto';
-import {MedicalFileDto} from "../../../../dto/medicalfile/MedicalFileDto";
-import {RapportVisuelComponent} from "../rapport-visuel/rapport-visuel.component";
+import {MedicalFileDto} from '../../../../dto/medicalfile/MedicalFileDto';
 
 
 @Component({
