@@ -20,7 +20,7 @@ import {
   NbButtonModule,
   NbCardModule,
   NbCheckboxModule,
-  NbIconModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
+  NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
   NbSelectModule, NbSidebarModule,
   NbStepperModule,
 } from '@nebular/theme';
@@ -31,6 +31,7 @@ import { RapportGlobalComponent } from './patient/rapport-global/rapport-global.
 import { ObjectifReadComponent } from './patient/objectif-read/objectif-read.component';
 import { ExamenCliniqueBilanLipidiqueReadComponent } from './patient/examen-clinique-bilan-lipidique-read/examen-clinique-bilan-lipidique-read.component';
 import { RapportVisuelComponent } from './patient/rapport-visuel/rapport-visuel.component';
+import {ChartsModule} from "ng2-charts";
 
 export const homeProRoutes: Routes = [
   {
@@ -52,15 +53,15 @@ export const homeProRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(homeProRoutes),
-    MatRadioModule,
-    MatFormFieldModule,
-    MaterialModule,
-    FormsModule,
-    CommonModule,
-    ReactiveFormsModule,
-    QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
-    NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule],
+    imports: [RouterModule.forChild(homeProRoutes),
+        MatRadioModule,
+        MatFormFieldModule,
+        MaterialModule,
+        FormsModule, NbInputModule,
+        CommonModule,
+        ReactiveFormsModule,
+        QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
+        NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule, ChartsModule],
     exports: [RouterModule,
         HistoireSanteComponent,
         BilanLipidiqueComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent,

@@ -2,13 +2,13 @@ import {Regulation} from './regulation';
 
 export class Reponse {
 
-  questionId: number;
-  quizId: number;
-  questionPereId : number
-  poids: number;
-  minu : number;
-  hr : number;
-  jr : number;
+  questionId = 0;
+  quizId = 0;
+  questionPereId = 0;
+  poids = 0;
+  minu = 0;
+  hr = 0;
+  jr = 0;
 
 
   constructor(questionId: number, quizId: number, poids: number, minu: any, hr: number, jr: number, questionPereId) {
@@ -18,6 +18,6 @@ export class Reponse {
     this.minu = minu;
     this.hr = hr;
     this.jr = jr;
-    this.questionPereId = questionPereId
+    this.questionPereId = questionPereId;
   }
 }

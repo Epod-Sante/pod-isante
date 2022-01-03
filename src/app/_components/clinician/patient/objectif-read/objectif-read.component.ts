@@ -3,7 +3,10 @@ import {PatientDataBetweenComponentsService} from '../../../../_services/Patient
 import {Subscription} from 'rxjs';
 import {PatientService} from '../../../../_services/patient.service';
 import {RecommandationDto} from '../../../../dto/RecommandationDto';
-import {ObjectifModel} from "../objectif-v2/ObjectifModel";
+import {ObjectifModel} from '../objectif-v2/ObjectifModel';
+import {NbWindowControlButtonsConfig, NbWindowService} from '@nebular/theme';
+import {ObjectifV2Component} from '../objectif-v2/objectif-v2.component';
+import {ObjectifComponent} from "../objectif/objectif.component";
 
 @Component({
   selector: 'app-objectif-read',
@@ -28,22 +31,17 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
   obj1Moment = [];
   obj2Moment = [];
 
-  constructor(private data: PatientDataBetweenComponentsService, private patientService: PatientService) {
+  constructor(private data: PatientDataBetweenComponentsService, private patientService: PatientService,
+              private windowService: NbWindowService) {
     this.subscription = this.data.currentMessage.subscribe(message => this.patientId = message);
-    console.log('++++++++' + this.recommendations);
   }
 
   ngOnInit(): void {
   }
 
-  ngAfterContentInit(){
-
-  }
-
   ngOnChange(){
 
   }
-
 
   ngOnDestroy() {
     if (this.subscription) {
@@ -54,7 +52,6 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
 
   onChange() {
     this.barriersRecommendation = JSON.parse(this.recommendations.at(this.selectedItem).barriersRecommendation) as string[];
-    console.log('////////////////' + this.recommendations);
     // tslint:disable-next-line:max-line-length
     this.barriersRecommendationSolutions = JSON.parse(this.recommendations.at(this.selectedItem).barriersRecommendationSolutions) as string[];
     this.objectif = JSON.parse(this.recommendations.at(this.selectedItem).recommendation) as ObjectifModel[];
@@ -115,6 +112,18 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
       i = i + 1;
     });
 
+  }
+
+  addRecommendation() {
+    const component = ObjectifComponent;
+    const title = 'Objectifs, barrieres et solutions';
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: true,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(component, {title  , buttons: buttonsConfig} );
   }
 }
 

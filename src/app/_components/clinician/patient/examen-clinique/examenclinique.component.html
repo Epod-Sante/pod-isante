@@ -1,0 +1,35 @@
+<nb-card>
+
+    <nb-card-body class="ec">
+
+      <h6>Cardiovasculaire (* repos de 10 minutes minimum doit précéder l’examen)</h6>
+      <div><p>FC (repos) </p><input type="number" #fc_repos nbInput placeholder="batt. / par minute"></div>
+      <div><p>TA (bras dr) Systolique en mmHg </p><input type="number" #tadrsys nbInput placeholder="Systolique"></div>
+      <div><p>TA (bras dr) Diastolique" en mmHg </p><input type="number" #tadrdias nbInput placeholder="Diastolique"></div>
+
+        <div><p>TA (bras gauche) Systolique en mmHg </p><input type="number" #tagcsys nbInput placeholder="Systolique"></div>
+        <div><p>TA (bras gche) Diastolique en mmHg </p><input type="number" #tagcdias nbInput placeholder="Diastolique"></div>
+
+
+      <h6> Données anthropométriques</h6>
+      <div><p>Poids (kg) </p><input type="number" #poidskg [(ngModel)]="kg" nbInput placeholder="KG"></div>
+      <div><p>Taille (cm) </p><input type="number" #taillecm [(ngModel)]="cm" nbInput placeholder="CM"></div>
+      <button mat-raised-button color="primary" (click)="calcul_imc()">Convertir et calculer l'IMC</button>
+      <div><p>Poids (lb) </p><input type="number" #poidslb [(ngModel)]="lbpoids" nbInput placeholder="LB"></div>
+      <div><p>Taille (pi) </p><input type="number" #taillepi [(ngModel)]="pitaille" nbInput placeholder="PI"></div>
+      <div><p>IMC (kg/m2) </p><input type="number" step="0.01" #imc [(ngModel)]="imccm" nbInput placeholder="IMC" appTwoDigitDecimaNumber></div>
+        <div><p>Tour de taille (cm) </p><input type="number" #tour_taille nbInput placeholder="CM"></div>
+
+
+
+      <nb-toggle labelPosition="start" [(checked)]="regularFC">Regulier</nb-toggle>
+
+      <button nbButton status="success"
+              (click)="ajouter(fc_repos.value,tadrsys.value,tadrdias.value,tagcsys.value,tagcdias.value,poidskg.value,taillecm.value,imc.value,tour_taille.value)">
+        <nb-icon icon="save-outline"></nb-icon>
+        Ajouter
+      </button>
+
+    </nb-card-body>
+
+</nb-card>

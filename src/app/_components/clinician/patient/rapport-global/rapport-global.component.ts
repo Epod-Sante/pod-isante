@@ -59,6 +59,7 @@ export class RapportGlobalComponent implements OnInit {
   }
 
   public printPDF(): void {
+    document.title = 'Rapport global-' + this.patient.firstName + ', ' + this.patient.lastName;
     window.print();
   }
 

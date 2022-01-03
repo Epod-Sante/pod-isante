@@ -13,7 +13,7 @@ import {PatientDataBetweenComponentsService} from '../../../../_services/Patient
 import {NbToastrService, NbWindowRef} from '@nebular/theme';
 
 @Component({
-  selector: 'app-examenclinique',
+  selector: 'app-examen-clinique',
   templateUrl: './examenclinique.component.html',
   styleUrls: ['./examenclinique.component.css']
 })
@@ -36,6 +36,7 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   mySubscription: any;
   now: string;
   @Output() expandedEvent = new EventEmitter<boolean>();
+  regularFC = false;
 
 
   constructor(private patientService: PatientService, private snackBar: MatSnackBar, private router: Router,
@@ -67,6 +68,8 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   }
 
   calcul_imc() {
+    console.log(this.kg)
+    console.log(this.cm)
 
     if (this.kg !== 0 && this.cm !== 0) {
       this.pitaille = +(this.cm / 30.48).toFixed(2);
@@ -124,12 +127,13 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   }
 
   ajouter(fcRepos, tadrsys: number, tadrdias: number, tagcsys: number, tagcdias: number, poidskg, taillecm, imc, tourTaille) {
+    console.log(this.regularFC)
     if (Number(fcRepos) && Number(tadrsys) && Number(tadrdias) && Number(tagcsys) &&
       Number(tagcdias) && Number(poidskg) && Number(taillecm) && Number(imc) && Number(tourTaille)) {
 
       const antro = new AnthropometryDto(poidskg, taillecm, imc, tourTaille);
       const ta = new BloodPressureDto(tagcdias, tadrdias, tadrsys, tagcsys);
-      const fc = new HeartRateDto(fcRepos, true);
+      const fc = new HeartRateDto(fcRepos, this.regularFC);
       const cardio = new CardiovascularDto(fc, ta);
 
 

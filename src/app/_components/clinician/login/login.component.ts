@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.loading = false;
-          this.showToast('top-right', 'danger', 'Échec', 'Veuillez contacter l\'clinician');
+          this.showToast('top-right', 'danger', 'Échec', 'Veuillez contacter l\'admin');
         });
 
   }

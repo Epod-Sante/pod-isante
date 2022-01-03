@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
-import {ObjectifModel} from "../objectif-v2/ObjectifModel";
-import {ClinicalExaminationDto} from "../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto";
-import {LipidProfileDto} from "../../../../dto/LipidProfilDto";
+import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_examination/ClinicalExaminationDto';
+import {LipidProfileDto} from '../../../../dto/LipidProfilDto';
+import {ExamencliniqueComponent} from '../examen-clinique/examenclinique.component';
+import {NbWindowControlButtonsConfig, NbWindowService} from '@nebular/theme';
+import {BilanLipidiqueComponent} from "../bilan-lipidique/bilan-lipidique.component";
 
 @Component({
   selector: 'app-examen-clinique-bilan-lipidique-read',
@@ -18,7 +20,7 @@ export class ExamenCliniqueBilanLipidiqueReadComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private windowService: NbWindowService) {
   }
 
   ngOnInit(): void {
@@ -35,6 +37,29 @@ export class ExamenCliniqueBilanLipidiqueReadComponent implements OnInit {
 
   onChangeBilanLipidique() {
     this.bilanLipidique = this.patient.medicalFile.lipidProfiles;
+  }
+
+  addClinicalExamination() {
+    const component = ExamencliniqueComponent;
+    const title = 'Examen clinique ';
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: true,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(component, {title  , buttons: buttonsConfig} );
+  }
+  addBilanLipidique() {
+    const component = BilanLipidiqueComponent;
+    const title = 'Bilan lipidique ';
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: true,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(component, {title  , buttons: buttonsConfig} );
   }
 
 }

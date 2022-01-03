@@ -43,7 +43,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
     {
       title: 'Accueil',
       link: '/listpatient',
-      icon: 'admin-outline',
+      icon: 'home-outline',
       home: true,
     }, /*
     {
@@ -109,7 +109,6 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
     if (window === 'Objectif'){
       component = ObjectifV2Component;
       title = 'Objectif';
-      console.log(this.message);
     } else if (window === 'Fitbit'){
       component = ObjectifV2Component;
       title = 'Fitbit';
@@ -142,7 +141,6 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
 
   getSelectedItem() {
     this.menuService.onItemClick().subscribe((data) => {
-      console.log('**********************' + data.item.title);
 
       if (data.item.title === 'Deconnexion') {
         this.logOut();

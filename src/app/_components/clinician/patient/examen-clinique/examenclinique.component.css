@@ -1,6 +1,9 @@
-.bl {
+.ec {
   display: flex;
   flex-direction: column;
+}
+nb-card {
+  height: 80vh;
 }
 
 nb-card nb-card-body div p{
@@ -11,4 +14,10 @@ nb-card nb-card-body div{
   flex-direction: row;
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+nb-card nb-card-body nb-toggle {
+  padding-top: 1em;
+  padding-bottom: 2em;
+
 }

@@ -59,6 +59,8 @@
   <div class="patientDetails">
     <app-addpatient (exampleOutput)="refresh_list($event)" [id]="id" *ngIf="addpatient===true"></app-addpatient>
     <app-patient-profile [id]="id" *ngIf="showProfile===true"></app-patient-profile>
+<!--
     <app-fab-button [id]="id" [name]="name"></app-fab-button>
+-->
   </div>
 </div>

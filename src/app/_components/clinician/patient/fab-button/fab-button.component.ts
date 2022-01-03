@@ -12,7 +12,7 @@ import {
 import {
   NbIconConfig,
   NbMenuItem,
-  NbPopoverDirective,
+  NbPopoverDirective, NbWindowControlButtonsConfig,
   NbWindowService
 } from '@nebular/theme';
 import {Subscription} from 'rxjs';
@@ -21,7 +21,7 @@ import {Router} from '@angular/router';
 import {ObjectifV2Component} from '../objectif-v2/objectif-v2.component';
 import {speedDialFabAnimations} from '../../../../../assets/speed-dial-fab.animations';
 import {AffectpodometreComponent} from "../affectpodometre/affectpodometre.component";
-import {ExamencliniqueComponent} from "../examenclinique/examenclinique.component";
+import {ExamencliniqueComponent} from "../examen-clinique/examenclinique.component";
 import {BilanLipidiqueComponent} from "../bilan-lipidique/bilan-lipidique.component";
 import {ObjectifComponent} from "../objectif/objectif.component";
 import {PatientDataBetweenComponentsService} from "../../../../_services/PatientDataBetweenComponentsService";
@@ -114,14 +114,11 @@ export class FabButtonComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   openWindow(window: string) {
-    console.log('////////////' + this.id);
-    console.log('////////////' + this.name);
     let component;
     let title;
     if (window === 'Objectif, barrieres et solutions'){
       component = ObjectifComponent;
       title = 'Objectifs, barrieres et solutions pour: ';
-      console.log(this.message);
     } else if (window === 'Podometre'){
       component = AffectpodometreComponent;
       title = 'Affecter/Récupérer un podometre pour: \n';
@@ -129,7 +126,13 @@ export class FabButtonComponent implements OnInit, OnChanges, OnDestroy {
       component = ExamencliniqueComponent;
       title = 'Examen clinique et bilan lipidique pour: ';
     }
-    this.windowService.open(component, {title : title  + this.name} );
+    const buttonsConfig: NbWindowControlButtonsConfig = {
+      minimize: true,
+      maximize: false,
+      fullScreen: false,
+    };
+
+    this.windowService.open(component, {title : title  + this.name, buttons: buttonsConfig} );
   }
 
   openPopover() {
