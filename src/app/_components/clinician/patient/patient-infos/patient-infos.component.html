@@ -1,0 +1,18 @@
+<nb-card>
+
+  <nb-card-body><b>Sex:</b> {{patient?.gender}}</nb-card-body>
+  <nb-card-body><b>État civil:</b> {{patient?.socioDemographicVariables}}</nb-card-body>
+  <nb-card-body><b>Sex:</b> {{patient?.gender}}</nb-card-body>
+  <nb-card-body><b>Sex:</b> {{patient?.gender}}</nb-card-body>
+
+  <nb-card-body *ngIf="patient?.medicalFile.medicalFileHistory?.length !== 0">
+    <p>Selectionner une date</p>
+    <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem">
+      <nb-option *ngFor="let mfh of patient?.medicalFile.medicalFileHistory; let i = index;"  [value]="i">
+        {{mfh.date}}
+      </nb-option>
+    </nb-select>
+  </nb-card-body>
+
+  <nb-card-body>Sex: {{patient?.medicalFile.medicalFileHistory.at(selectedItem).antecedents}}</nb-card-body>
+</nb-card>

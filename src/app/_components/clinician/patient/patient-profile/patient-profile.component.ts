@@ -21,9 +21,6 @@ import {ClinicalExaminationDto} from '../../../../dto/medicalfile/clinical_exami
 import {LipidProfileDto} from '../../../../dto/medicalfile/LipidProfileDto';
 import {CardiovascularDto} from '../../../../dto/medicalfile/clinical_examination/cardiovascular/CardiovascularDto';
 import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import {RapportGlobalComponent} from '../rapport-global/rapport-global.component';
 import {MatTabChangeEvent} from '@angular/material/tabs';
 import {RecommandationDto} from '../../../../dto/RecommandationDto';
 import {ObjectifReadComponent} from '../objectif-read/objectif-read.component';
@@ -33,6 +30,7 @@ import {
 import {RapportVisuelComponent} from '../rapport-visuel/rapport-visuel.component';
 import {NbWindowControlButtonsConfig, NbWindowService} from '@nebular/theme';
 import {AffectpodometreComponent} from '../affectpodometre/affectpodometre.component';
+import {PatientInfosComponent} from '../patient-infos/patient-infos.component';
 
 
 export interface DialogDataReport {
@@ -50,6 +48,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   @ViewChild(ObjectifReadComponent) objectifReadChild;
   @ViewChild(ExamenCliniqueBilanLipidiqueReadComponent) examenCliniqueBilanLipidiqueReadChild;
   @ViewChild(RapportVisuelComponent) rapportVisuelComponent;
+  @ViewChild(PatientInfosComponent) patientInfosComponent;
   expanded = false;
   expandedpodo = false;
   expandedAnte = false;
@@ -121,6 +120,9 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
     if (tab === 'Rapport visuel') {
       this.rapportVisuelComponent.onChange();
     }
+    if (tab === 'Informations du patient') {
+      this.patientInfosComponent.init(this.patient);
+    }
   }
 
   onOpen(expanded: boolean) {
@@ -159,25 +161,6 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
     this.snackBar.open(message, action, {
       duration: 2000,
 
-    });
-  }
-
-  reco(patient: PatientDto) {
-    const dialogRef = this.dialog.open(RecomandationComponent, {
-      data: {patient}
-    });
-
-  }
-
-  add_antecedent(id: string) {
-    const dialogRef = this.dialog.open(HistoireSanteComponent, {
-      data: {id}
-    });
-  }
-
-  add_socio(id: string) {
-    const dialogRef = this.dialog.open(SociodemoComponent, {
-      data: {id}
     });
   }
 
@@ -246,6 +229,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
 
 
   public printPDF(): void {
+/*
     const DATA = document.getElementById('htmlData');
 
     html2canvas(DATA).then(canvas => {
@@ -261,6 +245,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
       const title = 'Rapport global-' + this.patient.firstName + ' ' + this.patient.lastName;
       PDF.save(title);
     });
+*/
   }
 
   report() {

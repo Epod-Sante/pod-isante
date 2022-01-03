@@ -4,65 +4,53 @@
     Complétez les informations ci-dessous. Cochez une seule case par question.
     <br>
     <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Sexe :  </mat-label>
-    <mat-radio-group  #gender aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button  value="Femme" > Femme</mat-radio-button>
-      <mat-radio-button value="Homme" > Homme</mat-radio-button>
-      <mat-radio-button value="Autre" > Autre</mat-radio-button>
-      <mat-radio-button value="null" > Préfère ne pas répondre</mat-radio-button>
+    <mat-radio-group [(ngModel)]="genre"  aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let g of genders" [value]="g">
+        {{g}}
+      </mat-radio-button>
     </mat-radio-group>
     <br>
     <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> État civil :  </mat-label>
-    <mat-radio-group  #civilStatus aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button value="Célibataire" > Célibataire</mat-radio-button>
-      <mat-radio-button value="Marié" >Marié</mat-radio-button>
-      <mat-radio-button value="Conjoint de fait" >Conjoint de fait</mat-radio-button>
-      <mat-radio-button value="Veuf/veuve" > Veuf/veuve</mat-radio-button>
-      <mat-radio-button value="Séparé" >Séparé</mat-radio-button>
-      <mat-radio-button value="Divorcé" >Divorcé</mat-radio-button>
+    <mat-radio-group [(ngModel)]="civilStatus"   aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let c of civilStatuss" [value]="c">
+        {{c}}
+      </mat-radio-button>
     </mat-radio-group>
     <br>
     <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Scolarité :  </mat-label>
-    <mat-radio-group #education  aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button value="< 11 ans de scolarité (< Diplôme d'études secondaires)" > < 11 ans de scolarité (< Diplôme d'études secondaires)</mat-radio-button>
-      <mat-radio-button value="Diplôme d'études secondaires (DEP)" >Diplôme d'études secondaires (DEP)</mat-radio-button>
-      <mat-radio-button value="Formation professionnelle" >Formation professionnelle</mat-radio-button>
-      <mat-radio-button value="Formation collégiale" > Formation collégiale</mat-radio-button>
-      <mat-radio-button value="Séparé" >Formation universitaire 1er cycle</mat-radio-button>
-      <mat-radio-button value="Divorcé" >Formation universitaire 2ème et 3ème cycle</mat-radio-button>
+    <mat-radio-group [(ngModel)]="education"   aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let e of educations" [value]="e">
+        {{e}}
+      </mat-radio-button>
     </mat-radio-group>
     <br>
     <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Statut d’emploi : </mat-label>
-    <mat-radio-group #jobStatus  aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button value="emploi" > À l’emploi </mat-radio-button>
-      <mat-radio-button value="Retraité" >Retraité</mat-radio-button>
-      <mat-radio-button value="Sans emploi" >Sans emploi </mat-radio-button>
-      <mat-radio-button value="Maladie" >Au foyer</mat-radio-button>
-      <mat-radio-button #autre   value="Autre:" >Autre</mat-radio-button>
-      <input  appearance="fill"  type="text">
+    <mat-radio-group [(ngModel)]="jobStatus"    aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let j of jobStatuss" [value]="j">
+        {{j}}
+      </mat-radio-button>
     </mat-radio-group>
     <br>
     <mat-label><b> Revenu familial annuel moyen : </b></mat-label>
-    <mat-radio-group #familyIncome aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button   value="20000" > < 20 000 $ / année </mat-radio-button>
-      <mat-radio-button  value="39999"   >Entre 20 000 et 39 999 $ / année</mat-radio-button>
-      <mat-radio-button  value="59999" >Entre 40 000 et 59 999$ / année</mat-radio-button>
-      <mat-radio-button  style="width: 100%"  value="79999">Entre 60 000 et 79 999 $ / année</mat-radio-button>
-      <mat-radio-button  style="width: 100%" value="80000" >> 80 000 $ / année</mat-radio-button>
+    <mat-radio-group [(ngModel)]="familyIncome"  aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let f of familyIncomes" [value]="f">
+        {{f}}
+      </mat-radio-button>
     </mat-radio-group>
     <br>
     <mat-label style="font-weight: bold; font-size: 15px; width: 100%"> Milieu de vie : </mat-label>
-    <mat-radio-group #livingEnvironment  aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button value="Zone urbaine" >Urbain (ville) </mat-radio-button>
-      <mat-radio-button value="Zone rurale" >Rural (campagne)</mat-radio-button>
+    <mat-radio-group [(ngModel)]="livingEnvironment"   aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let l of livingEnvironments" [value]="l">
+        {{l}}
+      </mat-radio-button>
     </mat-radio-group>
     <br>
     <b> Type d'habitation : </b>
 
-    <mat-radio-group #housingType aria-label="choisissez une option" matNativeControl>
-      <mat-radio-button  value="Maison unifamiliale" >Maison unifamiliale</mat-radio-button>
-      <mat-radio-button  value="Appartement/Condo" >Appartement/Condo</mat-radio-button>
-      <mat-radio-button   value="Maison de retraite" >Maison de retraite</mat-radio-button>
-      <mat-radio-button     value="CHSLD/Soins longue durée">CHSLD/Soins longue durée</mat-radio-button>
+    <mat-radio-group [(ngModel)]="housingType"  aria-label="choisissez une option" matNativeControl>
+      <mat-radio-button class="example-radio-button" *ngFor="let h of housingTypes" [value]="h">
+        {{h}}
+      </mat-radio-button>
     </mat-radio-group>
     <br><br><br>
   </nb-card-body>
@@ -76,17 +64,18 @@
     <br><br>
     <mat-card-content *ngFor="let ant of antecedants; let  j = index;">
       {{ant.antecedents}}
-      <mat-checkbox  (change)="showOptions1($event,j)" [checked]="selected===j-100"  #desactive  name="desactive{{j}}"  matNativeControl> Non      </mat-checkbox>
-      <mat-checkbox  (change)="showOptions($event,j)" [checked]="selected===j-200"  #active  name="active{{j}}" matNativeControl>  Oui   </mat-checkbox>
+
+      <mat-checkbox  (change)="showOptions1($event,j)"  #desactive    matNativeControl> Non      </mat-checkbox>
+      <mat-checkbox  (change)="showOptions($event,j)"   #active   matNativeControl>  Oui   </mat-checkbox>
 
       <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button style="idth: 100px; height: 40px; height: 55px; margin-left: 20px;" mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
 
-        <mat-list role="list" *ngFor="let an of ant.date; let i = index;">
-          <mat-list-item role="listitem">{{an}}
-            <button mat-flat-button color="warn" style="width: 100px; height: 40px; margin-left: 20px;"  [disabled]="!active.checked"  (click)="delette(j,i)"> supprimer </button>
-          </mat-list-item>
+      <mat-list role="list" *ngFor="let an of ant.date; let i = index;">
+        <mat-list-item role="listitem">{{an}}
+          <button mat-flat-button color="warn" style="width: 100px; height: 40px; margin-left: 20px;"  [disabled]="!active.checked"  (click)="delette(j,i)"> supprimer </button>
+        </mat-list-item>
 
-        </mat-list>
+      </mat-list>
 
 
 
@@ -107,9 +96,9 @@
       <br>
 
     </mat-card-content>
-<!--
-    <img src="assets/douleur.PNG" alt="">
--->
+    <!--
+        <img src="assets/douleur.PNG" alt="">
+    -->
     <mat-card-content>
       <br>
       <b>Troubles musculo-squelettiques</b> <br>
@@ -119,7 +108,8 @@
       <input #frac2 [disabled]="!activeT.checked" type="text">
       <input #frac3 [disabled]="!activeT.checked" type="text">
       <br><br>
-      À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous? Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
+      À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous?
+      <br>Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
       <img src="assets/douleur.PNG" alt="">
       <br>
       <mat-checkbox (change)="setDouleur($event,no_douleur.value)" value="Aucune douleur" #no_douleur>  Aucune douleur </mat-checkbox>
@@ -192,7 +182,7 @@
 </nb-card>
 
 <button nbButton status="success" style="margin-bottom: 1em" fullWidth
-        (click)="enregistrerQuiz(gender.value,civilStatus.value,familyIncome.value,jobStatus.value,livingEnvironment.value,housingType.value
-    ,frac1,frac2,frac3,education.value)">
+        (click)="enregistrerQuiz(
+    frac1,frac2,frac3)">
   Enregistrer le questionnaire<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
 </button>

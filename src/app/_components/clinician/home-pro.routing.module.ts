@@ -31,7 +31,8 @@ import { RapportGlobalComponent } from './patient/rapport-global/rapport-global.
 import { ObjectifReadComponent } from './patient/objectif-read/objectif-read.component';
 import { ExamenCliniqueBilanLipidiqueReadComponent } from './patient/examen-clinique-bilan-lipidique-read/examen-clinique-bilan-lipidique-read.component';
 import { RapportVisuelComponent } from './patient/rapport-visuel/rapport-visuel.component';
-import {ChartsModule} from "ng2-charts";
+import {ChartsModule} from 'ng2-charts';
+import { PatientInfosComponent } from './patient/patient-infos/patient-infos.component';
 
 export const homeProRoutes: Routes = [
   {
@@ -65,14 +66,15 @@ export const homeProRoutes: Routes = [
     exports: [RouterModule,
         HistoireSanteComponent,
         BilanLipidiqueComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent,
-      FabButtonComponent, ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent, RapportVisuelComponent],
+        FabButtonComponent, ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent,
+      RapportVisuelComponent, PatientInfosComponent],
   declarations: [
     DetailsRecoComponent,
     BilanLipidiqueComponent,
     HistoireSanteComponent,
     OptionComponent, ObjectifComponent, ObjectifV2Component,
     SideBarFabButtonComponent, FabButtonComponent, RapportGlobalComponent,
-    ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent, RapportVisuelComponent],
+    ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent, RapportVisuelComponent, PatientInfosComponent],
   providers: []
 })
 export class HomeProRoutingModule {
