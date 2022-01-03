@@ -21,6 +21,35 @@ export class QuizindividComponent implements OnInit {
   medicamant: string;
   yr: string;
   selected = -1;
+  civilStatus: string ;
+
+  familyIncome : string ;
+  jobStatus : string ;
+  education: string ;
+  livingEnvironment: string ;
+  housingType: string ;
+  genre : string ;
+  civilStatuss : string[] = ['Célibataire', 'Marié', 'Conjoint de fait', 'Veuf/veuve', 'Séparét', 'Divorcé'];
+  genders : string[] = ['Femme', 'Homme', 'Autre', 'Préfère ne pas répondre'];
+  educations : string[] = ['< 11 ans de scolarité (< Diplôme d \'études secondaires) ',
+    'Diplôme d\'études secondaires (DEP)',
+    'Formation professionnelle',
+    'Formation collégiale',
+    'Formation universitaire 1er cycle',
+  'Formation universitaire 2ème et 3ème cycle'];
+  jobStatuss : string[] = ['À l’emploi', 'Retraité', 'Sans emploi ', 'Au foyer', 'Autre'];
+  livingEnvironments : string[] = ['Urbain (ville)', 'Rural (campagne)'];
+  housingTypes : string[] = ['Maison unifamiliale', 'Appartement/Condo', 'Maison de retraite', 'CHSLD/Soins longue durée'];
+  familyIncomes : string[] = ['< 20 000 $ / année', 'Entre 20 000 et 39 999 $ / année',
+    'Entre 40 000 et 59 999$ / année', 'Entre 60 000 et 79 999 $ / année', '80 000 $ / année'];
+
+
+
+
+
+
+
+
 
   troublesMusculoSquelettiques = new MedicalFileHistoryDto([], 'Troubles musculo-squelettiques (fracture)', false, []);
   douleurs = new MedicalFileHistoryDto([],
@@ -102,7 +131,6 @@ export class QuizindividComponent implements OnInit {
   }
 
   showOptions(event, j: number): void {
-    this.selected = j-200;
     if (event.checked) {
       this.antecedants[j].response = true;
     }
@@ -125,7 +153,6 @@ export class QuizindividComponent implements OnInit {
   }
 
   showOptions1(event, j: number): void {
-    this.selected = j-100;
     if (event.checked) {
       this.antecedants[j].date = [];
       this.antecedants[j].response = false;
@@ -136,13 +163,20 @@ export class QuizindividComponent implements OnInit {
     this.antecedants[j].date.splice(i, 1);
   }
 
-  enregistrerQuiz(gender: string, civilStatus: string, familyIncome: string, jobStatus: string,
-                  livingEnvironment: string, housingType: string,
-                  frac1, frac2, frac3, education: string) {
-    const socio = new SocioDemographicVariablesDto(civilStatus, familyIncome, jobStatus, education, livingEnvironment, housingType, gender);
+
+  enregistrerQuiz(frac1, frac2, frac3) {
+    let socio = new SocioDemographicVariablesDto(
+      this.civilStatus,
+     this.familyIncome,
+     this.jobStatus,
+      this.education,
+      this.livingEnvironment ,
+      this.housingType,
+      this.genre);
     this.antecedants.push(this.douleurs);
     this.antecedants.push(this.medicaments);
     this.antecedants.push(this.conds);
+    console.log(socio);
     if (frac1 !== '') {
       this.fractures.description.push(frac1);
     }
@@ -154,7 +188,7 @@ export class QuizindividComponent implements OnInit {
     }
     this.antecedants.push(this.fractures);
     const ini = this.patient.lastName.substr(0, 1);
-    const tial = this.patient.lastName.substr(0, 1);
+    const tial = this.patient.firstName.substr(0, 1);
     const initial = ini + '' + tial;
     const fileNumber = this.patient.fileNumber;
 
@@ -177,7 +211,7 @@ export class QuizindividComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 400,
+      duration: 1000,
 
     });
   }
