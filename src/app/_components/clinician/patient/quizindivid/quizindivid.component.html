@@ -1,4 +1,4 @@
-<nb-card status="danger">
+<nb-card status="info">
   <nb-card-header>INFORMATIONS SOCIO-DÉMOGRAPHIQUES</nb-card-header>
   <nb-card-body>
     Complétez les informations ci-dessous. Cochez une seule case par question.
@@ -56,7 +56,7 @@
   </nb-card-body>
 </nb-card>
 
-<nb-card status="danger">
+<nb-card status="info">
   <nb-card-header>ANTÉCÉDANTS MÉDICAUX</nb-card-header>
   <nb-card-body>
     Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
@@ -65,14 +65,17 @@
     <mat-card-content *ngFor="let ant of antecedants; let  j = index;">
       {{ant.antecedents}}
 
-      <mat-checkbox  (change)="showOptions1($event,j)"  #desactive    matNativeControl> Non      </mat-checkbox>
-      <mat-checkbox  (change)="showOptions($event,j)"   #active   matNativeControl>  Oui   </mat-checkbox>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button (change)="showOptions($event,j)" value="1">Non</mat-radio-button>
+        <mat-radio-button (change)="showOptions1($event,j)" #yes value="2">Oui</mat-radio-button>
+      </mat-radio-group>
 
-      <input [(ngModel)]="yr"  *ngIf="active.checked" type="text"  placeholder="ANNEE"><button style="idth: 100px; height: 40px; height: 55px; margin-left: 20px;" mat-flat-button color="primary" *ngIf="active.checked"  (click)="setYear(j,yr)"> Ajouter </button>
+      <input nbInput [(ngModel)]="yr"  *ngIf="yes.checked" type="number"  placeholder="Année" style="margin: 10px 10px 10px 0px">
+      <button status="success" nbButton style="margin-left: 20px;" *ngIf="yes.checked"  (click)="setYear(j,yr)"> Ajouter </button>
 
       <mat-list role="list" *ngFor="let an of ant.date; let i = index;">
         <mat-list-item role="listitem">{{an}}
-          <button mat-flat-button color="warn" style="width: 100px; height: 40px; margin-left: 20px;"  [disabled]="!active.checked"  (click)="delette(j,i)"> supprimer </button>
+          <button status="danger" nbButton style="margin-left: 20px;"  [disabled]="!yes.checked" shape="round" size="small" (click)="delette(j,i)"> Supprimer </button>
         </mat-list-item>
 
       </mat-list>
@@ -91,22 +94,26 @@
       <mat-checkbox (change)="setCond($event,obesite.value)" #obesite value="Obésité"> Obésité </mat-checkbox>
       <mat-checkbox (change)="setCond($event,diabeteI_II.value)" #diabeteI_II value="Diabète de type I ou II" > Diabète de type I ou II </mat-checkbox>
       <mat-checkbox (change)="setCond($event,trouble_anxieux.value)" #trouble_anxieux value="Trouble anxieux"> Trouble anxieux </mat-checkbox>
-      <mat-checkbox #autre (change)="setCond($event,autre.value)" value="autre" > Autre</mat-checkbox>
-      <input #autre_conditions  [disabled]="!autre.checked" type="text">
+      <mat-checkbox #autre> Autre</mat-checkbox>
+      <textarea nbInput *ngIf="autre.checked" [(ngModel)]="autreCond" type="text"></textarea>
       <br>
-
     </mat-card-content>
-    <!--
-        <img src="assets/douleur.PNG" alt="">
-    -->
+
     <mat-card-content>
       <br>
+
+
       <b>Troubles musculo-squelettiques</b> <br>
       Avez-vous déjà eu des fractures ?
-      <br><mat-checkbox #activeT>  Oui </mat-checkbox><mat-checkbox> Non</mat-checkbox>
-      <input #frac1 [disabled]="!activeT.checked" type="text">
-      <input #frac2 [disabled]="!activeT.checked" type="text">
-      <input #frac3 [disabled]="!activeT.checked" type="text">
+      <br>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="activeT">
+        <mat-radio-button value="false">Non</mat-radio-button>
+        <mat-radio-button #yes2 value="true">Oui</mat-radio-button>
+      </mat-radio-group>
+      <textarea nbInput [(ngModel)]="frac" *ngIf="yes2.checked" type="text"></textarea>
+
+
+
       <br><br>
       À l’heure actuelle, avez-vous des douleurs à l’une ou plusieurs des articulations illustrées sur l’image ci-dessous?
       <br>Si <b>OUI</b>, cochez lesquelles dans l’encadrer à droite de l’image. Si <b>NON</b>, cochez « Aucune douleur à rapporter »
@@ -144,45 +151,63 @@
         Consommation de produits alcoolisés, tabagiques ou drogues (si actuel/occasionnel, indiquez la fréquence.
         ex : nombre de cigarette/jour ou nombre de consommation/sem/jour, etc)
       </b> <br><br>
-      Alcool <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
-      <mat-checkbox #active_consA>  Actuel/occasionnel </mat-checkbox>
-      <input #freqSA [disabled]="!active_consA.checked" type="text" placeholder="frequence" ><br>
-      Tabac <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
-      <mat-checkbox #active_consT>  Actuel/occasionnel </mat-checkbox>
-      <input #freqT  [disabled]="!active_consT.checked" type="text" placeholder="frequence" ><br>
-      Drogue <mat-checkbox>  Jamais </mat-checkbox> <mat-checkbox>  Ancien </mat-checkbox>
-      <mat-checkbox #active_consD>  Actuel/occasionnel </mat-checkbox>
-      <input #freqD [disabled]="!active_consD.checked" placeholder="frequence" type="text">
+
+      Alcool
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="alcool">
+        <mat-radio-button value="Jamais">Jamais</mat-radio-button>
+        <mat-radio-button value="Ancien">Ancien</mat-radio-button>
+        <mat-radio-button #al value="Actuel / Occasionnel">Actuel / Occasionnel</mat-radio-button>
+      </mat-radio-group>
+      <input nbInput [(ngModel)]="alcoolFreq" *ngIf="al.checked" type="text" placeholder="Frequence" style="margin: 10px 10px 10px 0px">
+      <br>
+
+
+      Tabac
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="tabac">
+        <mat-radio-button value="Jamais">Jamais</mat-radio-button>
+        <mat-radio-button value="Ancien">Ancien</mat-radio-button>
+        <mat-radio-button #tab value="Actuel / Occasionnel">Actuel / Occasionnel</mat-radio-button>
+      </mat-radio-group>
+      <input nbInput [(ngModel)]="tabacFreq" *ngIf="tab.checked" type="text" placeholder="Frequence" style="margin: 10px 10px 10px 0px">
+      <br>
+
+      Drogue
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="drogue">
+        <mat-radio-button value="Jamais">Jamais</mat-radio-button>
+        <mat-radio-button value="Ancien">Ancien</mat-radio-button>
+        <mat-radio-button #drog value="Actuel / Occasionnel">Actuel / Occasionnel</mat-radio-button>
+      </mat-radio-group>
+      <input nbInput [(ngModel)]="drogueFreq" *ngIf="drog.checked" type="text" placeholder="Frequence" style="margin: 10px 10px 10px 0px">
     </mat-card-content>
+
+
     <mat-card-content><br><br>
       <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
         le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
-      <br> Ou <br>
-      <mat-checkbox #no_medic> <b>Je ne prends pas de médicaments</b>  </mat-checkbox>
       <br>
-      <input type="text" [(ngModel)]="medicamant" >
+      <textarea nbInput type="text" #medicamant  [disabled]="no_medic.checked"></textarea>
+      <br>
 
-      <button nbButton status="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant)">
+      <button nbButton status="primary" [disabled]="no_medic.checked" (click)="add_medic(medicamant.value)" style="margin: 20px 20px 20px 0px">
         Ajouter un medicament<nb-icon icon="plus-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
       </button>
 
       <br>
-      <nb-card *ngIf="medicaments.description.length>0">
+      <nb-card-body *ngIf="medicaments.description.length>0">
         <mat-list role="list" *ngFor="let med of medicaments.description; let i = index;">
-          <mat-list-item role="listitem">{{medicaments.description[i]}}<button mat-flat-button color="warn" style="width: 100px; height: 40px; margin-left: 20px;"  (click)="delett_med(i)"> supprimer </button>
+          <mat-list-item role="listitem">{{medicaments.description[i]}}<button nbButton status="danger" style="width: 100px; height: 40px; margin-left: 20px;" shape="round" size="small" (click)="delett_med(i)"> Supprimer </button>
           </mat-list-item>
-
-
         </mat-list>
-      </nb-card>
-      <br><br>
+      </nb-card-body>
+      <br> Ou <br>
+      <mat-checkbox #no_medic> <b>Je ne prends pas de médicaments</b>  </mat-checkbox>
+
     </mat-card-content>
 
   </nb-card-body>
 </nb-card>
 
 <button nbButton status="success" style="margin-bottom: 1em" fullWidth
-        (click)="enregistrerQuiz(
-    frac1,frac2,frac3)">
+        (click)="enregistrerQuiz()">
   Enregistrer le questionnaire<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
 </button>

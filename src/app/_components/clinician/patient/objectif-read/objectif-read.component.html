@@ -13,7 +13,7 @@
     </nb-select>
   </nb-card-body>
 
-  <nb-card-body *ngIf="recommendations.length === 0">Pas de recommendation</nb-card-body>
+  <nb-card-body *ngIf="recommendations.length === 0">Pas d'objectif.</nb-card-body>
 
   <nb-card-body *ngIf="recommendations.length > 0">
     <p><b>Objectif date:</b> {{recommendations.at(selectedItem).dateRecommendation}}</p>

@@ -7,6 +7,7 @@ import {PatientService} from '../../../../_services/patient.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {first} from 'rxjs/operators';
 import {IndividualQuestionnaireDto} from '../../../../dto/medicalfile/IndividualQuestionnaireDto';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -23,51 +24,61 @@ export class QuizindividComponent implements OnInit {
   selected = -1;
   civilStatus: string ;
 
-  familyIncome : string ;
-  jobStatus : string ;
+  familyIncome: string ;
+  jobStatus: string ;
   education: string ;
   livingEnvironment: string ;
   housingType: string ;
-  genre : string ;
-  civilStatuss : string[] = ['Célibataire', 'Marié', 'Conjoint de fait', 'Veuf/veuve', 'Séparét', 'Divorcé'];
-  genders : string[] = ['Femme', 'Homme', 'Autre', 'Préfère ne pas répondre'];
-  educations : string[] = ['< 11 ans de scolarité (< Diplôme d \'études secondaires) ',
+  genre: string ;
+  civilStatuss: string[] = ['Célibataire', 'Marié', 'Conjoint de fait', 'Veuf/veuve', 'Séparét', 'Divorcé'];
+  genders: string[] = ['Femme', 'Homme', 'Autre', 'Préfère ne pas répondre'];
+  educations: string[] = ['< 11 ans de scolarité (Diplôme d \'études secondaires) ',
     'Diplôme d\'études secondaires (DEP)',
     'Formation professionnelle',
     'Formation collégiale',
     'Formation universitaire 1er cycle',
     'Formation universitaire 2ème et 3ème cycle'];
-  jobStatuss : string[] = ['À l’emploi', 'Retraité', 'Sans emploi ', 'Au foyer', 'Autre'];
-  livingEnvironments : string[] = ['Urbain (ville)', 'Rural (campagne)'];
-  housingTypes : string[] = ['Maison unifamiliale', 'Appartement/Condo', 'Maison de retraite', 'CHSLD/Soins longue durée'];
-  familyIncomes : string[] = ['< 20 000 $ / année', 'Entre 20 000 et 39 999 $ / année',
+  jobStatuss: string[] = ['À l’emploi', 'Retraité', 'Sans emploi ', 'Au foyer', 'Autre'];
+  livingEnvironments: string[] = ['Urbain (ville)', 'Rural (campagne)'];
+  housingTypes: string[] = ['Maison unifamiliale', 'Appartement/Condo', 'Maison de retraite', 'CHSLD/Soins longue durée'];
+  familyIncomes: string[] = ['< 20 000 $ / année', 'Entre 20 000 et 39 999 $ / année',
     'Entre 40 000 et 59 999$ / année', 'Entre 60 000 et 79 999 $ / année', '80 000 $ / année'];
-
-
-
-
-
-
-
-
 
   troublesMusculoSquelettiques = new MedicalFileHistoryDto([], 'Troubles musculo-squelettiques (fracture)', false, []);
   douleurs = new MedicalFileHistoryDto([],
     'douleurs ', false, []);
   medicaments = new MedicalFileHistoryDto([],
-    'douleurs ', false, []);
+    'medicaments ', false, []);
   conds = new MedicalFileHistoryDto([],
     'Conditions de sante ', false, []);
   fractures = new MedicalFileHistoryDto([],
     'Freactures ', false, []);
   consommation = new MedicalFileHistoryDto([],
     'Consommation de produits alcoolisés, tabagiques ou drogues ', false, []);
+  public frac: string;
+  public activeT: boolean;
+  alcoolFreq: string;
+  alcool: string;
+  tabac: string;
+  tabacFreq: string;
+  drogueFreq: string;
+  drogue: string;
+  autreCond: string;
 
-  constructor(private patientService: PatientService, private snackBar: MatSnackBar) {
+
+  constructor(private patientService: PatientService, private snackBar: MatSnackBar, private router: Router) {
+
   }
 
   ngOnInit() {
-
+    this.civilStatus = '';
+    this.familyIncome = '';
+    this.jobStatus = '';
+    this.education = '';
+    this.livingEnvironment = '';
+    this.housingType = '';
+    this.genre = '';
+    this.antecedants = [];
     this.selected = -1;
     let mdh = new MedicalFileHistoryDto([], 'Angine', false, []);
     this.antecedants.push(mdh);
@@ -111,11 +122,11 @@ export class QuizindividComponent implements OnInit {
   }
 
   setYear(j: number, val: string) {
-    if((val != null) &&
+    if ((val != null) &&
       (val !== '') )
     {
       if (isNaN(Number(val))){
-        alert("Veuillez saisir une valeur numerique");
+        alert('Veuillez saisir une valeur numerique');
       }else{
         this.antecedants[j].date.push(val);
         this.antecedants[j].response = true;
@@ -123,16 +134,6 @@ export class QuizindividComponent implements OnInit {
         console.log(this.antecedants);
 
       }
-    }
-
-
-
-
-  }
-
-  showOptions(event, j: number): void {
-    if (event.checked) {
-      this.antecedants[j].response = true;
     }
   }
 
@@ -152,20 +153,26 @@ export class QuizindividComponent implements OnInit {
     console.log(this.douleurs);
   }
 
+  showOptions(event, j: number): void {
+    console.log('********' + j);
+    this.antecedants[j].date = [];
+    this.antecedants[j].response = false;
+    console.log('********' + JSON.stringify(this.antecedants));
+  }
+
   showOptions1(event, j: number): void {
-    if (event.checked) {
-      this.antecedants[j].date = [];
-      this.antecedants[j].response = false;
-    }
+    console.log('------' + j);
+    this.antecedants[j].response = true;
+    console.log('-------' + JSON.stringify(this.antecedants));
+
   }
 
   delette(j: number, i: number) {
     this.antecedants[j].date.splice(i, 1);
   }
 
-
-  enregistrerQuiz(frac1, frac2, frac3) {
-    let socio = new SocioDemographicVariablesDto(
+  enregistrerQuiz() {
+    const socio = new SocioDemographicVariablesDto(
       this.civilStatus,
       this.familyIncome,
       this.jobStatus,
@@ -175,38 +182,32 @@ export class QuizindividComponent implements OnInit {
       this.genre);
     this.antecedants.push(this.douleurs);
     this.antecedants.push(this.medicaments);
+    if (this.frac !== '') {
+      this.fractures.description.push(this.frac);
+    }
+    if (this.autreCond !== '') {
+      this.conds.description.push(this.autreCond);
+    }
     this.antecedants.push(this.conds);
-    console.log(socio);
-    if (frac1 !== '') {
-      this.fractures.description.push(frac1);
-    }
-    if (frac2 !== '') {
-      this.fractures.description.push(frac2);
-    }
-    if (frac3 !== '') {
-      this.fractures.description.push(frac3);
-    }
+    this.fractures.response = this.activeT;
     this.antecedants.push(this.fractures);
     const ini = this.patient.lastName.substr(0, 1);
     const tial = this.patient.firstName.substr(0, 1);
     const initial = ini + '' + tial;
     const fileNumber = this.patient.fileNumber;
 
-    const individuQuiz = new IndividualQuestionnaireDto(this.patient.id, fileNumber, initial, JSON.stringify(socio), JSON.stringify(this.antecedants));
+    const individuQuiz = new IndividualQuestionnaireDto(this.patient.id, fileNumber, initial, JSON.stringify(socio),
+      JSON.stringify(this.antecedants));
     const request = new Request(individuQuiz);
     this.patientService.addQuizIndi(request, this.patient.id).pipe(first())
       .subscribe(
         data => {
           this.openSnackBar(' AJOUT REUSSI', 'Ok');
-
-
+          //this.reload('/listpatient');
         },
         error => {
           this.openSnackBar(' Erreur d\'Ajout', 'Ok');
-
-
         });
-
   }
 
   openSnackBar(message: string, action: string) {
@@ -215,7 +216,6 @@ export class QuizindividComponent implements OnInit {
 
     });
   }
-
 
   add_medic(val: string) {
     this.medicaments.description.push(val);
@@ -239,8 +239,9 @@ export class QuizindividComponent implements OnInit {
       }
       this.douleurs.description.splice(index, 1);
     }
-
   }
-
-
+  async reload(url: string): Promise<boolean> {
+    await this.router.navigateByUrl('.', { skipLocationChange: true });
+    return this.router.navigateByUrl(url);
+  }
 }

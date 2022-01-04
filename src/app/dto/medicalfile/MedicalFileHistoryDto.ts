@@ -1,10 +1,10 @@
 export class MedicalFileHistoryDto {
-  private _date : string[] ;
-  private _antecedents : string;
-  private _response : Boolean;
-  private _description : string[];
+  private _date: string[] ;
+  private _antecedents: string;
+  private _response: boolean;
+  private _description: string[];
 
-  constructor(date: string[], antecedents: string, response : Boolean, description : string []) {
+  constructor(date: string[], antecedents: string, response: boolean, description: string []) {
     this._date = [];
     this._antecedents = antecedents;
     this._response = response;
@@ -20,7 +20,7 @@ export class MedicalFileHistoryDto {
     this._antecedents = value;
   }
 
-  set response(value: Boolean) {
+  set response(value: boolean) {
     this._response = value;
   }
 
@@ -36,7 +36,7 @@ export class MedicalFileHistoryDto {
     return this._antecedents;
   }
 
-  get response(): Boolean {
+  get response(): boolean {
     return this._response;
   }
 

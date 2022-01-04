@@ -71,35 +71,36 @@
 
       <mat-tab class="labeltab" label="Informations du patient">
 
-        <div class="infos">
-          <div>
-            <p>Date de naissance</p>
-            <h6 style="text-transform: capitalize;">{{patient?.birthday}}</h6>
+        <nb-card-body>
+          <div class="infos">
+            <div>
+              <p>Date de naissance</p>
+              <h6 style="text-transform: capitalize;">{{patient?.birthday}}</h6>
+            </div>
+
+            <div>
+              <p>Taille (cm)</p>
+              <h6 style="text-transform: capitalize;">{{height}}</h6>
+            </div>
+
+            <div>
+              <p>Poids (kg)</p>
+              <h6 style="text-transform: capitalize;">{{weight}}</h6>
+            </div>
+            <div>
+              <p>IMC</p>
+              <h6 style="text-transform: capitalize;">{{imc}}</h6>
+            </div>
           </div>
 
-          <div>
-            <p>Taille (cm)</p>
-            <h6 style="text-transform: capitalize;">{{height}}</h6>
-          </div>
+        </nb-card-body>
 
-          <div>
-            <p>Poids (kg)</p>
-            <h6 style="text-transform: capitalize;">{{weight}}</h6>
-          </div>
-          <div>
-            <p>IMC</p>
-            <h6 style="text-transform: capitalize;">{{imc}}</h6>
-          </div>
-        </div>
-
-        <nb-card class="parent" status="info">
+        <nb-card class="parent" status="info" style="margin-top: 2em">
           <nb-card-header>Informations personnels</nb-card-header>
           <nb-card-body class="Informations personnels">
             <app-patient-infos></app-patient-infos>
           </nb-card-body>
         </nb-card>
-
-
 
       </mat-tab>
 
