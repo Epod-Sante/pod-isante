@@ -1,0 +1,14 @@
+::ng-deep table {
+  box-shadow: none !important;
+}
+
+mat-tab-group{
+  margin-top: 5em;
+}
+.calendar{
+  display: flex;
+  justify-content: center;
+}
+::ng-deep .nb-theme-default nb-spinner.status-info {
+  background-color: white !important;
+}

@@ -191,9 +191,8 @@ export class RapportComponent implements OnInit, OnChanges {
   }
 
   public getSteps = () => {
-    const request = new Request(this.datess);
 
-    this.patientService.getSteps(this.patient.medicalFile.patient, request).subscribe(steps => {
+    this.patientService.getSteps(this.patient.medicalFile.patient).subscribe(steps => {
       this.steps = [];
       this.stepsDate = [];
       this.canvaData = [];
@@ -314,7 +313,7 @@ export class RapportComponent implements OnInit, OnChanges {
   public getMinutes = () => {
 
     const request = new Request(this.datess);
-    this.patientService.getMinutes(this.patient.medicalFile.patient, request).subscribe(minutes => {
+    this.patientService.getMinutes(this.patient.medicalFile.patient).subscribe(minutes => {
       this.minuHight = 0;
       this.minuMedium = 0;
       this.minuLow = 0;

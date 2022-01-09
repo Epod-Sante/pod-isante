@@ -51,6 +51,14 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
 
 
   onChange() {
+    this.obj1Moyen = [];
+    this.obj2Moyen = [];
+    this.obj3Moyen = [];
+    this.obj1Precaution = [];
+    this.obj2Precaution = [];
+    this.obj3Precaution = [];
+    this.obj1Moment = [];
+    this.obj2Moment = [];
     this.barriersRecommendation = JSON.parse(this.recommendations.at(this.selectedItem).barriersRecommendation) as string[];
     // tslint:disable-next-line:max-line-length
     this.barriersRecommendationSolutions = JSON.parse(this.recommendations.at(this.selectedItem).barriersRecommendationSolutions) as string[];

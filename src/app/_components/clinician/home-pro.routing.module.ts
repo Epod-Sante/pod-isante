@@ -17,12 +17,12 @@ import {ObjectifComponent} from './patient/objectif/objectif.component';
 import {NgModule} from '@angular/core';
 import {ObjectifV2Component} from './patient/objectif-v2/objectif-v2.component';
 import {
-  NbButtonModule,
-  NbCardModule,
-  NbCheckboxModule,
-  NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
-  NbSelectModule, NbSidebarModule,
-  NbStepperModule,
+    NbButtonModule, NbCalendarModule, NbCalendarRangeModule,
+    NbCardModule,
+    NbCheckboxModule,
+    NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
+    NbSelectModule, NbSidebarModule, NbSpinnerModule,
+    NbStepperModule,
 } from '@nebular/theme';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import { SideBarFabButtonComponent } from './side-bar-fab-button/side-bar-fab-button.component';
@@ -55,6 +55,7 @@ export const homeProRoutes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(homeProRoutes),
+        NbCalendarModule,
         MatRadioModule,
         MatFormFieldModule,
         MaterialModule,
@@ -62,7 +63,7 @@ export const homeProRoutes: Routes = [
         CommonModule,
         ReactiveFormsModule,
         QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
-        NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule, ChartsModule],
+        NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule, ChartsModule, NbCalendarRangeModule, NbSpinnerModule],
     exports: [RouterModule,
         HistoireSanteComponent,
         BilanLipidiqueComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent,

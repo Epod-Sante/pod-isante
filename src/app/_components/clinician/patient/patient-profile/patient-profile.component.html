@@ -80,16 +80,19 @@
 
             <div>
               <p>Taille (cm)</p>
-              <h6 style="text-transform: capitalize;">{{height}}</h6>
+              <h6 *ngIf="height !== null" style="text-transform: capitalize;">{{height}}</h6>
+              <p *ngIf="height === null">/</p>
             </div>
 
             <div>
               <p>Poids (kg)</p>
-              <h6 style="text-transform: capitalize;">{{weight}}</h6>
+              <h6 *ngIf="weight !== null" style="text-transform: capitalize;">{{weight}}</h6>
+              <p *ngIf="weight === null">/</p>
             </div>
             <div>
               <p>IMC</p>
-              <h6 style="text-transform: capitalize;">{{imc}}</h6>
+              <h6 *ngIf="imc !== null" style="text-transform: capitalize;">{{imc}}</h6>
+              <p *ngIf="imc === null">/</p>
             </div>
           </div>
 

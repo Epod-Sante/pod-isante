@@ -203,7 +203,7 @@ export class QuizindividComponent implements OnInit {
       .subscribe(
         data => {
           this.openSnackBar(' AJOUT REUSSI', 'Ok');
-          //this.reload('/listpatient');
+          this.reload('/listpatient');
         },
         error => {
           this.openSnackBar(' Erreur d\'Ajout', 'Ok');

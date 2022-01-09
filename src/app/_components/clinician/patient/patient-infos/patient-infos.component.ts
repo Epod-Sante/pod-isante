@@ -32,7 +32,6 @@ export class PatientInfosComponent implements OnInit {
     this.socioDemographicVariables = JSON.parse(this.patient.socioDemographicVariables) as SocioDemographicVariablesDto;
     this.antecedents1 = this.patient.medicalFile.medicalFileHistory;
     this.antecedents1 = this.antecedents1.filter(item => item.antecedents !== null);
-    console.log(JSON.stringify(this.antecedents1))
     this.antecedents2 = this.antecedents1.at(this.selectedItem);
     this.antecedents3 = JSON.parse(this.antecedents2.antecedents);
   }

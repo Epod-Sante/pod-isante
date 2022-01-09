@@ -313,7 +313,7 @@ export class PatientService {
 
   }
 
-  getSteps(id: string, request: Request) {
+  getSteps(id: string) {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('medicalFileId', id);
     const obj = JSON.parse(token);
@@ -323,11 +323,10 @@ export class PatientService {
            'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'})
          ,params: params
        };*/
-    return this.http.post(this.GET_STEPS, request, {headers: header, params});
-
+    return this.http.get(this.GET_STEPS, {headers: header, params});
   }
 
-  getMinutes(id: string, request: Request) {
+  getMinutes(id: string) {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('medicalFileId', id);
     const obj = JSON.parse(token);
@@ -337,7 +336,7 @@ export class PatientService {
            'Authorization': "bearer "+obj.access_token,'Content-Type': 'application/json'})
          ,params: params
        };*/
-    return this.http.post(this.GET_MINUTES, request, {headers: header, params});
+    return this.http.get(this.GET_MINUTES, {headers: header, params});
 
   }
 

@@ -200,6 +200,7 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
         this.imc = null;
         this.height = null;
       }
+      console.log(this.height)
       if (this.medicalfile.medicalFileHistory.length > 0) {
         this.listAnte = this.medicalfile.medicalFileHistory;
         for (let i = 0; i < this.listAnte.length; i++) {
@@ -225,27 +226,6 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
   public getAppointmentsPerPatientId(patient: PatientDto) {
     this.listVisites = patient.appointments as AppointmentDto[];
     this.lastVisite = this.listVisites[this.listVisites.length - 1];
-  }
-
-
-  public printPDF(): void {
-/*
-    const DATA = document.getElementById('htmlData');
-
-    html2canvas(DATA).then(canvas => {
-
-      const fileWidth = 208;
-      const fileHeight = canvas.height * fileWidth / canvas.width;
-
-      const FILEURI = canvas.toDataURL('image/png');
-      const PDF = new jsPDF('p', 'mm', 'a4');
-      const position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-
-      const title = 'Rapport global-' + this.patient.firstName + ' ' + this.patient.lastName;
-      PDF.save(title);
-    });
-*/
   }
 
   report() {
