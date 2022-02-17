@@ -8,6 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {first} from 'rxjs/operators';
 import {IndividualQuestionnaireDto} from '../../../../dto/medicalfile/IndividualQuestionnaireDto';
 import {Router} from '@angular/router';
+import {NbToastrService} from '@nebular/theme';
 
 
 @Component({
@@ -46,13 +47,13 @@ export class QuizindividComponent implements OnInit {
 
   troublesMusculoSquelettiques = new MedicalFileHistoryDto([], 'Troubles musculo-squelettiques (fracture)', false, []);
   douleurs = new MedicalFileHistoryDto([],
-    'douleurs ', false, []);
+    'Douleurs ', false, []);
   medicaments = new MedicalFileHistoryDto([],
-    'medicaments ', false, []);
+    'Medicaments ', false, []);
   conds = new MedicalFileHistoryDto([],
-    'Conditions de sante ', false, []);
+    'Conditions de santé ', false, []);
   fractures = new MedicalFileHistoryDto([],
-    'Freactures ', false, []);
+    'Fractures ', false, []);
   consommation = new MedicalFileHistoryDto([],
     'Consommation de produits alcoolisés, tabagiques ou drogues ', false, []);
   public frac: string;
@@ -66,7 +67,8 @@ export class QuizindividComponent implements OnInit {
   autreCond: string;
 
 
-  constructor(private patientService: PatientService, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private patientService: PatientService, private snackBar: MatSnackBar, private router: Router,
+              private toastrService: NbToastrService) {
 
   }
 
@@ -172,14 +174,25 @@ export class QuizindividComponent implements OnInit {
   }
 
   enregistrerQuiz() {
-    const socio = new SocioDemographicVariablesDto(
-      this.civilStatus,
-      this.familyIncome,
-      this.jobStatus,
-      this.education,
-      this.livingEnvironment ,
-      this.housingType,
-      this.genre);
+    let socio;
+    if (this.civilStatus === '' &&
+      this.familyIncome === '' &&
+      this.jobStatus === '' &&
+      this.education === '' &&
+      this.livingEnvironment === '' &&
+      this.housingType === '' &&
+      this.genre === ''){
+      socio = null;
+    } else {
+      socio = new SocioDemographicVariablesDto(
+        this.civilStatus,
+        this.familyIncome,
+        this.jobStatus,
+        this.education,
+        this.livingEnvironment ,
+        this.housingType,
+        this.genre);
+    }
     this.antecedants.push(this.douleurs);
     this.antecedants.push(this.medicaments);
     if (this.frac !== '') {
@@ -202,19 +215,19 @@ export class QuizindividComponent implements OnInit {
     this.patientService.addQuizIndi(request, this.patient.id).pipe(first())
       .subscribe(
         data => {
-          this.openSnackBar(' AJOUT REUSSI', 'Ok');
+          this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
           this.reload('/listpatient');
         },
         error => {
-          this.openSnackBar(' Erreur d\'Ajout', 'Ok');
+          this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
         });
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 1000,
-
-    });
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      {position, status});
   }
 
   add_medic(val: string) {

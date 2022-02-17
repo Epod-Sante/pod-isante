@@ -1,6 +1,7 @@
 @media print {
-  #printPageButton {
+  #dontprint {
     display: none;
+    height: 0px;
   }
   ::ng-deep nb-sidebar{
     display: none !important;
@@ -18,4 +19,7 @@
   @page {
     margin: 0;
   }
+}
+::ng-deep .nb-theme-default nb-spinner.status-info {
+  background-color: white !important;
 }

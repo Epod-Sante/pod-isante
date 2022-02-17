@@ -7,17 +7,18 @@
       <h2>Examen clinique</h2>
       <button nbButton status="danger" shape="round" size="small" (click)="addClinicalExamination()">Ajouter un examen clinique<nb-icon icon="plus"></nb-icon></button>
     </nb-card-body>
-    <nb-card-body *ngIf="this.patient.medicalFile.clinicalExamination.length !== 0">
+    <!--<nb-card-body *ngIf="this.patient.medicalFile.clinicalExamination.length !== 0">
      <p>Selectionner une date</p>
       <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem"  (selectedChange)="onChangeClinicalExamination()" >
         <nb-option *ngFor="let cl of this.patient.medicalFile.clinicalExamination; let i = index;"  [value]="i">{{cl.date}}</nb-option>
       </nb-select>
     </nb-card-body>
-
+-->
     <nb-card-body *ngIf="this.patient.medicalFile.clinicalExamination.length === 0">Pas d'examen clinique.</nb-card-body>
 
     <nb-card *ngIf="patient?.medicalFile.clinicalExamination !== undefined && patient?.medicalFile.clinicalExamination.length > 0">
-      <nb-card-body>
+      <nb-card-body *ngFor="let ce of patient?.medicalFile.clinicalExamination">
+        <p><b>Date : </b>{{ce.date}}</p>
         <h5>Anthropométrie</h5>
         <table class="table table-hover">
           <thead>
@@ -30,30 +31,30 @@
           </thead>
           <tbody>
           <tr>
-            <td>{{examenClinique.at(selectedItem)?.anthropometry.weight}}</td>
-            <td>{{examenClinique.at(selectedItem)?.anthropometry.height}}</td>
-            <td>{{examenClinique.at(selectedItem)?.anthropometry.imc}}</td>
-            <td>{{examenClinique.at(selectedItem)?.anthropometry.waist}}</td>
+            <td>{{ce.anthropometry.weight}}</td>
+            <td>{{ce.anthropometry.height}}</td>
+            <td>{{ce.anthropometry.imc}}</td>
+            <td>{{ce.anthropometry.waist}}</td>
           </tr>
           </tbody>
         </table>
-        <h5>Cardiovasculaire</h5>
+        <h5>Signes vitaux</h5>
         <table class="table table-hover">
           <thead>
           <tr>
             <th scope="col">Bras droit</th>
             <th scope="col">Bras gauche</th>
             <th scope="col">FC (repos)</th>
-            <th scope="col">Régulier</th>
+            <th scope="col">Le pouls est-il régulier?</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}} / {{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureLeftHandSystolique}} / {{examenClinique.at(selectedItem)?.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
-            <td>{{examenClinique.at(selectedItem)?.cardiovascular.heartRate.value}}</td>
-            <td *ngIf="examenClinique.at(selectedItem)?.cardiovascular.heartRate.regular === true">Oui</td>
-            <td *ngIf="examenClinique.at(selectedItem)?.cardiovascular.heartRate.regular === false">Non</td>
+            <td>{{ce?.cardiovascular.bloodPressure.bloodPressureRightHandSystolique}} / {{ce?.cardiovascular.bloodPressure.bloodPressureRightHandDiastolique}}</td>
+            <td>{{ce?.cardiovascular.bloodPressure.bloodPressureLeftHandSystolique}} / {{ce?.cardiovascular.bloodPressure.bloodPressureLeftHandDiastolique}}</td>
+            <td>{{ce?.cardiovascular.heartRate.value}}</td>
+            <td *ngIf="ce.cardiovascular.heartRate.regular === true">Oui</td>
+            <td *ngIf="ce.cardiovascular.heartRate.regular === false">Non</td>
           </tr>
           </tbody>
         </table>
@@ -64,20 +65,22 @@
   <nb-card class="lipid-profile">
 
     <nb-card-body id="title-lp">
-      <h2>Bilan lipidique</h2>
-      <button nbButton status="danger" shape="round" size="small" (click)="addBilanLipidique()">Ajouter un bilan lipidique<nb-icon icon="plus"></nb-icon></button>
+      <h2>Bilan sanguin</h2>
+      <button nbButton status="danger" shape="round" size="small" (click)="addBilanLipidique()">Ajouter un bilan sanguin<nb-icon icon="plus"></nb-icon></button>
     </nb-card-body>
+<!--
     <nb-card-body *ngIf="bilanLipidique.length !== 0">
       <p>Selectionner une date</p>
       <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem2"  (selectedChange)="onChangeBilanLipidique()" >
         <nb-option *ngFor="let lp of bilanLipidique; let i = index;"  [value]="i">{{lp.date}}</nb-option>
       </nb-select>
     </nb-card-body>
-    <nb-card-body *ngIf="this.patient.medicalFile.lipidProfiles.length === 0">Pas de bilan lipidique</nb-card-body>
+-->
+    <nb-card-body *ngIf="this.patient.medicalFile.lipidProfiles.length === 0">Pas de bilan sanguin</nb-card-body>
 
     <nb-card *ngIf="bilanLipidique.length > 0">
-      <nb-card-body>
-        <p><b>Date : </b>{{bilanLipidique.at(selectedItem2).date}}</p>
+      <nb-card-body *ngFor="let lp of patient?.medicalFile.lipidProfiles">
+        <p><b>Date : </b>{{lp.date}}</p>
         <table class="table table-hover">
           <thead>
           <tr>
@@ -85,14 +88,18 @@
             <th scope="col">NOHDL</th>
             <th scope="col">HBA1C</th>
             <th scope="col">LDL</th>
+            <th scope="col">Glucose à jeûn</th>
+            <th scope="col">Glucose aléatoire</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td>{{bilanLipidique.at(selectedItem2).hdl}}</td>
-            <td>{{bilanLipidique.at(selectedItem2).nohdl}}</td>
-            <td>{{bilanLipidique.at(selectedItem2).hba1c}}</td>
-            <td>{{bilanLipidique.at(selectedItem2).ldl}}</td>
+            <td>{{lp.hdl}}</td>
+            <td>{{lp.nohdl}}</td>
+            <td>{{lp.hba1c}}</td>
+            <td>{{lp.ldl}}</td>
+            <td>{{lp.glucoseJeun}}</td>
+            <td>{{lp.glucoseAleatoire}}</td>
           </tr>
           </tbody>
         </table>

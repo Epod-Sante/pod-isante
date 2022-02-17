@@ -9,6 +9,7 @@ import {ContactDto} from '../../../../dto/patient/ContactDto';
 import {Subscription} from 'rxjs';
 import {PatientDataBetweenComponentsService} from '../../../../_services/PatientDataBetweenComponentsService';
 import {NbToastrService, NbWindowRef} from '@nebular/theme';
+import {Options} from "@angular-slider/ngx-slider";
 
 @Component({
   selector: 'app-objectif',
@@ -22,7 +23,23 @@ export class ObjectifComponent implements OnInit, OnDestroy {
   solutions: string[] = [];
   message: string;
   subscription: Subscription;
-
+  value = null;
+  options: Options = {
+    showTicksValues: true,
+    stepsArray: [
+      { value: 0},
+      { value: 1},
+      { value: 2 },
+      { value: 3},
+      { value: 4 },
+      { value: 5},
+      { value: 6 },
+      { value: 7},
+      { value: 8 },
+      { value: 9},
+      { value: 10},
+    ]
+  };
   constructor(private  patientService: PatientService, private data: PatientDataBetweenComponentsService,
               private toastrService: NbToastrService, @Optional() protected windowRef: NbWindowRef, ) {
     this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
@@ -56,18 +73,20 @@ export class ObjectifComponent implements OnInit, OnDestroy {
       this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
     });
   }
-  comfirmerSol(sol: any[]){
-    for (let i = 0; i < sol.length; i++){
-      this.solutions.push(sol[i].value);
-    }
-    const recomm = new RecommandationDto(null, this.patient, null, null, null, null, JSON.stringify(this.solutions));
-    const request = new Request(recomm);
-    this.patientService.upReco(request).subscribe( reponse => {
-      this.windowRef.close();
-      this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
-    }, error => {
-      this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
-    });
+  addConfiance(){
+   if (this.value !== null){
+     const recomm = new RecommandationDto(null, this.patient, null, null, null, null, this.value.toString());
+     const request = new Request(recomm);
+     this.patientService.upReco(request).subscribe( () => {
+       this.windowRef.close();
+       this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
+     }, error => {
+       this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
+     });
+   }else {
+     this.showToast('top-right', 'info', 'Échec', 'Operation échouée');
+   }
+
   }
 
 

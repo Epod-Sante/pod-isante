@@ -1,8 +1,9 @@
-body{
+body {
   width: 100%;
   margin-left: 30em;
   position: absolute;
 }
+
 table {
   width: 100%;
   margin-right: 5%;
@@ -11,13 +12,38 @@ table {
 
 
 }
-html,body{height:100%;margin:0;padding:0;}
-.patient-wrapper{height:100%;  position: absolute;}
-.box{position:relative;width:100%;max-width:150em;}
 
-.mat-stroked-button{border:5px solid black; width: 100%; margin-top: 2em; margin-left: 2em}
-.patient-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
-.patient-wrapper .mat-form-field { width: 80%;}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.patient-wrapper {
+  height: 100%;
+  position: absolute;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  max-width: 150em;
+}
+
+.mat-stroked-button {
+  border: 5px solid black;
+  width: 100%;
+  margin-top: 2em;
+  margin-left: 2em
+}
+
+.patient-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.8375em 0;
+}
+
+.patient-wrapper .mat-form-field {
+  width: 80%;
+}
 
 .example-button-row button,
 .example-button-row a {
@@ -27,13 +53,12 @@ html,body{height:100%;margin:0;padding:0;}
 }
 
 
-.mat-form-field{
+.mat-form-field {
   width: 40%;
 }
 
 
-
-.mat-form-field{
+.mat-form-field {
   margin: 10px;
 }
 
@@ -48,12 +73,17 @@ tr.example-element-row:hover {
   cursor: pointer;
 
 }
-tr.example-element-row:active{
+
+tr.example-element-row:active {
   background: #b6b5b5;
   cursor: pointer;
 
 }
-.mat-stroked-button{border:1px solid currentColor; width: 100%;}
+
+.mat-stroked-button {
+  border: 1px solid currentColor;
+  width: 100%;
+}
 
 .example-element-row td {
   border-bottom-width: 0;
@@ -86,22 +116,18 @@ tr.example-element-row:active{
 .example-element-description-attribution {
   opacity: 0.5;
 }
-.pagel{
-  width: 90%;
-  position: absolute;
-  margin-top: 2em;
-  margin-left: 1em;
-  margin-bottom: 2em;
 
-
+.pagel {
+  margin: 1em;
 }
 
-@media(max-width: 800px) {
-  .pagel{
+@media (max-width: 800px) {
+  .pagel {
     width: 100%;
     position: relative;
   }
-  .page{
+
+  .page {
     width: 100%;
     position: relative;
     margin-left: 0;
@@ -110,7 +136,9 @@ tr.example-element-row:active{
   }
 
 
-
 }
 
 
+.example-container{
+  background: white;
+}

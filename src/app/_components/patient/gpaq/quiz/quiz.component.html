@@ -23,9 +23,9 @@
           <div *ngIf="question.questionPere==0" [attr.for]="option.id" class="option"
                style="background-color: #eeeeee; font-weight: bold;">
 
-            <label class="font-weight-normal">
+            <label *ngIf="question.id!==1031 && question.id!==1032 " class="font-weight-normal">
 
-              <input (change)="onSelect(question, option);" [(ngModel)]="option.selected" id="{{option.id}}"
+              <input  (change)="onSelect(question, option);" [(ngModel)]="option.selected" id="{{option.id}}"
                      style="margin-left: 1em; margin-right: 2em;"
                      type="checkbox"/> <b>{{option.name}}</b>
             </label>

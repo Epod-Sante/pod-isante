@@ -119,7 +119,7 @@ export class ObjectifV2Component implements OnInit {
     'Faire un échauffement long(5 minutes).',
     'Faire un retour au calme long(5 minutes).',
     'Commencer à faible intensité lors des températures froides.',
-    'Avoir sa nitroglycérine sur soir lors des périodes d\'activité physique (prèsducorps, ne doit pas gelée).',
+    'Avoir sa nitroglycérine sur soir lors des périodes d\'activité physique (près du corps, ne doit pas gelée).',
     'Utiliser des crampons l\'hiver pour la marche.',
     'Utiliser des bâtons de marche/canne pour la marche.',
     'L\'hiver, prévoir une période d\'échauffement avant de pelleter.',
@@ -236,7 +236,7 @@ export class ObjectifV2Component implements OnInit {
   // *************************************
 
   private moyensObjctif3: string[] = [
-    'S\'équiper d\'équipement pour bouger confortablement (chaussure confortable, pantalonet chandailde sport).',
+    'S\'équiper d\'équipement pour bouger confortablement (chaussures confortables, pantalon et chandail de sport).',
     'Mettre une sur le cellulaire au autre appareil afin de selever aux 30 minutes ou aux heures pour couper les périodes assises.',
     'Avoir un maximum d\'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.).',
     'Ajouter une marche de loisir à un moment opportun de votre journé.'

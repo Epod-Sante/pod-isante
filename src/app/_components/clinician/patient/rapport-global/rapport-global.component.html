@@ -1,6 +1,6 @@
 <div class="report" id="htmlData">
 
-  <button id="printPageButton" nbButton status="primary" fullWidth (click)="printPDF()">
+  <button id="dontprint" nbButton status="primary" fullWidth (click)="printPDF()">
     Imprimer
   </button>
   <nb-card class="head">
@@ -52,14 +52,14 @@
               </tr>
               </tbody>
             </table>
-            <h5>Cardiovasculaire</h5>
+            <h5>Signes vitaux</h5>
             <table class="table table-hover">
               <thead>
               <tr>
                 <th scope="col">Bras droit</th>
                 <th scope="col">Bras gauche</th>
                 <th scope="col">FC (repos)</th>
-                <th scope="col">Régulier</th>
+                <th scope="col">Le pouls est-il régulier?</th>
               </tr>
               </thead>
               <tbody>
@@ -78,8 +78,8 @@
 
       <nb-card class="lipid-profile">
         <nb-card-body>
-          <h2>Bilan lipidique</h2>
-          <p *ngIf="patient?.medicalFile.lipidProfiles.length === 0">Pas de bilan lipidique</p>
+          <h2>Bilan sanguin</h2>
+          <p *ngIf="patient?.medicalFile.lipidProfiles.length === 0">Pas de bilan sanguin</p>
         </nb-card-body>
         <nb-card *ngIf="patient?.medicalFile.lipidProfiles.length > 0">
           <nb-card-body *ngFor="let lp of patient?.medicalFile.lipidProfiles">
@@ -91,6 +91,8 @@
                 <th scope="col">NOHDL</th>
                 <th scope="col">HBA1C</th>
                 <th scope="col">LDL</th>
+                <th scope="col">Glucose à jeûn</th>
+                <th scope="col">Glucose aléatoire</th>
               </tr>
               </thead>
               <tbody>
@@ -99,6 +101,8 @@
                 <td>{{lp.nohdl}}</td>
                 <td>{{lp.hba1c}}</td>
                 <td>{{lp.ldl}}</td>
+                <td>{{lp.glucoseJeun}}</td>
+                <td>{{lp.glucoseAleatoire}}</td>
               </tr>
               </tbody>
             </table>
@@ -170,6 +174,71 @@
             </div>
 
           </nb-card>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card>
+        <nb-card-body>
+
+          <nb-card-body id="dontprint" *ngIf="pd !== null || pd.length !== 0">
+            <p style="font-size: x-large;">Sélectionnez une période:</p>
+            <nb-form-field>
+              <nb-icon nbPrefix icon="clock-outline"></nb-icon>
+              <nb-select placeholder="Sélectionnez une période" [(selected)]="selectedItemPD" (selectedChange)="onChangePD()" size="giant">
+                <nb-option *ngFor="let pdItem of pd; let i = index;"
+                           [value]="i">Date d'affectation : {{pdItem.initDateString}}
+                  <br>
+                  Date de récupération
+                  : {{pdItem.returnedAtString}}</nb-option>
+              </nb-select>
+            </nb-form-field>
+          </nb-card-body>
+
+          <div id="dontprint" *ngIf="this.steps?.length > 0">
+            <p style="font-size: x-large;">Ou choisir deux dates:</p>
+            <div class="calendar">
+              <nb-calendar-range [range]="range" size="large" [min]="min"
+                                 (rangeChange)="handleRangeChange($event)"></nb-calendar-range>
+            </div>
+          </div>
+
+          <h4 style="margin-top: 2em">Minutes</h4>
+          <nb-card-body *ngIf="this.steps?.length === 0">Pas de données.</nb-card-body>
+          <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading"
+                   nbSpinnerStatus="info"
+                   nbSpinnerSize="giant" nbSpinnerMessage="Pas de données, veuillez choisir deux dates.">
+            <nb-card-body class="load">
+            </nb-card-body>
+          </nb-card>
+          <nb-card-body *ngIf="this.stats.length > 0">
+            <div style="position: inherit; height:40vh; width:25vw">
+              <canvas baseChart
+                      [data]="minutesPieChartData"
+                      [labels]="pieChartLabels"
+                      [chartType]="pieChartType"
+                      [options]="pieChartOptions">
+              </canvas>
+            </div>
+          </nb-card-body>
+
+          <h4 style="margin-top: 2em">Nombre de pas</h4>
+          <nb-card *ngIf="this.steps.length > 0 && this.u?.length === 0" [nbSpinner]="loading" nbSpinnerStatus="info"
+                   nbSpinnerSize="giant" nbSpinnerMessage="Pas de données, veuillez choisir deux dates.">
+            <nb-card-body class="load">
+            </nb-card-body>
+          </nb-card>
+          <nb-card-body *ngIf="this.steps.length === 0">Pas de données.</nb-card-body>
+          <nb-card-body *ngIf="this.u?.length > 0">
+            <div style="position: inherit; height:40vh; width:20vw">
+              <canvas baseChart
+                      [datasets]="stepsBar"
+                      [labels]="stepsChartLabels"
+                      [options]="gpaqBarChartOptions"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+
+          </nb-card-body>
         </nb-card-body>
       </nb-card>
     </nb-card-body>

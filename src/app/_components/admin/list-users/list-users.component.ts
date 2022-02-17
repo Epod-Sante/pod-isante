@@ -9,6 +9,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Observable, pipe} from 'rxjs';
 import {delayResponse} from 'angular-in-memory-web-api/delay-response';
 import {first} from 'rxjs/operators';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -25,11 +26,21 @@ export class ListUsersComponent implements OnInit {
   public displayedColumns = ['nom', 'mail', 'role', 'details', 'block'
   ];
   public dataSource = new MatTableDataSource<UserRequestDto>();
+  currentRole;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public router: Router) {
+    this.currentRole = localStorage.getItem('currentRole');
+    if (this.currentRole !== 'role_admin') {
+      this.router.navigate(['/login']);
+    }
+  }
 
   ngOnInit() {
-    this.getAllUsers();
+    if (this.currentRole !== 'role_admin') {
+      this.router.navigate(['/login']);
+    }else{
+      this.getAllUsers();
+    }
   }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

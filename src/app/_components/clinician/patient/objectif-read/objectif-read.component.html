@@ -27,7 +27,7 @@
       </div>
       <h4>Moyens</h4>
       <div *ngIf="i === 0">
-        <p *ngIf="obj1Moyen.length === 0">Pas de moyens</p>
+        <p *ngIf="obj1Moyen.length === 0">Pas de moyen</p>
         <div *ngIf="obj1Moyen.length > 0">
           <div *ngFor="let moyen of obj1Moyen">
             <p>{{moyen}}</p>
@@ -36,7 +36,7 @@
       </div>
 
       <div *ngIf="i === 1">
-        <p *ngIf="obj2Moyen.length === 0">Pas de moyens</p>
+        <p *ngIf="obj2Moyen.length === 0">Pas de moyen</p>
         <div *ngIf="obj2Moyen.length > 0">
           <div *ngFor="let moyen of obj2Moyen">
             <p>{{moyen}}</p>
@@ -45,7 +45,7 @@
       </div>
 
       <div *ngIf="i === 2">
-        <p *ngIf="obj3Moyen.length === 0">Pas de moyens</p>
+        <p *ngIf="obj3Moyen.length === 0">Pas de moyen</p>
         <div *ngIf="obj3Moyen.length > 0">
           <div *ngFor="let moyen of obj3Moyen">
             <p>{{moyen}}</p>
@@ -54,9 +54,9 @@
       </div>
 
 
-      <h4>Precautions</h4>
+      <h4 *ngIf="i === 0 || i === 1">Précautions</h4>
       <div *ngIf="i === 0">
-        <p *ngIf="obj1Precaution.length === 0">Pas de precautions</p>
+        <p *ngIf="obj1Precaution.length === 0">Pas de précautions</p>
         <div *ngIf="obj1Precaution.length > 0">
           <div *ngFor="let precaution of obj1Precaution">
             <p>{{precaution}}</p>
@@ -65,7 +65,7 @@
       </div>
 
       <div *ngIf="i === 1">
-        <p *ngIf="obj2Precaution.length === 0">Pas de precautions</p>
+        <p *ngIf="obj2Precaution.length === 0">Pas de précautions</p>
         <div *ngIf="obj2Precaution.length > 0">
           <div *ngFor="let precaution of obj2Precaution">
             <p>{{precaution}}</p>
@@ -73,48 +73,39 @@
         </div>
       </div>
 
-      <div *ngIf="i === 2">
-        <p *ngIf="obj3Precaution.length === 0">Pas de precautions</p>
-        <div *ngIf="obj3Precaution.length > 0">
-          <div *ngFor="let precaution of obj3Precaution">
-            <p>{{precaution}}</p>
-          </div>
-        </div>
-      </div>
-
-      <h4 *ngIf="i === 0 || i === 1">Recommendations</h4>
+      <h4 *ngIf="i === 0 || i === 1">Recommandations</h4>
       <div *ngIf="i === 0">
-        <h5>Frequence</h5>
-        <p *ngIf="!obj.recommandation.frequence">Pas de frequence</p>
+        <h5>Fréquence</h5>
+        <p *ngIf="!obj.recommandation.frequence">Pas de fréquence</p>
         <p *ngIf="obj.recommandation.frequence">{{obj.recommandation.frequence}}</p>
 
-        <h5>Moment</h5>
-        <p *ngIf="obj1Moment.length === 0">Pas de moments</p>
+        <h5>Moments</h5>
+        <p *ngIf="obj1Moment.length === 0">Pas de moment</p>
         <div *ngIf="obj1Moment.length > 0">
           <div *ngFor="let moment of obj1Moment">
             <p>{{moment}}</p>
           </div>
         </div>
 
-        <h5>Intensite</h5>
+        <h5>Intensité</h5>
         <p>{{obj.recommandation.intensite.echelleString}} | {{obj.recommandation.intensite.echelleNumber}}</p>
       </div>
 
       <div *ngIf="i === 1">
 
-        <h5>Frequence</h5>
-        <p *ngIf="!obj.recommandation.frequence">Pas de frequence</p>
+        <h5>Fréquence</h5>
+        <p *ngIf="!obj.recommandation.frequence">Pas de fréquence</p>
         <p *ngIf="obj.recommandation.frequence">{{obj.recommandation.frequence}}</p>
 
-        <h5>Moment</h5>
-        <p *ngIf="obj2Moment.length === 0">Pas de moments</p>
+        <h5>Moments</h5>
+        <p *ngIf="obj2Moment.length === 0">Pas de moment</p>
         <div *ngIf="obj2Moment.length > 0">
           <div *ngFor="let moment of obj2Moment">
             <p>{{moment}}</p>
           </div>
         </div>
 
-        <h5>Intensite</h5>
+        <h5>Intensité</h5>
         <p>{{obj.recommandation.intensite.echelleString}} | {{obj.recommandation.intensite.echelleNumber}}</p>
       </div>
 
@@ -122,8 +113,8 @@
     </div>
 
 
-    <h3>Barriers:</h3>
-    <nb-card-body *ngIf="barriersRecommendation === undefined || barriersRecommendation === null">Pas de barriers</nb-card-body>
+    <h3>Barrières:</h3>
+    <nb-card-body *ngIf="barriersRecommendation === undefined || barriersRecommendation === null">Pas de barrières</nb-card-body>
     <div *ngIf="barriersRecommendation !== undefined && barriersRecommendation !== null">
       <nb-card-body *ngIf="barriersRecommendation.length === 0">Pas de barriers</nb-card-body>
       <div *ngIf="barriersRecommendation.length > 0">
@@ -134,17 +125,9 @@
     </div>
 
 
-    <h3>Barriers solutions:</h3>
-    <nb-card-body *ngIf="barriersRecommendationSolutions === undefined || barriersRecommendationSolutions === null">Pas de solutions</nb-card-body>
-    <div *ngIf="barriersRecommendationSolutions !== undefined && barriersRecommendationSolutions !== null">
-      <nb-card-body *ngIf="barriersRecommendationSolutions.length === 0">Pas de solutions</nb-card-body>
+    <h3>Niveau de confiance:</h3>
+    <nb-card-body>{{recommendations.at(selectedItem).confiance}}</nb-card-body>
 
-      <div *ngIf="barriersRecommendationSolutions.length > 0">
-        <div *ngFor="let brs of barriersRecommendationSolutions; index as i;">
-          <p>{{i + 1}}- {{brs}}</p>
-        </div>
-      </div>
-    </div>
 
   </nb-card-body>
 

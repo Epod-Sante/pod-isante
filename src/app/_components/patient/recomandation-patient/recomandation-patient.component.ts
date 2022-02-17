@@ -29,7 +29,6 @@ export class RecomandationPatientComponent implements OnInit {
   obj3Moyen = [];
   obj1Precaution = [];
   obj2Precaution = [];
-  obj3Precaution = [];
   obj1Moment = [];
   obj2Moment = [];
 
@@ -47,7 +46,6 @@ export class RecomandationPatientComponent implements OnInit {
       const response = recommandations as Response;
       this.recommandation = JSON.parse(JSON.stringify(response.object)) as RecommandationDto;
       this.barriersRecommendation = JSON.parse(this.recommandation.barriersRecommendation) as string[];
-      this.barriersRecommendationSolutions = JSON.parse(this.recommandation.barriersRecommendationSolutions) as string[];
       this.objectif = JSON.parse(this.recommandation.recommendation) as ObjectifModel[];
       let i = 0;
       this.objectif.forEach(elm => {
@@ -95,11 +93,6 @@ export class RecomandationPatientComponent implements OnInit {
           moyen.forEach(m => {
             if (m.checked) {
               this.obj3Moyen.push(m.name);
-            }
-          });
-          precaution.forEach(p => {
-            if (p.checked) {
-              this.obj3Precaution.push(p.name);
             }
           });
         }

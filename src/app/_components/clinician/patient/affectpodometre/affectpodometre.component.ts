@@ -135,7 +135,7 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
       const currentUser = localStorage.getItem('currentUser');
       const idPro = JSON.parse(currentUser).id;
 
-      this.po = [new PatientDeviceDto(null, null, this.date, idPro, this.patient.medicalFile.patient, null, this.patientEmail)];
+      this.po = [new PatientDeviceDto(null, null, idPro, this.patient.medicalFile.patient, null, this.patientEmail)];
       const device = new DeviceDto(this.deviceId, null, null,
         null, null, null, null, null,
         null, this.po);

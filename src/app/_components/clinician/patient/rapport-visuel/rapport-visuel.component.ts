@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DescStats} from '../../../../_models/DescStats';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {MatTableDataSource} from '@angular/material/table';
@@ -14,9 +14,9 @@ import {BREQValue, QuestionnaireBREQ} from '../../../../dto/QuestionnaireBREQ';
 import {QuestionnaireDto} from '../../../../dto/QuestionnaireDto';
 import {NbCalendarRange, NbDateService} from '@nebular/theme';
 import {StepsDto} from 'src/app/dto/medicalfile/StepsDto';
-import {MinutesDto} from '../../../../dto/medicalfile/MinutesDto';
 import {ActivitiesStepsDto} from '../../../../dto/medicalfile/ActivitiesStepsDto';
 import {ActivitiesMinutesDto} from '../../../../dto/medicalfile/ActivitiesMinutesDto';
+import {PatientDeviceDto} from '../../../../dto/PatientDeviceDto';
 
 @Component({
   selector: 'app-rapport-visuel',
@@ -39,6 +39,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   selectedItemBreq = 0;
   selectedItemMin = 0;
   selectedItemSteps = 0;
+  selectedItemPD = -1;
   public dataSource = new MatTableDataSource<DescStats>();
   minuHight: number;
   minuLow: number;
@@ -61,7 +62,11 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   public steps: Step[] = [];
   gpaqBarChartOptions: ChartOptions = {
     responsive: true,
-    scales: {xAxes: [{}], yAxes: [{}]},
+    plugins: {
+      labels: {
+        render: 'value',
+      }
+    }
   };
   public barChartType: ChartType = 'bar';
 
@@ -95,6 +100,13 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   public pieChartData: SingleDataSet = [0, 0, 0, 0, 0];
   public pieChartOptions: ChartOptions = {
     responsive: true,
+    plugins: {
+      labels: {
+        render: 'value',
+        fontColor: '#000',
+        position: 'outside'
+      }
+    }
   };
   public pieChartLabels: string[] = ['Intensité faible',
     'Intensité  modérée',
@@ -112,6 +124,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   private start: Date;
   private end: Date;
   public minutesDto: ActivitiesMinutesDto;
+  pd: PatientDeviceDto[];
 
   constructor(private patientService: PatientService, public datePipe: DatePipe, protected dateService: NbDateService<Date>) {
     /* this.range = {
@@ -130,7 +143,8 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
 
 
   onChange() {
-    console.log('onChange');
+    this.pd = [];
+    this.selectedItemPD = -1;
     this.appointmentsDates = [];
     this.minutesData = [];
     this.gpaq = [];
@@ -159,6 +173,8 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
 
         this.getSteps();
         this.getMinutes();
+        this.getPatientDevices();
+
       }
     });
     return this.appointmentsDates;
@@ -181,6 +197,29 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
           this.loading = true;
         }
       }
+    });
+  }
+
+  public getPatientDevices = () => {
+    this.patientService.getPatientDevices(this.patient.medicalFile.patient).subscribe(response => {
+      const req = JSON.parse(JSON.stringify(response)) as Request;
+      const object = req.object;
+
+      if (object !== null){
+        this.pd = object as PatientDeviceDto[];
+
+        this.pd.forEach(item => {
+          item.initDateString = new Date(item.initDate).toISOString().substring(0, 10);
+          if (item.returnedAt !== null){
+            item.returnedAtString = new Date(item.returnedAt).toISOString().substring(0, 10);
+          } else {
+            item.returnedAtString = '/';
+          }
+        });
+      }
+
+    }, error => {
+
     });
   }
 
@@ -469,6 +508,12 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
       this.stepsBarChart($event.start, $event.end);
       this.minutesCalcule();
     }
+  }
+
+  onChangePD() {
+    this.stepsBarChart(new Date(this.pd.at(this.selectedItemPD).initDate), new Date(this.pd.at(this.selectedItemPD).returnedAt));
+    this.minutesCalcule();
+
   }
 }
 

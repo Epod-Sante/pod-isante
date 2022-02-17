@@ -2,12 +2,14 @@
 
   <nb-card-body class="bl">
     <div><p>LDL (mmol/L) </p><input type="number" #ldl nbInput placeholder="LDL (mmol/L)"></div>
-    <div><p>HDL (mml/L) </p><input type="number" #hdl nbInput placeholder="HDL (mml/L)"></div>
+    <div><p>HDL (mmol/L) </p><input type="number" #hdl nbInput placeholder="HDL (mmol/L)"></div>
     <div><p>Non HDL  (CT- HDL) </p><input type="number" #nonhdl nbInput placeholder="Non HDL  (CT- HDL)"></div>
     <div><p>Triglycérides (mmol/L) </p><input type="number" #triglycerides nbInput placeholder="Triglycérides (mmol/L)"></div>
+    <div><p>Glucose à jeûn (mmol/L) </p><input type="number" #glucoseJeun nbInput placeholder="Glucose à jeûn (mmol/L)"></div>
+    <div><p>Glucose aléatoire (mmol/L) </p><input type="number" #glucoseAleatoire nbInput placeholder="Glucose aléatoire (mmol/L)"></div>
     <div><p>HbA1c (%) </p><input type="number" #hba1c nbInput placeholder="HbA1c (%)"></div>
 
-  <button nbButton status="success" (click)="ajouter(ldl.value, hdl.value, nonhdl.value, triglycerides.value, hba1c.value)"><nb-icon icon="save-outline"></nb-icon>Ajouter</button>
+  <button nbButton status="success" (click)="ajouter(ldl.value, hdl.value, nonhdl.value, triglycerides.value, hba1c.value, glucoseJeun.value, glucoseAleatoire.value)"><nb-icon icon="save-outline"></nb-icon>Ajouter</button>
 
   </nb-card-body>
 

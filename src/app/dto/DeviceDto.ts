@@ -11,6 +11,7 @@ export class DeviceDto{
   institutionCode: string;
   auth: string;
   patientDevices: PatientDeviceDto[];
+  authorized: boolean;
 
 
   constructor(id: string, deviceCode: string, deviceVersion: string, type: string, lastSyncDate: Date, adminId: string, available: boolean, institutionCode: string, auth: string, patientDevices: PatientDeviceDto[]) {

@@ -134,7 +134,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   logOut() {
-    this.authService.logout();
+    // this.authService.logout();
     localStorage.clear();
     this.router.navigate(['/login']);
   }

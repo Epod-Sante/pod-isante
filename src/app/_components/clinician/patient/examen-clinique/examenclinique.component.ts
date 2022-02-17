@@ -30,13 +30,15 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   cm: number;
   imccm: string;
   lbpoids: number;
-  pitaille: number;
+  feet: number;
+  inches: number;
   btbloq;
   active;
   mySubscription: any;
   now: string;
   @Output() expandedEvent = new EventEmitter<boolean>();
   regularFC = false;
+  feetinches: string;
 
 
   constructor(private patientService: PatientService, private snackBar: MatSnackBar, private router: Router,
@@ -68,20 +70,17 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   }
 
   calcul_imc() {
-    console.log(this.kg)
-    console.log(this.cm)
-
     if (this.kg !== 0 && this.cm !== 0) {
-      this.pitaille = +(this.cm / 30.48).toFixed(2);
+      const y = (this.cm * 0.393700) / 12;
+      this.feet = Math.floor(y);
+      this.inches = (y - this.feet) * 12;
+      this.feetinches = this.feet + ' pi ' + this.inches.toFixed(1) + ' po';
       this.lbpoids = +(this.kg * 2.20462).toFixed(2);
       const carrepoid = (this.cm / 100) * (this.cm / 100);
       this.imccm = (this.kg / carrepoid).toFixed(2);
-    } else if (this.lbpoids !== 0 && this.pitaille !== 0) {
-      this.cm = this.pitaille * 30.48;
-      this.kg = this.lbpoids / 2.20462;
-      const carrepoid = (this.cm / 100) * (this.cm / 100);
-      this.imccm = (this.kg / carrepoid).toFixed(2);
-
+    }
+    if (isNaN(this.cm)) {
+      this.feetinches = '';
     }
   }
 
@@ -127,7 +126,6 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   }
 
   ajouter(fcRepos, tadrsys: number, tadrdias: number, tagcsys: number, tagcdias: number, poidskg, taillecm, imc, tourTaille) {
-    console.log(this.regularFC)
     if (Number(fcRepos) && Number(tadrsys) && Number(tadrdias) && Number(tagcsys) &&
       Number(tagcdias) && Number(poidskg) && Number(taillecm) && Number(imc) && Number(tourTaille)) {
 
@@ -154,12 +152,6 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
     }
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 4000,
-
-    });
-  }
 
   showToast(position, status, statusFR, title) {
     this.toastrService.show(

@@ -37,7 +37,9 @@ export const environment = {
   ALL_RECO : "https://epod-zuul.herokuapp.com/api/v1/patient-service/recommendation/all",
   GET_ACTIVEMINUTES : 'https://epod-zuul.herokuapp.com/api/v1/fitbit-service/activity/activeminutes',
   GET_QUIZ : 'https://epod-zuul.herokuapp.com/api/v1/patient-service/questionnaire/all',
-  ADD_QUIZINDI : "https://epod-zuul.herokuapp.com/api/v1/patient-service/questionnaire/individual"
+  ADD_QUIZINDI : "https://epod-zuul.herokuapp.com/api/v1/patient-service/questionnaire/individual",
+  GET_PATIENT_DEVICES : 'https://epod-zuul.herokuapp.com/api/v1/fitbit-service/device/patient'
+
 
 
 

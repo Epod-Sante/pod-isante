@@ -1,3 +1,23 @@
-<app-main-nav *ngIf='currentRole=="role_admin" &&( router.url!="/login" &&  router.url !="/patient/login" &&  router.url !="/patient/questionnaire")'></app-main-nav>
-<router-outlet></router-outlet>
 
+<nb-layout>
+
+  <nb-sidebar class="sidebar" state="compacted" tag="left">
+    <div class="title">
+      <nb-icon *ngIf="toggleOn" class="flex-item1" nbButton icon="menu-arrow-outline" (click)="toggle()"></nb-icon>
+      <h4 *ngIf="toggleOn" class="flex-item1">I-POD SANTE</h4>
+      <nb-icon *ngIf="toggleOff" class="flex-item2" nbButton icon="menu-outline" (click)="toggle()"></nb-icon>
+    </div>
+    <nb-menu class="menu1" tag="menu1" [items]="MENU_ITEMS1"></nb-menu>
+    <nb-menu class="menu2" tag="menu2" [items]="MENU_ITEMS2"></nb-menu>
+  </nb-sidebar>
+  <nb-layout-column>
+
+    <router-outlet></router-outlet>
+
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+   &lt;!&ndash; Insert footer here &ndash;&gt;
+   </nb-layout-footer>-->
+
+</nb-layout>

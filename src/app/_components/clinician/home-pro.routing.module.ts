@@ -19,7 +19,7 @@ import {ObjectifV2Component} from './patient/objectif-v2/objectif-v2.component';
 import {
     NbButtonModule, NbCalendarModule, NbCalendarRangeModule,
     NbCardModule,
-    NbCheckboxModule,
+    NbCheckboxModule, NbFormFieldModule,
     NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
     NbSelectModule, NbSidebarModule, NbSpinnerModule,
     NbStepperModule,
@@ -55,6 +55,7 @@ export const homeProRoutes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forChild(homeProRoutes),
+        NbIconModule,
         NbCalendarModule,
         MatRadioModule,
         MatFormFieldModule,
@@ -63,7 +64,8 @@ export const homeProRoutes: Routes = [
         CommonModule,
         ReactiveFormsModule,
         QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
-        NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule, NbLayoutModule, NbPopoverModule, ChartsModule, NbCalendarRangeModule, NbSpinnerModule],
+        NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule,
+        NbLayoutModule, NbPopoverModule, ChartsModule, NbCalendarRangeModule, NbSpinnerModule, NbFormFieldModule],
     exports: [RouterModule,
         HistoireSanteComponent,
         BilanLipidiqueComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent,

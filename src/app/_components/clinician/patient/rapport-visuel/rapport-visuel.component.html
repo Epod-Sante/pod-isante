@@ -6,16 +6,32 @@
       <mat-tab label="Podomètre">
         <nb-card-body>
 
+          <nb-card-body *ngIf="pd !== null || pd.length !== 0">
+            <p style="font-size: x-large;">Sélectionnez une période:</p>
+            <nb-form-field>
+              <nb-icon nbPrefix icon="clock-outline"></nb-icon>
+              <nb-select placeholder="Sélectionnez une période" [(selected)]="selectedItemPD" (selectedChange)="onChangePD()" size="giant">
+                <nb-option *ngFor="let pdItem of pd; let i = index;" [value]="i">
+                    Date d'affectation : {{pdItem.initDateString}}
+                    <br>
+                    Date de récupération : {{pdItem.returnedAtString}}
+                </nb-option>
+              </nb-select>
+            </nb-form-field>
+          </nb-card-body>
+
           <div *ngIf="this.steps?.length > 0">
-            <p style="font-size: x-large;">Choisir deux dates:</p>
+            <p style="font-size: x-large;">Ou choisir deux dates:</p>
             <div class="calendar">
               <nb-calendar-range [range]="range" size="large" [min]="min"
                                  (rangeChange)="handleRangeChange($event)"></nb-calendar-range>
             </div>
           </div>
           <nb-card-body><h4>Statistiques descriptives</h4></nb-card-body>
+          <nb-card-body *ngIf="this.steps?.length === 0 || this.minutesDto === null">Pas de données.</nb-card-body>
           <nb-card-body *ngIf="this.minutesDto === null">Pas de statistiques descriptives.</nb-card-body>
-          <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading" nbSpinnerStatus="info"
+          <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading"
+                   nbSpinnerStatus="info"
                    nbSpinnerSize="giant" nbSpinnerMessage="Pas de données, veuillez choisir deux dates.">
             <nb-card-body class="load">
             </nb-card-body>
@@ -71,7 +87,9 @@
           </table>
 
           <h4 style="margin-top: 2em">Minutes</h4>
-          <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading" nbSpinnerStatus="info"
+          <nb-card-body *ngIf="this.steps?.length === 0">Pas de données.</nb-card-body>
+          <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading"
+                   nbSpinnerStatus="info"
                    nbSpinnerSize="giant" nbSpinnerMessage="Pas de données, veuillez choisir deux dates.">
             <nb-card-body class="load">
             </nb-card-body>
@@ -185,9 +203,9 @@
         </nb-card-body>
       </mat-tab>
 
-     <!-- <mat-tab label="Mesures cliniques">
+      <!-- <mat-tab label="Mesures cliniques">
 
-      </mat-tab>-->
+       </mat-tab>-->
 
     </mat-tab-group>
 

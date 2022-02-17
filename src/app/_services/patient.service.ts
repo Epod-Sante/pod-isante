@@ -32,6 +32,7 @@ export class PatientService {
   GET_MINUTES: string;
   GET_QUIZ: string;
   ADD_QUIZINDI: string;
+  GET_PATIENT_DEVICES: string;
 
 
   constructor(private http: HttpClient) {
@@ -57,6 +58,7 @@ export class PatientService {
     this.GET_MINUTES = environment.GET_ACTIVEMINUTES;
     this.GET_QUIZ = environment.GET_QUIZ;
     this.ADD_QUIZINDI = environment.ADD_QUIZINDI;
+    this.GET_PATIENT_DEVICES = environment.GET_PATIENT_DEVICES;
   }
 
 
@@ -363,5 +365,12 @@ export class PatientService {
   /*delete(id: number) {
       return this.http.delete(`/users/` + id);
   }*/
+  getPatientDevices(medicalFileId: string) {
+    const token = localStorage.getItem('currentToken');
+    const params = new HttpParams().set('medicalFileId', medicalFileId);
+    const obj = JSON.parse(token);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
+    return this.http.get(this.GET_PATIENT_DEVICES, {headers: header, params});
+  }
 }
 

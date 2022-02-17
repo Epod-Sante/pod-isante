@@ -33,7 +33,7 @@
       </button>
     </mat-tab>
 
-    <mat-tab label="  Identifier les solutions à ces mêmes barrières ">
+    <!--<mat-tab label="  Identifier les solutions à ces mêmes barrières ">
       <mat-selection-list #sol>
         <h2>SOLUTIONS</h2>
         <mat-list-option value="Prévoir des journées et moments fixes dans l'horaire pour pratiquer de l’activité physique">Prévoir des journées et moments fixes dans l'horaire pour pratiquer de l’activité physique</mat-list-option>
@@ -59,8 +59,17 @@
       <button nbButton status="success" fullWidth (click)="comfirmerSol(sol.selectedOptions.selected)">
         Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
       </button>
-    </mat-tab>
+    </mat-tab>-->
+    <mat-tab label="Niveau de confiance">
+      <mat-selection-list #sol>
+        <h2>Niveau de confiance</h2>
+        <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
 
+      </mat-selection-list>
+      <button nbButton status="success" fullWidth (click)="addConfiance()">
+        Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+      </button>
+    </mat-tab>
 
 
     <mat-tab label="  Sélectionner le nombre d’objectifs souhaités ">

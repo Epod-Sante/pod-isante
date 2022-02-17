@@ -52,7 +52,7 @@ export class ExamenCliniqueBilanLipidiqueReadComponent implements OnInit {
   }
   addBilanLipidique() {
     const component = BilanLipidiqueComponent;
-    const title = 'Bilan lipidique ';
+    const title = 'Bilan sanguin ';
     const buttonsConfig: NbWindowControlButtonsConfig = {
       minimize: true,
       maximize: false,

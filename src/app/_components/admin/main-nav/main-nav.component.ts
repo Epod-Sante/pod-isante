@@ -5,9 +5,9 @@ import {Router} from '@angular/router';
 
 
 import {first, map, shareReplay} from 'rxjs/operators';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {AuthenticationService} from "../../../_services";
-import {MatSidenav} from "@angular/material/sidenav";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthenticationService} from '../../../_services';
+import {MatSidenav} from '@angular/material/sidenav';
 
 
 @Component({
@@ -16,26 +16,27 @@ import {MatSidenav} from "@angular/material/sidenav";
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
-  currentUser = localStorage.getItem("currentUser");
+
+
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private http: HttpClient, private authenticationService: AuthenticationService) {
+    if (localStorage.getItem('currentRole' ) === 'role_admin'){
+      this.obj = JSON.parse(this.currentUser);
+      console.log(this.obj);
+
+    }else {
+      router.navigate(['/']);
+    }
+
+
+  }
+  currentUser = localStorage.getItem('currentUser');
   obj: any;
 
-  @ViewChild('sidenav',{static : false}) sidenav: MatSidenav;
+  @ViewChild('sidenav', {static : false}) sidenav: MatSidenav;
   isExpanded = true;
-  showSubmenu: boolean = false;
+  showSubmenu = false;
   isShowing = false;
-  showSubSubMenu: boolean = false;
-
-  mouseenter() {
-    if (!this.isExpanded) {
-      this.isShowing = true;
-    }
-  }
-
-  mouseleave() {
-    if (!this.isExpanded) {
-      this.isShowing = false;
-    }
-  }
+  showSubSubMenu = false;
 
   appitems = [
     {
@@ -75,7 +76,7 @@ export class MainNavComponent {
     fontColor: `#323232`,
     backgroundColor: `white`,
     selectedListFontColor: `blue`,
-    //highlightOnSelect: true,
+    // highlightOnSelect: true,
     collapseOnSelect: false,
     rtlLayout: false
   };
@@ -85,8 +86,20 @@ export class MainNavComponent {
       shareReplay()
     );
 
+  mouseenter() {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave() {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
+  }
+
   selectedItem($event) {
-    console.log(this.currentUser)
+    console.log(this.currentUser);
 
 
   }
@@ -94,24 +107,10 @@ export class MainNavComponent {
   selectedLabel($event) {
   }
 
-
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private http: HttpClient, private authenticationService : AuthenticationService) {
-    if (localStorage.getItem("currentRole" ) === "role_admin"){
-      this.obj = JSON.parse(this.currentUser)
-      console.log(this.obj)
-
-    }else {
-      router.navigate(["/"])
-    }
-
-
-  }
-
   logOut() {
-    this.authenticationService.logout()
-
-
-
+    console.log('logout')
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
 }

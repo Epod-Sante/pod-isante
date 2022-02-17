@@ -10,16 +10,17 @@ export class RecommandationDto {
   barriersRecommendation: string;
   barriersRecommendationSolutions: string;
   dateRecommendation: string;
+  confiance: string;
 
   constructor(id: string, patient: PatientDto, response: string, recommandation: string, professional: ProfessionalDto,
-              barriersRecommendation: string, barriersRecommendationSolutions: string ) {
+              barriersRecommendation: string, confiance: string ) {
     this.id = id;
     this.patient = patient;
     this.recommendation = recommandation;
     this.response = response;
     this.professional = professional;
     this.barriersRecommendation = barriersRecommendation;
-    this.barriersRecommendationSolutions = barriersRecommendationSolutions;
+    this.confiance = confiance;
 
   }
 }

@@ -6,7 +6,7 @@ import {RecommandationDto} from '../../../../dto/RecommandationDto';
 import {ObjectifModel} from '../objectif-v2/ObjectifModel';
 import {NbWindowControlButtonsConfig, NbWindowService} from '@nebular/theme';
 import {ObjectifV2Component} from '../objectif-v2/objectif-v2.component';
-import {ObjectifComponent} from "../objectif/objectif.component";
+import {ObjectifComponent} from '../objectif/objectif.component';
 
 @Component({
   selector: 'app-objectif-read',
@@ -19,7 +19,6 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
   selectedItem = 0;
   subscription: Subscription;
   barriersRecommendation: string[] = [];
-  barriersRecommendationSolutions: string[] = [];
   objectif: ObjectifModel[] = [];
 
   obj1Moyen = [];
@@ -61,7 +60,6 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
     this.obj2Moment = [];
     this.barriersRecommendation = JSON.parse(this.recommendations.at(this.selectedItem).barriersRecommendation) as string[];
     // tslint:disable-next-line:max-line-length
-    this.barriersRecommendationSolutions = JSON.parse(this.recommendations.at(this.selectedItem).barriersRecommendationSolutions) as string[];
     this.objectif = JSON.parse(this.recommendations.at(this.selectedItem).recommendation) as ObjectifModel[];
     let i = 0;
     this.objectif.forEach(elm => {
@@ -105,15 +103,9 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
         });
       } else {
         const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
-        const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
         moyen.forEach(m => {
           if (m.checked) {
             this.obj3Moyen.push(m.name);
-          }
-        });
-        precaution.forEach(p => {
-          if (p.checked) {
-            this.obj3Precaution.push(p.name);
           }
         });
       }
@@ -124,7 +116,7 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
 
   addRecommendation() {
     const component = ObjectifComponent;
-    const title = 'Objectifs, barrieres et solutions';
+    const title = 'Objectifs, barrieres et niveau de confiance';
     const buttonsConfig: NbWindowControlButtonsConfig = {
       minimize: true,
       maximize: false,

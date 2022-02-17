@@ -36,11 +36,11 @@ export class BilanLipidiqueComponent implements OnInit, OnDestroy {
     }
   }
 
-  ajouter(ldl: string, hdl: string, nonhdl: string, triglycerides: string, hba1c: string) {
-    if (Number(ldl) && Number(hdl) && Number(nonhdl) && Number(triglycerides) && Number(hba1c)) {
+  ajouter(ldl: string, hdl: string, nonhdl: string, triglycerides: string, hba1c: string, glucoseJeun: string, glucoseAleatoire: string) {
+    if (Number(ldl) && Number(hdl) && Number(nonhdl) && Number(triglycerides) && Number(hba1c) && Number(glucoseJeun) && Number(glucoseAleatoire)) {
       const date = new Date();
       this.setDate(date);
-      const lipidProfileDto = new LipidProfileDto(null, +ldl, +hdl, +triglycerides, +hba1c, +nonhdl, this.day);
+      const lipidProfileDto = new LipidProfileDto(null, +ldl, +hdl, +triglycerides, +hba1c, +nonhdl, this.day, +glucoseJeun, +glucoseAleatoire);
       const request = new Request(lipidProfileDto);
       this.patientService.addLipid(request, this.id).pipe(first())
         .subscribe(
