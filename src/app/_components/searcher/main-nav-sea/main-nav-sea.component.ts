@@ -66,7 +66,6 @@ appitems  = [
       shareReplay()
     );
     selectedItem($event) {
-      console.log(this.currentUser)
 
 
     }

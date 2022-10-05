@@ -265,7 +265,6 @@ export class RapportComponent implements OnInit, OnChanges {
         this.val.push({date: x.date, value: valeur, id: x.id, type: x.type});
 
       }
-      this.val.forEach(elm => console.log(elm));
       this.val.forEach(elm => this.show_barChart(elm.value.toString()));
     });
 

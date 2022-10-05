@@ -30,7 +30,6 @@ export class PatientComponent implements AfterViewInit {
   }
   ngAfterViewInit() {
     this.patient = this.child.addpatient;
-    console.log(this.child.addpatient)
 
   }
 

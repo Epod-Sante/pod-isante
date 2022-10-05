@@ -3,7 +3,7 @@ export class IndividualQuestionnaireDto {
   patientId: string;
   fileNumber: string;
   initial: string;
-  socioDemographicVariables: string = null;
+  socioDemographicVariables: string;
   medicalFileHistory: string;
 
 

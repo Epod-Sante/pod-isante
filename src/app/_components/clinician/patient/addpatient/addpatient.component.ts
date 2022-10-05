@@ -23,7 +23,7 @@ export class AddpatientComponent implements OnInit, OnDestroy {
   @Output() exampleOutput = new EventEmitter<PatientDto>();
   @Input() error: string | null;
   mySubscription: any;
-  birthday = '';
+  birthday;
   submitted = false;
   phonee = '';
   patientAdded = true;
@@ -58,7 +58,6 @@ export class AddpatientComponent implements OnInit, OnDestroy {
 
   changePhone(value: string) {
     if (value.length === 3 || value.length === 7) {
-      console.log(value);
       const tiret = '-';
       this.phonee = value.concat(tiret);
     }
@@ -81,8 +80,7 @@ export class AddpatientComponent implements OnInit, OnDestroy {
       mois = '0' + month;
     }
     const year = d.getFullYear();
-    this.birthday = year + '-' + mois + '-' + jr;
-    console.log(this.birthday);
+    this.birthday = d;
   }
 
   ajouter(firstName: string, lastName: string, motherName: string, phone: string, email: string, gender: string) {
@@ -116,7 +114,6 @@ export class AddpatientComponent implements OnInit, OnDestroy {
             , true, null, null, null,
             null, null, null, null, false, gender);
           const request = new Request(data);
-          console.log(request);
 
           this.patientService.addPatient(request).pipe(first())
             .subscribe(

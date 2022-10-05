@@ -82,7 +82,6 @@ export class GpaqQuizComponent implements OnInit {
 
     this.loadQuiz(this.quizName);
     this.getCodeFromURI();
-    console.log(this.saut + ' ' + this.pager.index);
 
   }
 
@@ -153,7 +152,6 @@ export class GpaqQuizComponent implements OnInit {
                       option.poids, question.min, question.hr, question.nbJour, question.questionPere);
                     this.rep[j] = rep;
                   }
-                  console.log(j);
                 }
                 if (exist === false) {
 
@@ -167,8 +165,6 @@ export class GpaqQuizComponent implements OnInit {
 
 
 
-
-                console.log(this.rep);
         }
 
 
@@ -184,8 +180,6 @@ export class GpaqQuizComponent implements OnInit {
   goBack(index: number) {
     this.ellapsedTime = '00:00';
     this.mode = 'quiz';
-    console.log(this.saut + ' ' + this.pager.index);
-    console.log(this.mode);
     this.quizes = this.quizService.getAll();
     this.quizName = this.quizes[0].id;
     this.loadQuiz(this.quizName);
@@ -213,7 +207,6 @@ export class GpaqQuizComponent implements OnInit {
 
       if (question.questionTypeId === 4) {
 
-        console.log('minutes ' + question.min);
 
 
       } else {
@@ -258,7 +251,6 @@ export class GpaqQuizComponent implements OnInit {
 
 
                 this.patientId = this.obj.object.id;
-                console.log(this.obj);
               }else{
 
               }

@@ -111,7 +111,6 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
     } else {
       jr = '0' + date;
     }
-    console.log(jr);
     const month = d.getMonth() + 1; // Be careful! January is 0 not 1
     let mois = month.toString();
     if (month > 9) {
@@ -122,7 +121,6 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
     const year = d.getFullYear();
 
     this.now = year + '-' + mois + '-' + jr;
-    console.log(this.now);
   }
 
   ajouter(fcRepos, tadrsys: number, tadrdias: number, tagcsys: number, tagcdias: number, poidskg, taillecm, imc, tourTaille) {
@@ -137,7 +135,6 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
 
       const clinicalExaminationDto = new ClinicalExaminationDto(cardio, antro, null, null, this.now);
       const request = new Request(clinicalExaminationDto);
-      console.log(clinicalExaminationDto);
       this.patientService.addExam(request, this.id).pipe(first())
       .subscribe(
         data => {

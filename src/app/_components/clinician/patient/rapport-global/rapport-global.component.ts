@@ -146,6 +146,8 @@ export class RapportGlobalComponent implements OnInit {
   loading = true;
   private start: Date;
   private end: Date;
+  private start2: Date;
+  private end2: Date;
   public minutesDto: ActivitiesMinutesDto;
   pd: PatientDeviceDto[];
 
@@ -183,7 +185,6 @@ export class RapportGlobalComponent implements OnInit {
       this.questionnaireResponse = questionnaires;
       this.response = JSON.parse(JSON.stringify(questionnaires)) as Response;
       this.questionnaireObj = this.response.object as [];
-      console.log(this.questionnaireObj.length);
       this.questionnaires = this.response.object as QuestionnaireDto[];
       this.questionnaires.forEach(elm => {
         if (elm.type === 'GPAQ') {
@@ -234,7 +235,6 @@ export class RapportGlobalComponent implements OnInit {
         this.val.push({date: x.date, value: valeur, id: x.id, type: x.type});
 
       }
-      this.val.forEach(elm => console.log(elm));
     });
   }
 
@@ -259,7 +259,6 @@ export class RapportGlobalComponent implements OnInit {
       {data: [this.marche, 0], label: 'Marche'},
       {data: [this.sedentaire, 0], label: 'Sédentaire'}
     ];
-    console.log('+++++++++++++' + this.barChar);
     return this.barChar;
   }
 
@@ -277,8 +276,14 @@ export class RapportGlobalComponent implements OnInit {
 
 
   private stepsBarChart(start: Date, end: Date) {
-    this.start = new Date(start.toISOString().slice(0, 10));
-    this.end = new Date(end.toISOString().slice(0, 10));
+    this.start = start;
+    this.end = end;
+    this.start2 = new Date(start.toISOString().slice(0, 10));
+    this.end2 = new Date(end.toISOString().slice(0, 10));
+    this.start.setHours(0, 0, 0, 0);
+    this.end.setHours(0, 0, 0, 0);
+    this.start2.setHours(0, 0, 0, 0);
+    this.end2.setHours(0, 0, 0, 0);
     this.stepsBar = [];
     this.stepsChartLabels = [];
     this.stepsChartLabels.length = 0;
@@ -288,9 +293,7 @@ export class RapportGlobalComponent implements OnInit {
       this.steps.forEach(elm => {
         const d = new Date(elm.date);
         d.setHours(0, 0, 0, 0);
-        this.start.setHours(0, 0, 0, 0);
-        this.end.setHours(0, 0, 0, 0);
-        if (elm.steps > 0 && this.start <= d && this.end >= d) {
+        if (elm.steps > 0 && this.start2 <= d && this.end2 >= d) {
           this.datesRange.push(elm);
         }
       });
@@ -331,7 +334,7 @@ export class RapportGlobalComponent implements OnInit {
     this.minutesDto.minutesDtoMap.forEach(elm => {
       const d = new Date(elm.date);
       d.setHours(0, 0, 0, 0);
-      if (this.start <= d && this.end >= d) {
+      if (this.start.getTime() <= d.getTime() && this.end.getTime() >= d.getTime()) {
         this.listSedentary.push(elm.sedentary);
         this.listHighIntensity.push(elm.very_active);
         this.listMediumIntensity.push(elm.fairly_active);
@@ -408,7 +411,6 @@ export class RapportGlobalComponent implements OnInit {
     this.patientService.getSteps(this.patient.medicalFile.patient).subscribe(response => {
       const req = JSON.parse(JSON.stringify(response)) as Request;
       const object = req.object;
-      // console.log(JSON.stringify(stepsDto));
 
       if (object != null) {
         const stepsDto = object as ActivitiesStepsDto;
@@ -433,10 +435,12 @@ export class RapportGlobalComponent implements OnInit {
         this.pd = object as PatientDeviceDto[];
 
         this.pd.forEach(item => {
-          const date1 = new Date(item.initDate).toISOString().substring(0, 10);
-          const date2 = new Date(item.returnedAt).toISOString().substring(0, 10);
-          item.initDateString = date1;
-          item.returnedAtString = date2;
+          item.initDateString = new Date(item.initDate).toISOString().substring(0, 10);
+          if (item.returnedAt !== null){
+            item.returnedAtString = new Date(item.returnedAt).toISOString().substring(0, 10);
+          } else {
+            item.returnedAtString = '/';
+          }
         });
       }
 

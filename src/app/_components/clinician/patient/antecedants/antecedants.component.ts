@@ -49,7 +49,6 @@ export class AntecedantsComponent implements OnInit {
           touble_muscle_squel: string,cancer3: string,cancer2: string,cancer1: string,dialyse: string,insuffisance_renale: string,mpoc: string,Chirurgie_vasculairep: string,claudication: string,thrombectomie: string,
           ait: string,avc: string,insuf_cardiaque_nyha3_4: string,insuf_cardiaque_nyha1_2: string,maladievalvulaire: string,angioplasticoronarienne: string,pontagescoronariens: string,pontagescoronarien: string,angineinfractus: string)
   {    let checked_dialyse = document.getElementById("dialyse")
-       console.log(checked_dialyse)
   }
   ajouterr(list_antecedants : any [],cancer1_year : string,
            cancer1_organe: string,cancer2_organe: string,
@@ -158,11 +157,7 @@ export class AntecedantsComponent implements OnInit {
 
 
    }
-    console.log(this.lis_antecedant)
     let request = new Request(this.lis_antecedant);
-    console.log(request)
-    console.log(this.id)
-
     this.patientService.addAntecedants(request,this.id).pipe(first())
       .subscribe(
         data => {
@@ -171,7 +166,6 @@ export class AntecedantsComponent implements OnInit {
 
         },
         error => {
-          console.log("error")
 
 
         });

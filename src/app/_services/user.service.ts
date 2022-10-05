@@ -47,7 +47,6 @@ export class UserService {
   }
 
   register(registrationClientDto: string): Observable<any>{
-    console.log(registrationClientDto);
     return this.http.post(this.REGISTER_URL, registrationClientDto, {headers: {'Content-Type': 'application/json'}});
 
 
@@ -59,7 +58,7 @@ export class UserService {
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
     const params = new HttpParams()
       .set('username', username);
-    return this.http.post('https://epod-zuul.herokuapp.com/api/v1/auth-service/user', null, {
+    return this.http.post('http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/user', null, {
       headers: header,
       params
     });
@@ -76,8 +75,6 @@ export class UserService {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
-    console.log(this.INVITER_URL);
-    console.log(userInviteDto);
     return this.http.post(this.INVITER_URL, userInviteDto, {headers: header});
 
 
@@ -90,7 +87,6 @@ export class UserService {
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
 
-    console.log(this.INVITER_URL);
     return this.http.post(this.ADD_DEVICE, request, {headers: header});
 
   }
@@ -135,7 +131,6 @@ export class UserService {
 
 
   block(user: UserRequestDto, blocker: boolean) {
-    console.log('desactiver');
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});

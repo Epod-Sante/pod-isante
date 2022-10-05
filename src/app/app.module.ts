@@ -165,7 +165,7 @@ import {QuizindividComponent} from './_components/clinician/patient/quizindivid/
     FormsModule, MatCardModule,
     NgxMatTimepickerModule,
     NgxMatDatetimePickerModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireModule.initializeApp(environment.firebase),
     FlexLayoutModule,
     HomeRoutingModule,
     HomeProRoutingModule,

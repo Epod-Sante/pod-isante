@@ -21,7 +21,6 @@ export class MainNavComponent {
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private http: HttpClient, private authenticationService: AuthenticationService) {
     if (localStorage.getItem('currentRole' ) === 'role_admin'){
       this.obj = JSON.parse(this.currentUser);
-      console.log(this.obj);
 
     }else {
       router.navigate(['/']);
@@ -99,7 +98,6 @@ export class MainNavComponent {
   }
 
   selectedItem($event) {
-    console.log(this.currentUser);
 
 
   }
@@ -108,7 +106,6 @@ export class MainNavComponent {
   }
 
   logOut() {
-    console.log('logout')
     localStorage.clear();
     this.router.navigate(['/login']);
   }

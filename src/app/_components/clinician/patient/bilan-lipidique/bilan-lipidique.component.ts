@@ -59,7 +59,6 @@ export class BilanLipidiqueComponent implements OnInit, OnDestroy {
 
   setDate(datee: Date) {
     const d = new Date(datee);
-    console.log(d);
 
     const date = d.getDate();
     let jr = date.toString();

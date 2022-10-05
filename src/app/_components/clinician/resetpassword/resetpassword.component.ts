@@ -57,10 +57,8 @@ export class ResetpasswordComponent implements OnInit {
       return;
     }
     if (this.f.password.value != this.f.comfirmpassword.value) {
-      console.log("eroor")
     } else {
 
-      console.log(this.tokenpassword)
       //console.log(this.f.comfirmpassword.value)
 
 
@@ -68,7 +66,6 @@ export class ResetpasswordComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log(data)
             this._snackBar.open("votre mot de passe a ete modifie", "OK")
             this.router.navigate(['login']);
             //location.reload();
@@ -95,14 +92,11 @@ export class ResetpasswordComponent implements OnInit {
       .subscribe(params => {
         let token: string;
         token = params.token;
-        console.log(token)
         if (token != null) {
           this.tokenpassword = token;
           let message = this.authenticationService.passwordUpdateToken(token).subscribe(
             response => {
-              console.log(response)
               let tokrep = JSON.parse(response.toString())
-              console.log(tokrep.tokenExist)
               if (tokrep.tokenExist) {
 
               } else {

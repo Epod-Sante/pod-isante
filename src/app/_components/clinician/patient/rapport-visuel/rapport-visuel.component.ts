@@ -123,6 +123,8 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   loading = true;
   private start: Date;
   private end: Date;
+  private start2: Date;
+  private end2: Date;
   public minutesDto: ActivitiesMinutesDto;
   pd: PatientDeviceDto[];
 
@@ -423,7 +425,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
     this.minutesDto.minutesDtoMap.forEach(elm => {
       const d = new Date(elm.date);
       d.setHours(0, 0, 0, 0);
-      if (this.start <= d && this.end >= d) {
+      if (this.start.getTime() <= d.getTime() && this.end.getTime() >= d.getTime()) {
         this.listSedentary.push(elm.sedentary);
         this.listHighIntensity.push(elm.very_active);
         this.listMediumIntensity.push(elm.fairly_active);
@@ -460,8 +462,14 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   }
 
   private stepsBarChart(start: Date, end: Date) {
-    this.start = new Date(start.toISOString().slice(0, 10));
-    this.end = new Date(end.toISOString().slice(0, 10));
+    this.start = start;
+    this.end = end;
+    this.start2 = new Date(start.toISOString().slice(0, 10));
+    this.end2 = new Date(end.toISOString().slice(0, 10));
+    this.start.setHours(0, 0, 0, 0);
+    this.end.setHours(0, 0, 0, 0);
+    this.start2.setHours(0, 0, 0, 0);
+    this.end2.setHours(0, 0, 0, 0);
     this.stepsBar = [];
     this.stepsChartLabels = [];
     this.stepsChartLabels.length = 0;
@@ -471,9 +479,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
       this.steps.forEach(elm => {
         const d = new Date(elm.date);
         d.setHours(0, 0, 0, 0);
-        this.start.setHours(0, 0, 0, 0);
-        this.end.setHours(0, 0, 0, 0);
-        if (elm.steps > 0 && this.start <= d && this.end >= d) {
+        if (elm.steps > 0 && this.start2 <= d && this.end2 >= d) {
           this.datesRange.push(elm);
         }
       });
@@ -511,6 +517,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   }
 
   onChangePD() {
+
     this.stepsBarChart(new Date(this.pd.at(this.selectedItemPD).initDate), new Date(this.pd.at(this.selectedItemPD).returnedAt));
     this.minutesCalcule();
 

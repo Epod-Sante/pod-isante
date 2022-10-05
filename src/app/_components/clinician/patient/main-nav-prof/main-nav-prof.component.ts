@@ -68,7 +68,6 @@ appitems  = [
       shareReplay()
     );
     selectedItem($event) {
-      console.log(this.currentUser)
 
 
     }
@@ -114,7 +113,6 @@ appitems  = [
     })
   }
   logOut() {
-  console.log("oui")
     localStorage.clear()
     this.router.navigate(["/login"])
    this.authenticationService.logout()

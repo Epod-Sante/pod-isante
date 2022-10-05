@@ -31,9 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.collectFailedRequest( request );
           this.tokenSubject.next(null);
           this.authenticationService.refresh_token().subscribe(ok => {
-            console.log(ok)
             let o = JSON.parse(JSON.stringify(ok))
-            console.log(o.access_token)
             this.newToken = o.access_token
 
           })

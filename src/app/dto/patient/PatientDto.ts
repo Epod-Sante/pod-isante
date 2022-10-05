@@ -13,7 +13,7 @@ export class PatientDto {
   fileNumber: string;
   firstName: string;
   lastName: string;
-  birthday: string;
+  birthday: Date;
   motherName: string;
   contact: ContactDto;
   familyDoctor: FamilyDoctorDto[];
@@ -32,7 +32,7 @@ export class PatientDto {
 
 
   constructor(id: string, fileNumber: string, firstName: string, lastName: string,
-              birthday: string, motherName: string, contact: ContactDto,
+              birthday: Date, motherName: string, contact: ContactDto,
               familyDoctor: FamilyDoctorDto[], pharmacy: PharmacyDto[],
               professionals: ProfessionalDto[], isActive: boolean,
               medicalFileDto: MedicalFileDto, loginCode: string,

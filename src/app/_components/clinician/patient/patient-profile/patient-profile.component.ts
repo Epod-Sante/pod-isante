@@ -200,7 +200,6 @@ export class PatientProfileComponent implements OnInit, OnDestroy, OnDestroy, On
         this.imc = null;
         this.height = null;
       }
-      console.log(this.height)
       if (this.medicalfile.medicalFileHistory.length > 0) {
         this.listAnte = this.medicalfile.medicalFileHistory;
         for (let i = 0; i < this.listAnte.length; i++) {

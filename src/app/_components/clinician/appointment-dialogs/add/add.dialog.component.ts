@@ -73,7 +73,6 @@ export class AddDialogComponent implements OnInit{
   }
   getBirthday(event: MatDatepickerInputEvent<Date>) {
     const d = new Date(event.value);
-    console.log(d);
 
     const date = d.getDate();
     let jr = date.toString();
@@ -82,7 +81,6 @@ export class AddDialogComponent implements OnInit{
     }else{
       jr = '0' + date;
     }
-    console.log(jr);
     const month = d.getMonth() + 1; // Be careful! January is 0 not 1
     let mois = month.toString();
     if (month > 9){
@@ -93,7 +91,6 @@ export class AddDialogComponent implements OnInit{
     const year = d.getFullYear();
 
     this.birthday = year + '-' + mois + '-' + jr;
-    console.log(this.birthday);
   }
 
   comfirmer(patientId: string, datev: Date){

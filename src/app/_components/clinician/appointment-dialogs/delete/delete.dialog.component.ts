@@ -22,10 +22,8 @@ export class DeleteDialogComponent {
 
     this.patientService.deleteRdv(this.data.request).pipe(first())
       .subscribe( reponse =>{
-         console.log("ok")
 
         }, error => {
-        console.log("non")
 
         }
       );

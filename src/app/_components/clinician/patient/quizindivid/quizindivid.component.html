@@ -1,5 +1,5 @@
 <nb-card status="info">
-  <nb-card-header>INFORMATIONS SOCIO-DÉMOGRAPHIQUES</nb-card-header>
+  <nb-card-header>Informations socio-démographiques</nb-card-header>
   <nb-card-body>
     Complétez les informations ci-dessous. Cochez une seule case par question.
     <br>
@@ -57,7 +57,7 @@
 </nb-card>
 
 <nb-card status="info">
-  <nb-card-header>ANTÉCÉDANTS MÉDICAUX</nb-card-header>
+  <nb-card-header>Antécédants</nb-card-header>
   <nb-card-body>
     Indiquez les conditions de santé pour lesquelles vous avez déjà eu un diagnostic dans votre vie ainsi que l’année du diagnostic. Si vous avez eu une même condition plusieurs fois,
     inscrire les années correspondantes.
@@ -122,8 +122,8 @@
       <mat-checkbox (change)="setDouleur($event,no_douleur.value)" value="Aucune douleur" #no_douleur>  Aucune douleur </mat-checkbox>
       <br>
       <mat-checkbox (change)="setDouleur($event,cou.value)" value="Cou" [disabled]="no_douleur.checked" #cou>  Cou </mat-checkbox>
-      <br><mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule droite" #epauled>  Epaule droite </mat-checkbox>
-      <mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule gauche" #epauleg >  Epaule gauche </mat-checkbox>
+      <br><mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule droite" #epauled>  Épaule droite </mat-checkbox>
+      <mat-checkbox (change)="setDouleur($event,epauleg.value)" [disabled]="no_douleur.checked" value="Epaule gauche" #epauleg >  Épaule gauche </mat-checkbox>
       <br><mat-checkbox (change)="setDouleur($event,m_dos.value)" [disabled]="no_douleur.checked"value="Milieu du dos" #m_dos >  Milieu du dos </mat-checkbox>
       <mat-checkbox (change)="setDouleur($event,h_dos.value)" [disabled]="no_douleur.checked" value="Haut du dos" #h_dos >  Haut du dos </mat-checkbox>
       <mat-checkbox (change)="setDouleur($event,b_dos.value)" [disabled]="no_douleur.checked" value="Bas du dos " #b_dos >  Bas du dos </mat-checkbox>
@@ -183,7 +183,7 @@
 
     <mat-card-content><br><br>
       <b>Énumérer tous les médicaments que vous prenez régulièrement. Inscrivez
-        le nom du médicament en lettres moulées, il n’est pas nécessaire de spécifier la dose.</b>
+        le nom du médicament, il n’est pas nécessaire de spécifier la dose.</b>
       <br>
       <textarea nbInput type="text" #medicamant  [disabled]="no_medic.checked"></textarea>
       <br>

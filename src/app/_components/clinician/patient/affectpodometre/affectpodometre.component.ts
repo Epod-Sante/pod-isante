@@ -54,7 +54,6 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
               private toastrService: NbToastrService, @Optional() protected windowRef: NbWindowRef, ) {
     this.subscription = this.data.currentMessage.subscribe(message => this.id = message);
 
-    console.log('**************' + this.id);
 
 
     this.available_device();
@@ -140,7 +139,6 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
         null, null, null, null, null,
         null, this.po);
       const req = new Request(device);
-      console.log(req);
       this.patientService.affectPodo(req).subscribe(
         reponse => {
           this.affecter = false;

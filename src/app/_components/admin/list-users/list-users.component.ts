@@ -56,12 +56,10 @@ export class ListUsersComponent implements OnInit {
         this.dataSource.data = res as Owner[];
       })*/
    this.userService.getAll().subscribe( users => {
-      console.log(users);
     // let tabusers = JSON.parse(JSON.stringify(users.toString()))
       this.dataSource.data = users as UserRequestDto[];
     });
 
-    // console.log("yes "+this.users)
   }
 
   public redirectToDetails = (id: string) => {
@@ -70,14 +68,11 @@ export class ListUsersComponent implements OnInit {
 
   public redirectToUpdate = (element: UserRequestDto) => {
     const obj = JSON.parse(JSON.stringify(element));
-    console.log(obj.account.enabled);
     if (element.account.enabled === false){
         this.blocK_checked = true;
 
-        console.log(this.blocK_checked);
       }else{
         this.blocK_checked = false;
-        console.log(this.blocK_checked);
 
       }
     this.userService.block(element, this.blocK_checked).subscribe();

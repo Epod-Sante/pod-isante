@@ -254,7 +254,6 @@ export class ObjectifV2Component implements OnInit {
               private toastrService: NbToastrService) {
     this.subscription = this.data.currentMessage.subscribe(message => this.message = message);
 
-    console.log('**************' + this.message);
 
 
     // tslint:disable-next-line:forin
@@ -340,7 +339,6 @@ export class ObjectifV2Component implements OnInit {
 
   updateCheckedSelectFreqObj2(option) {
     this.freqObj2 = option;
-    console.log(option);
   }
 
   updateCheckedOptionsMomentsObj2(option, event) {

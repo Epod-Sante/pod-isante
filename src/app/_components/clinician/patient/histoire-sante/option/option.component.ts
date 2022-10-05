@@ -103,9 +103,6 @@ export class OptionComponent implements OnInit {
 
       }
     }
-
-    console.log(this.data.antecedent)
-    console.log(this.lis_antecedant)
   }
   onChangeTraitement(value){
     if(this.lis_antecedant != null) {
@@ -130,9 +127,6 @@ export class OptionComponent implements OnInit {
     else{
       this.lis_antecedant = [new AntecedentsDto(this.data.antecedent.valeur, null, null, value, null)]
     }
-
-    console.log(this.data.antecedent)
-    console.log(this.lis_antecedant)
   }
   onChangeType(value){
     if(this.lis_antecedant != null) {
@@ -157,8 +151,6 @@ export class OptionComponent implements OnInit {
     else{
       this.lis_antecedant = [new AntecedentsDto(this.data.antecedent.valeur, null, null, null, value)]
     }
-    console.log(this.data.antecedent)
-    console.log(this.lis_antecedant)
   }
 
   onChangeYear(value){
@@ -193,8 +185,6 @@ export class OptionComponent implements OnInit {
     else{
       this.lis_antecedant = [new AntecedentsDto(this.data.antecedent.valeur, value, null, null, null)]
     }
-    console.log(this.data.antecedent)
-    console.log(this.lis_antecedant)
 
   }
 

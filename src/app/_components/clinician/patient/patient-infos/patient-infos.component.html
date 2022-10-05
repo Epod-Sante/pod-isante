@@ -1,7 +1,7 @@
 <nb-card>
 
   <nb-card-body><h4>Informations socio-démographiques</h4></nb-card-body>
-  <nb-card-body id="sex"><b>Sex:</b> {{patient?.gender}}</nb-card-body>
+  <nb-card-body id="sex"><b>Sexe:</b> {{patient?.gender}}</nb-card-body>
   <nb-card-body *ngIf="patient?.socioDemographicVariables !== null">
     <p><b>État civil:</b> {{socioDemographicVariables?.civilStatus}}</p>
     <p><b>Scolarité:</b> {{socioDemographicVariables?.education}}</p>
@@ -14,7 +14,7 @@
   <nb-card-body *ngIf="patient?.medicalFile.medicalFileHistory?.length !== 0">
     <nb-card-body><h4>Antécédents médicaux</h4></nb-card-body>
     <nb-card-body >
-      <p>Selectionner une date</p>
+      <p>Sélectionner une date</p>
       <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem">
         <nb-option *ngFor="let antc of antecedents1; let i = index;"  [value]="i" (selectionChange)="select(i)">
           {{antc.date}}
@@ -26,7 +26,7 @@
       <table class="table table-hover" style="margin-top: 2em">
         <thead>
         <tr>
-          <th scope="col">Antécédent</th>
+          <th scope="col">Antécédents</th>
           <th scope="col">Date</th>
           <th scope="col">Description</th>
         </tr>
@@ -44,7 +44,7 @@
   </nb-card-body>
   <nb-card-body *ngIf="patient?.medicalFile.medicalFileHistory?.length === 0">
     <nb-card-body><h4>Antécédents médicaux</h4></nb-card-body>
-    <p style="margin-top: 2em;">Pa d'antécédents médicaux.</p>
+    <p style="margin-top: 2em;">Pas d'antécédents médicaux.</p>
   </nb-card-body>
 
 </nb-card>

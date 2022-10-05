@@ -160,14 +160,11 @@ export class SociodemoComponentPatient implements OnInit {
     let type = hse_uni + cttge + bglv + cdo + ap + rtraite
 
     let socioinformation = new SocioDemographicVariablesDto( marital, revenu, profession, scolarity,"","","")
-    console.log(socioinformation)
     let request = new Request(socioinformation)
-    console.log(request)
     this.route.params
       .subscribe(params => {
 
         this.id = params['id'];
-        console.log(this.id)
       })
     this.patientService.addSocio(request, this.id).pipe(first())
       .subscribe(

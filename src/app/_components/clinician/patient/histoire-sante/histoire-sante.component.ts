@@ -170,7 +170,6 @@ export class HistoireSanteComponent implements OnInit {
     if (index1 >= 0) {
       this.lis_antecedant.splice(index1, 1);
     }
-    console.log(this.lis_antecedant)
   }
 
   removeFact(factess: string): void {
@@ -186,7 +185,6 @@ export class HistoireSanteComponent implements OnInit {
       if (index1 >= 0) {
         this.lis_antecedant.splice(index1, 1);
       }
-      console.log(this.lis_antecedant)
 
     }
     this.traitement = null
@@ -200,7 +198,6 @@ export class HistoireSanteComponent implements OnInit {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    console.log("voilaaa")
     // Add our antessmandation
     if ((value || '').trim()) {
       if(this.antess != null){
@@ -223,7 +220,6 @@ export class HistoireSanteComponent implements OnInit {
   addFact(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    console.log("voilaaa")
     // Add our antessmandation
     if ((value || '').trim()) {
       if(this.factess != null){
@@ -258,7 +254,6 @@ export class HistoireSanteComponent implements OnInit {
     }
     this.AnteInput.nativeElement.value = '';
     this.AnteCtrl.setValue(null);
-    console.log("--"+this.antess)
     this.chipDetails(event.option.viewValue)
 
 
@@ -301,13 +296,11 @@ export class HistoireSanteComponent implements OnInit {
         this.typ = this.lis_antecedant[exist].type;
         this.trait = this.lis_antecedant[exist].traitement;
       }
-      console.log(this.lis_antecedant)
 
     }
     this.option = true
     const index = this.list_antecedents.indexOf(reco);
     this.actualAntecedent = this.antecedents[index]
-    console.log(this.actualAntecedent)
     if(index >= 0) {
       if (this.antecedents[index].type != null) {
         this.type = this.antecedents[index].type
@@ -358,7 +351,6 @@ export class HistoireSanteComponent implements OnInit {
 
         }else{
           if(result!=null){
-            console.log(result)
             this.lis_antecedant.push(result[0])
 
           }else if(result == null && exist < 0){
@@ -369,9 +361,6 @@ export class HistoireSanteComponent implements OnInit {
         }
 
 
-
-        console.log(this.lis_antecedant)
-
         /* if (this.newRecom === undefined) {
            this.newRecom = [{id : result.id, type : result.type, valeur: result.reco, details : result.details}]
          } else {
@@ -379,8 +368,6 @@ export class HistoireSanteComponent implements OnInit {
 
          }*/
       })
-      console.log(this.mounh)
-
 
     }
   }
@@ -439,9 +426,6 @@ export class HistoireSanteComponent implements OnInit {
 
       }
     }
-
-    console.log(this.actualAntecedent)
-    console.log(this.lis_antecedant)
   }
 
   onChangeTrairement(value){
@@ -466,9 +450,6 @@ export class HistoireSanteComponent implements OnInit {
     else{
       this.lis_antecedant = [new AntecedentsDto(this.actualAntecedent.valeur, null, null, value, null)]
     }
-
-    console.log(this.actualAntecedent)
-    console.log(this.lis_antecedant)
   }
 
   onChangeType(value){
@@ -494,8 +475,6 @@ export class HistoireSanteComponent implements OnInit {
     else{
       this.lis_antecedant = [new AntecedentsDto(this.actualAntecedent.valeur, null, null, null, value)]
     }
-    console.log(this.actualAntecedent)
-    console.log(this.lis_antecedant)
   }
 
   onChangeYear(value){
@@ -529,8 +508,6 @@ export class HistoireSanteComponent implements OnInit {
     else{
       this.lis_antecedant = [new AntecedentsDto(this.actualAntecedent.valeur, value, null, null, null)]
     }
-    console.log(this.actualAntecedent)
-    console.log(this.lis_antecedant)
 
   }
 
@@ -550,7 +527,6 @@ export class HistoireSanteComponent implements OnInit {
         this.typ = this.lis_antecedant[exist].type;
         this.trait = this.lis_antecedant[exist].traitement;
       }
-      console.log(this.lis_antecedant)
 
     }
 
@@ -605,7 +581,6 @@ export class HistoireSanteComponent implements OnInit {
 
         }else{
           if(result!=null){
-            console.log(result)
             this.lis_antecedant.push(result[0])
 
           }else if(result == null && exist < 0){
@@ -616,10 +591,6 @@ export class HistoireSanteComponent implements OnInit {
         }
 
 
-        console.log(this.lis_antecedant)
-
-
-
 
   })
     }
@@ -628,8 +599,6 @@ export class HistoireSanteComponent implements OnInit {
   ajouter ()
   {
     let request = new Request(this.lis_antecedant);
-    console.log(request)
-    console.log(this.id)
 
     this.patientService.addAntecedants(request,this.id).pipe(first())
       .subscribe(

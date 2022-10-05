@@ -31,11 +31,11 @@ export class QuizindividComponent implements OnInit {
   livingEnvironment: string ;
   housingType: string ;
   genre: string ;
-  civilStatuss: string[] = ['Célibataire', 'Marié', 'Conjoint de fait', 'Veuf/veuve', 'Séparét', 'Divorcé'];
+  civilStatuss: string[] = ['Célibataire', 'Marié', 'Conjoint de fait', 'Veuf/veuve', 'Séparé/e', 'Divorcé'];
   genders: string[] = ['Femme', 'Homme', 'Autre', 'Préfère ne pas répondre'];
   educations: string[] = ['< 11 ans de scolarité (Diplôme d \'études secondaires) ',
-    'Diplôme d\'études secondaires (DEP)',
-    'Formation professionnelle',
+    'DES',
+    'DEP',
     'Formation collégiale',
     'Formation universitaire 1er cycle',
     'Formation universitaire 2ème et 3ème cycle'];
@@ -133,7 +133,6 @@ export class QuizindividComponent implements OnInit {
         this.antecedants[j].date.push(val);
         this.antecedants[j].response = true;
         this.yr = '';
-        console.log(this.antecedants);
 
       }
     }
@@ -152,20 +151,15 @@ export class QuizindividComponent implements OnInit {
       }
       this.douleurs.description.splice(index, 1);
     }
-    console.log(this.douleurs);
   }
 
   showOptions(event, j: number): void {
-    console.log('********' + j);
     this.antecedants[j].date = [];
     this.antecedants[j].response = false;
-    console.log('********' + JSON.stringify(this.antecedants));
   }
 
   showOptions1(event, j: number): void {
-    console.log('------' + j);
     this.antecedants[j].response = true;
-    console.log('-------' + JSON.stringify(this.antecedants));
 
   }
 
@@ -209,7 +203,7 @@ export class QuizindividComponent implements OnInit {
     const initial = ini + '' + tial;
     const fileNumber = this.patient.fileNumber;
 
-    const individuQuiz = new IndividualQuestionnaireDto(this.patient.id, fileNumber, initial, JSON.stringify(socio),
+    const individuQuiz = new IndividualQuestionnaireDto(this.patient.id, fileNumber, initial, socio,
       JSON.stringify(this.antecedants));
     const request = new Request(individuQuiz);
     this.patientService.addQuizIndi(request, this.patient.id).pipe(first())

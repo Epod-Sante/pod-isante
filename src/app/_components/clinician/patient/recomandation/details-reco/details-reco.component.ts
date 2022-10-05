@@ -41,7 +41,6 @@ export class DetailsRecoComponent implements OnInit {
           let index = moments[i].value.indexOf('-')
           let id  = moments[i].value.slice(0,index)
         let valeur = moments[i].value.slice(index+1)
-        console.log(id)
          this.categories = [{id : id, value : valeur}]
        // this.detais = {value :categorie, type: "moments", id :id}
 
@@ -155,11 +154,7 @@ export class DetailsRecoComponent implements OnInit {
 
 
     }
-    console.log(this.details)
     this.data.details = this.recomfinal.details
-    console.log(this.recomfinal)
-    console.log(this.data)
-
     this.detailsConfirmed = true
   }
 

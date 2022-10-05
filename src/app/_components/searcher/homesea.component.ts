@@ -12,10 +12,8 @@ export class HomeseaComponent implements OnInit {
 
   constructor(private router : Router) {
     if (localStorage.getItem("currentRole" ) === "role_searcher"){
-      console.log(localStorage.getItem("currentRole" ))
 
     } else {
-      console.log(localStorage.getItem("currentRole" ))
       router.navigate(["/login"])
     }
 

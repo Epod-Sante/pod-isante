@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fitbitinter": {
+    "pod-isante": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -109,21 +109,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "fitbitinter:build"
+            "browserTarget": "pod-isante:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "fitbitinter:build:production"
+              "browserTarget": "pod-isante:build:production"
             },
             "development": {
-              "browserTarget": "fitbitinter:build:development"
+              "browserTarget": "pod-isante:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fitbitinter:build"
+            "browserTarget": "pod-isante:build"
           }
         },
         "test": {
@@ -156,11 +156,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "fitbitinter:serve"
+            "devServerTarget": "pod-isante:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "fitbitinter:serve:production"
+              "devServerTarget": "pod-isante:serve:production"
             }
           }
         },
@@ -169,7 +169,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "fitbitinter:build:production",
+            "browserTarget": "pod-isante:build:production",
             "firebaseProject": "ipodsante-92c27",
             "firebaseHostingSite": "ipodsante-92c27"
           }
@@ -177,5 +177,5 @@
       }
     }
   },
-  "defaultProject": "fitbitinter"
+  "defaultProject": "pod-isante"
 }

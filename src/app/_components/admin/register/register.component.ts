@@ -2795,7 +2795,6 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {
-    console.log(this.page);
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -2840,7 +2839,6 @@ export class RegisterComponent implements OnInit {
     const year = d.getFullYear();
 
     this.birthday = year + '-' + month + '-' + date;
-    console.log(this.birthday);
   }
 
   register(username: string,
@@ -2881,10 +2879,8 @@ export class RegisterComponent implements OnInit {
             this._snackBar.open('l utilisateur a ete  enregistre avec succes, Vous pouvez vous connecter maintennant', 'OK');
             this.router.navigate(['home']);
           }
-          console.log(data);
         },
         error => {
-          console.log(error);
           this._snackBar.open('Donnees saisies invalide', 'OK');
           this.loading = false;
         });
@@ -2906,14 +2902,12 @@ export class RegisterComponent implements OnInit {
         let token: string;
         token = params.token;
         if (token != null) {
-          console.log('oken != null');
           this.tokenpassword = token;
 
           const message = this.userService.recup_token(token).subscribe(
             response => {
               const obj = JSON.parse(JSON.stringify(response));
               this.email = obj.email;
-              console.log(obj.email);
               this.tokrep = obj;
               if (this.tokrep.tokenExist) {
                 this._snackBar.open('Veuillez saisir les informations demander' +
@@ -2926,7 +2920,7 @@ export class RegisterComponent implements OnInit {
               }
 
             },
-            error => { console.log(error);
+            error => {
             }
           );
 

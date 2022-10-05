@@ -47,7 +47,6 @@ export class ListVisitesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ngOnInit2');
   }
 
   ngAfterViewInit(): void {
@@ -76,9 +75,7 @@ export class ListVisitesComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.getAllUsers();
-      console.log(this.dataSource.data);
 
     });
 

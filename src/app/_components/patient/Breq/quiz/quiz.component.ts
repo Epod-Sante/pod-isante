@@ -74,7 +74,6 @@ export class QuizComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     this.getCodeFromURI();
 
     /* this.quizName = this.quizes[0].id;*/
@@ -141,7 +140,6 @@ export class QuizComponent implements OnInit {
               question.id,
               option.poids));
 
-            console.log(this.rep);
             this.score(question, option);
             if (this.rep.length === 19) {
               this.comfirmer = true;
@@ -160,7 +158,6 @@ export class QuizComponent implements OnInit {
     this.ellapsedTime = '00:00';
     this.mode = 'quiz';
 
-    console.log(this.mode);
     this.quizes = this.quizService.getAll();
     this.quizName = this.quizes[0].id;
     this.loadQuiz();
@@ -186,46 +183,29 @@ export class QuizComponent implements OnInit {
 
       this.amotivationRegulation = this.amotivationRegulation + 1;
       this.poid = option.poids + this.poid;
-      console.log(this.poid);
-      console.log(this.amotivationRegulation);
     } else if (question.regulation.id === 2) {
       this.externalRegulation = this.externalRegulation + 1;
       this.poid1 = option.poids + this.poid1;
-      console.log(this.poid1);
-      console.log(this.externalRegulation);
     } else if (question.regulation.id === 3) {
       this.introjectedRegulation = this.introjectedRegulation + 1;
       this.poid2 = option.poids + this.poid2;
-      console.log(this.poid2);
-      console.log(this.introjectedRegulation);
     } else if (question.regulation.id === 4) {
       this.identifiedRegulation = this.identifiedRegulation + 1;
       this.poid3 = option.poids + this.poid3;
-      console.log(this.poid3);
-      console.log(this.identifiedRegulation);
     } else if (question.regulation.id === 5) {
       this.intrinsicRegulation = this.intrinsicRegulation + 1;
       this.poid4 = option.poids + this.poid4;
-      console.log(this.poid4);
-      console.log(this.intrinsicRegulation);
     }
-    console.log(question.regulation.name);
 
 
   }
 
   onSubmit() {
-    console.log(this.rep);
     const moyAmotivation = this.poid / this.amotivationRegulation;
     const moyExternal = this.poid1 / this.externalRegulation;
     const moyIntrojected = this.poid2 / this.introjectedRegulation;
     const moyIdentified = this.poid3 / this.identifiedRegulation;
     const moyIntrinsic = this.poid4 / this.intrinsicRegulation;
-    console.log(' score moyen Amotivation :' + moyAmotivation);
-    console.log('  score moyen external_regulation : ' + moyExternal);
-    console.log(' score moyen introjected_regulation : ' + moyIntrojected);
-    console.log(' score moyen identified_regulation : ' + moyIdentified);
-    console.log(' score moyen intrinsic_regulation : ' + moyIntrinsic);
     this.value = {
       reponses: this.rep,
       score: {
@@ -255,7 +235,6 @@ export class QuizComponent implements OnInit {
         this.patient = this.obj.object;
         if (this.patient != null) {
           this.patientId = this.obj.object.id;
-          console.log(this.obj);
         } else {
 
         }

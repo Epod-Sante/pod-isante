@@ -133,7 +133,6 @@ export class PagepatientComponent implements OnInit {
 
                 this.socio = this.patient.socioDemographicVariables;
                 this.patientId = this.obj.object.id;
-                console.log(this.obj);
               } else {
                 this.router.navigate(['patient/login']);
               }
@@ -226,11 +225,9 @@ export class PagepatientComponent implements OnInit {
   }
 
   hoverOnLogoutCard() {
-    console.log('active');
     this.logoutCardState = 'active';
   }
   hoverOutLogoutCard() {
-    console.log('inactive');
     this.logoutCardState = 'inactive';
   }
 }

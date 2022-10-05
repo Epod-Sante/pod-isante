@@ -223,11 +223,9 @@ export class RecomandationComponent {
     }
   }
   voir(){
-    console.log('oui');
   }
   chipDetails(reco: string) {
     const index = this.Reco.indexOf(reco);
-    console.log('oui');
     const dialogRef = this.dialog.open(DetailsRecoComponent, {
       data: {reco: this.Reco[index], type: 1, details: null},
       width: '60%',
@@ -250,9 +248,7 @@ export class RecomandationComponent {
 
 
   chipDetails1(reco1: string){
-    console.log('oui');
     const index = this.Reco1.indexOf(reco1);
-    console.log('oui');
     const dialogRef = this.dialog.open(DetailsRecoComponent, {
       data : {reco : this.Reco1[index], type : 3, details : null, id : null},
       width : '60%',
@@ -271,9 +267,7 @@ export class RecomandationComponent {
 
   }
   chipDetails2(reco2: string){
-    console.log('oui');
     const index = this.Reco2.indexOf(reco2);
-    console.log('oui');
     const dialogRef = this.dialog.open(DetailsRecoComponent, {
       data : {reco : this.Reco2[index], type : 2, details : null},
       width : '60%',
@@ -282,10 +276,8 @@ export class RecomandationComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (this.newRecom === undefined) {
         this.newRecom = [{id : result.id, type : result.type, valeur: result.reco, details : result.details}];
-        console.log(this.newRecom);
       } else {
         this.newRecom.push({id : result.id, type : result.type, valeur: result.reco, details : result.details});
-        console.log(this.newRecom);
       }
     });
   }
@@ -307,7 +299,6 @@ export class RecomandationComponent {
       this.Reco1  = [event.option.viewValue];
 
   }
-    console.log(this.Reco1);
     this.RecoInput.nativeElement.value = '';
     this.RecoCtrlG.setValue(null);
   }
@@ -343,17 +334,14 @@ export class RecomandationComponent {
     const patient = new PatientDto(this.data.patient.id, null, null, null, null, null, null, null, null, null,
       null, null, null, null, null, null, null, null, null, null);
     const recomm = new RecommandationDto(null, patient, null, JSON.stringify(this.newRecom), null, null, null);
-    console.log(JSON.stringify(this.newRecom));
     const request = new Request(recomm);
     this.patientService.addReco(request).subscribe( reponse => {
-      console.log('Ajout reussi');
       this.message = 'Ajout reussi';
       this.openSnackBar(this.message, 'Ok');
       this.dialogRef.close();
     }, error => {
       this.message = 'OPERATION ECHOUE';
       this.openSnackBar(this.message, 'Ok');
-      console.log(this.message);
     });
 
   }
@@ -368,10 +356,7 @@ export class RecomandationComponent {
         this.recomm = reco.object;
         this.barriersRecommendation = JSON.parse(JSON.stringify(this.recomm.barriersRecommendation));
         this.barriersRecommendationSolutions = JSON.parse(JSON.parse(JSON.stringify(this.recomm.barriersRecommendationSolutions)));
-        console.log(recommandations);
-        console.log(this.recomm);
         this.recommandation = JSON.parse(this.recomm.recommendation);
-        console.log(this.recommandation);
         for (let i = 0 ; i < this.recommandation.length; i++){
           if (i == 0) {
             this.detaills = this.recommandation[i].details;
@@ -379,7 +364,6 @@ export class RecomandationComponent {
           else {
             this.detaills.push(this.recommandation[i].details);
           }
-          console.log(this.detaills);
 
         }
 

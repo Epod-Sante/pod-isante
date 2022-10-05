@@ -82,7 +82,6 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
-    console.log(obj.access_token);
     return this.http.post(this.ADD_PATIENT_URL, request, {headers: header});
 
 
@@ -228,12 +227,10 @@ export class PatientService {
 
       .pipe(map(token => {
           // login successful if there's a jwt token in the response
-          console.log(token);
           rep = token;
 
           if (token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(token);
             return token;
 
           }
@@ -272,7 +269,6 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
-    console.log(obj.access_token);
     return this.http.post(this.AFFECT_DEVICE, request, {headers: header});
 
   }
@@ -281,7 +277,6 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
-    console.log(obj.access_token);
     return this.http.post(this.ADD_RECO, request, {headers: header});
 
 
@@ -291,7 +286,6 @@ export class PatientService {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
-    console.log(obj.access_token);
     return this.http.put(this.ADD_RECO, request, {headers: header});
 
 
