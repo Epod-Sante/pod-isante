@@ -49,11 +49,11 @@
     </div>
     <hr/>
     <div class="text-center">
-      <button (click)="goTo(pager.index - 1);" *ngIf="config.allowBack" class="btn btn-primary"
+      <button (click)="goTo(pager.index - 1,question, option);" *ngIf="config.allowBack" class="btn btn-primary"
               style="margin-right: 1em;">
         Precedent
       </button>
-      <button (click)="goTo(pager.index + 1);" class="btn btn-primary">Suivant</button>
+      <button (click)="goTo(pager.index + 1,question, option);" class="btn btn-primary">Suivant</button>
 <!--      <button class="btn btn-info" *ngIf="pager.index +1  == pager.count  && comfirmer == true " style="margin-left: 1em;"
               (click)="mode='result'"> Confirmer
       </button>-->

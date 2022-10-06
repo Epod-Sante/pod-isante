@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       target: '_blank',
     },
     {
-      title: 'Deconnexion',
+      title: 'Déconnexion',
       icon: 'log-out-outline',
     }
   ];
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
   getSelectedItem() {
     this.menuService.onItemClick().subscribe((data) => {
 
-      if (data.item.title === 'Deconnexion') {
+      if (data.item.title === 'Déconnexion') {
         this.logOut();
       }
     });

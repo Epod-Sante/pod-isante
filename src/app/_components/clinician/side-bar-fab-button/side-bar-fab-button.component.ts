@@ -26,7 +26,7 @@ import {PatientDto} from '../../../dto/patient/PatientDto';
 })
 export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
 
-  title = 'IPOD-SANTE';
+  title = 'POD-iSanté';
   currentRole = localStorage.getItem('currentRole');
   disabledIconConfig: NbIconConfig = {icon: 'settings-2-outline', pack: 'eva'};
 
@@ -61,7 +61,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
       target: '_blank',
     },
     {
-      title: 'Deconnexion',
+      title: 'Déconnexion',
       icon: 'log-out-outline',
     }
   ];
@@ -142,7 +142,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
   getSelectedItem() {
     this.menuService.onItemClick().subscribe((data) => {
 
-      if (data.item.title === 'Deconnexion') {
+      if (data.item.title === 'Déconnexion') {
         this.logOut();
       }
     });

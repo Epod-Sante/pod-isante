@@ -185,7 +185,8 @@ export class GpaqQuizComponent implements OnInit {
     this.loadQuiz(this.quizName);
   }
 
-  goTo(index: number) {
+  goTo(index: number,question: Question, option: Option) {
+    this.onSelect(question: Question, option: Option)
   if (this.rep.length == 22) { this.comfirmer = true; }
   if (index >= 0 && index < this.pager.count) {
       this.ellapsedTime = '00:00';

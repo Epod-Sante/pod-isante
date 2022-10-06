@@ -335,27 +335,28 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
 
   gpaqCalcule() {
     if (this.gpaq.length > 0){
-      this.travailModereVigoureuxUI = (this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr * 60 +
+      this.travailModereVigoureuxUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr +
+         this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) +
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr * 60 +
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr;
-      this.transportPiedUI = (this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr * 60 +
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu) *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr));
+      this.transportPiedUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr;
-      this.transportVeloUI = (this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr * 60 +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr));
+      this.transportVeloUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr;
-      this.loisirsModereVigoureuxUI = (this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr * 60 +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr));
+      this.loisirsModereVigoureuxUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr +
-        (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60 +
+        this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr) +
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60) +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr;
-      this.loisirsMarcheUI = (this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr * 60 +
+        this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr);
+      this.loisirsMarcheUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr;
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr));
+
     }
   }
 
@@ -375,18 +376,18 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
     this.marche = 0;
     this.sedentaire = 0;
     if (this.gpaq.length > 0){
-      this.vigoureux = (this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr *
+      this.vigoureux = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr) *
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr *
             60 +
             this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu)) +
-        (this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr *
-          (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr *
-            60 +
-            this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu));
-      this.moderee = (this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr *
-          (this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr *
-            60 +
-            this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu)) +
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr) *
+          ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr *
+            60 )+
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu)));
+      this.moderee = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) *
+          ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr *
+            60) +
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu))) +
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr *
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr *
             60 +
@@ -403,8 +404,8 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr *
             60 +
             this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu));
-      this.sedentaire = (this.gpaq.at(this.selectedItemGpaq).value.reponses[22].hr *
-        60 +
+      this.sedentaire = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[22].hr *
+        60 )+
         this.gpaq.at(this.selectedItemGpaq).value.reponses[22].minu);
       this.barChar = [
         {data: [this.vigoureux, 0], label: 'Vigoureux'},
