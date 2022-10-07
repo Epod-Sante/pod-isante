@@ -3,7 +3,7 @@ import {first} from 'rxjs/operators';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { AuthenticationService } from '../../../_services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MyErrorStateMatcher} from '../../admin/register/register.component';
+import {MyErrorStateMatcher} from '../../register/register.component';
 import {NbToastrService} from '@nebular/theme';
 
 

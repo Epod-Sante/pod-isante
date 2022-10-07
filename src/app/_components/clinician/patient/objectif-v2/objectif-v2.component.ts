@@ -40,7 +40,7 @@ export class ObjectifV2Component implements OnInit {
   private moyensObjctif1: string[] = [
     'Prévoir des journées et moments fixes dans l\'horaire pour pratiquer de l\'activité physique.',
     'Avoir un plan B pour remplacer une activité physique déjà plannifiée en cas d\'imprévus.',
-    'S\'inscrire à un groupe de conditionnement ou demarche.',
+    'S\'inscrire à un groupe de conditionnement ou de marche.',
     'Faire une liste des activités physiques que vous aimez ou croyez pouvoir apprécier et regarder les moyens pour initier l\'activité.',
     'Faire un journal d\'activité physique.',
     'Augmenter les tranports actifs (déplacements pour aller au travail, à la pharmacie, à l\'épicerie,etc.).',
@@ -140,7 +140,7 @@ export class ObjectifV2Component implements OnInit {
   private moyensObjctif2: string[] = [
     'Prévoir des journées et moments fixes dans l\'horaire pour pratiquer de l\'activité physique.',
     'Avoir un plan B pour remplacer une activité physique déjà plannifiée en cas d\'imprévus.',
-    'S\'inscrire à un groupe de conditionnement ou demarche.',
+    'S\'inscrire à un groupe de conditionnement ou de marche.',
     'Faire une liste des activités physiques que vous aimez ou croyez pouvoir apprécier et regarder les moyens pour initier l\'activité.',
     'Faire un journal d\'activité physique.',
     'Augmenter les tranports actifs (déplacements pour aller au travail, à la pharmacie, à l\'épicerie,etc.).',
@@ -237,9 +237,9 @@ export class ObjectifV2Component implements OnInit {
 
   private moyensObjctif3: string[] = [
     'S\'équiper d\'équipement pour bouger confortablement (chaussures confortables, pantalon et chandail de sport).',
-    'Mettre une sur le cellulaire au autre appareil afin de selever aux 30 minutes ou aux heures pour couper les périodes assises.',
+    'Mettre une alarme sur le cellulaire au autre appareil afin de se lever aux 30 minutes ou aux heures pour couper les périodes assises.',
     'Avoir un maximum d\'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.).',
-    'Ajouter une marche de loisir à un moment opportun de votre journé.'
+    'Ajouter une marche de loisir à un moment opportun de votre journée.'
   ];
   moyensObjctif3OptionsCheckbox = [];
   precautionsObjctif3OptionsSelect = [];

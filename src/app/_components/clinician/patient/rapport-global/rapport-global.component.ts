@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {DialogDataReport} from '../patient-profile/patient-profile.component';
@@ -32,8 +32,8 @@ import 'chartjs-plugin-labels';
   templateUrl: './rapport-global.component.html',
   styleUrls: ['./rapport-global.component.css']
 })
-export class RapportGlobalComponent implements OnInit {
-  private barChar: any[];
+export class RapportGlobalComponent implements OnInit, OnChanges {
+  private barChar: ChartDataSets[];
   private vigoureux: number;
   private moderee: number;
   private marche: number;
@@ -88,7 +88,6 @@ export class RapportGlobalComponent implements OnInit {
   public steps: Step[] = [];
   gpaqBarChartOptions: ChartOptions = {
     responsive: true,
-    maintainAspectRatio: false,
     plugins: {
       labels: {
         render: 'value',
@@ -151,7 +150,7 @@ export class RapportGlobalComponent implements OnInit {
   public minutesDto: ActivitiesMinutesDto;
   pd: PatientDeviceDto[];
 
-  constructor(public route: ActivatedRoute, private  patientService: PatientService, protected dateService: NbDateService<Date>) {
+  constructor(public route: ActivatedRoute, private patientService: PatientService, protected dateService: NbDateService<Date>) {
 
     this.route.params.subscribe(params => {
       this.patientId = params.id;
@@ -161,6 +160,10 @@ export class RapportGlobalComponent implements OnInit {
     this.getRecommendations();
 
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+        throw new Error('Method not implemented.');
+    }
 
 
   ngOnInit(): void {
@@ -198,6 +201,9 @@ export class RapportGlobalComponent implements OnInit {
       );
 
       this.onChange();
+      this.gpaqCalcule();
+      this.gpaqBarChart();
+      this.breqPieChart();
 
     });
 
@@ -465,6 +471,95 @@ export class RapportGlobalComponent implements OnInit {
     });
   }
 
+
+  public gpaqBarChart() {
+    this.barChar = [];
+    this.vigoureux = 0;
+    this.moderee = 0;
+    this.marche = 0;
+    this.sedentaire = 0;
+    if (this.gpaq.length > 0){
+      this.vigoureux = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr) *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu)) +
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr) *
+          ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr *
+              60 )+
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu)));
+      this.moderee = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) *
+          ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr *
+              60) +
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu))) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu)) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu));
+      this.marche = (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu)) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu));
+      this.sedentaire = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[22].hr *
+          60 )+
+        this.gpaq.at(this.selectedItemGpaq).value.reponses[22].minu);
+      this.barChar = [
+        {data: [this.vigoureux, 0], label: 'Vigoureux'},
+        {data: [this.moderee, 0], label: 'Modérée'},
+        {data: [this.marche, 0], label: 'Marche'},
+        {data: [this.sedentaire, 0], label: 'Sédentaire'}
+      ];
+    }
+  }
+
+  gpaqCalcule() {
+    if (this.gpaq.length > 0){
+      this.travailModereVigoureuxUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr * 60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu) *
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr * 60 +
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu) *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr));
+      this.transportPiedUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr * 60 +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu) *
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr));
+      this.transportVeloUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr * 60 +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu) *
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr));
+      this.loisirsModereVigoureuxUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr * 60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu) *
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr) +
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60) +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu) *
+        this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr;
+      this.loisirsMarcheUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr * 60 +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu) *
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr));
+
+    }
+  }
+
+  breqPieChart() {
+    this.intrinsic = this.breq.at(this.selectedItemBreq).value.score.intrinsic;
+    this.external = this.breq.at(this.selectedItemBreq).value.score.external;
+    this.amotivation = this.breq.at(this.selectedItemBreq).value.score.amotivation;
+    this.identified = this.breq.at(this.selectedItemBreq).value.score.identified;
+    this.introjected = this.breq.at(this.selectedItemBreq).value.score.introjected;
+    this.pieChart = [
+      parseFloat(this.intrinsic.toFixed(2)),
+      parseFloat(this.external.toFixed(2)),
+      parseFloat(this.amotivation.toFixed(2)),
+      parseFloat(this.identified.toFixed(2)),
+      parseFloat(this.introjected.toFixed(2))
+    ];
+  }
 }
 
 

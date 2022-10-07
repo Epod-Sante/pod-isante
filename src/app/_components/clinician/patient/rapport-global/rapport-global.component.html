@@ -16,12 +16,12 @@
       <nb-card class="infos">
         <nb-card-body>
           <p><b>Nom :</b> {{patient?.firstName}}</p>
-          <p><b>Prenom :</b> {{patient?.lastName}}</p>
+          <p><b>Prénom :</b> {{patient?.lastName}}</p>
           <p><b>Date de naissance :</b> {{patient?.birthday}}</p>
-          <p><b>Genre :</b> {{patient?.gender}}</p>
-          <p><b>E-mail :</b> {{patient?.contact.email}}</p>
+          <p><b>Sexe :</b> {{patient?.gender}}</p>
+          <p><b>Courriel :</b> {{patient?.contact.email}}</p>
           <p><b>Numéro de téléphone :</b> {{patient?.contact.phone}}</p>
-          <p><b>Pin :</b> {{patient?.loginCode}}</p>
+          <p><b>NIP :</b> {{patient?.loginCode}}</p>
         </nb-card-body>
       </nb-card>
 
@@ -130,7 +130,7 @@
                     <th scope="col">Amotivation</th>
                     <th scope="col">External</th>
                     <th scope="col">Identified</th>
-                    <th scope="col">Intrinsic</th>
+                    <th scope="col">Intrinsèque</th>
                     <th scope="col">introjected</th>
                   </tr>
                   </thead>
@@ -145,7 +145,16 @@
                   </tbody>
                 </table>
 
-
+<!--
+                <div>
+                  <canvas baseChart height="30vh" width="80vw"
+                          [data]="pieChart"
+                          [labels]="pieChartLabelsBreq"
+                          [chartType]="pieChartType"
+                          [options]="pieChartOptions">
+                  </canvas>
+                </div>
+-->
               </nb-card-body>
             </div>
           </nb-card>
@@ -172,7 +181,13 @@
 
               </nb-card-body>
             </div>
-
+           <!-- <div>
+              <canvas baseChart height="80vh"
+                      [datasets]="barChar"
+                      [options]="gpaqBarChartOptions"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>-->
           </nb-card>
         </nb-card-body>
       </nb-card>

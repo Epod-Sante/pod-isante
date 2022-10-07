@@ -4,7 +4,7 @@ import {DevicesComponent} from './devices/devices.component';
 import {InviteComponent} from './invite/invite.component';
 import {NgModule} from '@angular/core';
 import {NbIconLibraries} from "@nebular/theme";
-import {RegisterComponent} from "./register/register.component";
+import {RegisterComponent} from "../register/register.component";
 
 export const homeRoutes: Routes = [
   {
@@ -22,7 +22,7 @@ export const homeRoutes: Routes = [
       {
         path: 'inviter',
         component: InviteComponent
-      }
+      },
     ]
   }
 ];

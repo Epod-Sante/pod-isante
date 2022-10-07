@@ -95,7 +95,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   public pieChartLabelsBreq: Label[] = ['Extrinsèque',
     'Introjectée',
     'Identified',
-    'Intrinsic',
+    'Intrinsèque',
     'Amotivation'];
   public pieChartData: SingleDataSet = [0, 0, 0, 0, 0];
   public pieChartOptions: ChartOptions = {
@@ -352,7 +352,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
         this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr) +
         ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60) +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr);
+        this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr;
       this.loisirsMarcheUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu) *
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr));
@@ -366,7 +366,13 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
     this.amotivation = this.breq.at(this.selectedItemBreq).value.score.amotivation;
     this.identified = this.breq.at(this.selectedItemBreq).value.score.identified;
     this.introjected = this.breq.at(this.selectedItemBreq).value.score.introjected;
-    this.pieChart = [this.intrinsic, this.external, this.amotivation, this.identified, this.introjected];
+    this.pieChart = [
+      parseFloat(this.intrinsic.toFixed(2)),
+      parseFloat(this.external.toFixed(2)),
+      parseFloat(this.amotivation.toFixed(2)),
+      parseFloat(this.identified.toFixed(2)),
+      parseFloat(this.introjected.toFixed(2))
+    ];
   }
 
   public gpaqBarChart() {

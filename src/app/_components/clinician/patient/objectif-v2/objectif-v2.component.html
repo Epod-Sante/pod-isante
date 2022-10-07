@@ -70,7 +70,7 @@
                             <nb-checkbox (checkedChange)="endroitCheckboxObjectiv1(endroit.id)">{{endroit.group}}</nb-checkbox>
                           </nb-card-body>
                           <nb-card-body>
-                            <nb-select multiple placeholder="Choisissez les endroits" *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3" disabled="{{!endroit.checked}}">
+                            <nb-select multiple placeholder="Choisissez la modalité" *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3" disabled="{{!endroit.checked}}">
                               {{i+1}}
                                 <nb-option  *ngFor="let option of endroit.options" value="{{i}}"  (selectionChange)="endroitOptionObjectiv1(endroit.id, option.id)">{{option.group}}</nb-option>
                             </nb-select>
@@ -205,7 +205,7 @@
                           <nb-checkbox (checkedChange)="endroitCheckboxObjectiv2(endroit.id)">{{endroit.group}}</nb-checkbox>
                         </nb-card-body>
                         <nb-card-body>
-                          <nb-select multiple placeholder="Choisissez les endroits" *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3" disabled="{{!endroit.checked}}">
+                          <nb-select multiple placeholder="Choisissez la modalité" *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3" disabled="{{!endroit.checked}}">
                             {{j+1}}
                               <nb-option *ngFor="let option of endroit.options" value="{{j}}"  (selectionChange)="endroitOptionObjectiv2(endroit.id, option.id)">{{option.group}}</nb-option>
                           </nb-select>

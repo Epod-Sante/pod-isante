@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       } else if (localStorage.getItem('currentRole') === 'role_admin') {
         this.router.navigate(['/admin']);
       } else if (localStorage.getItem('currentRole') === 'role_searcher') {
-        this.router.navigate(['/admin/searcher']);
+        this.router.navigate(['/admin/researcher']);
       }
 
     }
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
           } else if (localStorage.getItem('currentRole') === 'role_professional') {
             this.router.navigate(['listpatient']);
           } else if (localStorage.getItem('currentRole') === 'role_searcher') {
-            this.router.navigate(['admin/searcher']);
+            this.router.navigate(['admin/researcher']);
           } else {
             this.router.navigate(['login']);
           }

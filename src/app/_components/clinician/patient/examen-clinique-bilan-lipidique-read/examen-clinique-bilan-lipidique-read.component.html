@@ -78,7 +78,7 @@
 -->
     <nb-card-body *ngIf="this.patient.medicalFile.lipidProfiles.length === 0">Pas de bilan sanguin</nb-card-body>
 
-    <nb-card *ngIf="bilanLipidique.length > 0">
+    <nb-card *ngIf="this.patient.medicalFile.lipidProfiles.length > 0">
       <nb-card-body *ngFor="let lp of patient?.medicalFile.lipidProfiles">
         <p><b>Date : </b>{{lp.date}}</p>
         <table class="table table-hover">

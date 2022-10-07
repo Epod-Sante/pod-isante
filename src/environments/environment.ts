@@ -20,7 +20,7 @@ export const environment = {
   PASSWORD_UPDATE_TOKEN_URL : 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/update/password?token=',
   PASSWORD_UPDATE_URL : 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/update/password',
   LOG_OUT_URL : 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/logingout',
-  REGISTER_URL: 'https://zuul-container-service.kf47arub8hkq2.ca-central-1.cs.amazonlightsail.com/api/v1/auth-service/user/create',
+  REGISTER_URL: 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/user/create',
   INVITER_URL : 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/user/invite',
   VERIF_TOK_INVITE : 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/user/invite?token=',
   USERS_URL : 'http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/user/all',

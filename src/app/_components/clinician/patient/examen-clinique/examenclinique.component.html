@@ -5,16 +5,16 @@
       <h6>Signes vitaux (repos de 10 minutes minimum doit précéder l’examen)</h6>
       <div><p>FC (repos) </p><input type="number" #fc_repos nbInput placeholder="batt. / par minute"></div>
       <nb-toggle labelPosition="start" [(checked)]="regularFC">Le pouls est-il régulier?</nb-toggle>
-      <div><p>TA (bras dr) Systolique en mmHg </p><input type="number" #tadrsys nbInput placeholder="Systolique"></div>
-      <div><p>TA (bras dr) Diastolique" en mmHg </p><input type="number" #tadrdias nbInput placeholder="Diastolique"></div>
+      <div><p>TA (bras droit) Systolique en mmHg </p><input type="number" #tadrsys nbInput placeholder="Systolique"></div>
+      <div><p>TA (bras droit) Diastolique en mmHg </p><input type="number" #tadrdias nbInput placeholder="Diastolique"></div>
 
         <div><p>TA (bras gauche) Systolique en mmHg </p><input type="number" #tagcsys nbInput placeholder="Systolique"></div>
-        <div><p>TA (bras gche) Diastolique en mmHg </p><input type="number" #tagcdias nbInput placeholder="Diastolique"></div>
+        <div><p>TA (bras gauche) Diastolique en mmHg </p><input type="number" #tagcdias nbInput placeholder="Diastolique"></div>
 
 
       <h6> Données anthropométriques</h6>
       <div><p>Poids (kg) </p><input type="number" #poidskg [(ngModel)]="kg" nbInput placeholder="KG"></div>
-      <div><p>Taille (cm) </p><input type="number" #taillecm [(ngModel)]="cm" nbInput placeholder="CM"></div>
+      <div><p>Grandeur (cm) </p><input type="number" #taillecm [(ngModel)]="cm" nbInput placeholder="CM"></div>
       <button mat-raised-button color="primary" (click)="calcul_imc()">Convertir et calculer l'IMC</button>
       <div><p>Poids (lb) </p><input type="number" #poidslb [(ngModel)]="lbpoids" nbInput placeholder="LB"></div>
       <div><p>Taille (pi, po) </p><input type="string" #taillepi [(ngModel)]="feetinches" nbInput placeholder="PI, PO"></div>

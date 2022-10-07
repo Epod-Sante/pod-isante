@@ -15,7 +15,7 @@
     <nb-card-body><h4>Antécédents médicaux</h4></nb-card-body>
     <nb-card-body >
       <p>Sélectionner une date</p>
-      <nb-select placeholder="Selectionner une date" [(selected)]="selectedItem">
+      <nb-select placeholder="Sélectionner une date" [(selected)]="selectedItem">
         <nb-option *ngFor="let antc of antecedents1; let i = index;"  [value]="i" (selectionChange)="select(i)">
           {{antc.date}}
         </nb-option>

@@ -203,7 +203,7 @@ export class QuizindividComponent implements OnInit {
     const initial = ini + '' + tial;
     const fileNumber = this.patient.fileNumber;
 
-    const individuQuiz = new IndividualQuestionnaireDto(this.patient.id, fileNumber, initial, socio,
+    const individuQuiz = new IndividualQuestionnaireDto(this.patient.id, fileNumber, initial,JSON.stringify(socio),
       JSON.stringify(this.antecedants));
     const request = new Request(individuQuiz);
     this.patientService.addQuizIndi(request, this.patient.id).pipe(first())

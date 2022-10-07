@@ -6,7 +6,7 @@ import {PatientService} from '../../../../_services/patient.service';
 import {AppointmentDto} from '../../../../dto/AppointmentDto';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {Observable} from 'rxjs';
-import {City} from '../../../admin/register/register.component';
+import {City} from '../../../register/register.component';
 import {first, map, startWith} from 'rxjs/operators';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {Request} from '../../../../dto';

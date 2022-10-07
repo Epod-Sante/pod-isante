@@ -8,16 +8,17 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {map, startWith} from 'rxjs/operators';
 
 
-import {AlertService, AuthenticationService, UserService} from '../../../_services';
-import {UserRequestDto} from '../../../dto';
+import {AlertService, AuthenticationService, UserService} from '../../_services';
+import {UserRequestDto} from '../../dto';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-import {AccountDto} from '../../../dto/AccountDto';
-import {EmailDto} from '../../../dto/EmailDto';
-import {RoleDto} from '../../../dto/RoleDto';
-import {InstitutionDto} from '../../../dto/InstitutionDto';
-import {Profile} from '../../../dto/Profile';
-import {AddressDto} from '../../../dto/AddressDto';
+import {AccountDto} from '../../dto/AccountDto';
+import {EmailDto} from '../../dto/EmailDto';
+import {RoleDto} from '../../dto/RoleDto';
+import {InstitutionDto} from '../../dto/InstitutionDto';
+import {Profile} from '../../dto/Profile';
+import {AddressDto} from '../../dto/AddressDto';
+import {NbToastrService} from "@nebular/theme";
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -2793,7 +2794,7 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private toastrService: NbToastrService
   ) {
     this.filteredStates = this.stateCtrl.valueChanges
       .pipe(
@@ -2868,31 +2869,22 @@ export class RegisterComponent implements OnInit {
         data => {
 
           if (data.emailExist === true) {
-            this._snackBar.open('Ce mail est deja pris', 'OK');
+            this.showToast('top-right', 'info', 'Info', 'Ce mail est deja pris');
             this.loading = false;
             // this.router.navigate(['/login']);
           } else if (data.usernameExist === true) {
-            this._snackBar.open('le nom d utilisateur est deja pris', 'OK');
+            this.showToast('top-right', 'info', 'Info', 'le nom d utilisateur est deja pris');
             this.loading = false;
             // this.router.navigate(['/login']);
           } else {
-            this._snackBar.open('l utilisateur a ete  enregistre avec succes, Vous pouvez vous connecter maintennant', 'OK');
+            this.showToast('top-right', 'success', 'Succès', 'Vous avez été enregistré avec succès, vous pouvez vous connecter maintenant');
             this.router.navigate(['home']);
           }
         },
         error => {
-          this._snackBar.open('Donnees saisies invalide', 'OK');
+          this.showToast('top-right', 'danger', 'Échec', 'Donnees saisies invalide');
           this.loading = false;
         });
-  }
-
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 20000,
-
-    });
-    // this.router.navigate(["login"]);
   }
 
   getCodeFromURI() {
@@ -2910,12 +2902,11 @@ export class RegisterComponent implements OnInit {
               this.email = obj.email;
               this.tokrep = obj;
               if (this.tokrep.tokenExist) {
-                this._snackBar.open('Veuillez saisir les informations demander' +
-                  ' et votre compte sera activer', 'OK');
+                this.showToast('top-right', 'info', 'Info', 'Veuillez saisir les informations demander et votre compte sera activer');
               } else {
                 // let fakeUrl = "user/invite?token="+token;
                 // this.router.navigate([fakeUrl])
-                this._snackBar.open('le token est expire, veuillez contacter l administrateur', 'OK');
+                this.showToast('top-right', 'danger', 'Échec', 'le token est expire, veuillez contacter l\'administrateur');
                 this.router.navigate(['login']);
               }
 
@@ -2925,10 +2916,16 @@ export class RegisterComponent implements OnInit {
           );
 
         } else {
-          this._snackBar.open('le token est expire, veuillez contacter l administrateur', 'OK');
+          this.showToast('top-right', 'danger', 'Échec', 'le token est expire, veuillez contacter l\'administrateur');
           this.router.navigate(['login']);
         }
       });
   }
 
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
+  }
 }
