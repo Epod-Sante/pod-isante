@@ -156,6 +156,9 @@
               Marche
               : {{loisirsMarcheUI}}
               minutes<br>
+              Nombre de jours où vous avez pratiqué de l’activité physique
+              : {{jrsAcPhyUI}}
+              minutes<br>
             </div>
 
             <div>
@@ -165,7 +168,9 @@
                       [chartType]="barChartType">
               </canvas>
             </div>
-
+            <div>
+              <h6>Total: {{totalUI}}</h6>
+            </div>
           </nb-card-body>
 
           <h4>BREQ</h4>

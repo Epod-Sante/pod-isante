@@ -124,7 +124,8 @@ export class AddpatientComponent implements OnInit, OnDestroy {
                   this.exampleOutput.emit(data);
                   this.showToast('top-right', 'success', 'Succès', 'Patient ajoute');
                 } else {
-                  this.error = obj.error.message;
+                  this.showToast('top-right', 'danger', 'Échec', 'L\'adresse e-mail existe');
+                  //this.error = obj.error.message;
                 }
               },
               error => {

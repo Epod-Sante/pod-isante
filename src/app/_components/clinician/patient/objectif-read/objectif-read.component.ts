@@ -116,7 +116,7 @@ export class ObjectifReadComponent implements OnInit, OnDestroy {
 
   addRecommendation() {
     const component = ObjectifComponent;
-    const title = 'Objectifs, barrieres et niveau de confiance';
+    const title = 'Objectifs, barrières et niveau de confiance';
     const buttonsConfig: NbWindowControlButtonsConfig = {
       minimize: true,
       maximize: false,

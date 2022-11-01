@@ -129,7 +129,7 @@ export class GpaqQuizComponent implements OnInit {
           this.rep.push(new Reponse(
             question.id, this.quiz.id,
             option.poids, null, null, null, question.questionPere));
-          this.goTo(this.pager.index + 3, question, option);
+          this.goTo(this.pager.index + 3);
           for (let i = 0; i < this.quiz.questions.length; i++) {
             if (this.quiz.questions[i].questionPere === question.id && this.quiz.questions[i].questionPere != 0) {
               this.rep.push(new Reponse(
@@ -173,7 +173,7 @@ export class GpaqQuizComponent implements OnInit {
 
     }
     if (this.config.autoMove) {
-      this.goTo(this.pager.index + this.saut, question, option);
+      this.goTo(this.pager.index + this.saut);
     }
   }
 
@@ -185,8 +185,8 @@ export class GpaqQuizComponent implements OnInit {
     this.loadQuiz(this.quizName);
   }
 
-  goTo(index: number,question: Question, option: Option) {
-    this.onSelect(question, option)
+  goTo(index: number) {
+    //this.onSelect(question, option)
   if (this.rep.length == 22) { this.comfirmer = true; }
   if (index >= 0 && index < this.pager.count) {
       this.ellapsedTime = '00:00';
