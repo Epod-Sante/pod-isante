@@ -218,7 +218,7 @@ export class ObjectifV2Component implements OnInit {
     'Faire un échauffement long(5 minutes).',
     'Faire un retour au calme long(5 minutes).',
     'Commencer à faible intensité lors des températures froides.',
-    'Avoir sa nitroglycérine sur soir lors des périodes d\'activité physique (prèsducorps, ne doit pas gelée).',
+    'Avoir sa nitroglycérine sur soi lors des périodes d\'activité physique (prèsducorps, ne doit pas gelée).',
     'Utiliser des crampons l\'hiver pour la marche.',
     'Utiliser des bâtons de marche/canne pour la marche.',
     'L\'hiver, prévoir une période d\'échauffement avant de pelleter.',
