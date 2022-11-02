@@ -160,7 +160,7 @@ import {QuizindividComponent} from './_components/clinician/patient/quizindivid/
     NbToastrModule.forRoot(),
     NbWindowModule.forRoot(),
     NgxSliderModule,
-    ObjectifV2Module,
+    ObjectifV2Module, NbCheckboxModule,
     BrowserModule,
     FormsModule, MatCardModule,
     NgxMatTimepickerModule,

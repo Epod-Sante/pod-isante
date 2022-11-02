@@ -113,11 +113,12 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   public stepsBar: ChartDataSets [];
   public pieChart: SingleDataSet = [0, 0, 0, 0, 0];
   public pieChartType: ChartType = 'pie';
-  public pieChartLabelsBreq: Label[] = ['Extrinsèque',
-    'Introjectée',
+  public pieChartLabelsBreq: Label[] = [
+    'Amotivation',
     'Identified',
-    'Intrinsic',
-    'Amotivation'];
+    'Introjectée',
+    'Extrinsèque',
+    'Intrinsèque'];
   public pieChartData: SingleDataSet = [0, 0, 0, 0, 0];
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -553,11 +554,11 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
     this.identified = this.breq.at(this.selectedItemBreq).value.score.identified;
     this.introjected = this.breq.at(this.selectedItemBreq).value.score.introjected;
     this.pieChart = [
-      parseFloat(this.intrinsic.toFixed(2)),
-      parseFloat(this.external.toFixed(2)),
       parseFloat(this.amotivation.toFixed(2)),
       parseFloat(this.identified.toFixed(2)),
-      parseFloat(this.introjected.toFixed(2))
+      parseFloat(this.introjected.toFixed(2)),
+      parseFloat(this.external.toFixed(2)),
+      parseFloat(this.intrinsic.toFixed(2))
     ];
   }
 }

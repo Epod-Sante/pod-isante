@@ -15,7 +15,7 @@ export class QuizService {
       //{ id: 'data/javascript.json', name: 'JavaScript' },
       //{ id: 'data/aspnet.json', name: 'Asp.Net' },
       //{ id: 'data/csharp.json', name: 'C Sharp' },
-     // { id: '_components/Breq/data/breq.json', name: 'BREQ-2' }
+     // { id: '_components/Breq/data/gpaq.json', name: 'BREQ-2' }
       //{ id: 'data/designPatterns.json', name: 'Design Patterns' }
     ];
   }

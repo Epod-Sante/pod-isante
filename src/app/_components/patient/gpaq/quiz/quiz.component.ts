@@ -28,7 +28,7 @@ export class GpaqQuizComponent implements OnInit {
   patientId = '';
   regulations: any [];
   rep: Reponse[] = [];
-  data  = require('../data/breq.json');
+  data  = require('../data/gpaq.json');
   quiz: Quiz = new Quiz(null);
   mode = 'quiz';
   jours;

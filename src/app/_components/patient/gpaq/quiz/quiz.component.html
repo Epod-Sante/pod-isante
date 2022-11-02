@@ -17,17 +17,13 @@
       <div class="row text-left options">
 
 
-
-
         <div *ngFor="let option of question.options" style="width: 100%; ">
-          <div *ngIf="question.questionPere==0" [attr.for]="option.id" class="option"
-               style="background-color: #eeeeee; font-weight: bold;">
+          <div *ngIf="question.questionPere==0" [attr.for]="option.id" class="option">
 
             <label *ngIf="question.id!==1031 && question.id!==1032 " class="font-weight-normal">
 
-              <input  (change)="onSelect(question, option);" [(ngModel)]="option.selected" id="{{option.id}}"
-                     style="margin-left: 1em; margin-right: 2em;"
-                     type="checkbox"/> <b>{{option.name}}</b>
+              <nb-checkbox [(ngModel)]="option.selected" (checkedChange)="onSelect(question, option)"><b  style="font-size: large; ">{{option.name}}</b></nb-checkbox>
+
             </label>
 
           </div>
@@ -49,15 +45,15 @@
     </div>
     <hr/>
     <div class="text-center">
-      <button (click)="goTo(pager.index - 1);" *ngIf="config.allowBack" class="btn btn-primary"
+      <button (click)="goTo(pager.index - 1);" *ngIf="config.allowBack" nbButton status="primary"
               style="margin-right: 1em;">
         Precedent
       </button>
-      <button (click)="goTo(pager.index + 1);" class="btn btn-primary">Suivant</button>
+      <button (click)="goTo(pager.index + 1);" nbButton status="primary">Suivant</button>
 <!--      <button class="btn btn-info" *ngIf="pager.index +1  == pager.count  && comfirmer == true " style="margin-left: 1em;"
               (click)="mode='result'"> Confirmer
       </button>-->
-      <button (click)="onSubmit()" [disabled]="!comfirmer" color="primary"  mat-raised-button style="margin-right: 5%; margin-left: 20%">Envoyer</button>
+      <button (click)="onSubmit()" [disabled]="!comfirmer"  nbButton status="success" style="margin-right: 5%; margin-left: 20%">Envoyer</button>
 
     </div>
   </div>
@@ -65,8 +61,8 @@
   <div *ngIf="mode=='result'">
     <h3 class="alert-success"> Merci, cliquez sur le button envoyer si vous avez fini sinon retour au
       questionnaire </h3>
-    <button (click)="onSubmit()" class="btn btn-primary" style="margin-right: 5%; margin-left: 20%">Envoyer</button>
-    <button (click)="goBack(pager.count)" class="btn btn-warning" style="margin-left: 5%; margin-right: 5%">retour au
+    <button (click)="onSubmit()" nbButton status="success" style="margin-right: 5%; margin-left: 20%">Envoyer</button>
+    <button (click)="goBack(pager.count)" nbButton status="primary" style="margin-left: 5%; margin-right: 5%">Retour au
       questionnaire
     </button>
   </div>

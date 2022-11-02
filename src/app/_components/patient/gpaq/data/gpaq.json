@@ -12,7 +12,7 @@
         {
           "id": 1055,
           "questionId": 1010,
-          "name": "oui",
+          "name": "Oui",
           "poids" : 0
 
         },
@@ -83,7 +83,7 @@
         {
           "id": 1055,
           "questionId": 1013,
-          "name": "oui ",
+          "name": "Oui ",
           "poids" : 0
 
         },
@@ -154,7 +154,7 @@
         {
           "id": 1055,
           "questionId": 1016,
-          "name": "oui ",
+          "name": "Oui ",
           "poids" : 0
 
         },
@@ -225,7 +225,7 @@
         {
           "id": 1055,
           "questionId": 1019,
-          "name": "oui",
+          "name": "Oui",
           "poids" : 0
 
         },
@@ -296,7 +296,7 @@
         {
           "id": 1055,
           "questionId": 1010,
-          "name": "oui ",
+          "name": "Oui ",
           "poids" : 0
 
         },
@@ -366,7 +366,7 @@
         {
           "id": 1055,
           "questionId": 1010,
-          "name": "oui ",
+          "name": "Oui ",
           "poids" : 0
 
         },
@@ -437,14 +437,14 @@
         {
           "id": 1055,
           "questionId": 1010,
-          "name": "oui !",
+          "name": "Oui",
           "poids" : 0
 
         },
         {
           "id": 1056,
           "questionId": 1010,
-          "name": "Non !",
+          "name": "Non",
 
           "poids" : 1
         }

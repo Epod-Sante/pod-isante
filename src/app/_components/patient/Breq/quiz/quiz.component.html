@@ -13,14 +13,14 @@
       </h3>
       <mat-card class="row text-left options">
         <div style="width: 100%; " *ngFor="let option of question.options">
-          <div class="option" style="background-color: #eeeeee; font-weight: bold;" [attr.for]="option.id"
+          <div class="option"  [attr.for]="option.id"
                *ngIf="option.id==1055 || option.id==1056 || option.id==1057 || option.id==1058 || option.id==1059">
-            <label class="font-weight-normal">
+            <!--<label class="font-weight-normal">
               <input style="margin-left: 1em; margin-right: 2em;" id="{{option.id}}" type="checkbox"
                      [(ngModel)]="option.selected"
                      (change)="onSelect(question, option);"/> <b>{{option.name}}</b>
-            </label>
-
+            </label>-->
+            <nb-checkbox [(ngModel)]="option.selected" (checkedChange)="onSelect(question, option)"><b  style="font-size: large; ">{{option.name}}</b></nb-checkbox>
           </div>
         </div>
       </mat-card>
@@ -35,7 +35,7 @@
      <!-- <button mat-button style="background-color: darkseagreen" *ngIf="comfirmer == true   " style="margin-left: 1em;"
               (click)="mode='result'"> Confirmer
       </button>-->
-      <button mat-raised-button color="primary"  [disabled]="!comfirmer" class="btn btn-primary" (click)="onSubmit()">Envoyer</button>
+      <button nbButton status="success"  [disabled]="!comfirmer" (click)="onSubmit()">Envoyer</button>
 
     </div>
   </div>
@@ -43,8 +43,8 @@
   <div *ngIf="mode=='result'">
     <h3 class="alert-success"> Merci, cliquez sur le button envoyer si vous avez fini sinon retour au
       questionnaire </h3>
-    <button mat-button style="margin-right: 5%; margin-left: 20%; color: darkgreen" class="btn btn-primary" (click)="onSubmit()">Envoyer</button>
-    <button mat-button style="margin-left: 5%; color: coral; margin-right: 5%" class="btn btn-warning" (click)="goBack(pager.count)">retour au
+    <button nbButton status="success" (click)="onSubmit()">Envoyer</button>
+    <button nbButton status="primary" (click)="goBack(pager.count)">Retour au
       questionnaire
     </button>
   </div>

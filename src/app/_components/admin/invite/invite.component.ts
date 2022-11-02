@@ -62,7 +62,7 @@ export class InviteComponent implements OnInit {
 
     this.profilelist = [
       new Profile('PROFESSIONAL', 'ROLE_PROFESSIONAL', true),
-      new Profile('SEARCHER', 'ROLE_SEARCHER', true)
+      new Profile('RESEARCHER', 'ROLE_RESEARCHER', true)
     ];
   }
 
