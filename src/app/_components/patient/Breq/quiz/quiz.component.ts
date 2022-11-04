@@ -222,6 +222,7 @@ export class QuizComponent implements OnInit {
     const request = new Request(breq);
     this.patientService.addQuiz(request).subscribe(reponse => {
       this.showToast('top-right', 'success', 'Succès', 'Ajout reussi');
+      window.location.reload();
     }, error => {
       this.showToast('top-right', 'info', 'Échec', 'Assurez-vous que le formulaire est bien rempli');
 

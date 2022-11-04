@@ -42,7 +42,7 @@ export const routes: Routes = [
   {path: 'update/password', component: ResetpasswordComponent},
   {path: 'user/invite', component: RegisterComponent},
   {path: 'patient/login', component: PatientloginComponent},
-  {path: 'patient/questionnaire', component: PagepatientComponent},
+  {path: 'patient/questionnaire', component: PagepatientComponent, runGuardsAndResolvers: 'always'},
   {
     path: 'signup',
     component: RegisterComponent
@@ -55,8 +55,8 @@ export const routes: Routes = [
 
 
 @NgModule({
- imports: [RouterModule.forRoot(routes),
-    NbIconModule,
+ imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
+NbIconModule,
     NbCalendarModule,
     MatRadioModule,
     MatFormFieldModule,

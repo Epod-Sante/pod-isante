@@ -7,21 +7,19 @@
       "id": 1010,
       "name": "Est-ce que votre travail implique des activités physiques de forte intensité qui nécessitent une augmentation conséquente de la respiration ou du rythme cardiaque pendant au moins 10 minutes consécutives ? (ex : soulever des charges lourdes, travailler sur un chantier, effectuer du travail de maçonnerie)",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1010,
           "name": "Oui",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1010,
           "name": "Non",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -29,22 +27,17 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1011,
       "name": "Habituellement, combien de jours par semaine effectuez-vous des activités physiques de forte intensité dans le cadre de votre travail ?",
       "questionTypeId": 3,
-      "questionPere" : 1010,
+      "questionPere": 1010,
       "jours": 0,
-
       "options": [
         {
           "jours": 0
         }
-
-
       ],
       "questionType": {
         "id": 3,
@@ -56,17 +49,14 @@
       "id": 1012,
       "name": "Lors d’une journée habituelle durant laquelle vous effectuez des activités physiques de forte intensité, combien de temps consacrez-vous à ces activités ?",
       "questionTypeId": 4,
-      "questionPere" : 1010,
-      "minutes" : 0,
-      "heures" : 0,
-
+      "questionPere": 1010,
+      "minutes": 0,
+      "heures": 0,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
       ],
       "questionType": {
         "id": 4,
@@ -78,21 +68,19 @@
       "id": 1013,
       "name": "Est-ce que votre travail implique des activités physiques d'intensité modérée, comme une marche rapide ou par ex. soulever une charge légère durant au moins 10 minutes consécutives ?",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1013,
           "name": "Oui ",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1013,
           "name": "Non ",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -100,19 +88,15 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1014,
       "name": "Habituellement, combien de jours par semaine effectuez-vous des activités physiques d'intensité modérée dans le cadre de votre travail ?",
       "questionTypeId": 3,
-      "questionPere" : 1013,
-
-
+      "questionPere": 1013,
       "options": [
         {
-        "jours": 0
+          "jours": 0
         }
       ],
       "questionType": {
@@ -120,24 +104,19 @@
         "name": "Select",
         "isActive": true
       }
-
     },
     {
       "id": 1015,
       "name": "Lors d’une journée habituelle durant laquelle vous effectuez des activités physiques d'intensité modérée, combien de temps consacrez-vous à ces activités ?",
       "questionTypeId": 4,
-      "questionPere" : 1013,
-      "minutes" : 0,
-      "heures" : 0,
-
+      "questionPere": 1013,
+      "minutes": 0,
+      "heures": 0,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
-
       ],
       "questionType": {
         "id": 4,
@@ -149,21 +128,19 @@
       "id": 1016,
       "name": "Est-ce que vous effectuez des trajets d’au moins 10 minutes consécutives à pied (inclure uniquement les marches pour se rendre à un endroit précis ex : commissions, travail, pharmacie, à la poste, …)?",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1016,
           "name": "Oui ",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1016,
           "name": "Non ",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -171,44 +148,36 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1017,
       "name": "Habituellement, combien de jours par semaine effectuez-vous des trajets d’au moins 10 minutes à pied ?",
       "questionTypeId": 3,
-      "questionPere" : 1016,
+      "questionPere": 1016,
       "jours": 0,
-
       "options": [
         {
           "jours": 0
         }
-
       ],
       "questionType": {
         "id": 3,
         "name": "Select",
         "isActive": true
       }
-
     },
     {
       "id": 1018,
       "name": "Lors d’une journée habituelle, combien de temps consacrez-vous à vos déplacements à pied ?",
       "questionTypeId": 4,
-      "questionPere" : 1016,
-      "minutes" : 0,
-      "heures" : 0,
-
+      "questionPere": 1016,
+      "minutes": 0,
+      "heures": 0,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
       ],
       "questionType": {
         "id": 4,
@@ -220,21 +189,19 @@
       "id": 1019,
       "name": "Est-ce que vous effectuez des trajets d’au moins 10 minutes à vélo ?",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1019,
           "name": "Oui",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1019,
           "name": "Non",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -242,44 +209,36 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1020,
       "name": "Habituellement, combien de jours par semaine effectuez-vous des trajets d’au moins 10 minutes consécutives à vélo (inclure uniquement les déplacements pour se rendre à un endroit précis ex : commissions, travail, pharmacie, à la poste, …)?",
       "questionTypeId": 3,
-      "questionPere" : 1019,
+      "questionPere": 1019,
       "jours": 0,
-
       "options": [
         {
           "jours": 0
         }
-
       ],
       "questionType": {
         "id": 3,
         "name": "Select",
         "isActive": true
       }
-
     },
     {
       "id": 1021,
       "name": "Lors d’une journée habituelle, combien de temps consacrez-vous à vos déplacements à vélo ?",
       "questionTypeId": 4,
-      "questionPere" : 1019,
-      "minutes" : 0,
-      "heures" : 0,
-
+      "questionPere": 1019,
+      "minutes": 0,
+      "heures": 0,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
       ],
       "questionType": {
         "id": 4,
@@ -291,21 +250,19 @@
       "id": 1022,
       "name": "Est-ce que vous pratiquez des sports, du fitness ou des activités de loisirs de forte intensité qui nécessitent une augmentation importante de la respiration ou du rythme cardiaque comme (courir, vélo rapide, natation intense, volleyball, tennis, soccer, hockey, escalade) pendant au moins 10 minutes consécutives?",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1010,
           "name": "Oui ",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1010,
           "name": "Non ",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -313,43 +270,34 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1023,
       "name": "Habituellement, combien de jours par semaine pratiquez-vous une activité sportive, du fitness ou d'autres activités de loisirs de forte intensité ?",
       "questionTypeId": 3,
-      "questionPere" : 1022,
+      "questionPere": 1022,
       "jours": 0,
-
       "options": [
         {
           "jours": 0
         }
-
       ],
       "questionType": {
         "id": 3,
         "name": "Select",
         "isActive": true
       }
-
     },
     {
       "id": 1024,
       "name": "Lors d’une journée habituelle, combien de temps y consacrez-vous ?",
       "questionTypeId": 4,
-      "questionPere" : 1022,
-
-
+      "questionPere": 1022,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
       ],
       "questionType": {
         "id": 4,
@@ -361,21 +309,19 @@
       "id": 1025,
       "name": "Est-ce que vous pratiquez des sports, du fitness ou des activités de loisirs d'intensité modérée qui nécessitent une petite augmentation de la respiration ou du rythme cardiaque (marche rapide, jogging relax, vélo relax, yoga) pendant au moins 10 minutes consécutives ?",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1010,
           "name": "Oui ",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1010,
           "name": "Non ",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -383,70 +329,58 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1026,
       "name": "Habituellement, combien de jours par semaine pratiquez-vous une activité sportive, du fitness ou d'autres activités de loisirs d'intensité modérée ?",
       "questionTypeId": 3,
-      "questionPere" : 1025,
+      "questionPere": 1025,
       "jours": 0,
-
       "options": [
         {
           "jours": 0
         }
-
       ],
       "questionType": {
         "id": 3,
         "name": "Select",
         "isActive": true
       }
-
     },
     {
       "id": 1027,
       "name": "Lors d’une journée habituelle, combien de temps y consacrez-vous ?",
       "questionTypeId": 4,
-      "questionPere" : 1026,
-
-
+      "questionPere": 1025,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
       ],
       "questionType": {
         "id": 4,
         "name": "Select",
         "isActive": true
       }
-    }
-  ,
+    },
     {
       "id": 1028,
       "name": "Est-ce que vous pratiquez des marches de loisirs de faible intensité pendant au moins 10 minutes consécutives ?",
       "questionTypeId": 2,
-      "questionPere" : 0,
+      "questionPere": 0,
       "options": [
         {
           "id": 1055,
           "questionId": 1010,
           "name": "Oui",
-          "poids" : 0
-
+          "poids": 0
         },
         {
           "id": 1056,
           "questionId": 1010,
           "name": "Non",
-
-          "poids" : 1
+          "poids": 1
         }
       ],
       "questionType": {
@@ -454,43 +388,34 @@
         "name": "One Choice",
         "isActive": true
       }
-
-
     },
     {
       "id": 1029,
       "name": "Habituellement, combien de jours par semaine pratiquez-vous de la marche de loisir?",
       "questionTypeId": 3,
-      "questionPere" : 1028,
+      "questionPere": 1028,
       "jours": 0,
-
       "options": [
         {
           "jours": 0
         }
-
       ],
       "questionType": {
         "id": 3,
         "name": "Select",
         "isActive": true
       }
-
     },
     {
       "id": 1030,
       "name": "Lors d’une journée habituelle, combien de temps y consacrez-vous ?",
       "questionTypeId": 4,
-      "questionPere" : 1028,
-
-
+      "questionPere": 1028,
       "options": [
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
       ],
       "questionType": {
         "id": 4,
@@ -502,18 +427,13 @@
       "id": 1031,
       "name": "Combien de jours avez-vous pratiqué des activités physiques de loisirs dans les 7 derniers jours?",
       "questionTypeId": 3,
-      "questionPere" : 0,
-      "minutes" : 0,
-      "heures" : 0,
-
-      "options":  [
-
-
-          {
-            "jours": 0
-          }
-
-
+      "questionPere": 0,
+      "minutes": 0,
+      "heures": 0,
+      "options": [
+        {
+          "jours": 0
+        }
       ],
       "questionType": {
         "id": 4,
@@ -525,19 +445,14 @@
       "id": 1032,
       "name": "Combien de temps passez-vous en position assise ou couchée (excluant la nuit) lors d'une journée habituelle en moyenne (ceci comprends : les temps de repas, la télévision/ordinateur, le travail, lors des déplacements en voiture ou en autobus) ?",
       "questionTypeId": 4,
-      "questionPere" : 0,
-      "minutes" : 0,
-      "heures" : 0,
-
+      "questionPere": 0,
+      "minutes": 0,
+      "heures": 0,
       "options": [
-
         {
-          "minutes" : 0,
-          "heures" : 0
-
+          "minutes": 0,
+          "heures": 0
         }
-
-
       ],
       "questionType": {
         "id": 4,

@@ -9,9 +9,9 @@ export class Question {
     options: Option[];
     regulation: Regulation;
 
-    min : number;
-    hr : number;
-    nbJour : number;
+    min : number = 0;
+    hr : number = 0;
+    nbJour : number = 0;
 
     constructor(data: any) {
         data = data || {};

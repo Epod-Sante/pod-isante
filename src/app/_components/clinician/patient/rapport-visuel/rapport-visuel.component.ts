@@ -160,9 +160,12 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
     this.u = [];
     this.datesRange = [];
     this.loading = false;
+    this.vigoureux = 0;
+    this.moderee = 0;
+    this.marche = 0;
+    this.sedentaire = 0;
     this.getAppointments();
     this.getQuestionnaires();
-
   }
 
   public getAppointments = () => {
@@ -351,9 +354,6 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
           this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu) *
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr)));
 
-      console.log((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60));
-      console.log(this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu);
-      console.log(this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr);
       this.loisirsModereVigoureuxUI = (((this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr * 60 +
           this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu) *
         this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr) +
@@ -364,19 +364,18 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
           this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu) *
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr)));
 
-      this.jrsAcPhyUI = this.gpaq.at(this.selectedItemGpaq).value.reponses[22].hr * 60 +
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[22].minu;
+      this.jrsAcPhyUI = this.gpaq.at(this.selectedItemGpaq).value.reponses[21].jr;
 
-      this.totalUI = ( ((this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr) *
+
+      this.totalUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr) *
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr *
             60 +
             this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu)) +
         ((this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr) *
           ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr *
               60 )+
-            (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu))))
-      +
-      (((this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) *
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu)))+
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) *
           ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr *
               60) +
             (this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu))) +
@@ -387,20 +386,15 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr *
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr *
             60 +
-            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu)))
-      +
-        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr *
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu))+
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr *
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr *
             60 +
             this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu)) +
         (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr *
           (this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr *
             60 +
-            this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu)))
-      +
-        (((this.gpaq.at(this.selectedItemGpaq).value.reponses[22].hr *
-          60 )+
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[22].minu))
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu));
 
 
     }
