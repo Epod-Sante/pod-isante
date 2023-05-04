@@ -17,12 +17,12 @@ import {ObjectifComponent} from './patient/objectif/objectif.component';
 import {NgModule} from '@angular/core';
 import {ObjectifV2Component} from './patient/objectif-v2/objectif-v2.component';
 import {
-    NbButtonModule, NbCalendarModule, NbCalendarRangeModule,
-    NbCardModule,
-    NbCheckboxModule, NbFormFieldModule,
-    NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
-    NbSelectModule, NbSidebarModule, NbSpinnerModule,
-    NbStepperModule,
+  NbButtonModule, NbCalendarModule, NbCalendarRangeModule,
+  NbCardModule,
+  NbCheckboxModule, NbFormFieldModule,
+  NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule,
+  NbSelectModule, NbSidebarModule, NbSpinnerModule,
+  NbStepperModule, NbToastrModule,
 } from '@nebular/theme';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 import { SideBarFabButtonComponent } from './side-bar-fab-button/side-bar-fab-button.component';
@@ -54,18 +54,18 @@ export const homeProRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(homeProRoutes),
-        NbIconModule,
-        NbCalendarModule,
-        MatRadioModule,
-        MatFormFieldModule,
-        MaterialModule,
-        FormsModule, NbInputModule,
-        CommonModule,
-        ReactiveFormsModule,
-        QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
-        NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule,
-        NbLayoutModule, NbPopoverModule, ChartsModule, NbCalendarRangeModule, NbSpinnerModule, NbFormFieldModule],
+  imports: [RouterModule.forChild(homeProRoutes),
+    NbIconModule,
+    NbCalendarModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MaterialModule,
+    FormsModule, NbInputModule,
+    CommonModule,
+    ReactiveFormsModule,
+    QRCodeModule, NbCardModule, NbStepperModule, NgxSliderModule, NbCheckboxModule, NbSelectModule,
+    NbButtonModule, NbIconModule, NbSidebarModule, NbMenuModule,
+    NbLayoutModule, NbPopoverModule, ChartsModule, NbCalendarRangeModule, NbSpinnerModule, NbFormFieldModule],
     exports: [RouterModule,
         HistoireSanteComponent,
         BilanLipidiqueComponent, ObjectifComponent, ObjectifV2Component, SideBarFabButtonComponent,
@@ -77,7 +77,7 @@ export const homeProRoutes: Routes = [
     HistoireSanteComponent,
     OptionComponent, ObjectifComponent, ObjectifV2Component,
     SideBarFabButtonComponent, FabButtonComponent, RapportGlobalComponent,
-    ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent, RapportVisuelComponent, PatientInfosComponent],
+    ObjectifReadComponent, ExamenCliniqueBilanLipidiqueReadComponent, RapportVisuelComponent, PatientInfosComponent,],
   providers: []
 })
 export class HomeProRoutingModule {

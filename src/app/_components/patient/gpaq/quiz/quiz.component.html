@@ -26,14 +26,14 @@
 
           <div *ngFor="let option of question.options" style="width: 100%; ">
             <label *ngIf="question.questionTypeId==4" for=""> Heures : </label>
-            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==4" [(ngModel)]="question.hr"
+            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==4" [(ngModel)]="question.hr"  value="0"
                    class="form-control" id="hr" max="24" min="0" name="" style="width: 30%" type="number">
             <label *ngIf="question.questionTypeId==4" for=""> Minutes : </label>
-            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==4" [(ngModel)]="question.min"
+            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==4" [(ngModel)]="question.min"  value="0"
                    class="form-control" id="mn" max="59" min="1" name="" style="width: 30%" type="number">
 
             <label *ngIf="question.questionTypeId==3" for=""> Jours : </label>
-            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==3"
+            <input (change)="onSelect(question, option);" *ngIf="question.questionTypeId==3" value="0"
                    [(ngModel)]="question.nbJour" class="form-control" id="" max="7" min="1" name="" style="width: 30%"
                    type="number">
           </div>

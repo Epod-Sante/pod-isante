@@ -13,3 +13,7 @@ button {
   border: none;
   outline: none;
 }
+
+.child{
+  margin-bottom: 50px;
+}

@@ -4,13 +4,17 @@ export class ObjectifModel {
   moyen: string[];
   recommandation: Recommandation;
   precaution: string[];
+  barrieres: string[];
+  nc: number;
 
 
-  constructor(objectif: Objectif, moyen: string[], recommandation: Recommandation, precaution: string[]) {
+  constructor(objectif: Objectif, moyen: string[], recommandation: Recommandation, precaution: string[], barrieres: string[], nc: number) {
     this.objectif = objectif;
     this.moyen = moyen;
     this.recommandation = recommandation;
     this.precaution = precaution;
+    this.barrieres = barrieres;
+    this.nc = nc;
   }
 }
 

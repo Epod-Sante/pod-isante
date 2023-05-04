@@ -1,4 +1,4 @@
-import {Component, Inject, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {PatientDto} from '../../../../dto/patient/PatientDto';
 import {DialogDataReport} from '../patient-profile/patient-profile.component';
@@ -20,12 +20,14 @@ import {AppointmentDto} from '../../../../dto/AppointmentDto';
 import {StepsDto} from '../../../../dto/medicalfile/StepsDto';
 import {BaseChartDirective, Label, SingleDataSet} from 'ng2-charts';
 import {ChartDataSets, ChartOptions, ChartPluginsOptions, ChartType} from 'chart.js';
-import {NbCalendarRange, NbDateService} from '@nebular/theme';
+import {NbCalendarRange, NbDateService, NbToastrService} from '@nebular/theme';
 import {ActivitiesMinutesDto} from '../../../../dto/medicalfile/ActivitiesMinutesDto';
 import {Step} from '../rapport-visuel/rapport-visuel.component';
 import {ActivitiesStepsDto} from '../../../../dto/medicalfile/ActivitiesStepsDto';
 import Chart from 'chart.js';
 import 'chartjs-plugin-labels';
+import {RecommandationDto} from "../../../../dto/RecommandationDto";
+import {ObjectifModel} from "../objectif-v2/ObjectifModel";
 
 @Component({
   selector: 'app-rapport-global',
@@ -41,7 +43,11 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   response: Response;
   patient: PatientDto;
   private patientId: any;
+  selectedItem = -1;
+
   questionnaires: QuestionnaireDto[];
+  recommendations: RecommandationDto[] =[];
+
   questionnaireResponse: any;
   questionnaireObj = [];
   breqScore = [];
@@ -50,7 +56,8 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   questionnaireBREQ: QuestionnaireBREQ[] = [];
   questionnaireGPAQ: QuestionnaireGPAQ[] = [];
   // *************
-
+  public totalUI = 0;
+  jrsAcPhyUI = 0;
   stats: DescStats[] = [];
   public displayedColumns: string[] = [
     'Minutes',
@@ -61,8 +68,8 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
     'Variance',
     'sd'
   ];
-  selectedItemGpaq = 0;
-  selectedItemBreq = 0;
+  selectedItemGpaq = -1;
+  selectedItemBreq = -1;
   selectedItemMin = 0;
   selectedItemSteps = 0;
   selectedItemPD = -1;
@@ -114,8 +121,8 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   public pieChart: SingleDataSet = [0, 0, 0, 0, 0];
   public pieChartType: ChartType = 'pie';
   public pieChartLabelsBreq: Label[] = [
-    'Amotivation',
-    'Identified',
+    'Démotivation',
+    'Identifiée',
     'Introjectée',
     'Extrinsèque',
     'Intrinsèque'];
@@ -134,7 +141,7 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   public pieChartLabels: string[] = ['Intensité faible',
     'Intensité  modérée',
     'Intensité élevée',
-    'sedentaires'];
+    'sedentaire'];
   stepsChartLabels: Label[];
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   range: NbCalendarRange<Date>;
@@ -144,6 +151,9 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   public u: any[];
   datesRange = [];
   loading = true;
+  loading2 = true;
+  loading3 = true;
+  loading4 = true;
   private start: Date;
   private end: Date;
   private start2: Date;
@@ -151,14 +161,32 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   public minutesDto: ActivitiesMinutesDto;
   pd: PatientDeviceDto[];
 
-  constructor(public route: ActivatedRoute, private patientService: PatientService, protected dateService: NbDateService<Date>) {
+  recommandation: RecommandationDto;
+  barriersRecommendation: string[] = [];
+  objectif: ObjectifModel[] = [];
+  obj1Moyen = [];
+  obj2Moyen = [];
+  obj3Moyen = [];
+  obj1Precaution = [];
+  obj2Precaution = [];
+  obj1Moment = [];
+  obj2Moment = [];
+  obj1Bar = [];
+  obj2Bar = [];
+  obj3Bar = [];
+  nc1: number;
+  nc2: number;
+  nc3: number;
+
+  constructor(public route: ActivatedRoute, private patientService: PatientService, protected dateService: NbDateService<Date>,
+              private toastrService: NbToastrService) {
 
     this.route.params.subscribe(params => {
       this.patientId = params.id;
     });
     this.getOnePatient();
-    this.getQuestionnaires();
-    this.getRecommendations();
+    this.getRecommendations().then(() => this.getAppointments()).then(()=> this.getQuestionnaires());
+    this.showToast('top-right', 'info', 'Info', 'Pour chaque section du rapport, choisir les dates souhaités');
 
   }
 
@@ -168,10 +196,17 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
 
 
   ngOnInit(): void {
-
   }
 
 
+  gpaqOnChange(i: number) {
+    this.loading2 = false;
+    if (this.selectedItemGpaq !== i) {
+      this.selectedItemGpaq = i;
+      this.gpaqCalcule();
+      this.gpaqBarChart();
+    }
+  }
   public getOnePatient = () => {
     this.patientService.getPatient(this.patientId).subscribe(patients => {
       const p = patients as Response;
@@ -185,32 +220,39 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   }
 
   public getQuestionnaires = () => {
-    this.patientService.getQuiz(this.patientId).subscribe(questionnaires => {
-      this.questionnaireResponse = questionnaires;
-      this.response = JSON.parse(JSON.stringify(questionnaires)) as Response;
-      this.questionnaireObj = this.response.object as [];
-      this.questionnaires = this.response.object as QuestionnaireDto[];
-      this.questionnaires.forEach(elm => {
-        if (elm.type === 'GPAQ') {
-          const value = JSON.parse(elm.value) as GPAQValue;
-          this.questionnaireGPAQ.push(new QuestionnaireGPAQ(elm.id, elm.patientId, elm.type, value, elm.date));
-        }
-        if (elm.type === 'BREQ') {
-          const value = JSON.parse(elm.value) as BREQValue;
-          this.questionnaireBREQ.push(new QuestionnaireBREQ(elm.id, elm.patientId, elm.type, value, elm.date));
-        }}
-      );
+    this.patientService.getQuiz(this.patientId).subscribe(response => {
+      const res = JSON.parse(JSON.stringify(response));
+      this.questionnaires = res.object;
 
-      this.onChange();
-      this.gpaqCalcule();
-      this.gpaqBarChart();
-      this.breqPieChart();
+      for (const x of this.questionnaires) {
+        if (x.type === 'GPAQ') {
+          const value = JSON.parse(x.value) as GPAQValue;
+          this.gpaq.push(new QuestionnaireGPAQ(x.id, x.patientId, x.type, value, x.date));
+        }
+        if (x.type === 'BREQ') {
+          const value = JSON.parse(x.value) as BREQValue;
+          this.breq.push(new QuestionnaireBREQ(x.id, x.patientId, x.type, value, x.date));
+        }
+      }
+      if (this.gpaq.length > 0){
+        this.gpaqCalcule();
+        this.gpaqBarChart();
+      }
+      if (this.breq.length > 0){
+        this.breqPieChart();
+      }
 
     });
 
   }
 
-
+  breqOnChange(i: number) {
+    this.loading3 = false;
+    if (this.selectedItemBreq !== i) {
+      this.selectedItemBreq = i;
+      this.breqPieChart();
+    }
+  }
   public getQuiz = () => {
     this.patientService.getQuiz(this.patient.id).subscribe(quiz => {
       const response = JSON.parse(JSON.stringify(quiz)) as Response;
@@ -270,8 +312,9 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   }
 
   public getRecommendations = () => {
-    this.patientService.getAllReco(this.patientId).subscribe(response => {
-
+    return this.patientService.getAllReco2(this.patientId).then(response => {
+      const res = response as Response;
+      this.recommendations = JSON.parse(JSON.stringify(res.object));
     });
   }
 
@@ -377,19 +420,98 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   }
 
   onChange() {
-    this.pd = [];
-    this.selectedItemPD = -1;
-    this.appointmentsDates = [];
-    this.minutesData = [];
-    this.gpaq = [];
-    this.breq = [];
-    this.stats = [];
-    this.steps = [];
-    this.stepsChartLabels = [];
-    this.u = [];
-    this.datesRange = [];
+    this.obj1Bar = [];
+    this.obj2Bar = [];
+    this.obj3Bar = [];
+    this.nc1 = -1;
+    this.nc2 = -1;
+    this.nc3 = -1;
+    this.obj1Moyen = [];
+    this.obj2Moyen = [];
+    this.obj3Moyen = [];
+    this.obj1Precaution = [];
+    this.obj2Precaution = [];
+    this.obj1Moment = [];
+    this.obj2Moment = [];
     this.loading = false;
-    this.getAppointments();
+    this.loading4 = false;
+
+      this.objectif = JSON.parse(this.recommendations.at(this.selectedItem).recommendation) as ObjectifModel[];
+      let i = 0;
+      this.objectif.forEach(elm => {
+        if (i === 0) {
+          const bar = JSON.parse(JSON.stringify(elm.barrieres)) as Barriere[];
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          const moment = JSON.parse(JSON.stringify(elm.recommandation.moment)) as Moment[];
+          const nc = JSON.parse(JSON.stringify(elm.nc)) as number;
+          bar.forEach(m => {
+            if (m.checked) {
+              this.obj1Bar.push(m.name);
+            }
+          });
+          this.nc1 = nc;
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj1Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj1Precaution.push(p.name);
+            }
+          });
+          moment.forEach(mm => {
+            if (mm.checked) {
+              this.obj1Precaution.push(mm.name);
+            }
+          });
+        } else if (i === 1) {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          const moment = JSON.parse(JSON.stringify(elm.recommandation.moment)) as Moment[];
+          const bar = JSON.parse(JSON.stringify(elm.barrieres)) as Barriere[];
+          const nc = JSON.parse(JSON.stringify(elm.nc)) as number;
+          bar.forEach(m => {
+            if (m.checked) {
+              this.obj2Bar.push(m.name);
+            }
+          });
+          this.nc2 = nc;
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj2Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj2Precaution.push(p.name);
+            }
+          });
+          moment.forEach(mm => {
+            if (mm.checked) {
+              this.obj1Precaution.push(mm.name);
+            }
+          });
+        } else {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const bar = JSON.parse(JSON.stringify(elm.barrieres)) as Barriere[];
+          const nc = JSON.parse(JSON.stringify(elm.nc)) as number;
+          bar.forEach(m => {
+            if (m.checked) {
+              this.obj3Bar.push(m.name);
+            }
+          });
+          this.nc3 = nc;
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj3Moyen.push(m.name);
+            }
+          });
+        }
+        i = i + 1;
+      });
+
 
   }
 
@@ -412,7 +534,6 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
     });
     return this.appointmentsDates;
   }
-
 
   public getSteps = () => {
     this.patientService.getSteps(this.patient.medicalFile.patient).subscribe(response => {
@@ -473,6 +594,84 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
   }
 
 
+  gpaqCalcule() {
+    if (this.gpaq.length > 0){
+      this.travailModereVigoureuxUI = (((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr * 60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu) *
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr * 60 +
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu) *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr)));
+      this.transportPiedUI = (((this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr * 60 +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu) *
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr)));
+      this.transportVeloUI = (((this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr * 60 +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu) *
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr)));
+
+      this.loisirsModereVigoureuxUI = (((this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr * 60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu) *
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr) +
+        (((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60) +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu) *
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr));
+      this.loisirsMarcheUI = (((this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr * 60 +
+          this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu) *
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr)));
+
+      this.jrsAcPhyUI = this.gpaq.at(this.selectedItemGpaq).value.reponses[21].jr;
+
+
+      this.totalUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr) *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu)) +
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr) *
+          ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr *
+              60 )+
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu)))+
+        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) *
+          ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr *
+              60) +
+            (this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu))) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu)) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu))+
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu)) +
+        (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr *
+          (this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr *
+            60 +
+            this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu));
+
+
+    }
+  }
+
+  breqPieChart() {
+    this.intrinsic = this.breq.at(this.selectedItemBreq).value.score.intrinsic;
+    this.external = this.breq.at(this.selectedItemBreq).value.score.external;
+    this.amotivation = this.breq.at(this.selectedItemBreq).value.score.amotivation;
+    this.identified = this.breq.at(this.selectedItemBreq).value.score.identified;
+    this.introjected = this.breq.at(this.selectedItemBreq).value.score.introjected;
+    this.pieChart = [
+      parseFloat(this.amotivation.toFixed(2)),
+      parseFloat(this.identified.toFixed(2)),
+      parseFloat(this.introjected.toFixed(2)),
+      parseFloat(this.external.toFixed(2)),
+      parseFloat(this.intrinsic.toFixed(2))
+    ];
+
+
+  }
+
   public gpaqBarChart() {
     this.barChar = [];
     this.vigoureux = 0;
@@ -520,47 +719,99 @@ export class RapportGlobalComponent implements OnInit, OnChanges {
     }
   }
 
-  gpaqCalcule() {
-    if (this.gpaq.length > 0){
-      this.travailModereVigoureuxUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[5].hr * 60 +
-            this.gpaq.at(this.selectedItemGpaq).value.reponses[5].minu) *
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[4].jr) +
-        (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].hr * 60 +
-          (this.gpaq.at(this.selectedItemGpaq).value.reponses[2].minu) *
-          (this.gpaq.at(this.selectedItemGpaq).value.reponses[1].jr));
-      this.transportPiedUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[8].hr * 60 +
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[8].minu) *
-        (this.gpaq.at(this.selectedItemGpaq).value.reponses[7].jr));
-      this.transportVeloUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[11].hr * 60 +
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[11].minu) *
-        (this.gpaq.at(this.selectedItemGpaq).value.reponses[10].jr));
-      this.loisirsModereVigoureuxUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[17].hr * 60 +
-            this.gpaq.at(this.selectedItemGpaq).value.reponses[17].minu) *
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[16].jr) +
-        ((this.gpaq.at(this.selectedItemGpaq).value.reponses[14].hr * 60) +
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[14].minu) *
-        this.gpaq.at(this.selectedItemGpaq).value.reponses[13].jr;
-      this.loisirsMarcheUI = ((this.gpaq.at(this.selectedItemGpaq).value.reponses[20].hr * 60 +
-          this.gpaq.at(this.selectedItemGpaq).value.reponses[20].minu) *
-        (this.gpaq.at(this.selectedItemGpaq).value.reponses[19].jr));
 
-    }
+  getRecoById() {
+    this.patientService.getReco(this.patientId).subscribe(recommandations => {
+      const response = recommandations as Response;
+      this.recommandation = JSON.parse(JSON.stringify(response.object)) as RecommandationDto;
+      this.barriersRecommendation = JSON.parse(this.recommandation.barriersRecommendation) as string[];
+      this.objectif = JSON.parse(this.recommandation.recommendation) as ObjectifModel[];
+      let i = 0;
+      this.objectif.forEach(elm => {
+        if (i === 0) {
+          console.log(JSON.stringify(elm))
+          const bar = JSON.parse(JSON.stringify(elm.barrieres)) as Barriere[];
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          const moment = JSON.parse(JSON.stringify(elm.recommandation.moment)) as Moment[];
+          const nc = JSON.parse(JSON.stringify(elm.nc)) as number;
+          bar.forEach(m => {
+            if (m.checked) {
+              this.obj1Bar.push(m.name);
+            }
+          });
+          this.nc1 = nc;
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj1Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj1Precaution.push(p.name);
+            }
+          });
+          moment.forEach(mm => {
+            if (mm.checked) {
+              this.obj1Precaution.push(mm.name);
+            }
+          });
+        } else if (i === 1) {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const precaution = JSON.parse(JSON.stringify(elm.precaution)) as Precaution[];
+          const moment = JSON.parse(JSON.stringify(elm.recommandation.moment)) as Moment[];
+          const bar = JSON.parse(JSON.stringify(elm.barrieres)) as Barriere[];
+          const nc = JSON.parse(JSON.stringify(elm.nc)) as number;
+          bar.forEach(m => {
+            if (m.checked) {
+              this.obj2Bar.push(m.name);
+            }
+          });
+          this.nc2 = nc;
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj2Moyen.push(m.name);
+            }
+          });
+          precaution.forEach(p => {
+            if (p.checked) {
+              this.obj2Precaution.push(p.name);
+            }
+          });
+          moment.forEach(mm => {
+            if (mm.checked) {
+              this.obj1Precaution.push(mm.name);
+            }
+          });
+        } else {
+          const moyen = JSON.parse(JSON.stringify(elm.moyen)) as Moyen[];
+          const bar = JSON.parse(JSON.stringify(elm.barrieres)) as Barriere[];
+          const nc = JSON.parse(JSON.stringify(elm.nc)) as number;
+          bar.forEach(m => {
+            if (m.checked) {
+              this.obj3Bar.push(m.name);
+            }
+          });
+          this.nc3 = nc;
+          moyen.forEach(m => {
+            if (m.checked) {
+              this.obj3Moyen.push(m.name);
+            }
+          });
+        }
+        i = i + 1;
+      });
+    });
   }
 
-  breqPieChart() {
-    this.intrinsic = this.breq.at(this.selectedItemBreq).value.score.intrinsic;
-    this.external = this.breq.at(this.selectedItemBreq).value.score.external;
-    this.amotivation = this.breq.at(this.selectedItemBreq).value.score.amotivation;
-    this.identified = this.breq.at(this.selectedItemBreq).value.score.identified;
-    this.introjected = this.breq.at(this.selectedItemBreq).value.score.introjected;
-    this.pieChart = [
-      parseFloat(this.amotivation.toFixed(2)),
-      parseFloat(this.identified.toFixed(2)),
-      parseFloat(this.introjected.toFixed(2)),
-      parseFloat(this.external.toFixed(2)),
-      parseFloat(this.intrinsic.toFixed(2))
-    ];
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status , duration: 10000});
   }
+
+
 }
 
 
@@ -570,4 +821,25 @@ export interface Resultat {
   value: object;
   id: string;
   type: string;
+}
+
+
+class Moyen {
+  name: string;
+  checked: boolean;
+}
+
+class Precaution {
+  name: string;
+  checked: boolean;
+}
+
+class Moment {
+  name: string;
+  checked: boolean;
+}
+
+class Barriere {
+  name: string;
+  checked: boolean;
 }

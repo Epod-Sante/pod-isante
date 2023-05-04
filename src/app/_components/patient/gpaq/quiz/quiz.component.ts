@@ -156,7 +156,7 @@ export class GpaqQuizComponent implements OnInit {
         if (exist === false) {
           this.rep.push(new Reponse(
             question.id, this.quiz.id,
-            option.poids, question.min, question.hr, question.nbJour, question.questionPere));
+            null, question.min, question.hr, question.nbJour, question.questionPere));
         }
         if (question.questionTypeId === 2) {
           this.goTo(this.pager.index + 1);

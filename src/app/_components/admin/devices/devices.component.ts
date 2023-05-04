@@ -8,6 +8,7 @@ import {DeviceDto} from '../../../dto/DeviceDto';
 import {UserService} from '../../../_services';
 import {Request} from '../../../dto';
 import {first} from 'rxjs/operators';
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-devices',
@@ -19,15 +20,17 @@ export class DevicesComponent implements OnInit {
   podos2: any [];
   id = null;
   autoriser = false;
-  auth = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=22DBSJ&redirect_uri=https%3A%2F%2Fipodsante-92c27.web.app%2Fdevice&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800';
+  auth = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=22DBSJ&redirect_uri=https%3A%2F%2Fwww.podisante.ca%2Fdevice&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800';
   currentUser = localStorage.getItem('currentUser');
   podo = false;
   addpodo = false;
   blocK_checked = false;
+
+  lastSyncDateString : string[];
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  public displayedColumns = ['deviceCode', 'type', 'action'];
+  public displayedColumns = ['deviceCode', 'type', 'fitbitId','available', 'lastSyncDate', 'action'];
   public dataSource = new MatTableDataSource<DeviceDto>();
 
   constructor(private router: Router, private userService: UserService, private route: ActivatedRoute) {
@@ -41,7 +44,10 @@ export class DevicesComponent implements OnInit {
   }
 
   autorise(element: DeviceDto) {
-    this.getAllPodo();
+    //this.getAllPodo();
+    /*this.userService.profilCheck().subscribe(res=>{
+      console.log(res)
+    })*/
     window.open(this.auth);
     localStorage.setItem('idautorize', element.id);
   }
@@ -83,7 +89,7 @@ export class DevicesComponent implements OnInit {
     const token = localStorage.getItem('currentToken');
     const decoded = jwtDecode(token);
     const adminId = decoded.id;
-    const po = new DeviceDto(null, code, null, type, null, adminId, true, null, null, null);
+    const po = new DeviceDto(null, null, code, null, type, null, adminId, true, null, null, null);
     const request = new Request(po);
     this.userService.addPodo(request).pipe(first())
       .subscribe(reponse => {
@@ -119,13 +125,19 @@ export class DevicesComponent implements OnInit {
   }
 
   public getAllPodo = () => {
+    this.lastSyncDateString = []
     this.userService.getPodos().subscribe(users => {
       const devices = JSON.parse(JSON.stringify(users));
       this.podos2 = devices.object as DeviceDto[];
+      for (let i = 0; i <this.podos2.length; i++) {
+        if (this.podos2[i].lastSyncDate != null){
+          this.lastSyncDateString.push(new Date(this.podos2[i].lastSyncDate).toLocaleDateString() +' '+ new Date(this.podos2[i].lastSyncDate).toLocaleTimeString());
+        }
+      }
       this.dataSource.data = this.podos2;
+      console.log(this.lastSyncDateString)
     });
   }
-
 
 
 }

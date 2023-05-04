@@ -151,7 +151,7 @@ import {QuizindividComponent} from './_components/clinician/patient/quizindivid/
     GpaqComponent,
     GpaqQuizComponent,
     WindowComponent,
-    QuizindividComponent
+    QuizindividComponent,
   ],
   imports: [
     NbTimepickerModule.forRoot(),
@@ -223,10 +223,12 @@ import {QuizindividComponent} from './_components/clinician/patient/quizindivid/
     DetailsRecoComponent,
     DeleteDialogComponent, EditDialogComponent, IddleUserDialogComponent, BilanLipidiqueComponent, WindowComponent],
   exports: [
-    RecomandationComponent
+    RecomandationComponent,
+    RecomandationPatientComponent,
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
 }
+

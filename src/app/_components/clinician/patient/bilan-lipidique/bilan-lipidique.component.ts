@@ -37,7 +37,6 @@ export class BilanLipidiqueComponent implements OnInit, OnDestroy {
   }
 
   ajouter(ldl: string, hdl: string, nonhdl: string, triglycerides: string, hba1c: string, glucoseJeun: string, glucoseAleatoire: string) {
-    if (Number(ldl) && Number(hdl) && Number(nonhdl) && Number(triglycerides) && Number(hba1c) && Number(glucoseJeun) && Number(glucoseAleatoire)) {
       const date = new Date();
       this.setDate(date);
       const lipidProfileDto = new LipidProfileDto(null, +ldl, +hdl, +triglycerides, +hba1c, +nonhdl, this.day, +glucoseJeun, +glucoseAleatoire);
@@ -51,9 +50,6 @@ export class BilanLipidiqueComponent implements OnInit, OnDestroy {
           error => {
             this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
           });
-    } else {
-      this.showToast('top-right', 'info', 'Info', 'Vous devez remplir toutes les entrées');
-    }
 
   }
 

@@ -1,82 +1,291 @@
-<nb-card>
+<nb-card status="info" class="root">
   <nb-card-body>
+    <h2 id="top">Sélectionner le nombre d’objectifs souhaités</h2>
+    <nb-card-body>
+      <nb-stepper orientation="horizontal">
+        <!--obj 1-->
+        <nb-step [label]="labelOne">
+          <ng-template #labelOne>Nombre de pas quotidien</ng-template>
+          <h4>Objectif #1: Nombre de pas quotidien</h4>
+
+            <nb-card-body>
+              <div>
+                <nb-card-body>
+                  <h4>Paramètres de l'objectif</h4>
+                  <p class="lorem">A) Augmenter le nombre de pas quotidien de </p>
+                  <input type="number" nbInput placeholder="" [(ngModel)]="value1Obj1">
+                  <p class="lorem">B) Atteindre un total de pas quotidien de </p>
+                  <input type="number" nbInput placeholder="" [(ngModel)]="value2Obj1">
+                </nb-card-body>
+              </div>
+
+              <div>
+                <nb-card-body>
+                  <h4>Barrières pour atteindre l’objectif</h4>
+                  <div *ngFor="let option of barObjctif1OptionsCheckbox">
+                    <nb-checkbox
+                      (checkedChange)="updateCheckedOptionsBarObj1(option, $event)"><p id="align">{{option.name}}</p>
+                    </nb-checkbox>
+                  </div>
+
+                </nb-card-body>
+              </div>
+
+              <div>
+                <nb-card-body>
+                  <h4>Moyens de l'objectif</h4>
+                  <div *ngFor="let option of moyensObjctif1OptionsCheckbox">
+                      <nb-checkbox
+                                   (checkedChange)="updateCheckedOptionsMoyensObj1(option, $event)"><p id="align">{{option.name}}</p>
+                      </nb-checkbox>
+                  </div>
+                </nb-card-body>
+              </div>
+
+              <h4>Recommandations de l'objectif</h4>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Fréquence</h6>
+                  <nb-select (selectedChange)="updateCheckedSelectFreqObj1($event)" placeholder="Fréquence">
+                    <nb-option *ngFor="let option of freqObjctif1OptionsSelect" value="{{option.name}}">
+                      {{option.name}}
+                    </nb-option>
+                  </nb-select>
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Endroits</h6>
+                  <div *ngFor="let endroit of groupOptionEndroitsObj1, let i = index" style="margin-bottom: 20px">
+                    <nb-checkbox
+                      (checkedChange)="endroitCheckboxObjectiv1(endroit.id)"><p id="align">{{endroit.group}}</p>
+                    </nb-checkbox>
+                    <nb-select multiple placeholder="Choisissez la modalité"
+                               *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3"
+                               disabled="{{!endroit.checked}}" id="endroits-select">
+                      {{i + 1}}
+                      <nb-option *ngFor="let option of endroit.options" value="{{i}}"
+                                 (selectionChange)="endroitOptionObjectiv1(endroit.id, option.id)">{{option.group}}</nb-option>
+                    </nb-select>
+                  </div>
+                </nb-card-body>
+
+              </div>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Moments</h6>
+                  <div *ngFor="let option of momentsObjctif1OptionsSelect">
+                    <nb-checkbox
+                      (checkedChange)="updateCheckedOptionsMomentsObj1(option, $event)"><p id="align">{{option.name}}</p>
+                    </nb-checkbox>
+                  </div>
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Intensité</h6>
+                  <div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+                    <ngx-slider [(value)]="IntensiteOptionsObjectif1Value"
+                                [options]="IntensiteOptionsObjectif1"></ngx-slider>
+                  </div>
+                </nb-card-body>
+              </div>
+
+              <h4>Précautions de l'objectif</h4>
+              <div>
+                <nb-card-body>
+                  <div *ngFor="let option of precautionsObjctif1OptionsSelect">
+                    <nb-checkbox
+                      (checkedChange)="updateCheckedOptionsPrecautionsObj1(option, $event)"><p id="align">{{option.name}}</p>
+                    </nb-checkbox>
+                  </div>
+                </nb-card-body>
+              </div>
 
 
+              <div>
+                <nb-card-body>
+                  <h4>Niveau de confiance</h4>
+                  <ngx-slider [(value)]="nc1" [options]="options"></ngx-slider>
+                </nb-card-body>
+              </div>
 
-  <mat-tab-group mat-align-tabs="center"  >
-    <!-- <mat-tab label="recommandation">
-     </mat-tab>-->
+            </nb-card-body>
 
+          <button nbButton nbStepperNext  (click)="gotop()">suivant</button>
 
-    <mat-tab label=" Identifier les principales barrières à la pratique d’activité physique" style="display: inline-block; ">
-      <mat-selection-list #bar>
- <h2>BARRIÈRES</h2>
-          <mat-list-option value="Manque de temps">Manque de temps</mat-list-option>
-          <mat-list-option  value="Faible motivation">Faible motivation</mat-list-option>
-          <mat-list-option value="Peu d’énergie ou se sent fatigué">Peu d’énergie ou se sent fatigué</mat-list-option>
-          <mat-list-option value="Pas les moyens financiers de pratiquer de l’activité physique">Pas les moyens financiers de pratiquer de l’activité physique</mat-list-option>
-          <mat-list-option value="Mauvaises températures/météo">Mauvaises températures/météo</mat-list-option>
-          <mat-list-option value="Être seul(e)">Être seul(e)</mat-list-option>
-          <mat-list-option  value="Blessure ou douleur chronique">Blessure ou douleur chronique</mat-list-option>
-          <mat-list-option  value="Ennuyant/ou peu d’intérêt pour l’activité physique">Ennuyant/ou peu d’intérêt pour l’activité physique</mat-list-option>
-        <mat-list-option  value="Ne possède pas d’équipement pour faire de l’activité physique">Ne possède pas d’équipement pour faire de l’activité physique</mat-list-option>
-        <mat-list-option  value="N’a pas accès à des infrastructures adéquates">N’a pas accès à des infrastructures adéquates</mat-list-option>
-        <mat-list-option  value="Ne se sent pas compétent à pratiquer de l’activité physique">Ne se sent pas compétent à pratiquer de l’activité physique</mat-list-option>
-        <mat-list-option  value="Se sent essoufflé rapidement ou déconditionné">Se sent essoufflé rapidement ou déconditionné</mat-list-option>
-        <mat-list-option  value="Crainte de se blesser">Crainte de se blesser</mat-list-option>
-
-      </mat-selection-list>
-
-      <button nbButton status="success" fullWidth (click)="comfirmerBar(bar.selectedOptions.selected)">
-        Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
-      </button>
-    </mat-tab>
-
-    <!--<mat-tab label="  Identifier les solutions à ces mêmes barrières ">
-      <mat-selection-list #sol>
-        <h2>SOLUTIONS</h2>
-        <mat-list-option value="Prévoir des journées et moments fixes dans l'horaire pour pratiquer de l’activité physique">Prévoir des journées et moments fixes dans l'horaire pour pratiquer de l’activité physique</mat-list-option>
-        <mat-list-option  value="Avoir un plan B pour remplacer une activité physique déjà planifiée en cas d'imprévus">Avoir un plan B pour remplacer une activité physique déjà planifiée en cas d'imprévus</mat-list-option>
-        <mat-list-option value="Faire un journal d'activité physique pour apprécier les progrès">Faire un journal d'activité physique pour apprécier les progrès</mat-list-option>
-        <mat-list-option value="Se procurer de l’équipement de seconde main.">Se procurer de l’équipement de seconde main.</mat-list-option>
-        <mat-list-option value="Débuter par des activités accessibles de faible intensité (marche)">Débuter par des activités accessibles de faible intensité (marche)</mat-list-option>
-        <mat-list-option value="S'inscrire à un groupe de conditionnement ou de marche">S'inscrire à un groupe de conditionnement ou de marche</mat-list-option>
-        <mat-list-option  value="Viser des activités physiques limitant la mise en charge (vélo, natation)">Viser des activités physiques limitant la mise en charge (vélo, natation)</mat-list-option>
-        <mat-list-option  value="Faire une activité physique avec un membre de la famille ou un(e) ami(e)">Faire une activité physique avec un membre de la famille ou un(e) ami(e)</mat-list-option>
-        <mat-list-option  value="Emprunt ou location d’équipement pour tester différents sports/activités.">Emprunt ou location d’équipement pour tester différents sports/activités.</mat-list-option>
-        <mat-list-option  value="Rechercher les infrastructures à proximité de votre domicile pour pratiquer de l'activité physique (piste cyclable, sentiers pédestres, centre de conditionnement, etc)">Rechercher les infrastructures à proximité de votre domicile pour pratiquer de l'activité physique (piste cyclable, sentiers pédestres, centre de conditionnement, etc)</mat-list-option>
-        <mat-list-option  value="Faire une liste des activités physiques que vous aimez ou croyez pouvoir apprécier et regarder les moyens pour initier l'activité.">Faire une liste des activités physiques que vous aimez ou croyez pouvoir apprécier et regarder les moyens pour initier l'activité.</mat-list-option>
-        <mat-list-option  value="Écouter de la musique ou des livres audio pendant la pratique d'activité physique">Écouter de la musique ou des livres audio pendant la pratique d'activité physique</mat-list-option>
-        <mat-list-option  value="S'équiper d'équipement pour bouger confortablement (chaussure confortable, pantalon et chandail de sport)">S'équiper d'équipement pour bouger confortablement (chaussure confortable, pantalon et chandail de sport)</mat-list-option>
-        <mat-list-option  value="Mettre une alarme sur le cellulaire ou autre appareil afin de se lever aux 30 minutes ou aux heures pour couper les périodes assises.">Mettre une alarme sur le cellulaire ou autre appareil afin de se lever aux 30 minutes ou aux heures pour couper les périodes assises.</mat-list-option>
-        <mat-list-option  value="Avoir un maximum d'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.)">Avoir un maximum d'heures par jour consacré à des activités de loisirs assises (télévision, ordinateur/tablette, lecture, jeux, etc.)</mat-list-option>
-        <mat-list-option  value="Consulter un professionnel de la santé spécialisé en activité physique (kinésiologue) pour obtenir des conseils précis">Consulter un professionnel de la santé spécialisé en activité physique (kinésiologue) pour obtenir des conseils précis</mat-list-option>
-        <mat-list-option  value="Ajouter une marche de loisir à un moment opportun de votre journée">Ajouter une marche de loisir à un moment opportun de votre journée</mat-list-option>
-        <mat-list-option  value="Faire une liste des bénéfices à faire de l’activité physique et la laisser accessible en tout temps pour consultation quand la motivation est plus difficile.">Faire une liste des bénéfices à faire de l’activité physique et la laisser accessible en tout temps pour consultation quand la motivation est plus difficile.</mat-list-option>
-
-      </mat-selection-list>
-      <button nbButton status="success" fullWidth (click)="comfirmerSol(sol.selectedOptions.selected)">
-        Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
-      </button>
-    </mat-tab>-->
-    <mat-tab label="Niveau de confiance">
-      <mat-selection-list #sol>
-        <h2>Niveau de confiance</h2>
-        <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
-
-      </mat-selection-list>
-      <button nbButton status="success" fullWidth (click)="addConfiance()">
-        Ajouter<nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
-      </button>
-    </mat-tab>
+        </nb-step>
 
 
-    <mat-tab label="  Sélectionner le nombre d’objectifs souhaités ">
-      <mat-selection-list #obj>
-        <app-objectif-v2></app-objectif-v2>
-      </mat-selection-list>
-    </mat-tab>
-  </mat-tab-group>
+        <!--obj 2-->z
+        <nb-step [label]="labelTwo">
+          <ng-template #labelTwo>Minutes quotidiennes actives</ng-template>
+          <h4>Objectif #2: Minutes quotidiennes actives</h4>
+
+           <nb-card-body>
+              <div>
+                <nb-card-body>
+                  <h4>Paramètres de l'objectif</h4>
+                  <p class="lorem">A) Augmenter le nombre de minutes actives quotidiennes de</p>
+                  <input type="number" nbInput placeholder="" [(ngModel)]="value1Obj2">
+                  <p class="lorem">B) Atteindre un nombre de minutes actives quotidiennes totales de</p>
+                  <input type="number" nbInput placeholder="" [(ngModel)]="value2Obj2">
+                </nb-card-body>
+              </div>
+             <div>
+               <nb-card-body>
+                 <h4>Barrières pour atteindre l’objectif</h4>
+                 <div *ngFor="let option of barObjctif2OptionsCheckbox">
+                   <nb-checkbox
+                     (checkedChange)="updateCheckedOptionsBarObj2(option, $event)"><p id="align">{{option.name}}</p>
+                   </nb-checkbox>
+                 </div>
+
+               </nb-card-body>
+             </div>
+
+             <div>
+                <nb-card-body>
+                  <h4>Moyens de l'objectif</h4>
+                  <div *ngFor="let option of moyensObjctif2OptionsCheckbox">
+                        <nb-checkbox
+                          (checkedChange)="updateCheckedOptionsMoyensObj2(option, $event)"><p id="align">{{option.name}}</p>
+                        </nb-checkbox>
+                  </div>
+                </nb-card-body>
+              </div>
+
+              <h4>Recommandations de l'objectif</h4>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Fréquence</h6>
+                  <nb-select (selectedChange)="updateCheckedSelectFreqObj2($event)" placeholder="Fréquence">
+                    <nb-option *ngFor="let option of freqObjctif2OptionsSelect" value="{{option.name}}">
+                      {{option.name}}
+                    </nb-option>
+                  </nb-select>
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Endroits</h6>
+                  <div *ngFor="let endroit of groupOptionEndroitsObj2, let j=index" style="margin-bottom: 20px">
+                        <nb-checkbox
+                          (checkedChange)="endroitCheckboxObjectiv2(endroit.id)"><p id="align">{{endroit.group}}</p></nb-checkbox>
+                        <nb-select multiple placeholder="Choisissez la modalité"
+                                   *ngIf="endroit.id === 1 || endroit.id === 2 || endroit.id === 3"
+                                   disabled="{{!endroit.checked}}" id="endroits-select">
+                          {{j + 1}}
+                          <nb-option *ngFor="let option of endroit.options" value="{{j}}"
+                                     (selectionChange)="endroitOptionObjectiv2(endroit.id, option.id)">{{option.group}}</nb-option>
+                        </nb-select>
+                  </div>
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Moments</h6>
+                  <div *ngFor="let option of momentsObjctif2OptionsSelect">
+                        <nb-checkbox
+                          (checkedChange)="updateCheckedOptionsMomentsObj2(option, $event)"><p id="align">{{option.name}}</p>
+                        </nb-checkbox>
+                  </div>
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h6 class="lorem">Intensité</h6>
+                  <div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+                    <ngx-slider [(value)]="IntensiteOptionsObjectif2Value"
+                                [options]="IntensiteOptionsObjectif2"></ngx-slider>
+                  </div>
+                </nb-card-body>
+              </div>
+
+              <h4>Précautions de l'objectif</h4>
+             <div>
+                    <nb-card-body>
+                      <div *ngFor="let option of precautionsObjctif2OptionsSelect">
+                            <nb-checkbox
+                              (checkedChange)="updateCheckedOptionsPrecautionsObj2(option, $event)"><p id="align">{{option.name}}</p>
+                            </nb-checkbox>
+                      </div>
+                    </nb-card-body>
+              </div>
+             <div>
+               <nb-card-body>
+                 <h4>Niveau de confiance</h4>
+                 <ngx-slider [(value)]="nc2" [options]="options"></ngx-slider>
+               </nb-card-body>
+             </div>
+
+            </nb-card-body>
+
+          <button nbButton nbStepperPrevious  (click)="gotop()">précédent</button>
+          <button nbButton nbStepperNext  (click)="gotop()">suivant</button>
+        </nb-step>
+
+        <!--obj 3-->
+        <nb-step [label]="labelThree">
+          <ng-template #labelThree>Temps sédentaire</ng-template>
+          <h4>Objectif #3: Temps sédentaire</h4>
+
+
+            <nb-card-body>
+              <div>
+                <nb-card-body>
+                  <h4>Paramètres de l'objectif</h4>
+                  <p class="lorem">A) Diminuer le nombre de minutes sédentaires de </p>
+                  <input type="number" nbInput placeholder="" [(ngModel)]="value1Obj3">
+                  <p class="lorem">B) Viser un maximum de minutes consécutives sédentaires de</p>
+                  <input type="number" nbInput placeholder="" [(ngModel)]="value2Obj3">
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h4>Barrières pour atteindre l’objectif</h4>
+                  <div *ngFor="let option of barObjctif3OptionsCheckbox">
+                    <nb-checkbox
+                      (checkedChange)="updateCheckedOptionsBarObj3(option, $event)"><p id="align">{{option.name}}</p>
+                    </nb-checkbox>
+                  </div>
+
+                </nb-card-body>
+              </div>
+
+              <div>
+                <nb-card-body>
+                  <h4>Moyens de l'objectif</h4>
+                  <div *ngFor="let option of moyensObjctif3OptionsCheckbox">
+                        <nb-checkbox
+                          (checkedChange)="updateCheckedOptionsMoyensObj3(option, $event)"><p id="align">{{option.name}}</p>
+                        </nb-checkbox>
+                  </div>
+                </nb-card-body>
+              </div>
+              <div>
+                <nb-card-body>
+                  <h4>Niveau de confiance</h4>
+                  <ngx-slider [(value)]="nc3" [options]="options"></ngx-slider>
+                </nb-card-body>
+              </div>
+
+            </nb-card-body>
+
+
+          <nb-card-body id="saveButton">
+
+            <button nbButton nbStepperPrevious  (click)="gotop()">précédent</button>
+            <button nbButton status="success"  (click)="SaveObjectifs()">
+              Ajouter
+              <nb-icon icon="save-outline" [options]="{ animation: { type: 'pulse' } }"></nb-icon>
+            </button>
+          </nb-card-body>
+        </nb-step>
+
+
+      </nb-stepper>
+    </nb-card-body>
 
 
   </nb-card-body>

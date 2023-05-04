@@ -31,9 +31,6 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
     'Maximum',
     'Minimum',
     'Moyenne',
-    'Mediane',
-    'Variance',
-    'sd'
   ];
   selectedItemGpaq = 0;
   selectedItemBreq = 0;
@@ -95,8 +92,8 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   public pieChart: SingleDataSet = [0, 0, 0, 0, 0];
   public pieChartType: ChartType = 'pie';
   public pieChartLabelsBreq: Label[] = [
-    'Amotivation',
-    'Identified',
+    'Démotivation',
+    'Identifiée',
     'Introjectée',
     'Extrinsèque',
     'Intrinsèque'];
@@ -114,7 +111,7 @@ export class RapportVisuelComponent implements OnInit, OnChanges {
   public pieChartLabels: string[] = ['Intensité faible',
     'Intensité  modérée',
     'Intensité élevée',
-    'sedentaires'];
+    'sedentaire'];
   stepsChartLabels: Label[];
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   range: NbCalendarRange<Date>;

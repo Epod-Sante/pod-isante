@@ -7,6 +7,7 @@ import {AlertService, AuthenticationService, UserService} from '../../../_servic
 import {ErrorStateMatcher} from '@angular/material/core';
 import {Profile} from '../../../dto/Profile';
 import {UserInviteDto} from '../../../dto/UserInviteDto';
+import {NbToastrService} from "@nebular/theme";
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -53,7 +54,7 @@ export class InviteComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authenticationService: AuthenticationService,
               private userService: UserService,
-              private _snackBar: MatSnackBar) {
+              private toastrService: NbToastrService) {
     if (localStorage.getItem('currentRole' ) === 'role_admin') {
 
     } else {
@@ -84,20 +85,18 @@ export class InviteComponent implements OnInit {
       .subscribe(
         result => {
           if (result.emailExist === true) {
-            this._snackBar.open('l email existe deja', 'OK');
+            this.showToast('top-right', 'danger', 'Échec', 'L\'adresse e-mail existe déjà');
             return;
           }
-          this._snackBar.open('on a envoyer le mail', 'OK');
-          this.router.navigate(['home']);
-
+          this.showToast('top-right', 'success', 'Success', 'Le courrier est envoyé');
         }, error => {
         });
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 20000,
-
-    });
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
   }
 }

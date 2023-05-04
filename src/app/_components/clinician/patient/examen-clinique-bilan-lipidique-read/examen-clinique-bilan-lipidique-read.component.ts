@@ -43,7 +43,7 @@ export class ExamenCliniqueBilanLipidiqueReadComponent implements OnInit {
     const component = ExamencliniqueComponent;
     const title = 'Examen clinique ';
     const buttonsConfig: NbWindowControlButtonsConfig = {
-      minimize: true,
+      minimize: false,
       maximize: false,
       fullScreen: false,
     };
@@ -54,7 +54,7 @@ export class ExamenCliniqueBilanLipidiqueReadComponent implements OnInit {
     const component = BilanLipidiqueComponent;
     const title = 'Bilan sanguin ';
     const buttonsConfig: NbWindowControlButtonsConfig = {
-      minimize: true,
+      minimize: false,
       maximize: false,
       fullScreen: false,
     };

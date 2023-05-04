@@ -27,7 +27,7 @@
                                  (rangeChange)="handleRangeChange($event)"></nb-calendar-range>
             </div>
           </div>
-          <nb-card-body><h4>Statistiques descriptives</h4></nb-card-body>
+          <nb-card-body><h4>Moyenne quotidienne</h4></nb-card-body>
           <nb-card-body *ngIf="this.steps?.length === 0 || this.minutesDto === null">Pas de données.</nb-card-body>
           <nb-card-body *ngIf="this.minutesDto === null">Pas de statistiques descriptives.</nb-card-body>
           <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading"
@@ -57,36 +57,36 @@
               <td mat-cell *matCellDef="let element"> {{element.min}} </td>
             </ng-container>
 
-            <!-- Average Column -->
+            &lt;!&ndash; Average Column &ndash;&gt;
             <ng-container matColumnDef="Moyenne">
               <th mat-header-cell *matHeaderCellDef> Moyenne</th>
               <td mat-cell *matCellDef="let element"> {{element.average}} </td>
             </ng-container>
-
-            <!-- Median Column -->
+<!--
+            &lt;!&ndash; Median Column &ndash;&gt;
             <ng-container matColumnDef="Mediane">
               <th mat-header-cell *matHeaderCellDef> Mediane</th>
               <td mat-cell *matCellDef="let element"> {{element.median}} </td>
             </ng-container>
 
-            <!-- Variance Column -->
+            &lt;!&ndash; Variance Column &ndash;&gt;
             <ng-container matColumnDef="Variance">
               <th mat-header-cell *matHeaderCellDef> Variance</th>
               <td mat-cell *matCellDef="let element"> {{element.variance}} </td>
             </ng-container>
 
-            <!-- SD Column -->
+            &lt;!&ndash; SD Column &ndash;&gt;
             <ng-container matColumnDef="sd">
               <th mat-header-cell *matHeaderCellDef> SD</th>
               <td mat-cell *matCellDef="let element"> {{element.sd}} </td>
             </ng-container>
-
+-->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr class="active" mat-row *matRowDef="let row; columns: displayedColumns;"
                 class="example-element-row"></tr>
           </table>
 
-          <h4 style="margin-top: 2em">Minutes</h4>
+          <h4 style="margin-top: 2em">Total hebdomadaire</h4>
           <nb-card-body *ngIf="this.steps?.length === 0">Pas de données.</nb-card-body>
           <nb-card *ngIf="this.stats.length === 0 && this.minutesDto !== null" [nbSpinner]="loading"
                    nbSpinnerStatus="info"

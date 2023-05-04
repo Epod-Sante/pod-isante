@@ -38,6 +38,8 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
   hidenAffecter = true;
   model;
   type;
+
+  lastSync;
   patientEmail: string;
   idDevice;
   subscription: any;
@@ -47,7 +49,7 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
   pasPodometre = false;
   podometre = false;
   private deviceId: any;
-
+  checkboxDataSync = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private patientService: PatientService,
               private data: PatientDataBetweenComponentsService,
@@ -57,6 +59,9 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
 
 
     this.available_device();
+  }
+  toggle(checked: boolean) {
+    this.checkboxDataSync = checked;
   }
 
   ngOnInit() {
@@ -110,6 +115,7 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
         this.podometre = true;
         this.model = device.deviceCode;
         this.type = device.type;
+        this.lastSync = new Date(device.lastSyncDate).toLocaleDateString()+ "  " + new Date(device.lastSyncDate).toLocaleTimeString();
         this.idDevice = device.id;
       }
     });
@@ -117,12 +123,12 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   recuperer(id: string) {
-    const deviceDto = new DeviceDto(id, null, null, null, null, null, null, null, null, null);
+    const deviceDto = new DeviceDto(id, null, null, null, null, null, null, null, null, null, null);
     const request = new Request(deviceDto);
     this.patientService.recup_podo(request).pipe(first()).subscribe(response => {
-      this.pasPodometre = false;
-      this.windowRef.close();
-      this.showToast('top-right', 'success', 'Succès', 'Podometre récupérer');
+        this.pasPodometre = false;
+        this.windowRef.close();
+        this.showToast('top-right', 'success', 'Succès', 'Podometre récupérer');
       }, error => {
         this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
       }
@@ -135,7 +141,7 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
       const idPro = JSON.parse(currentUser).id;
 
       this.po = [new PatientDeviceDto(null, null, idPro, this.patient.medicalFile.patient, null, this.patientEmail)];
-      const device = new DeviceDto(this.deviceId, null, null,
+      const device = new DeviceDto(this.deviceId,null, null, null,
         null, null, null, null, null,
         null, this.po);
       const req = new Request(device);
@@ -151,8 +157,20 @@ export class AffectpodometreComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.showToast('top-right', 'info', 'Info', 'Veuillez choisir une podometre');
     }
-
   }
+  synchronize(id: string) {
+    const deviceDto = new DeviceDto(id, null, null, null, null, null, null, null, null, null, null);
+    const request = new Request(deviceDto);
+    this.patientService.synchronizePodo(request).pipe(first()).subscribe(response => {
+        this.pasPodometre = false;
+        this.windowRef.close();
+        this.showToast('top-right', 'success', 'Succès', 'Podomètre synchronisé');
+      }, error => {
+        this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
+      }
+    );
+  }
+
   getPatientById(){
     this.patientService.getPatient(this.id).subscribe(patient => {
       const patientObj = patient as Response;

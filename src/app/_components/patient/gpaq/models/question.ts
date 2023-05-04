@@ -22,12 +22,21 @@ export class Question {
         this.options = [];
          if (data.questionTypeId === 3  || data.questionTypeId === 4 ) {
           if (data.questionTypeId === 4 ) {
+            if (data.minutes === undefined){
+              this.min = 0;
+            }else{
               this.min = data.minutes;
-              this.hr = data.heures;
+            }
+            if (data.hr === undefined){
+              this.hr = 0;
+            }else{
+              this.hr = data.hr;
+            }
         } else {
               this.nbJour = data.jours;
         }
         }
+
         this.questionPere = data.questionPere;
         data.options.forEach(o => {
             this.options.push(new Option(o));

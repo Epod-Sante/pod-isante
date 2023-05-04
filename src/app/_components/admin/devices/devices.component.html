@@ -22,16 +22,32 @@
               <td mat-cell *matCellDef="let element" > {{element.deviceCode}} </td>
             </ng-container>
 
-
-
-
-
             <ng-container matColumnDef="type">
               <th mat-header-cell *matHeaderCellDef > Type </th>
               <td mat-cell *matCellDef="let element"> {{element.type}} </td>
             </ng-container>
 
-
+            <ng-container matColumnDef="fitbitId">
+              <th mat-header-cell *matHeaderCellDef > ID de compte Fitbit</th>
+              <td mat-cell *matCellDef="let element">
+              <div  *ngIf="element.fitbitSubscription != null">{{element.fitbitSubscription.ownerId}}</div>
+              <div  *ngIf="element.fitbitSubscription == null">/</div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="available">
+              <th mat-header-cell *matHeaderCellDef > Disponible</th>
+              <td mat-cell *matCellDef="let element">
+                <div  *ngIf="element.available">Oui</div>
+                <div  *ngIf="element.available == false">Non</div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="lastSyncDate">
+              <th mat-header-cell *matHeaderCellDef > Dernière synchronisation</th>
+              <td mat-cell *matCellDef="let element; index as i;" >
+                <div  *ngIf="element.lastSyncDate != null">{{lastSyncDateString[i-1]}}</div>
+                <div  *ngIf="element.lastSyncDate == null">/</div>
+              </td>
+            </ng-container>
 
 
             <ng-container matColumnDef="action">

@@ -124,8 +124,7 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
   }
 
   ajouter(fcRepos, tadrsys: number, tadrdias: number, tagcsys: number, tagcdias: number, poidskg, taillecm, imc, tourTaille) {
-    if (Number(fcRepos) && Number(tadrsys) && Number(tadrdias) && Number(tagcsys) &&
-      Number(tagcdias) && Number(poidskg) && Number(taillecm) && Number(imc) && Number(tourTaille)) {
+
 
       const antro = new AnthropometryDto(poidskg, taillecm, imc, tourTaille);
       const ta = new BloodPressureDto(tagcdias, tadrdias, tadrsys, tagcsys);
@@ -144,9 +143,7 @@ export class ExamencliniqueComponent implements OnInit, OnDestroy {
         error => {
           this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
         });
-    } else {
-      this.showToast('top-right', 'info', 'Info', 'Vous devez remplir toutes les entrées');
-    }
+
   }
 
 

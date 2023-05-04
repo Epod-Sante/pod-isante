@@ -17,6 +17,9 @@ export class UserService {
   RM_DEVICE: string;
   LIST_DEVICES: string;
   AUTH_DEVICE: string;
+  USER_INFO: string;
+  FITBIT_PROFILE: string;
+
 
   constructor(private http: HttpClient) {
     this.REGISTER_URL = environment.REGISTER_URL;
@@ -28,6 +31,8 @@ export class UserService {
     this.RM_DEVICE = environment.RM_DEVICE;
     this.LIST_DEVICES = environment.LIST_DEVICES;
     this.AUTH_DEVICE = environment.AUTH_DEVICE;
+    this.USER_INFO = environment.USER_INFO;
+    this.FITBIT_PROFILE = environment.FITBIT_PROFILE;
 
   }
 
@@ -58,7 +63,7 @@ export class UserService {
     const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
     const params = new HttpParams()
       .set('username', username);
-    return this.http.post('http://ec2-3-97-178-51.ca-central-1.compute.amazonaws.com:8762/api/v1/auth-service/user', null, {
+    return this.http.post(this.USER_INFO, null, {
       headers: header,
       params
     });
@@ -103,6 +108,18 @@ export class UserService {
     return this.http.delete(this.RM_DEVICE, options);
 
   }
+
+  profilCheck(){
+    const token = localStorage.getItem('currentToken');
+    const obj = JSON.parse(token);console.log(obj.access_token)
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json', Authorization: 'bearer ' + obj.access_token
+      })
+    };
+    return this.http.get(this.FITBIT_PROFILE, options);
+  }
+
 
   autorizepodo(id: string, code: string) {
     const token = localStorage.getItem('currentToken');

@@ -21,7 +21,7 @@ export class ForgetpasswordComponent implements OnInit {
               private authenticationService: AuthenticationService,
               private toastrService: NbToastrService) {
     if (this.authenticationService.currentUser === undefined) {
-      this.router.navigate(['/admin']);
+      this.router.navigate(['login']);
     }
   }
   get f() { return this.forgetForm.controls; }

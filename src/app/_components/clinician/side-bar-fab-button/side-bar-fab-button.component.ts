@@ -57,7 +57,7 @@ export class SideBarFabButtonComponent implements OnInit, OnDestroy, OnChanges {
     {
       title: 'Guide',
       icon: 'bulb-outline',
-      url: 'https://sway.office.com/L1oSmMGRpJHiiFh9?authoringPlay=true&publish',
+      url: '#',
       target: '_blank',
     },
     {

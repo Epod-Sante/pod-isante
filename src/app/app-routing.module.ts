@@ -18,7 +18,7 @@ import {
   NbCheckboxModule, NbFormFieldModule,
   NbIconModule,
   NbInputModule, NbLayoutModule, NbMenuModule, NbPopoverModule, NbSelectModule, NbSidebarModule, NbSpinnerModule,
-  NbStepperModule
+  NbStepperModule, NbToastrModule
 } from "@nebular/theme";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatFormFieldModule} from "@angular/material/form-field";

@@ -1,16 +1,14 @@
-<nb-card class="v">
+<nb-card class="v" status="info">
   <nb-card-body>
     <nb-stepper orientation="horizontal">
       <!--obj 1-->
       <nb-step [label]="labelOne">
         <ng-template #labelOne>Nombre de pas quotidien</ng-template>
-        <h4>Nombre de pas quotidien</h4>
+        <h4>Objectif #1: Nombre de pas quotidien</h4>
 
-        <nb-card size="medium">
+        <nb-card >
           <nb-card-body>
-            <nb-stepper orientation="vertical">
-              <nb-step label="Paramètres">
-                <h4>Paramètres de l'objectif #1</h4>
+                <h4>Paramètres de l'objectif</h4>
                 <nb-card>
                   <nb-card-body>
                     <p class="lorem">A) Augmenter le nombre de pas quotidien de </p>
@@ -25,11 +23,7 @@
 
                   </nb-card-body>
                 </nb-card>
-                <button disabled nbButton nbStepperNext>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
 
-              <nb-step label="Moyens">
                 <h4>Moyens de l'objectif #1</h4>
                 <nb-card-body>
 
@@ -45,11 +39,6 @@
 
                 </nb-card-body>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-
-              <nb-step label="Recommandations">
                 <h4>Recommandations de l'objectif #1</h4>
                   <nb-card>
                     <nb-card-body>
@@ -103,12 +92,8 @@
                     </nb-card-body>
                   </nb-card>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
 
 
-              <nb-step label="Précautions">
                 <h4>Précautions de l'objectif #1</h4>
 
                     <div *ngFor="let option of precautionsObjctif1OptionsSelect">
@@ -121,10 +106,6 @@
                       </nb-card>
                     </div>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button disabled nbButton nbStepperNext>next</button>
-              </nb-step>
-            </nb-stepper>
           </nb-card-body>
         </nb-card>
 
@@ -135,16 +116,13 @@
 
 
       <!--obj 2-->
-
       <nb-step [label]="labelTwo">
         <ng-template #labelTwo>Minutes quotidiennes actives</ng-template>
         <h4>Minutes quotidiennes actives</h4>
 
 
-        <nb-card size="medium">
+        <nb-card >
           <nb-card-body>
-            <nb-stepper orientation="vertical">
-              <nb-step label="Paramètres">
                 <h4>Paramètres de l'objectif #2</h4>
                 <nb-card>
                   <nb-card-body>
@@ -160,11 +138,6 @@
 
                   </nb-card-body>
                 </nb-card>
-                <button disabled nbButton nbStepperNext>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-
-              <nb-step label="Moyens">
                 <h4>Moyens de l'objectif #2</h4>
                 <nb-card-body>
 
@@ -180,11 +153,6 @@
 
                 </nb-card-body>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-
-              <nb-step label="Recommandations">
                 <h4>Recommandations de l'objectif #2</h4>
                 <nb-card>
                   <nb-card-body>
@@ -238,12 +206,6 @@
                   </nb-card-body>
                 </nb-card>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-
-
-              <nb-step label="Précautions">
                 <h4>Précautions de l'objectif #2</h4>
 
                 <div *ngFor="let option of precautionsObjctif2OptionsSelect">
@@ -256,10 +218,6 @@
                   </nb-card>
                 </div>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button disabled nbButton nbStepperNext>next</button>
-              </nb-step>
-            </nb-stepper>
           </nb-card-body>
         </nb-card>
 
@@ -274,11 +232,8 @@
         <h4>Temps sédentaire</h4>
 
 
-        <nb-card size="medium">
+        <nb-card >
           <nb-card-body>
-            <nb-stepper orientation="vertical">
-
-              <nb-step label="Paramètres">
                 <h4>Paramètres de l'objectif #3</h4>
                 <nb-card>
                   <nb-card-body>
@@ -294,12 +249,8 @@
 
                   </nb-card-body>
                 </nb-card>
-                <button disabled nbButton nbStepperNext>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
 
 
-              <nb-step label="Moyens">
                 <h4>Moyens de l'objectif #3</h4>
                 <nb-card-body>
 
@@ -315,11 +266,7 @@
 
                 </nb-card-body>
 
-                <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
 
-            </nb-stepper>
           </nb-card-body>
         </nb-card>
 

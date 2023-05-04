@@ -327,11 +327,6 @@ export class ObjectifV2Component implements OnInit {
     this.precautionsObjctif1OptionsSelect.find(element => element.value === option.value).checked = ((this.precautionsObjctif1OptionsSelect.find(element => element.value === option.value).checked === false));
   }
 
-  updateIntensiteObj1($event) {
-  }
-
-  // ********************
-
   updateCheckedOptionsMoyensObj2(option, event) {
     // tslint:disable-next-line:max-line-length
     this.moyensObjctif2OptionsCheckbox.find(element => element.value === option.value).checked = ((this.moyensObjctif2OptionsCheckbox.find(element => element.value === option.value).checked === false));
@@ -376,7 +371,7 @@ export class ObjectifV2Component implements OnInit {
         new Intensite(
           this.IntensiteOptionsObjectif1Value,
           this.IntensiteOptionsObjectif1.stepsArray.find(element => element.value === this.IntensiteOptionsObjectif1Value).legend)),
-      this.precautionsObjctif1OptionsSelect));
+      this.precautionsObjctif1OptionsSelect,null, null));
 
     this.parametres2.push(new Parametre('Augmenter le nombre de minutes actives quotidiennes de', this.value1Obj2));
     this.parametres2.push(new Parametre('Atteindre un nombre de minutes actives quotidiennes totales de', this.value2Obj2));
@@ -389,7 +384,7 @@ export class ObjectifV2Component implements OnInit {
         new Intensite(
           this.IntensiteOptionsObjectif2Value,
           this.IntensiteOptionsObjectif2.stepsArray.find(element => element.value === this.IntensiteOptionsObjectif2Value).legend)),
-      this.precautionsObjctif2OptionsSelect));
+      this.precautionsObjctif2OptionsSelect,null, null));
 
 
     this.parametres3.push(new Parametre('Diminuer le nombre de minutes sédentaires de', this.value1Obj3));
@@ -397,7 +392,7 @@ export class ObjectifV2Component implements OnInit {
     this.objectif.push(new ObjectifModel(new Objectif('Temps sédentaire', this.parametres3),
       this.moyensObjctif3OptionsCheckbox,
       null,
-      null));
+      null, null, null));
 
 
     this.patient = new PatientDto(this.message, null, null, null, null,
@@ -413,14 +408,6 @@ export class ObjectifV2Component implements OnInit {
       this.showToast('top-right', 'danger', 'Échec', 'Operation échouée');
     });
   }
-
-  showToast(position, status, statusFR, title) {
-    this.toastrService.show(
-      statusFR || 'success',
-      title,
-      {position, status});
-  }
-
 
   endroitCheckboxObjectiv1(id: number) {
     this.groupOptionEndroitsObj1.at(id - 1).checked = !this.groupOptionEndroitsObj1.at(id - 1).checked;
@@ -450,5 +437,12 @@ export class ObjectifV2Component implements OnInit {
   endroitOptionObjectiv2(id: number, id2: number) {
     // tslint:disable-next-line:max-line-length
     this.groupOptionEndroitsObj2.at(id - 1).options.at(id2 - 1).checked = !this.groupOptionEndroitsObj2.at(id - 1).options.at(id2 - 1).checked;
+  }
+
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      {position, status});
   }
 }

@@ -1,5 +1,6 @@
-nb-card {
+.root {
   height: 80vh;
+  width: 120vh;
 }
 
 
@@ -8,4 +9,17 @@ button {
 }
 ngx-slider {
   width: 80%;
+}
+#saveButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#endroits-select{
+  float: right;
+}
+
+#align{
+  display: contents;
 }

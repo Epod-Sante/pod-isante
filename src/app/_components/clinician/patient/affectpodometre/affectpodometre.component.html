@@ -11,14 +11,38 @@
       <nb-option *ngFor="let device of devices" value="{{device.id}}">{{device.deviceCode }}  ({{device.type}})</nb-option>
     </nb-select>
     <button nbButton status="success" (click)="affect()">Affecter</button>
-  </nb-card-body>
-</nb-card>
 
+  </nb-card-body>
+
+</nb-card>
 
 <nb-card size="medium" *ngIf="podometre===true">
   <nb-card-body class="example-items-col">
-    <b>Model : </b>{{model}}
-    <b>Type : </b> {{type}}
-    <button nbButton status="success" (click)="recuperer(idDevice)">Récupérer</button>
+    <div class="child">
+      <b>Model : </b>{{model}}<br>
+      <b>Type : </b> {{type}}<br>
+      <b>Date de la dernière synchronisation : </b> {{lastSync}}<br>
+    </div>
+
+    <div  class="child">
+      <div>
+        <nb-checkbox status="info" (checkedChange)="toggle($event)">Avant de récupérer le podomètre, assurez-vous que le podomètre est synchronisé pour récupérer les dernières données.</nb-checkbox>
+      </div>
+
+      <div>
+        <button nbButton status="success" (click)="recuperer(idDevice)"  *ngIf="checkboxDataSync===false" disabled>
+          Récupérer
+        </button>
+        <button nbButton status="success" (click)="recuperer(idDevice)"  *ngIf="checkboxDataSync===true">
+          Récupérer
+        </button>
+      </div>
+
+
+      <!--<button nbButton status="success" (click)="synchronize(idDevice)">
+        <nb-icon icon="sync-outline" [options]="{ animation: { type: 'shake' } }"></nb-icon>
+        Synchroniser le podomètre
+      </button>-->
+    </div>
   </nb-card-body>
 </nb-card>

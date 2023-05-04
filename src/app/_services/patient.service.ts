@@ -21,6 +21,7 @@ export class PatientService {
   LOGIN_PATIENT: string;
   LIST_DEVICE_AVAILABLE: string;
   AFFECT_DEVICE: string;
+  SYNC_DEVICE: string;
   RECUP_DEVICE: string;
   ADD_RDV: string;
   LIST_RDV: string;
@@ -59,6 +60,7 @@ export class PatientService {
     this.GET_QUIZ = environment.GET_QUIZ;
     this.ADD_QUIZINDI = environment.ADD_QUIZINDI;
     this.GET_PATIENT_DEVICES = environment.GET_PATIENT_DEVICES;
+    this.SYNC_DEVICE = environment.SYNC_DEVICE;
   }
 
 
@@ -273,6 +275,14 @@ export class PatientService {
 
   }
 
+  synchronizePodo(request: Request) {
+    const token = localStorage.getItem('currentToken');
+    const obj = JSON.parse(token);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token, 'Content-Type': 'application/json'});
+    return this.http.post(this.SYNC_DEVICE, request, {headers: header});
+
+  }
+
   addReco(request: Request) {
     const token = localStorage.getItem('currentToken');
     const obj = JSON.parse(token);
@@ -308,7 +318,14 @@ export class PatientService {
     return this.http.get(this.ALL_RECO, {headers: header, params});
 
   }
+  getAllReco2(id: string) {
+    const token = localStorage.getItem('currentToken');
+    const params = new HttpParams().set('patientId', id);
+    const obj = JSON.parse(token);
+    const header = new HttpHeaders({Authorization: 'bearer ' + obj.access_token});
+    return this.http.get(this.ALL_RECO, {headers: header, params}).toPromise();
 
+  }
   getSteps(id: string) {
     const token = localStorage.getItem('currentToken');
     const params = new HttpParams().set('medicalFileId', id);

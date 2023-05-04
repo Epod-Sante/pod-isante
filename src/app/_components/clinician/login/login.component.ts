@@ -43,10 +43,10 @@ export class LoginComponent implements OnInit {
     if (localStorage.getItem('currentUser')) {
       // redirect to admin if already logged in
       if (localStorage.getItem('currentRole') === 'role_professional') {
-        this.router.navigate(['listpatient']);
+        this.router.navigate(['/listpatient']);
       } else if (localStorage.getItem('currentRole') === 'role_admin') {
-        this.router.navigate(['/admin']);
-      } else if (localStorage.getItem('currentRole') === 'role_searcher') {
+        this.router.navigate(['/']);
+      } else if (localStorage.getItem('currentRole') === 'role_researcher') {
         this.router.navigate(['/admin/researcher']);
       }
 
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['']);
           } else if (localStorage.getItem('currentRole') === 'role_professional') {
             this.router.navigate(['listpatient']);
-          } else if (localStorage.getItem('currentRole') === 'role_searcher') {
+          } else if (localStorage.getItem('currentRole') === 'role_researcher') {
             this.router.navigate(['admin/researcher']);
           } else {
             this.router.navigate(['login']);
@@ -100,7 +100,6 @@ export class LoginComponent implements OnInit {
           this.loading = false;
           this.showToast('top-right', 'danger', 'Échec', 'Veuillez contacter l\'admin');
         });
-
   }
 
   showToast(position, status, statusFR, title) {

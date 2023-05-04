@@ -2807,7 +2807,7 @@ export class RegisterComponent implements OnInit {
 
     this.profilelist = [
       new Profile('PROFESSIONAL', 'role_professional', true),
-      new Profile('SEARCHER', 'role_searcher', true)
+      new Profile('RESEARCHER', 'role_researcher', true)
 
 
     ];
@@ -2873,16 +2873,15 @@ export class RegisterComponent implements OnInit {
             this.loading = false;
             // this.router.navigate(['/login']);
           } else if (data.usernameExist === true) {
-            this.showToast('top-right', 'info', 'Info', 'le nom d utilisateur est deja pris');
+            this.showToast('top-right', 'info', 'Info', 'le nom d\'utilisateur est deja pris');
             this.loading = false;
-            // this.router.navigate(['/login']);
           } else {
             this.showToast('top-right', 'success', 'Succès', 'Vous avez été enregistré avec succès, vous pouvez vous connecter maintenant');
-            this.router.navigate(['home']);
+            this.router.navigate(['/login']);
           }
         },
         error => {
-          this.showToast('top-right', 'danger', 'Échec', 'Donnees saisies invalide');
+          this.showToast('top-right', 'danger', 'Échec', 'Données saisies invalide');
           this.loading = false;
         });
   }

@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService, SnackBar} from "../../../_services";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 import {first} from "rxjs/operators";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'app-resetpassword',
@@ -12,6 +13,8 @@ import {first} from "rxjs/operators";
   styleUrls: ['./resetpassword.component.css']
 })
 export class ResetpasswordComponent implements OnInit {
+  @ViewChild('password') password: ElementRef;
+  @ViewChild('comfirmpassword') comfirmpassword: ElementRef;
   resetForm: FormGroup;
   submitted = false;
   tokenpassword: string;
@@ -19,10 +22,10 @@ export class ResetpasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private _snackBar: MatSnackBar,
+              private toastrService: NbToastrService,
               private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/admin']);
+      this.router.navigate(['/']);
     }else {
       this.getCodeFromURI();
     }
@@ -51,40 +54,34 @@ export class ResetpasswordComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
+    console.log(this.password.nativeElement.value)
+    console.log(this.password.nativeElement.value.size)
     // stop here if form is invalid
-    if (this.resetForm.invalid) {
-      return;
+    if (this.password.nativeElement.value === '' || this.password.nativeElement.value === '') {
+      this.showToast('top-right', 'danger', 'Échec', 'Les deux entrées sont invalides, essayez une autre fois');
     }
-    if (this.f.password.value != this.f.comfirmpassword.value) {
+    else if (this.password.nativeElement.value !== this.comfirmpassword.nativeElement.value) {
+      this.showToast('top-right', 'danger', 'Échec', 'Les deux entrées sont différentes, essayez une autre fois');
     } else {
-
-      //console.log(this.f.comfirmpassword.value)
-
-
-      this.authenticationService.passwordUpdate(this.tokenpassword, this.f.password.value)
+      this.authenticationService.passwordUpdate(this.tokenpassword, this.password.nativeElement.value)
         .pipe(first())
         .subscribe(
           data => {
-            this._snackBar.open("votre mot de passe a ete modifie", "OK")
-            this.router.navigate(['login']);
-            //location.reload();
+            this.showToast('top-right', 'success', 'Success', 'Votre mot de passe a été changé');
           },
           error => {
-
 
           });
     }
 
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
-      duration: 20000,
-
-    })
+  showToast(position, status, statusFR, title) {
+    this.toastrService.show(
+      statusFR || 'success',
+      title,
+      { position, status });
   }
-
 
   getCodeFromURI() {
 
